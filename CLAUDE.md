@@ -21,6 +21,14 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 - `ESPRESSO_BREWING_BASICS.md` - Core variables, shot styles, adjustment strategies
 - `ESPRESSO_TASTING_GUIDE.md` - Sour vs bitter diagnosis, tasting methodology
 - `GAGGIMATE_PROFILE_CREATION_GUIDE.md` - Profile JSON structure, examples, best practices
+- `PROFILE_LIBRARY.md` - Ready-to-use extraction profiles organized by roast, process, and style
+- `grinders/SETTE_270.md` - Sette 270 grinder mechanics, calibration, maintenance
+
+## Dynamic Data Files
+
+These files in the project root grow from user interactions:
+- `user-setup.md` - User's equipment and preferences
+- `grind-map.md` - Personal record of successful grind settings (auto-updated from 4-5 star shots)
 
 ## Core Workflow
 
@@ -52,13 +60,20 @@ When a user shares a new coffee (photo of bag, name, or description):
    - Roast date (freshness affects CO2 and extraction)
    - Tasting notes from roaster
 
-3. **Synthesize into recommendations**:
+3. **Check grind map** for similar coffees:
+   - Read `grind-map.md` and look for beans with similar roast level, processing method, or origin
+   - If matches found, suggest: "Based on your history with similar coffees, try starting around [setting]"
+   - **Adjust for freshness**: If the historical data was at a different freshness level, account for it. Fresher beans (fewer days off roast) typically need a finer grind due to higher CO2 content. Example: "Your similar coffee worked at 9D at 14 days off roast. This bag is 7 days old, so consider starting at 9A-9B (slightly finer)."
+   - If no matches, fall back to general guidance from `knowledge/grinders/SETTE_270.md`
+
+4. **Synthesize into recommendations**:
    - Suggest starting temperature based on roast level
-   - Suggest profile pattern (classic 9-bar, bloom, lever decline, etc.)
+   - Suggest starting grind based on grind map matches or grinder reference
+   - Suggest profile from `knowledge/PROFILE_LIBRARY.md` or create a custom one
    - Suggest starting ratio based on processing and roast
    - Note any special considerations (e.g., natural process often needs more pre-infusion)
 
-4. **Ask user preferences** before finalizing:
+5. **Ask user preferences** before finalizing:
    - "This natural Ethiopian typically shines at higher temps with a bloom phase. Would you like to start there, or would you prefer a more conservative approach?"
 
 ### 3. Profile Creation Workflow
@@ -108,7 +123,25 @@ After the user pulls a shot, gather feedback. The shot notes fields are:
 - Balance direction (sour/balanced/bitter)
 - At least one specific observation (body, sweetness, finish, or a flavor note)
 
-### 5. Iterative Improvement Loop
+### 5. Grind Map Learning
+
+After receiving shot feedback, automatically update the grind map for successful shots:
+
+**Trigger conditions** (all must be true):
+- Rating is 4 or 5 stars
+- Grind setting was provided
+- Coffee information is known (name, roast level, processing)
+
+**Update process:**
+1. Read current `grind-map.md`
+2. Append new row to the "Successful Settings" table with: Coffee, Roast, Process, Origin, Days Off Roast, Grind, Rating, Date
+   - If roast date is known (from coffee research or bag photo), calculate Days Off Roast
+   - If roast date is unknown, use "—" for Days Off Roast
+3. No confirmation needed—silent learning
+
+**Grind notation:** Use full Sette 270 format: macro number + micro letter (e.g., "9D", "10M", "11A")
+
+### 6. Iterative Improvement Loop
 
 Based on feedback, suggest adjustments:
 
