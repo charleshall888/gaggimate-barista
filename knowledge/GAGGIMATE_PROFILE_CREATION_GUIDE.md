@@ -4,6 +4,8 @@
 
 This document provides comprehensive guidance for creating custom espresso extraction profiles for Gaggimate-equipped machines (Gaggia Classic Pro, Gaggia Classic Evo, etc.). Gaggimate supports two profile types: **Simple** and **Pro**, with Pro profiles offering advanced features like pressure profiling, flow control, and complex transitions.
 
+> **Looking for ready-to-use profiles?** See `PROFILE_LIBRARY.md` for a curated collection of profiles organized by roast level, processing method, and shot style.
+
 ## Profile Versions
 
 - **Gaggimate Standard**: Basic temperature control, volumetric dosing, timed phases
