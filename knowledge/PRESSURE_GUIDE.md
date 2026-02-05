@@ -192,12 +192,7 @@ Look up your coffee's roast level + processing method in the matrix above. This 
 - **Allongé** → 6 bar peak, flow-controlled (style overrides)
 - **Lever decline** → Start at matrix pressure, decline to matrix minus 4-5 bar
 
-### Step 3: Adjust for Milk Drinks vs. Straight
-
-- **Milk drinks** → Favor the higher end of the matrix range for more body and intensity that punches through milk
-- **Straight espresso** → Favor the lower end for more clarity and nuance
-
-### Step 4: Adjust Based on Taste
+### Step 3: Adjust Based on Taste
 
 | If the shot is... | Adjust pressure... | Why |
 |--------------------|--------------------|-----|

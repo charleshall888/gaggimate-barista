@@ -14,10 +14,10 @@ For technical details on profile structure, see `GAGGIMATE_PROFILE_CREATION_GUID
 | [Light Roast Bloom](#light-roast-bloom) | Light | 95°C | 1:2.5 | 28-35s | Fruity, floral coffees |
 | [Dark Roast Gentle](#dark-roast-gentle) | Dark | 89°C | 1:1.5-2 | 22-28s | Italian roasts, milk drinks |
 | [Natural Process Bloom](#natural-process-bloom) | Light-Med | 94°C | 1:2-2.5 | 30-38s | Natural/dry processed beans |
-| [Turbo Shot](#turbo-shot) | Any | 92°C | 1:2 | 15-20s | Clarity, brightness |
+| [Turbo Shot](#turbo-shot) | Any | 96°C | 1:2.5-3 | 15-20s | Clarity, brightness |
 | [Allongé](#allongé) | Light-Med | 94°C | 1:4-5 | 40-50s | Long, sweet, tea-like |
 | [Lever Decline](#lever-decline) | Medium | 91°C | 1:2 | 28-35s | Syrupy body, complex |
-| [Milk Drink Base](#milk-drink-base) | Med-Dark | 92°C | 1:1.5 | 22-26s | Cuts through milk |
+| [Milk Drink Base](#milk-drink-base) | Med-Dark | 92°C | 1:1.5 | 22-26s | Concentrated, intense body |
 
 ---
 
@@ -358,21 +358,23 @@ Coarse grind, high flow, fast extraction. Emphasizes clarity and brightness over
 **When to use:** Showcasing origin character, light roasts, when you want tea-like clarity
 
 **Parameters:**
-- Temperature: 92°C
-- Ratio: 1:2 (18g → 36g)
+- Temperature: 96°C (high temp compensates for short contact time)
+- Ratio: 1:2.5-1:3 (18g → 45-54g)
 - Expected time: 15-20 seconds (yes, really)
 - Grind: Significantly coarser than normal espresso
 
 **Flavor expectations:** Bright, clean, tea-like, clarity of origin flavors, lighter body
 
-**Note:** Requires coarser grind than typical espresso. Expect 2-4 steps coarser on most grinders.
+**Note:** Requires coarser grind than typical espresso. Expect 2-4 macro steps coarser on most grinders. The longer ratio is essential — with a coarse grind and short contact time, you need more water volume to achieve adequate extraction. A 1:2 turbo will be sour and under-extracted.
+
+**Milk drink note:** Turbo shots have lighter body and higher volume, which can get lost in large milk drinks. If you want turbo clarity in milk, pair with a cortado, piccolo, or flat white rather than a full latte.
 
 ```json
 {
   "label": "Turbo Shot [AI]",
   "type": "pro",
   "description": "Fast, high-flow extraction for clarity - requires coarse grind",
-  "temperature": 92,
+  "temperature": 96,
   "phases": [
     {
       "name": "Pre-wet",
@@ -391,7 +393,7 @@ Coarse grind, high flow, fast extraction. Emphasizes clarity and brightness over
       "temperature": 0,
       "transition": { "type": "instant", "duration": 0, "adaptive": true },
       "pump": { "target": "flow", "pressure": 6, "flow": 4.5 },
-      "targets": [{ "type": "volumetric", "operator": "gte", "value": 36 }]
+      "targets": [{ "type": "volumetric", "operator": "gte", "value": 54 }]
     }
   ]
 }
@@ -461,9 +463,11 @@ A long, sweet extraction at extended ratios. Not a lungo (which is just more wat
 
 #### Milk Drink Base
 
-A punchy, concentrated shot designed to cut through milk. Shorter ratio, higher intensity.
+A punchy, concentrated shot with high intensity and full body. The shorter ratio emphasizes
+sweetness and body over clarity.
 
-**When to use:** Lattes, cappuccinos, flat whites, any milk-based drink
+**When to use:** When you want maximum intensity — works great as a ristretto-style shot or
+as a base for larger milk drinks where you want the coffee to remain prominent
 
 **Parameters:**
 - Temperature: 92°C
@@ -471,13 +475,13 @@ A punchy, concentrated shot designed to cut through milk. Shorter ratio, higher 
 - Expected time: 22-26 seconds
 - Grind: Standard to slightly finer
 
-**Flavor expectations:** Intense, punchy, chocolate/caramel forward, cuts through milk
+**Flavor expectations:** Intense, punchy, chocolate/caramel forward, full body
 
 ```json
 {
   "label": "Milk Drink Base [AI]",
   "type": "pro",
-  "description": "Concentrated shot that cuts through milk - 1:1.5 ratio",
+  "description": "Concentrated ristretto-style shot - maximum intensity at 1:1.5 ratio",
   "temperature": 92,
   "phases": [
     {
@@ -553,7 +557,7 @@ See `GAGGIMATE_PROFILE_CREATION_GUIDE.md` for dose-scaling formulas and the comp
 |-------|-------------------|-----|
 | Shots too sour | Light Roast Bloom | Higher temp, bloom for better extraction |
 | Shots too bitter | Dark Roast Gentle | Lower temp/pressure, taper at end |
-| Weak in milk | Milk Drink Base | Concentrated ratio cuts through |
+| Want more intensity | Milk Drink Base | Shorter ratio concentrates flavor |
 | Inconsistent | Automatic Pro v2 | Self-regulating flow control |
 | Channeling | Natural Process Bloom | Extended pre-infusion, gentle fill |
 

@@ -49,7 +49,7 @@ If you don't know the user's setup, ask about it before making recommendations. 
 - **Grinder**: Brand, model (affects grind setting recommendations)
 - **Basket**: Size in grams (15g, 18g, 20g, etc.) and type (pressurized, VST, IMS, etc.)
 - **Scale**: Is it Bluetooth-connected for volumetric stop? If yes, what's the predictive delay setting?
-- **Drink preference**: Straight espresso, Americano, milk drinks, or all of the above
+- **Drink preference**: Straight espresso, Americano, milk drinks (and preferred formats: cortado, cappuccino, flat white, latte), or all
 - **Bean preferences**: Light/medium/dark roasts, flavor profiles they enjoy or avoid
 - **Puck prep routine**: WDT, leveling, tamping pressure/technique
 
@@ -133,6 +133,19 @@ After the user pulls a shot, gather feedback. The shot notes fields are:
 - Balance direction (sour/balanced/bitter)
 - At least one specific observation (body, sweetness, finish, or a flavor note)
 
+### Drink Format Recommendation
+
+After dialing in, recommend a drink format based on the shot's characteristics — not the other way around. Don't adjust extraction to "cut through milk." Extract for the bean's best expression, then match the drink:
+
+| Shot Character | Recommended Format | Why |
+|----------------|-------------------|-----|
+| Bright, fruity, delicate | Cortado or piccolo | Small milk volume preserves acidity and fruit |
+| Sweet, balanced, medium body | Cappuccino or flat white | Enough milk to complement without drowning |
+| Intense, heavy body, bold | Latte (if desired) | More milk balances intensity |
+| Clarity-focused (turbo/allongé) | Cortado or piccolo | Lighter body gets lost in large drinks |
+
+**Never** adjust grind, ratio, pressure, or temperature to "make the shot work in milk." If the extraction tastes great as espresso, the right milk drink will showcase it. If the user wants more concentration for a specific drink, suggest a smaller drink format rather than compromising extraction.
+
 ### 5. Grind Map Learning
 
 After receiving shot feedback, automatically update the grind map for successful shots:
@@ -211,7 +224,9 @@ You have access to Gaggimate MCP tools for:
 |-------|-------|----------|
 | 1:1 - 1:1.5 | Ristretto | Dark roasts, milk drinks |
 | 1:2 | Classic | Most coffees, starting point |
-| 1:2.5 - 1:3 | Lungo | Light roasts, fruity coffees |
+| 1:2.5 - 1:3 | Lungo / Turbo | Light roasts, fruity coffees, turbo shots |
+
+**Turbo shots require 1:2.5-1:3.** The coarse grind and short contact time mean you need more water volume for adequate extraction. A 1:2 turbo will be sour and under-extracted — don't shorten the ratio to compensate for milk drinks. Instead, recommend a smaller milk drink (cortado, piccolo, flat white) to preserve the turbo's clarity.
 
 ### Processing Method Patterns
 - **Washed**: Clean, bright—classic profiles work well, 9 bar is fine

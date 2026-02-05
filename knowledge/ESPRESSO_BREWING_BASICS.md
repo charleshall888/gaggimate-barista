@@ -44,16 +44,18 @@ Espresso extraction happens in stages:
 - **Ratio:** 1:2
 - **Time:** 25-35 seconds
 - **Character:** Full body, syrupy, classic espresso
-- **Best for:** Medium-dark roasts, milk drinks
+- **Best for:** Medium-dark roasts, balanced everyday espresso
 
 ### Turbo Shot
-- **Pressure:** ~6 bar
-- **Grind:** Coarser (medium-fine)
-- **Ratio:** 1:2 to 1:3
+- **Pressure:** ~6 bar (naturally low from coarse grind)
+- **Grind:** Coarser (medium-fine, 2-4 macro steps coarser than traditional)
+- **Ratio:** 1:2.5 to 1:3 (longer ratio is essential — coarse grind + short time needs more water for adequate extraction)
 - **Time:** 10-20 seconds
+- **Temperature:** 96°C (high temp compensates for short contact time)
 - **Character:** Sweeter, more clarity, less body
-- **Best for:** Light-medium roasts, drinking straight
+- **Best for:** Light-medium roasts, showcasing origin character
 - **Why it works:** Coarser grind + lower pressure = more even extraction, less channeling
+- **Milk pairing:** Turbo's lighter body can get lost in large milk drinks. Pair with cortado, piccolo, or flat white rather than full lattes
 
 ### Allongé
 - **Pressure:** 9 bar (or declining)
