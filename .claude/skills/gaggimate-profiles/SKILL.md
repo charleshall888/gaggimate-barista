@@ -89,6 +89,19 @@ After generating JSON, explain:
 - How the profile addresses the user's flavor goals
 - Any adjustments they might want to try
 
+### Step 6: Save Profile to Repository
+
+After explaining the profile, save it to the `coffees/` directory:
+
+1. **Find or create** the coffee's directory: `coffees/{roaster}-{coffee-name}/`
+   - If the directory exists, use it
+   - If not, create it with a minimal `README.md` (Bean Profile table with known info, empty Profiles and Tasting Notes sections)
+2. **Write the profile JSON** to `coffees/{coffee-dir}/{profile-style}.json` (kebab-case, e.g., `natural-bloom.json`, `turbo.json`)
+   - Same JSON content that was uploaded to the device
+   - Overwrite existing files on update—git tracks iterations
+3. **Update the Profiles table** in the coffee's `README.md` with: Profile name, Style, Temp, Pressure, Ratio, and link to the JSON file
+4. **Remove `.gitkeep`** from `coffees/` if present
+
 ## Quick Profile Patterns
 
 ### Classic 9-Bar (Medium Roasts)
@@ -144,6 +157,7 @@ Pre-infusion (4s, flow 2.5 ml/s) → Ramp (3s to 7 bar) → Hold (25s) → Taper
 3. **Use sensible defaults** - valve: 1, adaptive: true for most cases
 4. **Add a volumetric target** on the final extraction phase (if scale available)
 5. **Explain your choices** after the JSON
+6. **Save to `coffees/` directory** alongside the coffee's README.md
 
 ## Resources
 

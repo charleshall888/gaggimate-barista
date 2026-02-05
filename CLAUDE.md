@@ -31,6 +31,7 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 These files in the project root grow from user interactions:
 - `user-setup.md` - User's equipment and preferences
 - `grind-map.md` - Personal record of successful grind settings (auto-updated from 4-5 star shots)
+- `coffees/` - Per-coffee directories containing research (README.md), profiles (.json), and dialing notes
 
 ## Skills
 
@@ -85,6 +86,11 @@ When a user shares a new coffee (photo of bag, name, or description):
 5. **Ask user preferences** before finalizing:
    - "This natural Ethiopian typically shines at higher temps with a bloom phase. Would you like to start there, or would you prefer a more conservative approach?"
 
+6. **Save coffee research** to `coffees/{roaster}-{coffee-name}/README.md`:
+   - Directory name: `{roaster}-{coffee-name}` in kebab-case (e.g., `perc-ethiopia-chelchele`)
+   - Write `README.md` with Bean Profile table, empty Profiles table, empty Tasting Notes section
+   - No confirmation needed—standard workflow step
+
 ### 3. Profile Creation Workflow
 
 When creating a profile, use `/gaggimate-profiles` for comprehensive guidance including pump modes, transitions, stop conditions, and troubleshooting.
@@ -104,7 +110,12 @@ When creating a profile, use `/gaggimate-profiles` for comprehensive guidance in
    - What flavor outcomes to expect?
 
 5. **Upload the profile** using the MCP tool to `gaggimate.local`
-6. **Give extraction guidance**:
+6. **Save profile to repository**:
+   - Write the profile JSON to `coffees/{coffee-dir}/{profile-style}.json` (kebab-case filename, e.g., `natural-bloom.json`)
+   - Update the coffee's `README.md` Profiles table with the new profile entry
+   - If no coffee directory exists yet, create it with a minimal `README.md`
+   - Overwrite existing JSON files on update—git history tracks iterations
+7. **Give extraction guidance**:
    - Target dose (**dose = basket size**; don't underdose)
    - Expected extraction time range
    - What to watch for during the shot
@@ -163,6 +174,14 @@ After receiving shot feedback, automatically update the grind map for successful
 3. No confirmation needed—silent learning
 
 **Grind notation:** Use full Sette 270 format: macro number + micro letter (e.g., "9D", "10M", "11A")
+
+### 5b. Coffee Tasting Notes
+
+When a shot gets 4-5 stars (same trigger as grind-map update), also update the coffee's dialing journal:
+
+1. Find the coffee's directory in `coffees/`
+2. Append a Tasting Notes entry to the coffee's `README.md` with: date, grind, dose in/out, ratio, profile used, rating, and tasting observations
+3. If a profile was modified based on feedback, overwrite the JSON file in the coffee directory
 
 ### 6. Iterative Improvement Loop
 

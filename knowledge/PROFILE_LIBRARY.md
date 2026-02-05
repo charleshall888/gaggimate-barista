@@ -1,6 +1,6 @@
 # Profile Library
 
-Ready-to-use extraction profiles for Gaggimate Pro. Each profile includes complete JSON, recommended parameters, and flavor expectations.
+Ready-to-use extraction profiles for Gaggimate Pro. Each profile includes complete JSON, recommended parameters, and flavor expectations. These are **generic templates** — coffee-specific profiles created during dialing are saved in `coffees/{roaster}-{coffee-name}/` alongside the coffee's research and tasting notes.
 
 For technical details on profile structure, see `GAGGIMATE_PROFILE_CREATION_GUIDE.md`.
 

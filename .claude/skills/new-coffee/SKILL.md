@@ -102,6 +102,41 @@ manage_profile(action="create", profile_name="[Coffee Name] [AI]", temperature=X
 
 Always add `[AI]` suffix to profile names.
 
+### 7. SAVE to Repository
+
+Create a coffee directory and save the research:
+
+1. **Create directory:** `coffees/{roaster}-{coffee-name}/` (kebab-case, e.g., `coffees/perc-ethiopia-chelchele/`)
+2. **Write `README.md`** using this template:
+
+```markdown
+# {Roaster} {Coffee Name}
+
+## Bean Profile
+
+| Field | Value |
+|-------|-------|
+| **Roaster** | ... |
+| **Origin** | ... |
+| **Process** | ... |
+| **Roast Level** | ... |
+| **Variety** | ... |
+| **Altitude** | ... |
+| **Tasting Notes** | ... |
+| **Roast Date** | ... |
+
+## Profiles
+
+| Profile | Style | Temp | Pressure | Ratio | File |
+|---------|-------|------|----------|-------|------|
+
+## Tasting Notes
+```
+
+3. **If a profile was uploaded**, also save the JSON to the same directory and fill in the Profiles table row
+4. **Remove `.gitkeep`** from `coffees/` if it exists (no longer needed once real content is present)
+5. No confirmation needed—this is a standard workflow step
+
 ---
 
 ## Output Format
@@ -132,6 +167,9 @@ Always add `[AI]` suffix to profile names.
 
 ### Profile
 [Link to PROFILE_LIBRARY.md profile, or custom JSON if creating new]
+
+### Saved To
+`coffees/{roaster}-{coffee-name}/README.md`
 
 ### What to Watch For
 - [Specific guidance for first shot based on bean characteristics]
