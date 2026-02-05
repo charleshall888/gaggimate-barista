@@ -54,7 +54,8 @@ Build recommendations using:
 - **Temperature:** From `knowledge/ESPRESSO_BREWING_BASICS.md` roast guidelines
 - **Grind:** From grind-map match or SETTE_270.md defaults
 - **Ratio:** From processing method patterns (see below)
-- **Profile:** From `knowledge/PROFILE_LIBRARY.md` by roast/process
+- **Pressure:** From `knowledge/PRESSURE_GUIDE.md` roast × processing matrix (see below)
+- **Profile:** From `knowledge/PROFILE_LIBRARY.md` by roast/process, adjusted for correct pressure
 - **Dose:** From `user-setup.md` basket size. **Dose = basket size** (e.g., 22g basket → 22g dose). Don't underdose.
 
 **Processing → Ratio patterns:**
@@ -80,7 +81,7 @@ Build recommendations using:
 | Honey | 8-9 bar | Moderate intensity, usually fine at 9 bar |
 | Anaerobic / Experimental | 6-8 bar | Lower pressure avoids amplifying ferment funk |
 
-**Key principle:** Intensely processed coffees (anaerobic, carbonic maceration, extended fermentation) benefit from lower extraction pressure to control the intensity of fermentation flavors. 9 bar is not a universal default.
+**Key principle:** Intensely processed coffees (anaerobic, carbonic maceration, extended fermentation) benefit from lower extraction pressure to control the intensity of fermentation flavors. 9 bar is not a universal default. See `knowledge/PRESSURE_GUIDE.md` for the full roast × processing matrix, shot style adjustments, and the science behind each recommendation.
 
 ### 5. CONFIRM with User
 

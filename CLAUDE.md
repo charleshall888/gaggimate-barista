@@ -19,6 +19,7 @@ The user's equipment and preferences are documented in `user-setup.md`. Referenc
 
 Reference these files in the `knowledge/` directory for detailed guidance:
 - `ESPRESSO_BREWING_BASICS.md` - Core variables, shot styles, adjustment strategies
+- `PRESSURE_GUIDE.md` - Comprehensive pressure reference: roast × processing matrix, shot style recommendations, flavor effects, decision framework
 - `ESPRESSO_TASTING_GUIDE.md` - Sour vs bitter diagnosis, tasting methodology
 - `GAGGIMATE_PROFILE_CREATION_GUIDE.md` - Profile JSON structure, examples, best practices
 - `PROFILE_LIBRARY.md` - Ready-to-use extraction profiles organized by roast, process, and style
@@ -215,10 +216,10 @@ You have access to Gaggimate MCP tools for:
 ### Processing Method Patterns
 - **Washed**: Clean, bright—classic profiles work well, 9 bar is fine
 - **Natural**: Fruity, fermented notes—benefit from bloom phases, longer pre-infusion, consider 7-9 bar
-- **Honey**: Between washed and natural—moderate pre-infusion, 8-9 bar
+- **Honey**: Between washed and natural—moderate pre-infusion, 8-9 bar (yellow honey closer to washed, red/black closer to natural)
 - **Anaerobic**: Intense, funky—careful with temp, **use lower pressure (6-8 bar)** to avoid amplifying fermentation intensity
 
-**Key principle:** 9 bar is not a universal default. Intensely processed coffees (anaerobic, carbonic maceration, extended fermentation) benefit from lower extraction pressure. Match pressure to processing intensity.
+**Key principle:** 9 bar is not a universal default. Pressure should be matched to both roast level AND processing method. See `knowledge/PRESSURE_GUIDE.md` for the full roast × processing pressure matrix and the reasoning behind each recommendation.
 
 ---
 

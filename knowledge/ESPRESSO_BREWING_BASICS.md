@@ -85,10 +85,10 @@ Modern espresso benefits from phased extraction:
 - **Why it matters:** Prevents channeling, enables more even extraction
 
 ### Ramp / Main Extraction
-- **Pressure:** Build to target (6-9 bar depending on style and processing method)
+- **Pressure:** Build to target (6-9 bar depending on roast, processing, and shot style)
 - **Transition:** Linear or ease-in works well
 - **Purpose:** Main extraction of flavor compounds
-- **Processing note:** Intensely processed coffees (anaerobic, carbonic maceration) benefit from lower extraction pressure (6-8 bar) to avoid amplifying fermentation intensity
+- See `PRESSURE_GUIDE.md` for the full roast × processing pressure matrix
 
 ### Decline / Taper (Optional)
 - **Pressure:** Reduce toward end of shot

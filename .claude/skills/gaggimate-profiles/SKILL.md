@@ -41,8 +41,10 @@ If not provided, ask about (or check `user-setup.md`):
 **Pressure by processing method:**
 - Washed: 9 bar (clean, handles full pressure)
 - Natural: 7-9 bar (lower tames fruit intensity)
-- Honey: 8-9 bar (moderate intensity)
+- Honey: 8-9 bar (yellow closer to washed, red/black closer to natural)
 - Anaerobic/Experimental: 6-8 bar (lower avoids amplifying funk)
+
+For the full roast × processing pressure matrix and detailed reasoning, see `knowledge/PRESSURE_GUIDE.md`.
 
 ### Step 3: Load Reference Files
 
