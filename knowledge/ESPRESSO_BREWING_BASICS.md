@@ -10,13 +10,13 @@ Every espresso shot is controlled by these interconnected variables:
 
 | Variable | What it does | Typical range |
 |---|---|---|
-| **Dose** | Grams of coffee in | 15-20g |
+| **Dose** | Grams of coffee in | 15-22g (match basket size) |
 | **Yield** | Grams of espresso out | 30-50g |
 | **Ratio** | Dose:Yield relationship | 1:2 to 1:3 |
 | **Time** | Extraction duration | 20-35s (varies by style) |
 | **Grind** | Particle size | Finer = slower, more extraction |
 | **Temperature** | Brew water temp | 88-96°C |
-| **Pressure** | Bar during extraction | 6-9 bar (varies by style) |
+| **Pressure** | Bar during extraction | 6-9 bar (varies by style and processing) |
 
 **Key principle:** Change one variable at a time. If you change grind AND dose AND temperature, you won't know what fixed (or broke) your shot.
 
@@ -85,9 +85,10 @@ Modern espresso benefits from phased extraction:
 - **Why it matters:** Prevents channeling, enables more even extraction
 
 ### Ramp / Main Extraction
-- **Pressure:** Build to target (6-9 bar depending on style)
+- **Pressure:** Build to target (6-9 bar depending on style and processing method)
 - **Transition:** Linear or ease-in works well
 - **Purpose:** Main extraction of flavor compounds
+- **Processing note:** Intensely processed coffees (anaerobic, carbonic maceration) benefit from lower extraction pressure (6-8 bar) to avoid amplifying fermentation intensity
 
 ### Decline / Taper (Optional)
 - **Pressure:** Reduce toward end of shot
@@ -179,7 +180,7 @@ A common misconception: dark roasts actually contain similar acid levels to ligh
 ## Dialing-In Process
 
 ### Quick Start (New Coffee)
-1. **Set dose** based on basket size (e.g., 15g for 15g basket)
+1. **Set dose** to match basket size (e.g., 22g basket = 22g dose)
 2. **Set ratio** at 1:2 as starting point
 3. **Adjust grind** until shot time is ~25-30s
 4. **Taste and adjust:**

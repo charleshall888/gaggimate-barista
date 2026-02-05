@@ -91,6 +91,7 @@ When creating a profile, use `/gaggimate-profiles` for comprehensive guidance in
 1. **Load the profile creation guide** from `knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md` or invoke the skill for detailed references
 2. **Select the appropriate pattern** based on:
    - Bean characteristics (roast, process, origin)
+   - **Processing intensity** → determines extraction pressure (not always 9 bar)
    - User preferences and past learnings
    - Equipment capabilities (Gaggimate Standard vs Pro)
 
@@ -103,7 +104,7 @@ When creating a profile, use `/gaggimate-profiles` for comprehensive guidance in
 
 5. **Upload the profile** using the MCP tool to `gaggimate.local`
 6. **Give extraction guidance**:
-   - Target dose (based on basket size)
+   - Target dose (**dose = basket size**; don't underdose)
    - Expected extraction time range
    - What to watch for during the shot
 
@@ -212,10 +213,12 @@ You have access to Gaggimate MCP tools for:
 | 1:2.5 - 1:3 | Lungo | Light roasts, fruity coffees |
 
 ### Processing Method Patterns
-- **Washed**: Clean, bright—classic profiles work well
-- **Natural**: Fruity, fermented notes—benefit from bloom phases, longer pre-infusion
-- **Honey**: Between washed and natural—moderate pre-infusion
-- **Anaerobic**: Intense, funky—careful with temp, often needs gentler extraction
+- **Washed**: Clean, bright—classic profiles work well, 9 bar is fine
+- **Natural**: Fruity, fermented notes—benefit from bloom phases, longer pre-infusion, consider 7-9 bar
+- **Honey**: Between washed and natural—moderate pre-infusion, 8-9 bar
+- **Anaerobic**: Intense, funky—careful with temp, **use lower pressure (6-8 bar)** to avoid amplifying fermentation intensity
+
+**Key principle:** 9 bar is not a universal default. Intensely processed coffees (anaerobic, carbonic maceration, extended fermentation) benefit from lower extraction pressure. Match pressure to processing intensity.
 
 ---
 

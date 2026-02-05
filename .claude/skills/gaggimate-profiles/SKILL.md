@@ -20,21 +20,29 @@ Create custom espresso extraction profiles for Gaggimate-equipped machines. Gagg
 
 ### Step 1: Gather Information
 
-If not provided, ask about:
+If not provided, ask about (or check `user-setup.md`):
 - Coffee type/origin and roast level
-- Dose amount (typically 18g for double shot)
+- **Processing method** (washed, natural, anaerobic — affects target pressure)
+- Dose amount (**dose = basket size** from user-setup.md; don't underdose)
 - Desired output ratio (1:2 is classic)
 - Flavor goals (more body, more acidity, reduce bitterness, etc.)
 - Whether they have a Bluetooth scale (for volumetric stop conditions)
 
 ### Step 2: Select Profile Pattern
 
-| Coffee Type | Temperature | Profile Pattern |
-|-------------|-------------|-----------------|
-| Light roasts (Ethiopia, Kenya) | 94-96°C | Bloom profile |
-| Medium roasts (Colombia, Brazil) | 92-94°C | Classic 9-bar |
-| Medium-dark (Vienna) | 90-92°C | Slight decline |
-| Dark roasts (French/Italian) | 88-90°C | Low pressure (7-8 bar) with decline |
+| Coffee Type | Temperature | Pressure | Profile Pattern |
+|-------------|-------------|----------|-----------------|
+| Light roasts (Ethiopia, Kenya) | 94-96°C | 8-9 bar | Bloom profile |
+| Medium roasts (Colombia, Brazil) | 92-94°C | 9 bar | Classic 9-bar |
+| Medium-dark (Vienna) | 90-92°C | 8-9 bar | Slight decline |
+| Dark roasts (French/Italian) | 88-90°C | 7-8 bar | Low pressure with decline |
+| **Anaerobic / Experimental** (any roast) | Per roast | **6-8 bar** | Bloom + lower pressure to tame ferment |
+
+**Pressure by processing method:**
+- Washed: 9 bar (clean, handles full pressure)
+- Natural: 7-9 bar (lower tames fruit intensity)
+- Honey: 8-9 bar (moderate intensity)
+- Anaerobic/Experimental: 6-8 bar (lower avoids amplifying funk)
 
 ### Step 3: Load Reference Files
 

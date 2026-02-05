@@ -22,7 +22,7 @@
 
 ## Notes
 
-- With a 22g basket and milk drinks, typical dose will be 20-22g in
+- **Dose = basket size.** With a 22g basket, dose 22g. Don't underdose.
 - Light roasts + milk = higher extraction temps (93-95°C) to bring out sweetness
 - Sette 270's micro-adjust is useful for fine-tuning between shots
 - Gaggimate Pro enables flow profiling—useful for bloom profiles on light roasts
