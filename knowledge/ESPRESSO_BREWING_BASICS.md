@@ -34,6 +34,8 @@ Espresso extraction happens in stages:
 **Over-extraction** = went too far → bitter, dry, astringent
 **Good extraction** = balanced → sweetness present, pleasant acidity, hint of bitterness for depth
 
+→ *For the science behind extraction (TDS, extraction yield, grind physics), see `EXTRACTION_SCIENCE.md`*
+
 ---
 
 ## Shot Styles Overview

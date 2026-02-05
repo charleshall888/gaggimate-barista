@@ -15,6 +15,8 @@ Pressure defines espresso. At ~9 bar, water behaves fundamentally differently fr
 - **Above ~10 bar**, secondary compression causes significant problems: uneven flow, channeling, harsh over-extraction.
 - **As a shot progresses**, the puck erodes (less mass, less resistance). A fixed 9-bar profile forces increasing flow through weakening channels — this is why pressure decline is beneficial for most coffees.
 
+→ *For channeling physics, fines migration, and prevention strategies, see `EXTRACTION_SCIENCE.md`*
+
 ### What Pressure Controls
 
 | Higher Pressure (8-9+ bar) | Lower Pressure (5-7 bar) |
