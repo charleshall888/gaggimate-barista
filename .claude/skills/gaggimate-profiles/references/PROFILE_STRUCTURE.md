@@ -1,3 +1,5 @@
+> Focused extract from knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md
+
 # Gaggimate Profile Structure Reference
 
 Complete JSON schema and field reference for Gaggimate espresso profiles.

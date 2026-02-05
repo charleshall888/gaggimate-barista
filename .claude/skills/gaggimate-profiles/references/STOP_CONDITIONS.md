@@ -1,3 +1,5 @@
+> Focused extract from knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md
+
 # Stop Conditions (Targets) Reference
 
 Complete documentation for phase stop conditions in Gaggimate profiles.

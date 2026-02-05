@@ -1,3 +1,5 @@
+> Focused extract from knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md
+
 # Pump Configuration and Transitions Reference
 
 Complete documentation for pump control modes and transition types in Gaggimate profiles.

@@ -58,30 +58,11 @@ Build recommendations using:
 - **Profile:** From `knowledge/PROFILE_LIBRARY.md` by roast/process, adjusted for correct pressure
 - **Dose:** From `user-setup.md` basket size. **Dose = basket size** (e.g., 22g basket → 22g dose). Don't underdose.
 
-**Processing → Ratio patterns:**
-| Process | Suggested Ratio | Notes |
-|---------|-----------------|-------|
-| Washed | 1:2 | Clean, classic starting point |
-| Natural | 1:2 to 1:2.5 | Longer to develop fruit sweetness |
-| Honey | 1:2 | Between washed and natural |
-| Anaerobic | 1:2 to 1:2.5 | Often intense, longer ratio tames it |
-
-**Roast → Temperature:**
-| Roast | Temperature |
-|-------|-------------|
-| Light | 94-96°C |
-| Medium | 92-94°C |
-| Dark | 88-90°C |
-
-**Processing → Extraction Pressure:**
-| Process | Pressure | Notes |
-|---------|----------|-------|
-| Washed | 9 bar | Clean, handles full pressure well |
-| Natural | 7-9 bar | Lower pressure tames fruit intensity; 9 bar OK with bloom |
-| Honey | 8-9 bar | Moderate intensity, usually fine at 9 bar |
-| Anaerobic / Experimental | 6-8 bar | Lower pressure avoids amplifying ferment funk |
-
-**Key principle:** Intensely processed coffees (anaerobic, carbonic maceration, extended fermentation) benefit from lower extraction pressure to control the intensity of fermentation flavors. 9 bar is not a universal default. See `knowledge/PRESSURE_GUIDE.md` for the full roast × processing matrix, shot style adjustments, and the science behind each recommendation.
+**Starting parameters** — read these knowledge files for recommendations:
+- **Temperature by roast**: `knowledge/ESPRESSO_BREWING_BASICS.md` → "Temperature Guidelines by Roast"
+- **Ratio by processing**: `knowledge/ESPRESSO_BREWING_BASICS.md` → "Ratio Guidelines" section
+- **Pressure by processing**: `knowledge/PRESSURE_GUIDE.md` → roast × processing matrix
+- **Dose**: From `user-setup.md` basket size. Dose = basket size — don't underdose.
 
 ### 5. CONFIRM with User
 

@@ -30,21 +30,10 @@ If not provided, ask about (or check `user-setup.md`):
 
 ### Step 2: Select Profile Pattern
 
-| Coffee Type | Temperature | Pressure | Profile Pattern |
-|-------------|-------------|----------|-----------------|
-| Light roasts (Ethiopia, Kenya) | 94-96°C | 8-9 bar | Bloom profile |
-| Medium roasts (Colombia, Brazil) | 92-94°C | 9 bar | Classic 9-bar |
-| Medium-dark (Vienna) | 90-92°C | 8-9 bar | Slight decline |
-| Dark roasts (French/Italian) | 88-90°C | 7-8 bar | Low pressure with decline |
-| **Anaerobic / Experimental** (any roast) | Per roast | **6-8 bar** | Bloom + lower pressure to tame ferment |
-
-**Pressure by processing method:**
-- Washed: 9 bar (clean, handles full pressure)
-- Natural: 7-9 bar (lower tames fruit intensity)
-- Honey: 8-9 bar (yellow closer to washed, red/black closer to natural)
-- Anaerobic/Experimental: 6-8 bar (lower avoids amplifying funk)
-
-For the full roast × processing pressure matrix and detailed reasoning, see `knowledge/PRESSURE_GUIDE.md`.
+Consult these knowledge files to determine settings:
+- **Temperature**: `knowledge/ESPRESSO_BREWING_BASICS.md` → "Temperature Guidelines by Roast"
+- **Pressure**: `knowledge/PRESSURE_GUIDE.md` → roast × processing matrix
+- **Profile pattern**: `knowledge/PROFILE_LIBRARY.md` → select by roast, process, and style
 
 ### Step 3: Load Reference Files
 
@@ -55,7 +44,6 @@ For complete documentation, load the appropriate reference file:
 - **Stop Conditions**: See [references/STOP_CONDITIONS.md](references/STOP_CONDITIONS.md)
 - **Complete Examples**: See [references/EXAMPLES.md](references/EXAMPLES.md)
 - **Troubleshooting**: See [references/TROUBLESHOOTING.md](references/TROUBLESHOOTING.md)
-- **Quick Reference**: See [references/QUICK_REFERENCE.md](references/QUICK_REFERENCE.md)
 
 ### Step 4: Generate Profile JSON
 

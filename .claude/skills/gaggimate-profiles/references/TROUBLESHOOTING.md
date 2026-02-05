@@ -1,3 +1,5 @@
+> Focused extract from knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md
+
 # Troubleshooting Profiles
 
 Diagnose and fix common espresso extraction issues through profile adjustments.

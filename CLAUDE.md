@@ -185,30 +185,13 @@ When a shot gets 4-5 stars (same trigger as grind-map update), also update the c
 
 ### 6. Iterative Improvement Loop
 
-Based on feedback, suggest adjustments:
+Based on feedback, consult `knowledge/ESPRESSO_BREWING_BASICS.md` for adjustment strategies (the 5g rule, traditional vs turbo adjustments, temperature tuning). General direction:
 
-#### If SOUR (under-extracted):
-- **Grind finer** (most common fix)
-- **Increase temperature** (+1-2°C)
-- **Extend extraction time** (longer ratio or slower flow)
-- **Add or extend bloom phase** (better saturation)
+- **Sour** → extract more (finer grind, higher temp, longer time, more pre-infusion)
+- **Bitter** → extract less (coarser grind, lower temp, shorter time, lower pressure)
+- **Balanced but lacking** → fine-tune (body ↔ grind, brightness ↔ temp, sweetness ↔ bloom)
 
-#### If BITTER (over-extracted):
-- **Grind coarser**
-- **Decrease temperature** (-1-2°C)
-- **Shorten extraction** (stop earlier)
-- **Reduce pressure** (try 7-8 bar instead of 9)
-- **Add declining pressure phase**
-
-#### If BALANCED but lacking specific qualities:
-- **Want more body?** → Finer grind, higher temp, or longer pre-infusion
-- **Want more acidity/brightness?** → Slightly coarser, lower temp
-- **Want more sweetness?** → Bloom phase, medium-pressure extraction
-
-**Always explain why:**
-"That sourness suggests we didn't extract enough. The easiest lever to pull is grinding finer—I'd suggest going 0.5 steps finer. That should slow the shot down and give us more sweetness."
-
-**For deeper diagnosis:** Use `/diagnose` to correlate taste feedback with shot telemetry (pressure curves, flow rates, temperature). This provides more precise root cause analysis when simple adjustments aren't working.
+Always explain *why* you're suggesting a change. For deeper diagnosis, use `/diagnose`.
 
 ## MCP Tools Available
 
@@ -228,32 +211,13 @@ You have access to Gaggimate MCP tools for:
 - **Personal taste**: Conventional wisdom isn't always right. If a user prefers 1:4 ratios, help them optimize for that, don't push them toward "correct" ratios.
 - **AI profiles**: Mark AI-created profiles with `[AI]` suffix in the label for safety.
 
-## Key Espresso Principles
+## Core Rules (detailed references in knowledge/)
 
-### Temperature Guidelines
-| Roast Level | Temperature | Notes |
-|-------------|-------------|-------|
-| Light (Nordic) | 94-96°C | Needs high extraction |
-| Medium | 92-94°C | Standard espresso |
-| Medium-dark | 90-92°C | Balanced sweetness |
-| Dark | 88-90°C | Avoid over-extraction |
-
-### Ratio Guidelines
-| Ratio | Style | Best For |
-|-------|-------|----------|
-| 1:1 - 1:1.5 | Ristretto | Dark roasts, milk drinks |
-| 1:2 | Classic | Most coffees, starting point |
-| 1:2.5 - 1:3 | Lungo / Turbo | Light roasts, fruity coffees, turbo shots |
-
-**Turbo shots require 1:2.5-1:3.** The coarse grind and short contact time mean you need more water volume for adequate extraction. A 1:2 turbo will be sour and under-extracted — don't shorten the ratio to compensate for milk drinks. Instead, recommend a smaller milk drink (cortado, piccolo, flat white) to preserve the turbo's clarity.
-
-### Processing Method Patterns
-- **Washed**: Clean, bright—classic profiles work well, 9 bar is fine
-- **Natural**: Fruity, fermented notes—benefit from bloom phases, longer pre-infusion, consider 7-9 bar
-- **Honey**: Between washed and natural—moderate pre-infusion, 8-9 bar (yellow honey closer to washed, red/black closer to natural)
-- **Anaerobic**: Intense, funky—careful with temp, **use lower pressure (6-8 bar)** to avoid amplifying fermentation intensity
-
-**Key principle:** 9 bar is not a universal default. Pressure should be matched to both roast level AND processing method. See `knowledge/PRESSURE_GUIDE.md` for the full roast × processing pressure matrix and the reasoning behind each recommendation.
+- **Dose = basket size.** Never underdose. (See `user-setup.md`)
+- **Temperature varies by roast.** (See `knowledge/ESPRESSO_BREWING_BASICS.md`)
+- **Pressure varies by processing method — not always 9 bar.** (See `knowledge/PRESSURE_GUIDE.md`)
+- **Turbo shots require 1:2.5-1:3 ratio.** Coarse grind + short contact time needs more water. (See `knowledge/ESPRESSO_BREWING_BASICS.md`)
+- **Extract for the coffee, then recommend the drink.** Never adjust grind/ratio/pressure/temp for milk. (See Drink Format table above)
 
 ---
 

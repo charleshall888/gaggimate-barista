@@ -812,30 +812,9 @@ This creates a **40-second linear decline** from the previous flow (1.8 g/s) dow
 
 ## Profile Design Best Practices
 
-### Temperature Guidelines
-
-| Coffee Type | Roast Level | Recommended Temp | Adjustment Range |
-|-------------|-------------|------------------|------------------|
-| Light roast | Nordic style | 94-96°C | Very high extraction |
-| Medium roast | City/Full City | 92-94°C | Standard espresso |
-| Medium-dark | Vienna | 90-92°C | Balanced sweetness |
-| Dark roast | French/Italian | 88-90°C | Avoid over-extraction |
-
-**Temperature Adjustment Strategy:**
-- Too sour/acidic → Increase 1-2°C
-- Too bitter/harsh → Decrease 1-2°C
-- Flat/lifeless → Increase temperature
-- Astringent/dry → Decrease temperature
-
-### Ratio and Timing Guidelines
-
-| Ratio | Dose In | Output | Time Range | Style |
-|-------|---------|--------|------------|-------|
-| 1:1 | 18g | 18g | 20-25s | Ristretto |
-| 1:1.5 | 18g | 27g | 22-28s | Short |
-| 1:2 | 18g | 36g | 25-32s | Classic |
-| 1:2.5 | 18g | 45g | 28-35s | Lungo |
-| 1:3 | 18g | 54g | 30-40s | Allongé |
+For temperature, ratio, and adjustment strategies, see `ESPRESSO_BREWING_BASICS.md`.
+For pressure selection by roast and processing method, see `PRESSURE_GUIDE.md`.
+For ready-to-use profile patterns, see `PROFILE_LIBRARY.md`.
 
 ### Phase Duration Guidelines
 
@@ -847,42 +826,6 @@ This creates a **40-second linear decline** from the previous flow (1.8 g/s) dow
 | Pressure ramp | 3-5 seconds | Build to extraction pressure |
 | Hold phase | 15-30 seconds | Main extraction |
 | Decline/taper | 3-6 seconds | Smooth finish |
-
-### Common Profile Patterns
-
-#### 1. **Modern Espresso** (Medium roasts)
-```
-Pre-infusion (3-4s at 3 ml/s)
-→ Ramp (3s to 9 bar)
-→ Hold (20-25s at 9 bar)
-→ Stop at target weight
-```
-
-#### 2. **Light Roast Bloom**
-```
-Gentle fill (5s at 2 ml/s)
-→ Bloom (8s, pump off)
-→ Ramp (4s to 9 bar)
-→ Hold (15-20s at 9 bar)
-→ Stop at target weight
-```
-
-#### 3. **Dark Roast Low Pressure**
-```
-Pre-infusion (4s at 2.5 ml/s)
-→ Ramp (3s to 7 bar)
-→ Hold (25s at 7 bar)
-→ Taper (4s to 4 bar)
-→ Stop at target weight
-```
-
-#### 4. **Spring Lever Simulation**
-```
-Pre-infusion (4s at 3 ml/s)
-→ Peak (3s to 9 bar)
-→ Linear decline (25s from 9→3 bar)
-→ Stop at target weight
-```
 
 ### Flow Rate Guidelines
 
@@ -1031,25 +974,9 @@ After 2-3 shots, estimation typically becomes accurate within Â±2g.
 
 ## Quick Reference Card
 
-### Essential Settings by Coffee Type
-
-**Light Roasts (Ethiopia, Kenya, Fruit-forward)**
-- Temperature: 94-96°C
-- Ratio: 1:2.5 to 1:3
-- Profile: Bloom + 9 bar
-- Time: 28-35 seconds
-
-**Medium Roasts (Colombia, Brazil, Balanced)**
-- Temperature: 92-94°C
-- Ratio: 1:2
-- Profile: Classic 9 bar or slight decline
-- Time: 25-32 seconds
-
-**Dark Roasts (French, Italian)**
-- Temperature: 88-90°C
-- Ratio: 1:1.5 to 1:2
-- Profile: 7-8 bar or declining
-- Time: 22-28 seconds
+For essential settings by coffee type (temperature, ratio, timing), see `ESPRESSO_BREWING_BASICS.md`.
+For pressure by roast and processing, see `PRESSURE_GUIDE.md`.
+For ready-to-use profiles, see `PROFILE_LIBRARY.md`.
 
 ### Most Common Mistakes
 

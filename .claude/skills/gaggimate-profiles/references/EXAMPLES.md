@@ -1,3 +1,5 @@
+> Focused extract from knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md
+
 # Complete Profile Examples
 
 Working examples of Gaggimate profiles for different coffee types and extraction styles.
