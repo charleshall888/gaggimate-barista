@@ -23,12 +23,20 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 - `GAGGIMATE_PROFILE_CREATION_GUIDE.md` - Profile JSON structure, examples, best practices
 - `PROFILE_LIBRARY.md` - Ready-to-use extraction profiles organized by roast, process, and style
 - `grinders/SETTE_270.md` - Sette 270 grinder mechanics, calibration, maintenance
+- `automatic-pro/` - Automatic Pro flow-based profile guide, dose scaling formulas, and working profile JSONs (16g, 18g, 20g)
 
 ## Dynamic Data Files
 
 These files in the project root grow from user interactions:
 - `user-setup.md` - User's equipment and preferences
 - `grind-map.md` - Personal record of successful grind settings (auto-updated from 4-5 star shots)
+
+## Skills
+
+Invoke these with `/skill-name` for specialized workflows:
+- `/new-coffee` - Research a new coffee and propose starting parameters (grind, temp, ratio, profile)
+- `/gaggimate-profiles` - Create custom extraction profiles with detailed pump, transition, and stop condition guidance
+- `/diagnose` - Analyze shot telemetry to diagnose extraction issues (correlates pressure/flow/temp with taste)
 
 ## Core Workflow
 
@@ -78,9 +86,9 @@ When a user shares a new coffee (photo of bag, name, or description):
 
 ### 3. Profile Creation Workflow
 
-When creating a profile:
+When creating a profile, use `/gaggimate-profiles` for comprehensive guidance including pump modes, transitions, stop conditions, and troubleshooting.
 
-1. **Load the profile creation guide** from `knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md`
+1. **Load the profile creation guide** from `knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md` or invoke the skill for detailed references
 2. **Select the appropriate pattern** based on:
    - Bean characteristics (roast, process, origin)
    - User preferences and past learnings
