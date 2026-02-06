@@ -529,7 +529,7 @@ The **Automatic Pro** is a firmware built-in profile maintained by the Gaggimate
 
 It uses flow-based variable pressure with declining flow extraction. Select the correct dose variant on your machine's display, then adjust temperature and target weight/time.
 
-> **Full documentation**: [`automatic-pro/AUTOMATIC_PRO_GUIDE.md`](automatic-pro/AUTOMATIC_PRO_GUIDE.md) — 5-phase architecture, dose scaling, roast recommendations, troubleshooting.
+> **Full documentation**: [`automatic-pro/AUTOMATIC_PRO_GUIDE.md`](automatic-pro/AUTOMATIC_PRO_GUIDE.md) — 5-phase architecture, dose scaling, and Second Blooming effect.
 
 ---
 

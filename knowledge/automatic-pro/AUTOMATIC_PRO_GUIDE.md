@@ -25,17 +25,9 @@ The Automatic Pro is a **firmware built-in** profile that ships with Gaggimate. 
 
 ---
 
-## Roast-Level Recommendations
+## Brewing Recommendations
 
-| Roast Level | Temperature | Ratio | Approx. Time |
-|-------------|-------------|-------|---------------|
-| **Med-Dark** | ~91°C | 1:1.5 – 1:2.5 | ~36s |
-| **Med-Light** | ~94°C | 1:2.5 – 1:3+ | ~46s |
-
-**Tips:**
-- Sour/salty? → Higher ratio (1:2.5+), higher temperature
-- Bitter/dry? → Lower ratio (1:1.5-), lower temperature
-- Italian beans + 89°C + 1:1 ratio = great high-pressure shot
+For temperature, ratio, and roast-level guidance, see [Espresso Brewing Basics](../ESPRESSO_BREWING_BASICS.md). The default profile temperature is 91°C; adjust via the machine display based on roast level.
 
 ---
 
@@ -117,6 +109,7 @@ Volumetric stop       = Dose × Ratio              → adjust via display
 When ground very fine, the transition from the 12 bar Extraction Start (Phase 4) to the 9 bar Main Extraction ceiling (Phase 5) causes flow to briefly pause as the system regulates pressure downward. This is **not an error** — it creates a secondary saturation moment that often produces rich, chocolatey profiles.
 
 **Best for**: Chocolatey/nutty roasts at a 1:1.5 ratio with a fine grind.
+**Not occurring?** Grind finer — this effect only happens with high puck resistance.
 
 ---
 
@@ -146,14 +139,7 @@ The original documentation (and many online guides) describe the v2 architecture
 
 ## Troubleshooting
 
-| Problem | Solution |
-|---------|----------|
-| **Sour/salty** | Higher ratio (1:2.5+), higher temp |
-| **Bitter/dry** | Lower ratio (1:1.5-), lower temp |
-| **Low/no pressure** | Grind finer or check portafilter seal |
-| **Shot stalls** | Grind coarser |
-| **Channeling** | Improve puck prep (WDT, even distribution) |
-| **Second Blooming not occurring** | Grind finer — it only happens with high resistance |
+For diagnosing extraction issues (sour, bitter, channeling, stalls), see the [Diagnostic Decision Tree](../ESPRESSO_BREWING_BASICS.md) in Espresso Brewing Basics.
 
 ---
 
