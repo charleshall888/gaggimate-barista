@@ -24,9 +24,9 @@
 
 | Field | Value |
 |-------|-------|
-| **Coffee** | PERC Ethiopia Chelchele |
-| **Directory** | `coffees/perc-ethiopia-chelchele` |
-| **Roast Date** | — |
+| **Coffee** | Onyx Ethiopia Bochesa Anaerobic Natural |
+| **Directory** | `coffees/onyx-ethiopia-bochesa` |
+| **Roast Date** | January 20, 2026 |
 
 ## Bluetooth Scale & Auto-Stop
 
