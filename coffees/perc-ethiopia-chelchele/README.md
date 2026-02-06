@@ -27,6 +27,7 @@ A fruit-forward natural Ethiopian with anaerobic fermentation amplifying the alr
 | Profile | Style | Temp | Pressure | Ratio | File |
 |---------|-------|------|----------|-------|------|
 | Natural Process Bloom | Bloom | 94°C | 7.5 bar | 1:2.2 | [natural-bloom.json](natural-bloom.json) |
+| Chelchele Bloom Slide | Bloom + Decline | 94°C | 7.5→4 bar | 1:2.4 | [bloom-slide.json](bloom-slide.json) |
 
 ## Tasting Notes
 
