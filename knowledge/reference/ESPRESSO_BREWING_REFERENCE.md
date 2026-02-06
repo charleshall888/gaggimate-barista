@@ -158,7 +158,7 @@ A diagnostic tool for understanding what your profile is doing at each stage of 
 
 **When to use it:** When you're fine-tuning a profile and want to understand *where* in the extraction the problems are. Not for daily use — it's a diagnostic, not a routine.
 
-> *For detailed profile modification based on salami shot findings, see the Taste-Driven Profile Tuning section in `GAGGIMATE_PROFILE_CREATION_GUIDE.md`*
+> *For detailed profile modification based on salami shot findings, see the Taste-Driven Profile Tuning section in `PROFILE_CREATION_REFERENCE.md`*
 
 ### Managing Multiple Coffees
 

@@ -19,15 +19,16 @@ The user's equipment and preferences are documented in `user-setup.md`. Referenc
 
 Reference these files in the `knowledge/` directory for detailed guidance:
 - `ESPRESSO_BREWING_BASICS.md` - Core variables, adjustment strategies, ratio guidelines, diagnostic decision tree
-- `PRESSURE_GUIDE.md` - Comprehensive pressure reference: roast × processing matrix, shot style recommendations, flavor effects, decision framework
+- `EXTRACTION_SCIENCE.md` - Grinder-profile interaction, channeling prevention, pre-infusion mechanics, freshness guidance, visual diagnosis
+- `PRESSURE_GUIDE.md` - Pressure matrix (roast × processing), shot style parameters, decision framework
 - `ESPRESSO_TASTING_GUIDE.md` - Sour vs bitter diagnosis, tasting methodology, feedback template
-- `GAGGIMATE_PROFILE_CREATION_GUIDE.md` - Profile JSON structure, examples, best practices
+- `GAGGIMATE_PROFILE_CREATION_GUIDE.md` - Profile JSON schema, pump modes, stop conditions, examples, best practice tables
 - `PROFILE_LIBRARY.md` - Ready-to-use extraction profiles organized by roast, process, and style
 - `BEAN_FRESHNESS_AND_STORAGE.md` - Peak flavor windows, ultra-fresh handling, visual freshness cues
 - `SPECIAL_CATEGORIES.md` - Decaf extraction adjustments, blend archetypes and strategies
 - `grinders/SETTE_270.md` - Sette 270 grinder mechanics, calibration, maintenance
 - `automatic-pro/` - Automatic Pro firmware built-in profile: 5-phase vIT3 architecture, dose scaling, and working profile JSONs (16g, 18g, 20g, 22g)
-- `MILK_AND_DRINKS.md` - Milk science, steaming technique, drink recipes and proportions
+- `MILK_AND_DRINKS.md` - Steaming technique, temperature thresholds, drink specs, single-boiler workflow
 - `BASKETS.md` - Dose = basket size rule, puck depth effects, precision basket puck prep
 
 ### Deep Reference Files (in `knowledge/reference/`)
@@ -37,6 +38,10 @@ Load only when explicitly needed for deep-dive questions:
 - `ESPRESSO_TASTING_REFERENCE.md` - Flavor wheel, palate exercises, aroma evaluation, off-flavors, palate fatigue
 - `BEAN_FRESHNESS_REFERENCE.md` - Degassing science, storage methods, freezing protocols, staleness indicators
 - `BASKETS_REFERENCE.md` - Basket type specs (IMS, VST, stock), comparisons, ridged vs ridgeless, wall geometry
+- `EXTRACTION_SCIENCE_REFERENCE.md` - TDS/EY theory, grind science, particle distribution, channeling physics, CO2 degassing
+- `PROFILE_CREATION_REFERENCE.md` - Transition details, taste-driven profile tuning, advanced techniques, troubleshooting, file management
+- `PRESSURE_REFERENCE.md` - Matrix explanations, flavor compound effects, pressure variable interactions, misconceptions
+- `MILK_AND_DRINKS_REFERENCE.md` - Milk chemistry, foam science, latte art, detailed drink descriptions, iced drinks
 
 ## Dynamic Data Files
 

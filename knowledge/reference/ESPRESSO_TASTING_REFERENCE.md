@@ -119,7 +119,7 @@ The salami shot (described in `knowledge/reference/ESPRESSO_BREWING_REFERENCE.md
 
 **Training value:** Once you can identify these characters individually, you'll recognize them more easily when they're blended in a normal shot. A hint of sourness that you couldn't name before becomes recognizable as "early extraction character" — and you know to grind finer or extend pre-infusion.
 
-> *For how to use salami shot results to modify profiles, see the Taste-Driven Profile Tuning section in `GAGGIMATE_PROFILE_CREATION_GUIDE.md`*
+> *For how to use salami shot results to modify profiles, see the Taste-Driven Profile Tuning section in `PROFILE_CREATION_REFERENCE.md`*
 
 ---
 

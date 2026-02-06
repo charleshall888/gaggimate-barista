@@ -139,4 +139,4 @@ Don't judge a turbo shot for lacking body — that's expected. Judge it on clari
 
 ---
 
-*For the SCA Flavor Wheel, palate development exercises, aroma evaluation, off-flavor identification, and palate fatigue management, see `reference/ESPRESSO_TASTING_REFERENCE.md`. For brewing fundamentals and adjustment strategies, see `ESPRESSO_BREWING_BASICS.md`. For profile tuning based on taste feedback, see `GAGGIMATE_PROFILE_CREATION_GUIDE.md`.*
+*For the SCA Flavor Wheel, palate development exercises, aroma evaluation, off-flavor identification, and palate fatigue management, see `reference/ESPRESSO_TASTING_REFERENCE.md`. For brewing fundamentals and adjustment strategies, see `ESPRESSO_BREWING_BASICS.md`. For profile tuning based on taste feedback, see `reference/PROFILE_CREATION_REFERENCE.md`.*
