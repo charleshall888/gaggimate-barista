@@ -165,7 +165,7 @@ A diagnostic tool for understanding what your profile is doing at each stage of 
 If you rotate between different bags:
 
 - **Record everything** in your `grind-map.md` — coffee, grind setting, profile, ratio, temperature, days off roast, rating
-- **When returning to a coffee**, check your grind map and adjust for freshness: fresher beans (fewer days off roast) typically need a slightly finer grind due to higher CO2 content
+- **When returning to a coffee**, check your grind map and adjust for freshness: fresher beans (fewer days off roast) typically need a slightly coarser grind — CO2 adds puck resistance, so compensate to hit target time
 - **Purge grinder retention** when switching coffees — run 2-3g through to clear the old grounds. The Sette 270 has relatively low retention (~1g), but stale grounds from a previous coffee will affect the first shot
 - **Don't compare across coffees** — a grind setting that works for one bean won't work for another, even at the same roast level. Origin, variety, density, and processing all affect extraction
 

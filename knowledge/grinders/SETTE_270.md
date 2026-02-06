@@ -37,7 +37,7 @@ For espresso, you'll typically be in the **8-14** macro range:
 | Dark | 11-14 | Coarser to avoid over-extraction |
 
 **Important:** These are starting points. Your actual settings depend on:
-- Bean freshness (fresher = finer)
+- Bean freshness (fresher = coarser)
 - Humidity (higher = finer)
 - Dose size
 - Target ratio and time

@@ -47,7 +47,7 @@ Read `grind-map.md` and find similar coffees:
 - If match found: use as starting point, adjust for freshness and profile style differences
 - If no match: use defaults from `knowledge/grinders/SETTE_270.md`
 
-**Freshness adjustment:** Fresher beans (fewer days off roast) need finer grind due to CO2. If historical match was at 14 days and new bag is 7 days, suggest 1-2 micro steps finer.
+**Freshness adjustment:** Fresher beans (fewer days off roast) need **coarser** grind — CO2 adds puck resistance. If historical match was at 14 days and new bag is 7 days, suggest 1-2 micro steps coarser.
 
 ### 4. SYNTHESIZE Recommendations
 
