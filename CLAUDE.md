@@ -23,6 +23,8 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 - `ESPRESSO_TASTING_GUIDE.md` - Sour vs bitter diagnosis, tasting methodology
 - `GAGGIMATE_PROFILE_CREATION_GUIDE.md` - Profile JSON structure, examples, best practices
 - `PROFILE_LIBRARY.md` - Ready-to-use extraction profiles organized by roast, process, and style
+- `BEAN_FRESHNESS_AND_STORAGE.md` - Degassing science, peak flavor windows, storage methods, freezing protocols
+- `SPECIAL_CATEGORIES.md` - Decaf extraction adjustments, blend archetypes and strategies
 - `grinders/SETTE_270.md` - Sette 270 grinder mechanics, calibration, maintenance
 - `automatic-pro/` - Automatic Pro flow-based profile guide, dose scaling formulas, and working profile JSONs (16g, 18g, 20g)
 

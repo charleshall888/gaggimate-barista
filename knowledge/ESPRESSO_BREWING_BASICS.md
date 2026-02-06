@@ -236,4 +236,4 @@ A common misconception: dark roasts actually contain similar acid levels to ligh
 
 ---
 
-*For tasting guidance and feedback templates, see `ESPRESSO_TASTING_GUIDE.md`. For profile creation, see `GAGGIMATE_PROFILE_CREATION_GUIDE.md`.*
+*For tasting guidance and feedback templates, see `ESPRESSO_TASTING_GUIDE.md`. For profile creation, see `GAGGIMATE_PROFILE_CREATION_GUIDE.md`. For decaf and blend extraction strategies, see `SPECIAL_CATEGORIES.md`.*

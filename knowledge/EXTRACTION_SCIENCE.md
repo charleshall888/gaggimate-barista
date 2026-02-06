@@ -297,6 +297,8 @@ Fresh-roasted beans contain significant CO2 from the roasting process.
 
 Light roasts degas more slowly than dark roasts (denser structure retains gas longer), so they may need longer rest periods or extended bloom phases.
 
+> *For comprehensive freshness management — peak flavor windows, storage methods, and freezing protocols — see `BEAN_FRESHNESS_AND_STORAGE.md`.*
+
 ### Visual Diagnosis (Bottomless Portafilter)
 
 A bottomless portafilter reveals what's happening in the puck:
