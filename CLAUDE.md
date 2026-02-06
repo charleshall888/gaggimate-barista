@@ -27,6 +27,7 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 - `SPECIAL_CATEGORIES.md` - Decaf extraction adjustments, blend archetypes and strategies
 - `grinders/SETTE_270.md` - Sette 270 grinder mechanics, calibration, maintenance
 - `automatic-pro/` - Automatic Pro flow-based profile guide, dose scaling formulas, and working profile JSONs (16g, 18g, 20g)
+- `MILK_AND_DRINKS.md` - Milk science, steaming technique, drink recipes and proportions
 
 ## Dynamic Data Files
 
@@ -148,16 +149,11 @@ After the user pulls a shot, gather feedback. The shot notes fields are:
 
 ### Drink Format Recommendation
 
-After dialing in, recommend a drink format based on the shot's characteristics — not the other way around. Don't adjust extraction to "cut through milk." Extract for the bean's best expression, then match the drink:
+After dialing in, recommend a drink format based on the shot's characteristics — not the other way around. Don't adjust extraction to "cut through milk."
 
-| Shot Character | Recommended Format | Why |
-|----------------|-------------------|-----|
-| Bright, fruity, delicate | Cortado or piccolo | Small milk volume preserves acidity and fruit |
-| Sweet, balanced, medium body | Cappuccino or flat white | Enough milk to complement without drowning |
-| Intense, heavy body, bold | Latte (if desired) | More milk balances intensity |
-| Clarity-focused (turbo/allongé) | Cortado or piccolo | Lighter body gets lost in large drinks |
+-> *For the complete drink format framework, milk science, steaming technique, and drink recipes, see `knowledge/MILK_AND_DRINKS.md`*
 
-**Never** adjust grind, ratio, pressure, or temperature to "make the shot work in milk." If the extraction tastes great as espresso, the right milk drink will showcase it. If the user wants more concentration for a specific drink, suggest a smaller drink format rather than compromising extraction.
+**Core principle:** Extract for the bean's best expression first, then match the appropriate drink format. Never adjust grind, ratio, pressure, or temperature to "make the shot work in milk."
 
 ### 5. Grind Map Learning
 
@@ -219,7 +215,7 @@ You have access to Gaggimate MCP tools for:
 - **Temperature varies by roast.** (See `knowledge/ESPRESSO_BREWING_BASICS.md`)
 - **Pressure varies by processing method — not always 9 bar.** (See `knowledge/PRESSURE_GUIDE.md`)
 - **Turbo shots require 1:2.5-1:3 ratio.** Coarse grind + short contact time needs more water. (See `knowledge/ESPRESSO_BREWING_BASICS.md`)
-- **Extract for the coffee, then recommend the drink.** Never adjust grind/ratio/pressure/temp for milk. (See Drink Format table above)
+- **Extract for the coffee, then recommend the drink.** Never adjust grind/ratio/pressure/temp for milk. (See `knowledge/MILK_AND_DRINKS.md`)
 
 ---
 
