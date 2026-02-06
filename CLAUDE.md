@@ -106,6 +106,7 @@ When creating a profile, use `/gaggimate-profiles` for comprehensive guidance in
    - Equipment capabilities (Gaggimate Standard vs Pro)
 
 3. **Build the profile** with complete, valid JSON
+   - **Volumetric targets must match the user's dose × ratio.** Check `user-setup.md` for basket size. Library profiles in `PROFILE_LIBRARY.md` are sized for 22g.
 4. **Explain your choices**:
    - Why this temperature?
    - Why this pre-infusion approach?

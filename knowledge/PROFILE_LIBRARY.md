@@ -4,6 +4,8 @@ Ready-to-use extraction profiles for Gaggimate Pro. Each profile includes comple
 
 For technical details on profile structure, see `GAGGIMATE_PROFILE_CREATION_GUIDE.md`.
 
+> **Note:** All profiles are sized for a **22g dose**. Volumetric targets reflect the stated ratio at 22g in. If your basket size changes, recalculate: `target = dose × ratio`.
+
 ---
 
 ## Quick Reference
@@ -33,7 +35,7 @@ Designed for Nordic-style light roasts that need high extraction and benefit fro
 
 **Parameters:**
 - Temperature: 95°C
-- Ratio: 1:2.5 (18g → 45g)
+- Ratio: 1:2.5 (22g → 55g)
 - Expected time: 28-35 seconds
 - Grind: Finer than medium roast settings
 
@@ -82,7 +84,7 @@ Designed for Nordic-style light roasts that need high extraction and benefit fro
       "temperature": 0,
       "transition": { "type": "instant", "duration": 0, "adaptive": true },
       "pump": { "target": "pressure", "pressure": 9, "flow": 4 },
-      "targets": [{ "type": "volumetric", "operator": "gte", "value": 45 }]
+      "targets": [{ "type": "volumetric", "operator": "gte", "value": 55 }]
     }
   ]
 }
@@ -100,7 +102,7 @@ The reliable workhorse. A straightforward pre-infusion → ramp → hold pattern
 
 **Parameters:**
 - Temperature: 93°C
-- Ratio: 1:2 (18g → 36g)
+- Ratio: 1:2 (22g → 44g)
 - Expected time: 25-32 seconds
 - Grind: Standard espresso
 
@@ -140,7 +142,7 @@ The reliable workhorse. A straightforward pre-infusion → ramp → hold pattern
       "temperature": 0,
       "transition": { "type": "instant", "duration": 0, "adaptive": true },
       "pump": { "target": "pressure", "pressure": 9, "flow": 4 },
-      "targets": [{ "type": "volumetric", "operator": "gte", "value": 36 }]
+      "targets": [{ "type": "volumetric", "operator": "gte", "value": 44 }]
     }
   ]
 }
@@ -154,7 +156,7 @@ Mimics a spring lever machine with declining pressure throughout extraction. Cre
 
 **Parameters:**
 - Temperature: 91°C
-- Ratio: 1:2 (18g → 36g)
+- Ratio: 1:2 (22g → 44g)
 - Expected time: 28-35 seconds
 - Grind: Slightly finer than classic
 
@@ -194,7 +196,7 @@ Mimics a spring lever machine with declining pressure throughout extraction. Cre
       "temperature": 0,
       "transition": { "type": "linear", "duration": 25, "adaptive": true },
       "pump": { "target": "pressure", "pressure": 3, "flow": 0 },
-      "targets": [{ "type": "volumetric", "operator": "gte", "value": 36 }]
+      "targets": [{ "type": "volumetric", "operator": "gte", "value": 44 }]
     }
   ]
 }
@@ -212,7 +214,7 @@ Lower temperature and pressure to avoid over-extraction bitterness. Shorter rati
 
 **Parameters:**
 - Temperature: 89°C
-- Ratio: 1:1.5-2 (18g → 27-36g)
+- Ratio: 1:1.5-2 (22g → 33-44g)
 - Expected time: 22-28 seconds
 - Grind: Coarser than medium roast settings
 
@@ -252,7 +254,7 @@ Lower temperature and pressure to avoid over-extraction bitterness. Shorter rati
       "temperature": 0,
       "transition": { "type": "instant", "duration": 0, "adaptive": true },
       "pump": { "target": "pressure", "pressure": 7.5, "flow": 4 },
-      "targets": [{ "type": "volumetric", "operator": "gte", "value": 32 }]
+      "targets": [{ "type": "volumetric", "operator": "gte", "value": 39 }]
     },
     {
       "name": "Taper",
@@ -281,7 +283,7 @@ Extended bloom phase helps tame the intensity of natural process coffees while p
 
 **Parameters:**
 - Temperature: 94°C
-- Ratio: 1:2-2.5 (18g → 36-45g)
+- Ratio: 1:2-2.5 (22g → 44-55g)
 - Expected time: 30-38 seconds
 - Grind: Medium-fine, err toward finer
 
@@ -330,7 +332,7 @@ Extended bloom phase helps tame the intensity of natural process coffees while p
       "temperature": 0,
       "transition": { "type": "instant", "duration": 0, "adaptive": true },
       "pump": { "target": "pressure", "pressure": 8, "flow": 4 },
-      "targets": [{ "type": "volumetric", "operator": "gte", "value": 40 }]
+      "targets": [{ "type": "volumetric", "operator": "gte", "value": 49 }]
     },
     {
       "name": "Taper",
@@ -359,7 +361,7 @@ Coarse grind, high flow, fast extraction. Emphasizes clarity and brightness over
 
 **Parameters:**
 - Temperature: 96°C (high temp compensates for short contact time)
-- Ratio: 1:2.5-1:3 (18g → 45-54g)
+- Ratio: 1:2.5-1:3 (22g → 55-66g)
 - Expected time: 15-20 seconds (yes, really)
 - Grind: Significantly coarser than normal espresso
 
@@ -393,7 +395,7 @@ Coarse grind, high flow, fast extraction. Emphasizes clarity and brightness over
       "temperature": 0,
       "transition": { "type": "instant", "duration": 0, "adaptive": true },
       "pump": { "target": "flow", "pressure": 6, "flow": 4.5 },
-      "targets": [{ "type": "volumetric", "operator": "gte", "value": 54 }]
+      "targets": [{ "type": "volumetric", "operator": "gte", "value": 66 }]
     }
   ]
 }
@@ -409,7 +411,7 @@ A long, sweet extraction at extended ratios. Not a lungo (which is just more wat
 
 **Parameters:**
 - Temperature: 94°C
-- Ratio: 1:4-5 (18g → 72-90g)
+- Ratio: 1:4-5 (22g → 88-110g)
 - Expected time: 40-50 seconds
 - Grind: Slightly coarser than standard
 
@@ -449,7 +451,7 @@ A long, sweet extraction at extended ratios. Not a lungo (which is just more wat
       "temperature": 0,
       "transition": { "type": "instant", "duration": 0, "adaptive": true },
       "pump": { "target": "pressure", "pressure": 6, "flow": 4 },
-      "targets": [{ "type": "volumetric", "operator": "gte", "value": 80 }]
+      "targets": [{ "type": "volumetric", "operator": "gte", "value": 98 }]
     }
   ]
 }
@@ -471,7 +473,7 @@ as a base for larger milk drinks where you want the coffee to remain prominent
 
 **Parameters:**
 - Temperature: 92°C
-- Ratio: 1:1.5 (18g → 27g)
+- Ratio: 1:1.5 (22g → 33g)
 - Expected time: 22-26 seconds
 - Grind: Standard to slightly finer
 
@@ -511,7 +513,7 @@ as a base for larger milk drinks where you want the coffee to remain prominent
       "temperature": 0,
       "transition": { "type": "instant", "duration": 0, "adaptive": true },
       "pump": { "target": "pressure", "pressure": 9, "flow": 4 },
-      "targets": [{ "type": "volumetric", "operator": "gte", "value": 27 }]
+      "targets": [{ "type": "volumetric", "operator": "gte", "value": 33 }]
     }
   ]
 }
@@ -529,7 +531,7 @@ A self-regulating profile that adapts to your grind. Uses flow targeting with pr
 
 **Parameters:**
 - Temperature: 91°C
-- Ratio: 1:2 (18g → 36g)
+- Ratio: 1:2 (22g → 44g)
 - Expected time: 25-35 seconds (varies with grind)
 - Grind: More forgiving than pressure-based profiles
 

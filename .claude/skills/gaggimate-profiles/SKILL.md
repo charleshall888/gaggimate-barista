@@ -70,6 +70,8 @@ Always output complete, valid JSON with ALL required fields:
 }
 ```
 
+**Volumetric target:** Always set to `dose × ratio` using the user's basket size from `user-setup.md`. Library profiles in `PROFILE_LIBRARY.md` are sized for 22g.
+
 ### Step 5: Explain the Profile
 
 After generating JSON, explain:

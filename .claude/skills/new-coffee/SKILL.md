@@ -57,6 +57,7 @@ Build recommendations using:
 - **Pressure:** From `knowledge/PRESSURE_GUIDE.md` roast × processing matrix (see below)
 - **Profile:** From `knowledge/PROFILE_LIBRARY.md` by roast/process, adjusted for correct pressure
 - **Dose:** From `user-setup.md` basket size. **Dose = basket size** (e.g., 22g basket → 22g dose). Don't underdose.
+- **Volumetric target:** When using a library profile, confirm its volumetric stop matches dose × ratio. Library profiles are sized for 22g.
 
 **Starting parameters** — read these knowledge files for recommendations:
 - **Temperature by roast**: `knowledge/ESPRESSO_BREWING_BASICS.md` → "Temperature Guidelines by Roast"
