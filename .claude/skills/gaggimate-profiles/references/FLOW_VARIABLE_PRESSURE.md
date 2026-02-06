@@ -87,73 +87,21 @@ Ramp Target = Flow × Phase Duration (typically 6s)
 
 ## Profile Structure
 
-### Phase 1: Pre-Infusion
-- **Goal**: Fill headspace, moisten puck without pressure
-- **Flow**: High (20 g/s) for fast fill
-- **Pressure Limit**: 2 bar (prevents premature extraction)
-- **Stop Triggers**:
-  - `volumetric >= 1g` (first drip in cup)
-  - `pumped >= calculated volume`
+The firmware Automatic Pro profile (vIT3_0_8) implements flow-variable pressure across 5 phases:
 
-```json
-{
-  "name": "Pre-Infusion",
-  "pump": { "target": "flow", "pressure": 2, "flow": 20 },
-  "targets": [
-    { "type": "volumetric", "operator": "gte", "value": 1 },
-    { "type": "pumped", "operator": "gte", "value": 31 }
-  ]
-}
-```
+1. **Initialization** — System check at minimal flow (0.1 g/s, 1 bar)
+2. **Fill Headspace** — Fast fill (10 g/s, 1 bar ceiling) until pressure detected
+3. **Saturate Puck** — Moderate flow (2 g/s, 2 bar) until first drip or pumped volume reached
+4. **Extraction Start** — Pressure-targeted ramp (12 bar, dose-scaled flow limit)
+5. **Main Extraction** — Declining flow (→ 1.2 g/s over 40s, 9 bar ceiling) to target weight
 
-### Phase 2: Bloom
-- **Goal**: Saturate puck, prevent channeling
-- **Flow**: Match main brew flow (1.8 g/s for 18g)
-- **Pressure Limit**: 2 bar (pauses pump if saturated)
-- **Stop Trigger**: `volumetric >= 1.5g`
+**Key structural patterns for custom profiles:**
+- Low-pressure fill phases use `"target": "flow"` with a low pressure ceiling (1-2 bar)
+- Ramp phase uses `"target": "pressure"` at 12 bar with flow as a limiter
+- Extraction phase uses `"target": "flow"` with declining flow via `"transition": { "type": "linear", "duration": 40 }`
+- Volumetric stops on extraction phases, pressure-based stops on fill phases
 
-```json
-{
-  "name": "Bloom",
-  "pump": { "target": "flow", "pressure": 2, "flow": 1.8 },
-  "targets": [
-    { "type": "volumetric", "operator": "gte", "value": 1.5 }
-  ]
-}
-```
-
-### Phase 3: Ramp-Up
-- **Goal**: Build pressure smoothly
-- **Flow**: Same as brew flow
-- **Pressure Limit**: 12 bar (accommodates fine grinds)
-- **Duration**: 6 seconds max
-- **Stop Trigger**: `volumetric >= Flow × 6s`
-
-```json
-{
-  "name": "Ramp",
-  "pump": { "target": "flow", "pressure": 12, "flow": 1.8 },
-  "targets": [
-    { "type": "volumetric", "operator": "gte", "value": 11 }
-  ]
-}
-```
-
-### Phase 4: Main Extraction
-- **Goal**: Extract at constant flow with pressure ceiling
-- **Flow**: Calculated for dose (1.8 g/s for 18g)
-- **Pressure Limit**: 9 bar (prevents bitterness)
-- **Stop Trigger**: Target weight
-
-```json
-{
-  "name": "Brew",
-  "pump": { "target": "flow", "pressure": 9, "flow": 1.8 },
-  "targets": [
-    { "type": "volumetric", "operator": "gte", "value": 36 }
-  ]
-}
-```
+> **Full phase-by-phase analysis with JSON**: See [`automatic-pro/AUTOMATIC_PRO_GUIDE.md`](../../knowledge/automatic-pro/AUTOMATIC_PRO_GUIDE.md)
 
 ---
 
@@ -186,31 +134,24 @@ This creates a **40-second linear transition** from the previous flow (e.g., 1.8
 
 ---
 
-## Comparison: v2 vs v3 Approach
+## Version History
 
-| Aspect | v2 (Simple) | v3 (Advanced) |
-|--------|-------------|---------------|
-| Phases | 4 | 5 (+ Initialization) |
-| Pre-Infusion | 2 bar, fast fill | 1 bar, gentler |
-| Ramp | Flow-based | Pressure-based |
-| Extraction | Constant flow | Declining flow |
-| Complexity | Lower | Higher |
+The current firmware version is **vIT3_0_8** (5-phase, declining flow, pressure-targeted ramp). Older documentation may reference the **v2** version (4-phase, constant flow, flow-targeted ramp). For a detailed comparison, see the [Automatic Pro Guide](../../knowledge/automatic-pro/AUTOMATIC_PRO_GUIDE.md#v2-vs-vit3-comparison).
 
 ---
 
-## Quick Reference
+## Quick Reference (vIT3_0_8)
 
 ### What Stays Constant Across Doses
 - Temperature (91°C default)
-- Phase durations (10s, 6s, 6s, 120s)
-- Pressure limits (2 → 2 → 12 → 9 bar)
-- Bloom stop trigger (1.5g in cup)
+- Phase durations (3s, 20s, 30s, 6s, 90s)
+- Pressure ceilings (1 → 1 → 2 → 12 → 9 bar)
+- Main Extraction decline (40s linear to 1.2 g/s)
 
 ### What Scales With Dose
-- Flow rate
-- Pre-infusion water volume
-- Ramp target weight
-- Final yield
+- Saturate Puck pumped stop volume
+- Extraction Start flow limit
+- Final yield (volumetric stop)
 
 ---
 
@@ -228,6 +169,5 @@ This creates a **40-second linear transition** from the previous flow (e.g., 1.8
 
 ## Related Resources
 
-- [Automatic Pro Profile Guide](../../knowledge/automatic-pro/AUTOMATIC_PRO_PROFILE_GUIDE.md)
-- [How the Automatic Pro Profile works](../../knowledge/automatic-pro/How%20the%20Automatic%20Pro%20Profile%20works.md)
-- [Profile Creation Guide](../../knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md)
+- [Automatic Pro Guide](../../knowledge/automatic-pro/AUTOMATIC_PRO_GUIDE.md) — Canonical firmware profile documentation
+- [Profile Creation Guide](../../knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md) — JSON schema and custom profile examples

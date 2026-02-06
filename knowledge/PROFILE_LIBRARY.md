@@ -521,23 +521,15 @@ as a base for larger milk drinks where you want the coffee to remain prominent
 
 ---
 
-## Flow-Based Profiles
+## Firmware Built-In Profiles
 
-### Automatic Pro v2
+### Automatic Pro (vIT3)
 
-A self-regulating profile that adapts to your grind. Uses flow targeting with pressure ceiling to automatically adjust extraction.
+The **Automatic Pro** is a firmware built-in profile maintained by the Gaggimate developer — not an agent-created profile. It ships pre-installed on Gaggimate Pro devices in multiple dose variants (16g, 18g, 20g, 22g).
 
-**When to use:** When you want consistency across different coffees without constant profile adjustment
+It uses flow-based variable pressure with declining flow extraction. Select the correct dose variant on your machine's display, then adjust temperature and target weight/time.
 
-**Parameters:**
-- Temperature: 91°C
-- Ratio: 1:2 (22g → 44g)
-- Expected time: 25-35 seconds (varies with grind)
-- Grind: More forgiving than pressure-based profiles
-
-**Flavor expectations:** Balanced, consistent, adapts to bean characteristics
-
-See `GAGGIMATE_PROFILE_CREATION_GUIDE.md` for dose-scaling formulas and the complete profile.
+> **Full documentation**: [`automatic-pro/AUTOMATIC_PRO_GUIDE.md`](automatic-pro/AUTOMATIC_PRO_GUIDE.md) — 5-phase architecture, dose scaling, roast recommendations, troubleshooting.
 
 ---
 
@@ -560,7 +552,7 @@ See `GAGGIMATE_PROFILE_CREATION_GUIDE.md` for dose-scaling formulas and the comp
 | Shots too sour | Light Roast Bloom | Higher temp, bloom for better extraction |
 | Shots too bitter | Dark Roast Gentle | Lower temp/pressure, taper at end |
 | Want more intensity | Milk Drink Base | Shorter ratio concentrates flavor |
-| Inconsistent | Automatic Pro v2 | Self-regulating flow control |
+| Inconsistent | Automatic Pro (firmware) | Self-regulating flow control |
 | Channeling | Natural Process Bloom | Extended pre-infusion, gentle fill |
 
 ---

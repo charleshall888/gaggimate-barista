@@ -681,106 +681,21 @@ Complex flavor profile with 7 phases for maximum control.
 
 ---
 
-## Flow-Based Variable Pressure (Automatic Pro) by modsmthng_57901 on Gaggimate Discord
+## Flow-Based Variable Pressure (Automatic Pro)
 
-Self-regulating profile that adapts to grind size automatically. Uses flow control with pressure ceiling.
+The **Automatic Pro** is a firmware built-in profile by modsmthng_57901. It uses flow-variable pressure — targeting a flow rate with a pressure ceiling so extraction adapts to puck resistance automatically.
 
-**Best for:** All roasts, beginners, when you want consistency without constant adjustment
+**Best for:** All roasts, beginners, consistency without constant adjustment
 
-**Key technique:** Target a flow rate with a pressure limit—pressure becomes variable based on puck resistance.
+**Key technique for custom profiles:**
+- Use `"target": "flow"` with a `"pressure"` ceiling — the machine self-regulates
+- Scale flow to dose: `Flow = Dose × 2 / 20s` (16g → 1.6, 18g → 1.8, 22g → 2.2 g/s)
+- Add declining flow via linear transition for sweetness (e.g., 40s decline from brew flow → 1.2 g/s)
+- Use low pressure ceilings (1-2 bar) for fill/saturation phases, 12 bar for ramp, 9 bar for extraction
 
-```json
-{
-  "label": "Automatic Pro v2 18g",
-  "type": "pro",
-  "description": "Flow-based variable pressure - adapts to grind automatically",
-  "temperature": 91,
-  "phases": [
-    {
-      "name": "Pre-Infusion",
-      "phase": "preinfusion",
-      "valve": 1,
-      "duration": 10,
-      "temperature": 0,
-      "transition": { "type": "instant", "duration": 0, "adaptive": true },
-      "pump": {
-        "target": "flow",
-        "pressure": 2,
-        "flow": 20
-      },
-      "targets": [
-        { "type": "volumetric", "operator": "gte", "value": 1 },
-        { "type": "pumped", "operator": "gte", "value": 31 }
-      ]
-    },
-    {
-      "name": "Bloom",
-      "phase": "preinfusion",
-      "valve": 1,
-      "duration": 6,
-      "temperature": 0,
-      "transition": { "type": "instant", "duration": 0, "adaptive": true },
-      "pump": {
-        "target": "flow",
-        "pressure": 2,
-        "flow": 1.8
-      },
-      "targets": [
-        { "type": "volumetric", "operator": "gte", "value": 1.5 }
-      ]
-    },
-    {
-      "name": "Ramp",
-      "phase": "brew",
-      "valve": 1,
-      "duration": 6,
-      "temperature": 0,
-      "transition": { "type": "instant", "duration": 0, "adaptive": true },
-      "pump": {
-        "target": "flow",
-        "pressure": 12,
-        "flow": 1.8
-      },
-      "targets": [
-        { "type": "volumetric", "operator": "gte", "value": 11 }
-      ]
-    },
-    {
-      "name": "Brew",
-      "phase": "brew",
-      "valve": 1,
-      "duration": 120,
-      "temperature": 0,
-      "transition": { "type": "instant", "duration": 0, "adaptive": true },
-      "pump": {
-        "target": "flow",
-        "pressure": 9,
-        "flow": 1.8
-      },
-      "targets": [
-        { "type": "volumetric", "operator": "gte", "value": 36 }
-      ]
-    }
-  ]
-}
-```
-
-**How it works:**
-1. **Pre-Infusion**: Fast fill (20 g/s) at low pressure (2 bar) until puck saturated
-2. **Bloom**: Maintain brew flow (1.8 g/s) at 2 bar ceiling—pauses if puck already pressurized
-3. **Ramp**: Same flow, but 12 bar ceiling allows pressure to build through resistance
-4. **Brew**: Flow-controlled at 1.8 g/s with 9 bar ceiling—prevents over-extraction
-
-**Advantages:**
-- **Grind Tolerance**: Forgiving of slight grind inconsistencies
-- **Channeling Prevention**: Low initial pressure reduces channeling
-- **Flavor Balance**: 9 bar ceiling prevents bitterness
-- **Second Blooming**: Fine grinds may cause brief pause at phase transition—enhances chocolatey/nutty notes
-
-**Scaling to other doses** (see [FLOW_VARIABLE_PRESSURE.md](./FLOW_VARIABLE_PRESSURE.md)):
-- Flow = `Dose × 2 / 20s` (9g→0.9, 16g→1.6, 18g→1.8, 22g→2.2)
-- Pre-infusion water = `Dose × 1.3 + 7.5ml`
-- Ramp target = `Flow × 6s`
+> **Full firmware profile documentation**: See [`automatic-pro/AUTOMATIC_PRO_GUIDE.md`](../../knowledge/automatic-pro/AUTOMATIC_PRO_GUIDE.md) for the 5-phase vIT3 architecture, dose scaling tables, and phase-by-phase analysis.
+>
+> **Technique reference**: See [`FLOW_VARIABLE_PRESSURE.md`](./FLOW_VARIABLE_PRESSURE.md) for dose scaling formulas, advantages, and troubleshooting.
 
 ---
 
@@ -795,4 +710,4 @@ Self-regulating profile that adapts to grind size automatically. Uses flow contr
 | Turbo Shot | 96°C | 9 bar | 15-20s | Light roasts |
 | Allongé | 92°C | 8 bar | 35-50s | Long drinks |
 | Multi-Stage | 93°C | 9→3 bar | 40-50s | Complex cups |
-| **Automatic Pro** | 91°C | Variable (≤9) | 30-40s | All roasts, consistency |
+| **Automatic Pro** (firmware) | 91°C | Variable (≤9) | 30-40s | All roasts, consistency |

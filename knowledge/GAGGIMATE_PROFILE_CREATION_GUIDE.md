@@ -662,151 +662,25 @@ Declining pressure profile mimicking manual lever machines.
 }
 ```
 
-### Example 4: Flow-Based Variable Pressure (Automatic Pro Style)
-Pioneered by modsmthng_57901 on Gaggimate Discord
+### Example 4: Flow-Based Variable Pressure Technique
 
-This technique creates **self-regulating pressure** that adapts to your grind size. Instead of targeting a fixed pressure, you target a flow rate with a pressure ceiling—the machine automatically adjusts.
-
-#### How It Works
+Pioneered by modsmthng_57901 on Gaggimate Discord. This technique creates **self-regulating pressure** — target a flow rate with a pressure ceiling, and the machine adapts to puck resistance automatically.
 
 ```json
 "pump": {
-  "target": "flow",      // Primary control: maintain this flow rate
+  "target": "flow",      // Primary: maintain this flow rate
   "pressure": 9,         // Secondary: never exceed this pressure
-  "flow": 1.8            // Target 1.8 g/s
+  "flow": 1.8            // Target flow in g/s
 }
 ```
 
-**The Magic**: 
-- If puck resistance is **high** (fine grind) → pressure builds quickly to the 9 bar ceiling, flow may drop below target
-- If puck resistance is **low** (coarse grind) → pressure stays low naturally, flow maintained at target
-- The profile **adapts automatically** without manual adjustment
+**How it works**: High puck resistance (fine grind) → pressure builds to the ceiling, flow may drop below target. Low resistance (coarse grind) → pressure stays low, flow is maintained. The profile adapts without manual adjustment.
 
-#### Advantages of Flow-Based Variable Pressure
+**Advantages**: Grind tolerance, channeling prevention (lower initial pressure), flavor balance (pressure ceiling prevents bitterness), consistency across different coffees.
 
-1. **Grind Tolerance**: Forgiving of slight grind inconsistencies—no need to dial in perfectly
-2. **Channeling Prevention**: Lower initial pressure reduces channeling risk
-3. **Flavor Balance**: The 9 bar ceiling prevents over-extraction bitterness
-4. **Consistency**: Same profile works across different coffees with minor grind adjustments
-5. **Second Blooming Effect**: With fine grinds, the transition from 12→9 bar can create a brief pause, enhancing chocolatey/nutty notes
+**Scaling flow to dose**: `Flow = Dose × 2 / 20s` (e.g., 16g → 1.6 g/s, 18g → 1.8 g/s, 22g → 2.2 g/s)
 
-#### Dose-Based Scaling Formulas
-
-When adapting this profile to different doses, use these formulas:
-
-| Parameter | Formula | 9g | 16g | 18g | 20g | 22g |
-|-----------|---------|-----|-----|-----|-----|-----|
-| **Flow Rate** | `Dose × 2 / 20s` | 0.9 g/s | 1.6 g/s | 1.8 g/s | 2.0 g/s | 2.2 g/s |
-| **Pre-Infusion Water** | `Dose × 1.3 + 7.5ml` | 19ml | 28ml | 31ml | 34ml | 36ml |
-| **Ramp Target** | `Flow × 6s` | 5g | 10g | 11g | 12g | 13g |
-| **Final Yield (1:2)** | `Dose × 2` | 18g | 32g | 36g | 40g | 44g |
-
-#### Complete Example: Automatic Pro v2 (18g)
-
-```json
-{
-  "label": "Automatic Pro v2 18g",
-  "type": "pro",
-  "description": "Flow-based variable pressure - adapts to grind automatically",
-  "temperature": 91,
-  "phases": [
-    {
-      "name": "Pre-Infusion",
-      "phase": "preinfusion",
-      "valve": 1,
-      "duration": 10,
-      "temperature": 0,
-      "transition": { "type": "instant", "duration": 0, "adaptive": true },
-      "pump": {
-        "target": "flow",
-        "pressure": 2,
-        "flow": 20
-      },
-      "targets": [
-        { "type": "volumetric", "operator": "gte", "value": 1 },
-        { "type": "pumped", "operator": "gte", "value": 31 }
-      ]
-    },
-    {
-      "name": "Bloom",
-      "phase": "preinfusion",
-      "valve": 1,
-      "duration": 6,
-      "temperature": 0,
-      "transition": { "type": "instant", "duration": 0, "adaptive": true },
-      "pump": {
-        "target": "flow",
-        "pressure": 2,
-        "flow": 1.8
-      },
-      "targets": [
-        { "type": "volumetric", "operator": "gte", "value": 1.5 }
-      ]
-    },
-    {
-      "name": "Ramp",
-      "phase": "brew",
-      "valve": 1,
-      "duration": 6,
-      "temperature": 0,
-      "transition": { "type": "instant", "duration": 0, "adaptive": true },
-      "pump": {
-        "target": "flow",
-        "pressure": 12,
-        "flow": 1.8
-      },
-      "targets": [
-        { "type": "volumetric", "operator": "gte", "value": 11 }
-      ]
-    },
-    {
-      "name": "Brew",
-      "phase": "brew",
-      "valve": 1,
-      "duration": 120,
-      "temperature": 0,
-      "transition": { "type": "instant", "duration": 0, "adaptive": true },
-      "pump": {
-        "target": "flow",
-        "pressure": 9,
-        "flow": 1.8
-      },
-      "targets": [
-        { "type": "volumetric", "operator": "gte", "value": 36 }
-      ]
-    }
-  ]
-}
-```
-
-#### Advanced: Declining Flow Profile (v3 Style)
-
-For even more sophistication, add a declining flow during extraction:
-
-```json
-{
-  "name": "Main Extraction",
-  "phase": "brew",
-  "valve": 1,
-  "duration": 90,
-  "temperature": 0,
-  "transition": {
-    "type": "linear",
-    "duration": 40,
-    "adaptive": true
-  },
-  "pump": {
-    "target": "flow",
-    "pressure": 9,
-    "flow": 1.2
-  },
-  "targets": [
-    { "type": "volumetric", "operator": "gte", "value": 36 }
-  ]
-}
-```
-
-This creates a **40-second linear decline** from the previous flow (1.8 g/s) down to 1.2 g/s, mimicking high-end lever machine behavior for sweeter, more balanced shots.
+> **Gaggimate's built-in Automatic Pro profile** implements this technique with a 5-phase architecture including declining flow extraction. For the full firmware profile documentation, dose scaling tables, and phase-by-phase analysis, see [`automatic-pro/AUTOMATIC_PRO_GUIDE.md`](automatic-pro/AUTOMATIC_PRO_GUIDE.md).
 
 ---
 
