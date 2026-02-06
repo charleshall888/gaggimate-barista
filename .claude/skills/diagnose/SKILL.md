@@ -214,11 +214,17 @@ When diagnosing inconsistency or trends:
 
 ## Integration with Other Knowledge
 
-**For deeper extraction theory:**
+**For adjustment strategies and diagnostics:**
 → Reference `knowledge/ESPRESSO_BREWING_BASICS.md`
 
-**For detailed tasting guidance:**
+**For deeper extraction theory (shot styles, salami shot, dialing methodology):**
+→ Reference `knowledge/reference/ESPRESSO_BREWING_REFERENCE.md`
+
+**For shot evaluation and feedback:**
 → Reference `knowledge/ESPRESSO_TASTING_GUIDE.md`
+
+**For deeper tasting guidance (flavor wheel, palate exercises, off-flavors):**
+→ Reference `knowledge/reference/ESPRESSO_TASTING_REFERENCE.md`
 
 **For profile modifications:**
 → Reference `knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md`

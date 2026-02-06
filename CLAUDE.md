@@ -18,16 +18,25 @@ The user's equipment and preferences are documented in `user-setup.md`. Referenc
 ## Knowledge Files
 
 Reference these files in the `knowledge/` directory for detailed guidance:
-- `ESPRESSO_BREWING_BASICS.md` - Core variables, shot styles, adjustment strategies
+- `ESPRESSO_BREWING_BASICS.md` - Core variables, adjustment strategies, ratio guidelines, diagnostic decision tree
 - `PRESSURE_GUIDE.md` - Comprehensive pressure reference: roast × processing matrix, shot style recommendations, flavor effects, decision framework
-- `ESPRESSO_TASTING_GUIDE.md` - Sour vs bitter diagnosis, tasting methodology
+- `ESPRESSO_TASTING_GUIDE.md` - Sour vs bitter diagnosis, tasting methodology, feedback template
 - `GAGGIMATE_PROFILE_CREATION_GUIDE.md` - Profile JSON structure, examples, best practices
 - `PROFILE_LIBRARY.md` - Ready-to-use extraction profiles organized by roast, process, and style
-- `BEAN_FRESHNESS_AND_STORAGE.md` - Degassing science, peak flavor windows, storage methods, freezing protocols
+- `BEAN_FRESHNESS_AND_STORAGE.md` - Peak flavor windows, ultra-fresh handling, visual freshness cues
 - `SPECIAL_CATEGORIES.md` - Decaf extraction adjustments, blend archetypes and strategies
 - `grinders/SETTE_270.md` - Sette 270 grinder mechanics, calibration, maintenance
 - `automatic-pro/` - Automatic Pro flow-based profile guide, dose scaling formulas, and working profile JSONs (16g, 18g, 20g)
 - `MILK_AND_DRINKS.md` - Milk science, steaming technique, drink recipes and proportions
+- `BASKETS.md` - Dose = basket size rule, puck depth effects, precision basket puck prep
+
+### Deep Reference Files (in `knowledge/reference/`)
+
+Load only when explicitly needed for deep-dive questions:
+- `ESPRESSO_BREWING_REFERENCE.md` - Shot styles, extraction theory, dialing methodology, salami shot, common mistakes
+- `ESPRESSO_TASTING_REFERENCE.md` - Flavor wheel, palate exercises, aroma evaluation, off-flavors, palate fatigue
+- `BEAN_FRESHNESS_REFERENCE.md` - Degassing science, storage methods, freezing protocols, staleness indicators
+- `BASKETS_REFERENCE.md` - Basket type specs (IMS, VST, stock), comparisons, ridged vs ridgeless, wall geometry
 
 ## Dynamic Data Files
 
