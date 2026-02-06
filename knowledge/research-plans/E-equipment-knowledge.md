@@ -4,38 +4,22 @@ Hardware-specific knowledge that affects extraction.
 
 ## Research Topics
 
-### E1. Basket Types & Effects — SIGNIFICANT
+### E1. Basket Types & Effects — COMPLETED
 
-**Current:** "22g basket" in user setup. No other basket discussion.
+**Delivered:** `knowledge/BASKETS.md` — comprehensive guide covering stock vs precision baskets, IMS Baristapro Nanotech specs (661 holes, 0.30mm diameter, AISI 304 steel), VST comparison, ridged vs ridgeless tradeoffs, what "22g" means, basket geometry and puck physics, precision baskets and puck prep interaction. Sourced from Perfect Daily Grind, Barista Hustle, Robert McKeon Aloe data analysis, IMS/VST manufacturer specs.
 
-**Gaps:** VST vs IMS vs stock Gaggia baskets, hole pattern effects on flow/channeling, ridged vs ridgeless, basket geometry (depth, taper), what "22g" actually means, upgrade recommendations, precision baskets and puck prep interaction.
+### E2. Bluetooth Scale Integration — COMPLETED
 
-**Sources:** VST docs, IMS docs, James Hoffmann basket comparisons, Barista Hustle.
+**Delivered:** New section in `user-setup.md` — "Bluetooth Scale & Auto-Stop" covering Bookoo Themis Ultra specs (2000g/0.1g, IP67, BLE, sub-100ms response), predictive stop mechanism, 200ms delay calibration guide, troubleshooting (0g reads, connection drops, inconsistent stops).
 
-### E2. Bluetooth Scale Integration — MODERATE
+### E3. Advanced Shot Styles — COMPLETED
 
-**Current:** Mentioned as equipment. Volumetric stop conditions documented.
-
-**Gaps:** How predictive stop works, recommended delay value, calibration method, troubleshooting (connection, 0g reads, inconsistent stops), delay vs accuracy relationship.
-
-### E3. Advanced Shot Styles — MINOR
-
-**Current:** Traditional, turbo, allongé, SOUP, bloom all documented.
-
-**Gaps:** Ristretto (only in ratio table, no profile/guidance), lungo vs allongé distinction, stepped/surfing pressure profiles, adaptive/responsive profiles.
-
-## Execution
-
-1. Research each topic using web search, focusing on the expert sources listed
-2. Write basket knowledge to `knowledge/BASKETS.md` (new file) or a new section in `knowledge/ESPRESSO_BREWING_BASICS.md`
-3. Write BT scale integration to a new section in `user-setup.md` or a standalone doc
-4. Expand shot styles into `knowledge/ESPRESSO_BREWING_BASICS.md` (Shot Styles section) and add missing profiles to `knowledge/PROFILE_LIBRARY.md`
-5. Add Sources sections with links to expert references
+**Delivered:** Added to `knowledge/ESPRESSO_BREWING_BASICS.md` — Ristretto subsection (pressure, grind, ratio, time, character, relationship to Classic 9-Bar profile) and Lungo vs Allongé clarification paragraph explaining the key difference (over-extraction vs engineered extended extraction).
 
 ## Also Fix (No Research Needed)
 
-1. **Natural Process Bloom profile** (`PROFILE_LIBRARY.md`): Extraction at 9 bar but `PRESSURE_GUIDE.md` says light-medium naturals = 7-8 bar. Bloom compensates +0.5-1 bar per the guide, but 9 bar still seems high.
+1. **Natural Process Bloom profile** — FIXED. Reduced Ramp pressure 9→8 bar, target 8.5→7.5 bar, Extract pressure 9→8 bar. Aligns with PRESSURE_GUIDE.md matrix (light-medium natural = 7-8 bar, +0.5-1 bar bloom compensation = 8 bar ceiling).
 
-2. **No 22g Automatic Pro profile JSON** exists, though dose-scaling formulas are documented. User has a 22g basket.
+2. **22g Automatic Pro profile JSON** — FIXED. Created `knowledge/automatic-pro/profile_files/Automatic Pro vIT3_0_8 22g.json` scaled from 18g/20g pattern: Saturate Puck pumped=14, Extraction Start flow=2.2, Main Extraction volumetric=44.
 
-3. **User setup** missing BT scale predictive delay value.
+3. **User setup BT scale predictive delay** — FIXED. Updated equipment table and added comprehensive BT scale section to `user-setup.md`.

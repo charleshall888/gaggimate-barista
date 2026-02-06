@@ -76,6 +76,24 @@ Espresso extraction happens in stages:
 - **Best for:** Ultra-light roasts, filter-style flavor in concentrated form
 - **Key technique:** Gentle soak until puck fully saturated, then fast flow
 
+### Ristretto
+- **Pressure:** 9 bar (same as traditional)
+- **Grind:** Finer than traditional (to maintain resistance with less water)
+- **Ratio:** 1:1 to 1:1.5
+- **Time:** 15-20 seconds
+- **Character:** Intense, syrupy, concentrated, heavy body
+- **Best for:** Dark roasts, milk drinks where you want the coffee to punch through, or when you prefer maximum intensity
+- **Key difference from traditional:** Same profile shape and pressure — a ristretto is a recipe adjustment (shorter ratio, finer grind), not a distinct extraction style. Use the Classic 9-Bar or Milk Drink Base profile and simply set a shorter volumetric stop.
+
+### Lungo vs Allongé
+
+A **lungo** ("long" in Italian) is often confused with an allongé, but they're different approaches:
+
+- **Lungo:** More water pushed through the same puck at the same grind setting. The extra volume comes from extended extraction time, which pulls increasingly bitter compounds. The result is a larger, weaker drink that's often harsh — it's over-extraction by default. Not recommended as a deliberate strategy.
+- **Allongé:** A properly engineered extended extraction. The grind is adjusted coarser, pressure is often lower (6 bar), and the longer ratio (1:4-1:5) is *designed for* from the start. The result is a sweet, tea-like drink with high extraction yield but no harshness, because the coarser grind and lower pressure prevent over-extraction of bitter compounds.
+
+If someone asks for a "lungo," what they usually want is an allongé — or an Americano (espresso + hot water), which achieves volume without over-extraction.
+
 ---
 
 ## Pre-Infusion & Pressure Phases

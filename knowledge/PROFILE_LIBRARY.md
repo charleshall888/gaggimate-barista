@@ -319,8 +319,8 @@ Extended bloom phase helps tame the intensity of natural process coffees while p
       "duration": 5,
       "temperature": 0,
       "transition": { "type": "ease-in-out", "duration": 4, "adaptive": true },
-      "pump": { "target": "pressure", "pressure": 9, "flow": 0 },
-      "targets": [{ "type": "pressure", "operator": "gte", "value": 8.5 }]
+      "pump": { "target": "pressure", "pressure": 8, "flow": 0 },
+      "targets": [{ "type": "pressure", "operator": "gte", "value": 7.5 }]
     },
     {
       "name": "Extract",
@@ -329,7 +329,7 @@ Extended bloom phase helps tame the intensity of natural process coffees while p
       "duration": 25,
       "temperature": 0,
       "transition": { "type": "instant", "duration": 0, "adaptive": true },
-      "pump": { "target": "pressure", "pressure": 9, "flow": 4 },
+      "pump": { "target": "pressure", "pressure": 8, "flow": 4 },
       "targets": [{ "type": "volumetric", "operator": "gte", "value": 40 }]
     },
     {
