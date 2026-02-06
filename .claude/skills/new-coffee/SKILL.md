@@ -43,7 +43,8 @@ Search for the specific coffee to find:
 
 Read `grind-map.md` and find similar coffees:
 - Match by: roast level > processing method > origin
-- If match found: use as starting point, adjust for freshness
+- **Consider profile style compatibility**: A grind setting from a bloom profile at 7.5 bar won't translate directly to a turbo at 6 bar. When presenting matches, include the Profile, Ratio, and Temp columns so the user sees the full extraction context.
+- If match found: use as starting point, adjust for freshness and profile style differences
 - If no match: use defaults from `knowledge/grinders/SETTE_270.md`
 
 **Freshness adjustment:** Fresher beans (fewer days off roast) need finer grind due to CO2. If historical match was at 14 days and new bag is 7 days, suggest 1-2 micro steps finer.

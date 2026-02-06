@@ -26,7 +26,7 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 - `BEAN_FRESHNESS_AND_STORAGE.md` - Peak flavor windows, ultra-fresh handling, visual freshness cues
 - `SPECIAL_CATEGORIES.md` - Decaf extraction adjustments, blend archetypes and strategies
 - `grinders/SETTE_270.md` - Sette 270 grinder mechanics, calibration, maintenance
-- `automatic-pro/` - Automatic Pro flow-based profile guide, dose scaling formulas, and working profile JSONs (16g, 18g, 20g)
+- `automatic-pro/` - Automatic Pro firmware built-in profile: 5-phase vIT3 architecture, dose scaling, and working profile JSONs (16g, 18g, 20g, 22g)
 - `MILK_AND_DRINKS.md` - Milk science, steaming technique, drink recipes and proportions
 - `BASKETS.md` - Dose = basket size rule, puck depth effects, precision basket puck prep
 
@@ -85,6 +85,7 @@ When a user shares a new coffee (photo of bag, name, or description):
 3. **Check grind map** for similar coffees:
    - Read `grind-map.md` and look for beans with similar roast level, processing method, or origin
    - If matches found, suggest: "Based on your history with similar coffees, try starting around [setting]"
+   - **Consider profile style**: A grind match from a different extraction style needs adjustment. Example: "Your similar coffee worked at 9D on a bloom profile at 7.5 bar. If using a turbo style, you'll need significantly coarser."
    - **Adjust for freshness**: If the historical data was at a different freshness level, account for it. Fresher beans (fewer days off roast) typically need a finer grind due to higher CO2 content. Example: "Your similar coffee worked at 9D at 14 days off roast. This bag is 7 days old, so consider starting at 9A-9B (slightly finer)."
    - If no matches, fall back to general guidance from `knowledge/grinders/SETTE_270.md`
 
@@ -176,7 +177,10 @@ After receiving shot feedback, automatically update the grind map for successful
 
 **Update process:**
 1. Read current `grind-map.md`
-2. Append new row to the "Successful Settings" table with: Coffee, Roast, Process, Origin, Days Off Roast, Grind, Rating, Date
+2. Append new row to the "Successful Settings" table with: Coffee, Roast, Process, Origin, Days Off Roast, Grind, Profile, Ratio, Temp, Rating, Date
+   - **Profile**: The profile style name used (e.g., "Natural Bloom", "Turbo", "Classic 9-bar")
+   - **Ratio**: Actual dose-in:dose-out as 1:X.X
+   - **Temp**: Profile temperature in °C
    - If roast date is known (from coffee research or bag photo), calculate Days Off Roast
    - If roast date is unknown, use "—" for Days Off Roast
 3. No confirmation needed—silent learning

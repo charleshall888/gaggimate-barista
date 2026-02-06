@@ -4,8 +4,8 @@ A personal record of successful grind settings that grows from your shots. When 
 
 ## Successful Settings
 
-| Coffee | Roast | Process | Origin | Days Off Roast | Grind | Rating | Date |
-|--------|-------|---------|--------|----------------|-------|--------|------|
+| Coffee | Roast | Process | Origin | Days Off Roast | Grind | Profile | Ratio | Temp | Rating | Date |
+|--------|-------|---------|--------|----------------|-------|---------|-------|------|--------|------|
 
 *Days Off Roast is optional—use "—" when roast date is unknown.*
 
