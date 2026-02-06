@@ -6,11 +6,18 @@ Detailed reference for interpreting Gaggimate shot telemetry and correlating wit
 
 ## Pressure Patterns
 
-### Normal Pressure Curve
-- **Pre-infusion:** 2-4 bar for 3-8 seconds
-- **Ramp:** Rises to target over 2-5 seconds
-- **Extraction:** Holds at 8-10 bar (or follows profile)
-- **Decline (if profiled):** Gradual drop to 6-7 bar
+### Pressure Curve by Style
+
+"Normal" pressure depends entirely on the shot style. Load specific expectations from `knowledge/PRESSURE_GUIDE.md` (Pressure by Shot Style section).
+
+| Style | Pre-infusion | Extraction Pressure | Curve Shape |
+|-------|-------------|---------------------|-------------|
+| Classic 9-Bar | 2-4 bar, 4-8s | 8-10 bar flat | Flat hold |
+| Bloom | 2-3 bar fill, then pump off | 7-9 bar | Bloom pause → ramp → hold |
+| Turbo | 5-6 bar, 2-3s | 5-6 bar | Flat at lower pressure |
+| Allongé | 2-3 bar, 5-8s | ~6 bar peak | Flow-controlled, pressure rises then naturally declines |
+| Lever Decline | 2-4 bar, 5-8s | 8-9 bar peak → 3-5 bar | Linear decline through extraction |
+| Dark/Gentle | 2-3 bar, 4-6s | 7-8 bar | Flat or gentle taper |
 
 ### Pressure Anomalies
 
@@ -41,11 +48,16 @@ Detailed reference for interpreting Gaggimate shot telemetry and correlating wit
 
 ## Flow Patterns
 
-### Normal Flow Curve
-- **Pre-infusion:** 0-1 ml/s (saturation phase)
-- **First drip:** Appears 4-8 seconds into shot
-- **Extraction:** 1.5-2.5 ml/s steady state
-- **Peak flow:** Typically at end as puck erodes
+### Flow Curve by Style
+
+| Style | Pre-infusion Flow | Extraction Flow | First Drip |
+|-------|-------------------|-----------------|------------|
+| Classic 9-Bar | 0-1 ml/s | 1.5-2.5 ml/s steady | 4-8s |
+| Bloom | 1-2 ml/s fill, ~0 during bloom | 1.5-2.5 ml/s | Delayed by bloom (15-25s from start) |
+| Turbo | Brief pre-wet | 3-5 ml/s (high flow is intentional) | 2-4s |
+| Allongé | 0.5-1 ml/s | 2-3 ml/s constant flow-target | 5-10s |
+| Lever Decline | 0-1 ml/s | Starts 1.5-2 ml/s, increases as pressure drops | 4-8s |
+| Dark/Gentle | 0-1 ml/s | 1.5-2.5 ml/s | 4-7s |
 
 ### Flow Anomalies
 
@@ -60,15 +72,18 @@ Detailed reference for interpreting Gaggimate shot telemetry and correlating wit
 
 ### Flow-Based Diagnostics
 
-**Time to first drip** is one of the most diagnostic metrics:
+**Time to first drip** is one of the most diagnostic metrics, but expected values vary by style:
 
-| First Drip Time | Interpretation | Action |
-|-----------------|----------------|--------|
-| < 2 seconds | Severe channeling or very coarse | Major grind adjustment needed |
-| 2-4 seconds | Too fast, likely coarse or channel | Grind 1-2 steps finer |
-| 4-8 seconds | Optimal range | Monitor taste, fine-tune |
-| 8-12 seconds | Slow but acceptable for some profiles | May need slight coarsening |
-| > 12 seconds | Risk of choking | Grind coarser, reduce dose |
+| Style | Expected First Drip | Too Fast | Too Slow |
+|-------|---------------------|----------|----------|
+| Classic 9-Bar | 4-8s | < 3s | > 10s |
+| Bloom | 15-25s from start (delayed by bloom pause) | Flow during bloom > 1 ml/s | > 30s from start |
+| Turbo | 2-4s | < 1.5s | > 6s |
+| Allongé | 5-10s | < 3s | > 12s |
+| Lever Decline | 4-8s | < 3s | > 10s |
+| Dark/Gentle | 4-7s | < 3s | > 9s |
+
+**Important:** For bloom profiles, first drip time is measured from the *start of the extraction phase* (after bloom), not from the start of the shot. A bloom shot showing "first drip at 20s" is normal — the bloom pause accounts for 10-15s of that.
 
 ---
 
@@ -102,19 +117,78 @@ Detailed reference for interpreting Gaggimate shot telemetry and correlating wit
 
 ## Taste-to-Telemetry Correlation Matrix
 
-Use this matrix to work backwards from taste to likely telemetry cause:
+Use this matrix to work backwards from taste to likely telemetry cause. All thresholds are **relative to the identified shot style** — load expected ranges from `knowledge/PRESSURE_GUIDE.md` and `knowledge/PROFILE_LIBRARY.md`.
 
 | Taste Descriptor | Primary Telemetry Suspect | Secondary Suspect | Tertiary Suspect |
 |------------------|---------------------------|-------------------|------------------|
-| **Sour** | Flow too fast (>3 ml/s) | Time to drip too short (<4s) | Temperature too low |
-| **Bitter** | Extraction too long (>35s) | Temperature too high | Pressure sustained high |
-| **Astringent** | Pressure spike + drop | Channeling (erratic flow) | Over-extracted fines |
-| **Watery** | Low pressure (<7 bar) | High flow (>3 ml/s) | Short extraction |
-| **Harsh** | Choked flow (<1 ml/s) | Very long extraction (>45s) | High temperature |
-| **Flat/Muted** | Temperature drift | Short preinfusion | Stale beans (not telemetry) |
-| **Unbalanced** | Erratic flow/pressure | Channeling evidence | Multiple extraction zones |
-| **Thin body** | Fast flow | Short time | Low pressure |
-| **Heavy/Syrupy** | Slow flow | Long time | Fine grind (not anomalous) |
+| **Sour** | Flow above style's expected range | First drip below style's expected time | Temperature too low |
+| **Bitter** | Extraction time well above style range | Temperature too high | Pressure sustained above style target |
+| **Astringent** | Pressure spike + drop (any style) | Channeling (erratic flow) | Over-extracted fines |
+| **Watery** | Pressure below style's expected range | Flow above style range | Extraction time below style range |
+| **Harsh** | Flow well below style range (choked) | Extraction time far above style range | High temperature |
+| **Flat/Muted** | Temperature drift (any style) | Insufficient preinfusion/bloom | Stale beans (not telemetry) |
+| **Unbalanced** | Erratic flow/pressure (any style) | Channeling evidence | Multiple extraction zones |
+| **Thin body** | Flow above style range | Time below style range | Pressure below style range |
+| **Heavy/Syrupy** | Flow below style range | Time above style range | Fine grind (not anomalous if balanced) |
+
+---
+
+## Style Detection Fingerprints
+
+Use this table for Tier 3 detection (last resort) when neither profile definition nor meaningful profile name is available. Classify the shot style from telemetry signatures alone.
+
+| Fingerprint | Detected Style |
+|-------------|----------------|
+| Total time < 22s AND avg flow > 3 ml/s | **Turbo** |
+| Pre-infusion > 12s with near-zero flow pause (pump off period) | **Bloom** |
+| Pressure clearly declining through brew phase (>4 bar drop over >15s) | **Lever Decline** |
+| Total time > 38s AND avg extraction pressure < 7 bar AND high yield | **Allongé** |
+| Extraction pressure 7-8 bar steady, no bloom, no decline | **Dark/Gentle** |
+| Extraction pressure 8-10 bar steady, 25-35s total | **Classic 9-Bar** |
+
+**Ambiguity rules:**
+- If multiple fingerprints match, prefer the more specific one (e.g., bloom > classic)
+- Short shots with moderate flow (22-28s, 2-3 ml/s) are likely Classic with a slightly coarse grind, not Turbo
+- Declining pressure at the very end of any shot is normal puck degradation, not Lever Decline — look for intentional, sustained decline starting early in extraction
+
+---
+
+## Per-Style Diagnostic Notes
+
+Common misdiagnosis warnings — what NOT to flag for each style.
+
+### Turbo
+- Flow 3-5 ml/s is **EXPECTED**. Only flag > 6 ml/s as too fast.
+- Total time 12-20s is **EXPECTED**. Do not flag as "too short."
+- Pressure at 5-6 bar is **EXPECTED**. Do not flag as "too low."
+- First drip at 2-4s is **EXPECTED** for the coarser grind.
+- Sourness likely means ratio too short (needs 1:2.5-1:3) or temp too low, not grind too coarse.
+
+### Bloom
+- Delayed first drip (15-25s from shot start) is **EXPECTED** — the bloom pause adds 10-15s.
+- No flow during pump-off phase is **NORMAL** — that's the bloom working.
+- Total time 30-40s is **EXPECTED**. Do not flag as "too long."
+- Lower extraction pressure (7-8 bar) is **EXPECTED** for naturals/anaerobics.
+- If sour despite correct parameters, consider longer bloom or higher temperature.
+
+### Allongé
+- Total time 25-50s is **EXPECTED**. Do not flag as "too long."
+- Pressure at 5-6 bar is **EXPECTED** — flow-controlled, not pressure-controlled.
+- Pressure naturally rising then declining is **NORMAL** allongé behavior.
+- High yield (1:4-1:5 ratio) is **INTENTIONAL**. Do not flag as over-extracted.
+- Bitterness in allongé usually means temperature too high, not over-extraction.
+
+### Lever Decline
+- Declining pressure through extraction is **INTENTIONAL**. Do not flag as "pressure dropping."
+- Flow increasing as pressure drops is **NORMAL** physics — lower pressure = less resistance.
+- Total time 28-35s is **EXPECTED**.
+- If bitter, the peak pressure may be too high or held too long before decline starts.
+
+### Dark/Gentle
+- Pressure at 7-8 bar is **EXPECTED**. Do not flag as "too low."
+- Shorter ratios (1:1.5-1:2) are **NORMAL** for dark roasts.
+- Total time 22-28s is **EXPECTED**.
+- Temperature at 88-90°C is **EXPECTED** — do not suggest raising it.
 
 ---
 
@@ -212,11 +286,14 @@ When comparing multiple shots, calculate variance in:
 
 When diagnosing a shot:
 
-- [ ] Check time to first drip (most diagnostic single metric)
-- [ ] Check peak pressure and when it occurred
-- [ ] Check average flow rate
-- [ ] Check temperature stability
+- [ ] Identify shot style (profile definition → profile name → telemetry fingerprint)
+- [ ] Load style-specific expected ranges from knowledge files
+- [ ] Check time to first drip against style expectations
+- [ ] Check peak pressure against style target
+- [ ] Check average flow rate against style range
+- [ ] Check temperature stability (universal: ±1°C normal)
+- [ ] Compare intended profile vs actual telemetry (if profile definition available)
 - [ ] Compare to previous shots if available
-- [ ] Correlate with user's taste description
+- [ ] Correlate with user's taste description using style-relative thresholds
 - [ ] Identify primary variable to adjust
 - [ ] Provide specific, actionable recommendation
