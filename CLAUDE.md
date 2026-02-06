@@ -22,7 +22,7 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 - `EXTRACTION_SCIENCE.md` - Grinder-profile interaction, channeling prevention, pre-infusion mechanics, freshness guidance, visual diagnosis
 - `PRESSURE_GUIDE.md` - Pressure matrix (roast × processing), shot style parameters, decision framework
 - `ESPRESSO_TASTING_GUIDE.md` - Sour vs bitter diagnosis, tasting methodology, feedback template
-- `GAGGIMATE_PROFILE_CREATION_GUIDE.md` - Profile JSON schema, pump modes, stop conditions, examples, best practice tables
+- `GAGGIMATE_PROFILE_CREATION_GUIDE.md` - Profile JSON schema quick-reference (field tables, pump modes, stop conditions, duration/flow guidelines)
 - `PROFILE_LIBRARY.md` - Profile lookup table, condensed summaries, selection guides (by taste goal and problem)
 - `BEAN_FRESHNESS_AND_STORAGE.md` - Peak flavor windows, ultra-fresh handling, visual freshness cues
 - `SPECIAL_CATEGORIES.md` - Decaf extraction adjustments, blend temperature strategies, archetype quick-reference
@@ -88,70 +88,13 @@ The Active Coffee section in `user-setup.md` tracks which coffee is currently be
 
 ### 2. Coffee Research Workflow
 
-When a user shares a new coffee (photo of bag, name, or description):
-
-1. **Identify the coffee**: Roaster, name, origin(s)
-2. **Research thoroughly** using web search for reliable sources:
-   - Processing method (washed, natural, honey, anaerobic, etc.)
-   - Origin country and region
-   - Altitude (affects density and extraction behavior)
-   - Variety (Bourbon, Gesha, Caturra, etc.)
-   - Roast level (if not stated, infer from roaster style or tasting notes)
-   - Roast date (freshness affects CO2 and extraction)
-   - Tasting notes from roaster
-
-3. **Check grind map** for similar coffees:
-   - Read `grind-map.md` and look for beans with similar roast level, processing method, or origin
-   - If matches found, suggest: "Based on your history with similar coffees, try starting around [setting]"
-   - **Consider profile style**: A grind match from a different extraction style needs adjustment. Example: "Your similar coffee worked at 9D on a bloom profile at 7.5 bar. If using a turbo style, you'll need significantly coarser."
-   - **Adjust for freshness**: If the historical data was at a different freshness level, account for it. Fresher beans (fewer days off roast) typically need a **coarser** grind — CO2 adds puck resistance, so compensate to hit target time. Example: "Your similar coffee worked at 9D at 14 days off roast. This bag is 7 days old, so consider starting at 9F-9G (slightly coarser)."
-   - If no matches, fall back to general guidance from `knowledge/grinders/SETTE_270.md`
-
-4. **Synthesize into recommendations**:
-   - Suggest starting temperature based on roast level
-   - Suggest starting grind based on grind map matches or grinder reference
-   - Suggest profile from `knowledge/PROFILE_LIBRARY.md` or create a custom one
-   - Suggest starting ratio based on processing and roast
-   - Note any special considerations (e.g., natural process often needs more pre-infusion)
-
-5. **Ask user preferences** before finalizing:
-   - "This natural Ethiopian typically shines at higher temps with a bloom phase. Would you like to start there, or would you prefer a more conservative approach?"
-
-6. **Save coffee research** to `coffees/{roaster}-{coffee-name}/README.md`:
-   - Directory name: `{roaster}-{coffee-name}` in kebab-case (e.g., `perc-ethiopia-chelchele`)
-   - Write `README.md` with Bean Profile table (include roaster's actual tasting notes), "What to Expect" section (2-3 sentence summary + 2-4 bullets synthesizing origin, variety, processing, and altitude into flavor expectations), empty Profiles table, empty Tasting Notes table (header row, no data)
-   - **Set as active coffee:** Update the Active Coffee section in `user-setup.md` with coffee name, directory path, and roast date
-   - No confirmation needed—standard workflow step
+Use `/new-coffee` — it owns the full workflow: research, grind map lookup, recommendations, saving to `coffees/`, and setting active coffee. See the skill for details.
 
 ### 3. Profile Creation Workflow
 
-When creating a profile, use `/gaggimate-profiles` for comprehensive guidance including pump modes, transitions, stop conditions, and troubleshooting.
+Use `/gaggimate-profiles` — it owns the full workflow: gathering info, selecting patterns, generating JSON, explaining choices, uploading, and saving to `coffees/`. See the skill for details.
 
-1. **Load the profile creation guide** from `knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md` or invoke the skill for detailed references
-2. **Select the appropriate pattern** based on:
-   - Bean characteristics (roast, process, origin)
-   - **Processing intensity** → determines extraction pressure (not always 9 bar)
-   - User preferences and past learnings
-   - Equipment capabilities (Gaggimate Standard vs Pro)
-
-3. **Build the profile** with complete, valid JSON
-   - **Volumetric targets must match the user's dose × ratio.** Check `user-setup.md` for basket size. Library profiles in `PROFILE_LIBRARY.md` are sized for 22g.
-4. **Explain your choices**:
-   - Why this temperature?
-   - Why this pre-infusion approach?
-   - Why this pressure curve?
-   - What flavor outcomes to expect?
-
-5. **Upload the profile** using the MCP tool to `gaggimate.local`
-6. **Save profile to repository**:
-   - Write the profile JSON to `coffees/{coffee-dir}/{profile-style}.json` (kebab-case filename, e.g., `natural-bloom.json`)
-   - Update the coffee's `README.md` Profiles table with the new profile entry
-   - If no coffee directory exists yet, create it with a minimal `README.md`
-   - Overwrite existing JSON files on update—git history tracks iterations
-7. **Give extraction guidance**:
-   - Target dose (**dose = basket size**; don't underdose)
-   - Expected extraction time range
-   - What to watch for during the shot
+**Volumetric targets must match the user's dose × ratio.** Check `user-setup.md` for basket size. Library profiles in `PROFILE_LIBRARY.md` are sized for 22g.
 
 ### 4. Shot Feedback & Rating Workflow
 

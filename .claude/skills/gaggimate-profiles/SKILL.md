@@ -7,15 +7,6 @@ description: Create custom espresso extraction profiles for Gaggimate-equipped m
 
 Create custom espresso extraction profiles for Gaggimate-equipped machines. Gaggimate supports **Simple** and **Pro** profile types, with Pro profiles offering pressure profiling, flow control, and complex transitions.
 
-## When to Use This Skill
-
-- Creating new espresso extraction profiles for Gaggimate machines
-- Modifying or troubleshooting existing Gaggimate profiles
-- Designing pressure profiles, flow profiles, or blooming profiles
-- Helping with espresso extraction issues (channeling, over-extraction, under-extraction)
-- Explaining profile concepts like pressure profiling, flow control, transitions
-- Suggesting profiles for specific coffee types or roast levels
-
 ## Workflow
 
 ### Step 1: Gather Information
@@ -92,53 +83,13 @@ After explaining the profile, save it to the `coffees/` directory:
 3. **Update the Profiles table** in the coffee's `README.md` with: Profile name, Style, Temp, Pressure, Ratio, and link to the JSON file
 4. **Remove `.gitkeep`** from `coffees/` if present
 
-## Quick Profile Patterns
+## Quick Reference
 
-### Classic 9-Bar (Medium Roasts)
-```
-Pre-infusion (4s, flow 3 ml/s) → Ramp (4s to 9 bar) → Hold (25s at 9 bar) → Stop at weight
-```
-
-### Bloom Profile (Light Roasts)
-```
-Fill (5s, flow 2.5 ml/s) → Bloom (8s, pump off) → Ramp (5s to 9 bar) → Hold (20s) → Stop at weight
-```
-
-### Lever Simulation (Any Roast)
-```
-Pre-infusion (5s, flow 3 ml/s) → Peak (5s to 9 bar) → Linear decline (25s to 3 bar) → Stop at weight
-```
-
-### Dark Roast Low Pressure
-```
-Pre-infusion (4s, flow 2.5 ml/s) → Ramp (3s to 7 bar) → Hold (25s) → Taper (4s to 4 bar)
-```
-
-## Essential Pump Modes
-
-```json
-// Pressure mode - maintain specific pressure
-{ "target": "pressure", "pressure": 9, "flow": 4 }
-
-// Flow mode - maintain specific flow rate
-{ "target": "flow", "pressure": 9, "flow": 2.5 }
-
-// Adaptive flow - auto-adjust to puck resistance
-{ "target": "flow", "pressure": 9, "flow": -1 }
-
-// Power mode (for bloom - pump off)
-{ "target": "power", "pressure": 0, "flow": 0 }
-```
-
-## Essential Transition Types
-
-| Type | Use Case |
-|------|----------|
-| `instant` | Phase starts, step changes |
-| `linear` | Standard pressure ramps |
-| `ease-in` | Gentle pre-infusion to extraction |
-| `ease-out` | Tapering at end of shot |
-| `ease-in-out` | Complex profiles, most natural |
+For detailed documentation beyond the workflow above:
+- **Profile patterns & full JSON examples**: [references/EXAMPLES.md](references/EXAMPLES.md)
+- **Pump modes & transition types**: [references/PUMP_AND_TRANSITIONS.md](references/PUMP_AND_TRANSITIONS.md)
+- **Stop conditions**: [references/STOP_CONDITIONS.md](references/STOP_CONDITIONS.md)
+- **Troubleshooting**: [references/TROUBLESHOOTING.md](references/TROUBLESHOOTING.md)
 
 ## Output Requirements
 
@@ -149,9 +100,3 @@ Pre-infusion (4s, flow 2.5 ml/s) → Ramp (3s to 7 bar) → Hold (25s) → Taper
 5. **Explain your choices** after the JSON
 6. **Save to `coffees/` directory** alongside the coffee's README.md
 
-## Resources
-
-- **Documentation**: https://docs.gaggimate.eu/
-- **Discord Community**: https://discord.gg/APw7rgPGPf
-- **Web Interface**: http://gaggimate.local/profiles
-- **GitHub**: https://github.com/jniebuhr/gaggimate
