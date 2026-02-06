@@ -183,19 +183,148 @@ A common misconception: dark roasts actually contain similar acid levels to ligh
 
 ## Dialing-In Process
 
-### Quick Start (New Coffee)
-1. **Set dose** to match basket size (e.g., 22g basket = 22g dose)
-2. **Set ratio** at 1:2 as starting point
-3. **Adjust grind** until shot time is ~25-30s
-4. **Taste and adjust:**
-   - Sour → finer grind
-   - Bitter → coarser grind
-5. **Fine-tune** temperature and ratio based on taste
+Dialing in is the iterative process of adjusting variables until a coffee tastes its best. It's not a failure state — it's the normal path to great espresso. Every new bag requires it. Most coffees take 3-5 shots to dial in; the first shot is calibration, not a finished product.
 
-### When Stuck
-- If adjustments aren't helping, try a different profile style (turbo vs traditional)
-- Fresh beans (<2 weeks from roast) need longer pre-infusion for degassing
-- If nothing works, cup the beans to check if they have inherent defects
+### Starting Point Strategy
+
+There are two schools of thought on where to begin:
+
+**Start coarse, go finer (Hoffmann approach):** Begin with a grind that's clearly too coarse. The shot runs fast and sour. Grind finer in small steps until the shot slows to the target range and sourness resolves. *Advantage:* Less waste of good coffee (fast shots use less). Easier to identify the correct zone by approaching from one direction.
+
+**Start in the middle (La Marzocco / Rao approach):** Set grind to a known starting point (from your grind map or grinder reference), pull a shot, and adjust based on taste. *Advantage:* Faster when you have historical data for similar coffees.
+
+**Recommendation for home baristas with Gaggimate:** If you have a grind-map entry for a similar coffee, start there (adjusting for freshness). If not, start slightly coarser than your best guess — it's easier to diagnose an under-extracted shot than an over-extracted one, and you waste less coffee on fast shots.
+
+### The Iteration Loop
+
+The core loop is simple: **pull → taste → evaluate → adjust one variable → repeat.**
+
+1. Pull a shot with your starting parameters
+2. Taste it (let it cool to ~50°C for best evaluation — see `ESPRESSO_TASTING_GUIDE.md`)
+3. Identify the primary issue (sour, bitter, or balanced but lacking something)
+4. Adjust **one variable** in the appropriate direction
+5. Pull again and compare
+
+**Realistic expectations:**
+- **Shot 1:** Calibration. Tells you which direction to go. Rarely good.
+- **Shots 2-3:** Narrowing in. Major improvements happen here.
+- **Shots 4-5:** Fine-tuning. Diminishing returns set in.
+- **Beyond shot 5:** You're chasing the last 10%. A 4-star shot taken to 5 stars takes disproportionate effort — and the difference is often subjective.
+
+### Variable Hierarchy: What to Adjust First
+
+Not all variables have equal impact. Adjust in this order:
+
+| Priority | Variable | Impact | When to adjust |
+|---|---|---|---|
+| 1 | **Grind size** | Largest effect on extraction | Shot time is far off target, or taste is clearly sour/bitter |
+| 2 | **Yield/Ratio** | Quick correction without re-dialing time | Shot time is acceptable but taste is off (use the 5g rule, see above) |
+| 3 | **Temperature** | Fine-tuning after grind is close | Grind is dialed but flavor is flat, sharp, or lacking sweetness |
+| 4 | **Pressure/Profile** | Style change or enhancement | Fundamentals are working but you want different character |
+| 5 | **Puck prep** | Consistency and channeling | Sour AND bitter simultaneously, or inconsistent shots |
+
+**Key principle:** Don't jump to profile tuning when the grind isn't right. Get the basics working first, then refine. A perfect profile can't save a bad grind setting.
+
+### Diagnostic Decision Tree
+
+Use this table to diagnose what's wrong and what to check:
+
+| Symptom | Shot Time | First Check | Second Check | Third Check |
+|---|---|---|---|---|
+| **Sour + fast** | <20s | Grind finer | — | — |
+| **Sour + normal time** | 25-30s | Increase yield by 5g | Increase temp 1-2°C | Add bloom to profile |
+| **Sour + slow** | >35s | Likely channeling (see below) | Better puck prep | Longer pre-infusion |
+| **Bitter + slow** | >35s | Grind coarser | — | — |
+| **Bitter + normal time** | 25-30s | Decrease yield by 5g | Decrease temp 1-2°C | Add pressure decline |
+| **Bitter + fast** | <20s | Possible over-roast or water issue | Check bean freshness | Check water quality |
+| **Sour AND bitter** | Any | **Channeling** — fix puck prep | Finer grind + longer PI | Check grinder for clumping |
+| **Balanced but flat** | 25-30s | Increase temp 1°C | Try longer ratio | Check freshness |
+| **Balanced but thin** | 25-30s | Shorter ratio | Finer grind (increase body) | Check for basket leaks |
+
+**Critical insight (Scott Rao):** If your shot tastes **both sour and bitter at the same time**, it's almost certainly channeling — water is finding paths of least resistance, over-extracting some grounds while under-extracting others. The fix is puck prep (WDT, distribution, even tamp), not grind adjustment. Grinding finer when channeling is present makes it worse.
+
+### The Salami Shot Technique
+
+A diagnostic tool for understanding what your profile is doing at each stage of extraction. Named because you "slice" the shot into segments.
+
+**How to do it:**
+1. Place 3 small cups in a row
+2. Pull your normal shot, switching cups every ~8-10 seconds
+3. Taste each cup separately
+
+**What each phase reveals:**
+
+| Cup | Timing | Expected Taste | What It Tells You |
+|---|---|---|---|
+| Cup 1 (early) | 0-10s | Intense, sour, concentrated | Pre-infusion and early extraction — acids dominate |
+| Cup 2 (middle) | 10-20s | Sweet, balanced, best flavor | The "sweet spot" — sugars and oils at their peak |
+| Cup 3 (late) | 20-30s+ | Weak, bitter, thin | Late extraction — bitter compounds, diminishing returns |
+
+**Interpretation:**
+- If cup 1 is overwhelmingly sour → pre-infusion needs more time or bloom
+- If the sweet spot (cup 2) is very narrow → extraction is uneven; improve puck prep or add bloom
+- If cup 3 turns bitter very quickly → add a pressure decline phase or cut the shot earlier
+- If all cups taste similar → extraction is very even (good sign); adjust recipe rather than profile
+
+**When to use it:** When you're fine-tuning a profile and want to understand *where* in the extraction the problems are. Not for daily use — it's a diagnostic, not a routine.
+
+> *For detailed profile modification based on salami shot findings, see the Taste-Driven Profile Tuning section in `GAGGIMATE_PROFILE_CREATION_GUIDE.md`*
+
+### Separating Problems
+
+When a shot isn't right, the challenge is identifying *which* variable is the culprit:
+
+**Is it the grind?**
+- Shot time is significantly off target (>5 seconds away)
+- Taste matches the time — fast + sour, or slow + bitter
+- Fix: Adjust grind, everything else stays the same
+
+**Is it the temperature?**
+- Shot time is in range, but flavor is flat, sharp, or lacks sweetness
+- Changing grind doesn't improve taste (just makes it faster/slower with the same issues)
+- Fix: Adjust temperature 1-2°C in the appropriate direction
+
+**Is it the ratio?**
+- Shot time and temperature feel right, but the balance is slightly off
+- The 5g rule resolves it quickly (see Adjustment Strategies above)
+- Fix: Add or subtract 5g from yield
+
+**Is it the profile?**
+- Grind and temperature are dialed, shot time is correct, but the coffee feels "incomplete"
+- You want more sweetness, different body, or a different character
+- Fix: Try a different profile style (bloom, decline, turbo) or tune profile phases
+
+**Is it puck prep?**
+- Sour AND bitter simultaneously
+- Inconsistent shots (same settings, different results)
+- Telemetry shows uneven flow or pressure spikes
+- Fix: WDT distribution, even tamp, check for clumps; don't change grind until prep is consistent
+
+### Managing Multiple Coffees
+
+If you rotate between different bags:
+
+- **Record everything** in your `grind-map.md` — coffee, grind setting, days off roast, rating
+- **When returning to a coffee**, check your grind map and adjust for freshness: fresher beans (fewer days off roast) typically need a slightly finer grind due to higher CO2 content
+- **Purge grinder retention** when switching coffees — run 2-3g through to clear the old grounds. The Sette 270 has relatively low retention (~1g), but stale grounds from a previous coffee will affect the first shot
+- **Don't compare across coffees** — a grind setting that works for one bean won't work for another, even at the same roast level. Origin, variety, density, and processing all affect extraction
+
+### When to Abandon an Approach
+
+Sometimes the right move is to stop iterating and try something fundamentally different:
+
+**Signs it's time to change approach:**
+- 6+ shots with no meaningful improvement
+- Persistent sour AND bitter (channeling that puck prep can't fix)
+- Good shots but wildly inconsistent (may indicate equipment issues)
+- The coffee just doesn't taste like the roaster's tasting notes at all
+
+**What to try instead:**
+1. **Different profile style** — switch from traditional 9-bar to turbo, or from flat pressure to bloom
+2. **Cup the beans** — brew as filter (or dilute espresso 1:1 with hot water) to check if the beans themselves have issues. If filter tastes good but espresso doesn't, the problem is the espresso recipe
+3. **Check the grinder** — burrs may need cleaning or alignment; clumping causes channeling
+4. **Verify freshness** — beans >4-5 weeks off roast lose volatile aromatics and produce flat, papery shots
+5. **Check water quality** — metallic or flat-tasting shots across all coffees suggest water issues (ideal: 75-250 ppm TDS, zero iron, pH 6.5-7.5)
 
 ---
 
@@ -227,6 +356,11 @@ A common misconception: dark roasts actually contain similar acid levels to ligh
 
 **Key sources for this guide:**
 - Lance Hedrick: [Why your Coffee is Sour or Bitter (and how to fix it)](https://www.youtube.com/watch?v=Z2zsmehysHk) — 5g adjustment rule, extraction timeline, dark roast fines insight
+- Scott Rao: [Best Practice Espresso Profile](https://www.scottrao.com/blog/2021/5/18/best-practice-espresso-profile) — Blooming technique, "sour AND bitter = channeling" diagnostic, salami shot analysis
+- James Hoffmann: [The Ultimate Espresso Dial-In](https://www.youtube.com/watch?v=aTFaoYT03mE) — Start coarse approach, realistic expectations
+- Barista Hustle: [The Espresso Compass](https://www.baristahustle.com/the-espresso-compass/) — Matt Perger's extraction/strength diagnostic framework
+- Barista Hustle: [Extract More Better](https://www.baristahustle.com/extract-more-better/) — Diminishing returns of grinding finer, channeling as extraction ceiling
+- La Marzocco: [Dialing In: How to Reduce Your Sink Shots](https://home.lamarzoccousa.com/dialing-in-how-to-reduce-your-sink-shots-and-still-make-a-beautiful-espresso/) — Practical home barista methodology
 
 **Further learning:**
 - **Lance Hedrick YouTube** — Excellent visual guides on extraction theory
