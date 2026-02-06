@@ -2,6 +2,10 @@
 
 AI espresso coach powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Gaggimate](https://gaggimate.com/) hardware integration.
 
+<img width="2816" height="1536" alt="Gemini_Generated_Image_p2rojwp2rojwp2ro" src="https://github.com/user-attachments/assets/ae48eed2-c88a-49ae-8580-a8bf3fa2e148" />
+<img width="2816" height="1536" alt="Gemini_Generated_Image_nlrkrpnlrkrpnlrk" src="https://github.com/user-attachments/assets/a0e8207c-f252-49b8-ae1d-b6a9d7986536" />
+
+
 ## What It Does
 
 - **Researches new coffees** — identifies origin, variety, processing, and roast characteristics to recommend starting extraction parameters
