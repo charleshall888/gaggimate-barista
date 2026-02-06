@@ -23,10 +23,10 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 - `PRESSURE_GUIDE.md` - Pressure matrix (roast × processing), shot style parameters, decision framework
 - `ESPRESSO_TASTING_GUIDE.md` - Sour vs bitter diagnosis, tasting methodology, feedback template
 - `GAGGIMATE_PROFILE_CREATION_GUIDE.md` - Profile JSON schema, pump modes, stop conditions, examples, best practice tables
-- `PROFILE_LIBRARY.md` - Ready-to-use extraction profiles organized by roast, process, and style
+- `PROFILE_LIBRARY.md` - Profile lookup table, condensed summaries, selection guides (by taste goal and problem)
 - `BEAN_FRESHNESS_AND_STORAGE.md` - Peak flavor windows, ultra-fresh handling, visual freshness cues
-- `SPECIAL_CATEGORIES.md` - Decaf extraction adjustments, blend archetypes and strategies
-- `grinders/SETTE_270.md` - Sette 270 grinder mechanics, calibration, maintenance
+- `SPECIAL_CATEGORIES.md` - Decaf extraction adjustments, blend temperature strategies, archetype quick-reference
+- `grinders/SETTE_270.md` - Sette 270 adjustment system, espresso range table, quick adjustment guide
 - `automatic-pro/` - Automatic Pro firmware built-in profile: 5-phase vIT3 architecture, dose scaling, and working profile JSONs (16g, 18g, 20g, 22g)
 - `MILK_AND_DRINKS.md` - Steaming technique, temperature thresholds, drink specs, single-boiler workflow
 - `BASKETS.md` - Dose = basket size rule, puck depth effects, precision basket puck prep
@@ -42,6 +42,9 @@ Load only when explicitly needed for deep-dive questions:
 - `PROFILE_CREATION_REFERENCE.md` - Transition details, taste-driven profile tuning, advanced techniques, troubleshooting, file management
 - `PRESSURE_REFERENCE.md` - Matrix explanations, flavor compound effects, pressure variable interactions, misconceptions
 - `MILK_AND_DRINKS_REFERENCE.md` - Milk chemistry, foam science, latte art, detailed drink descriptions, iced drinks
+- `PROFILE_LIBRARY_REFERENCE.md` - Full profile definitions with JSON, parameters, flavor expectations, usage notes
+- `SPECIAL_CATEGORIES_REFERENCE.md` - Decaffeination science, process comparisons, blend philosophy, SO vs blend analysis
+- `SETTE_270_REFERENCE.md` - Single-dosing tips, clumping/static, calibration, maintenance, burr wear, troubleshooting
 
 ## Dynamic Data Files
 
@@ -116,7 +119,7 @@ When a user shares a new coffee (photo of bag, name, or description):
 
 6. **Save coffee research** to `coffees/{roaster}-{coffee-name}/README.md`:
    - Directory name: `{roaster}-{coffee-name}` in kebab-case (e.g., `perc-ethiopia-chelchele`)
-   - Write `README.md` with Bean Profile table, empty Profiles table, empty Tasting Notes table (header row, no data)
+   - Write `README.md` with Bean Profile table (include roaster's actual tasting notes), "What to Expect" section (2-3 sentence summary + 2-4 bullets synthesizing origin, variety, processing, and altitude into flavor expectations), empty Profiles table, empty Tasting Notes table (header row, no data)
    - **Set as active coffee:** Update the Active Coffee section in `user-setup.md` with coffee name, directory path, and roast date
    - No confirmation needed—standard workflow step
 
