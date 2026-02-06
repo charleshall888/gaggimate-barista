@@ -37,6 +37,10 @@ Search for the specific coffee to find:
 - Roast level (light, medium, dark) — infer from tasting notes if not stated
 - Roaster's tasting notes
 
+**Capture research synthesis:** As you research, note the flavor implications of this coffee's
+origin, variety, processing, and altitude. These insights get saved to the README's
+"What to Expect" section — not just presented in conversation.
+
 **See:** `references/RESEARCH_CHECKLIST.md` for detailed research patterns.
 
 ### 3. CONSULT Grind Map
@@ -105,8 +109,21 @@ Create a coffee directory and save the research:
 | **Roast Level** | ... |
 | **Variety** | ... |
 | **Altitude** | ... |
-| **Tasting Notes** | ... |
+| **Tasting Notes** | {roaster's published tasting notes — actual descriptors, not a placeholder} |
 | **Roast Date** | ... |
+
+## What to Expect
+
+{2-3 sentence summary of the coffee's character and what makes it interesting for espresso.
+Synthesize origin, variety, processing, and altitude into flavor expectations.}
+
+- **Origin character:** {What this origin typically brings — fruit profile, acidity, body}
+- **Variety ({name}):** {How this variety behaves — density, flavor tendencies, quirks}
+- **Processing ({method}):** {How processing affects flavor and why we chose this profile style}
+- **Density/Altitude:** {If notable (1800+ masl), mention implications for grind and temp}
+
+{Include only bullets that add genuine insight — omit any that just repeat the Bean Profile
+table. 2-4 bullets is typical.}
 
 ## Profiles
 
@@ -169,6 +186,10 @@ Set as active coffee in `user-setup.md`
 - [What taste outcomes to expect]
 - [When to adjust and in which direction]
 ```
+
+**Note:** "What to Watch For" above is conversational guidance for the user's first shot.
+Research synthesis (origin, variety, processing insights) is separately saved to the README's
+"What to Expect" section in Step 7.
 
 ---
 
