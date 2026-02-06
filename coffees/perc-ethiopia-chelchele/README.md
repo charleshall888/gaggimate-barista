@@ -20,3 +20,6 @@
 | Natural Process Bloom | Bloom | 94°C | 7.5 bar | 1:2.2 | [natural-bloom.json](natural-bloom.json) |
 
 ## Tasting Notes
+
+| # | Date | Shot | Grind | In/Out | Ratio | Profile | Balance | ⭐ | Observations |
+|---|------|------|-------|--------|-------|---------|---------|----|--------------|

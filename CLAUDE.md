@@ -86,7 +86,7 @@ When a user shares a new coffee (photo of bag, name, or description):
    - Read `grind-map.md` and look for beans with similar roast level, processing method, or origin
    - If matches found, suggest: "Based on your history with similar coffees, try starting around [setting]"
    - **Consider profile style**: A grind match from a different extraction style needs adjustment. Example: "Your similar coffee worked at 9D on a bloom profile at 7.5 bar. If using a turbo style, you'll need significantly coarser."
-   - **Adjust for freshness**: If the historical data was at a different freshness level, account for it. Fresher beans (fewer days off roast) typically need a finer grind due to higher CO2 content. Example: "Your similar coffee worked at 9D at 14 days off roast. This bag is 7 days old, so consider starting at 9A-9B (slightly finer)."
+   - **Adjust for freshness**: If the historical data was at a different freshness level, account for it. Fresher beans (fewer days off roast) typically need a **coarser** grind — CO2 adds puck resistance, so compensate to hit target time. Example: "Your similar coffee worked at 9D at 14 days off roast. This bag is 7 days old, so consider starting at 9F-9G (slightly coarser)."
    - If no matches, fall back to general guidance from `knowledge/grinders/SETTE_270.md`
 
 4. **Synthesize into recommendations**:
@@ -101,7 +101,7 @@ When a user shares a new coffee (photo of bag, name, or description):
 
 6. **Save coffee research** to `coffees/{roaster}-{coffee-name}/README.md`:
    - Directory name: `{roaster}-{coffee-name}` in kebab-case (e.g., `perc-ethiopia-chelchele`)
-   - Write `README.md` with Bean Profile table, empty Profiles table, empty Tasting Notes section
+   - Write `README.md` with Bean Profile table, empty Profiles table, empty Tasting Notes table (header row, no data)
    - No confirmation needed—standard workflow step
 
 ### 3. Profile Creation Workflow
@@ -189,11 +189,27 @@ After receiving shot feedback, automatically update the grind map for successful
 
 ### 5b. Coffee Tasting Notes
 
-When a shot gets 4-5 stars (same trigger as grind-map update), also update the coffee's dialing journal:
+After receiving shot feedback, update the coffee's dialing journal. Unlike the grind map (successes only), tasting notes capture **all rated shots** — failures show what didn't work and why.
 
+**Trigger:** Any shot where the user provides feedback (rating + balance + observations).
+
+**Update process:**
 1. Find the coffee's directory in `coffees/`
-2. Append a Tasting Notes entry to the coffee's `README.md` with: date, grind, dose in/out, ratio, profile used, rating, and tasting observations
+2. Append a row to the Tasting Notes table in the coffee's `README.md`:
+
+| # | Date | Shot | Grind | In/Out | Ratio | Profile | Balance | ⭐ | Observations |
+|---|------|------|-------|--------|-------|---------|---------|----|--------------|
+
+   - **#**: Sequential shot number for this coffee
+   - **Date**: Compact format (e.g., Feb 6)
+   - **Shot**: Gaggimate shot ID (6-digit, for `/diagnose` cross-reference)
+   - **In/Out**: Dose in/out as "22/48g"
+   - **Ratio**: Actual ratio as 1:X.X
+   - **Profile**: Short profile style name (matches Profiles table)
+   - **Balance**: Sour / Balanced / Bitter
+   - **Observations**: Brief sensory notes (5-10 words — flavor, body, finish, issues)
 3. If a profile was modified based on feedback, overwrite the JSON file in the coffee directory
+4. No confirmation needed — silent learning
 
 ### 6. Iterative Improvement Loop
 
