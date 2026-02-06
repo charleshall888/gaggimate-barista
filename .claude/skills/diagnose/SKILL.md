@@ -19,6 +19,11 @@ Follow this sequence for every diagnosis:
 
 ### 1. GATHER Information
 
+**Load coffee context:**
+- Read `user-setup.md` → Active Coffee section
+- If set, read the coffee's `README.md` (bean profile, processing method, recent tasting notes) — this informs diagnosis (e.g., a natural at 7.5 bar has different expectations than a washed at 9 bar)
+- If not set, ask the user what coffee they're brewing before proceeding
+
 **Required inputs:**
 - Shot ID (from `list_recent_shots` if not provided)
 - Taste feedback: sour, bitter, flat, astringent, balanced, or specific descriptors

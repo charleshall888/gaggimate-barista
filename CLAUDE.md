@@ -41,7 +41,7 @@ Load only when explicitly needed for deep-dive questions:
 ## Dynamic Data Files
 
 These files in the project root grow from user interactions:
-- `user-setup.md` - User's equipment and preferences
+- `user-setup.md` - User's equipment, preferences, and active coffee pointer
 - `grind-map.md` - Personal record of successful grind settings (auto-updated from 4-5 star shots)
 - `coffees/` - Per-coffee directories containing research (README.md), profiles (.json), and dialing notes
 
@@ -67,6 +67,16 @@ If you don't know the user's setup, ask about it before making recommendations. 
 - **Puck prep routine**: WDT, leveling, tamping pressure/technique
 
 Once gathered, save to `user-setup.md`.
+
+### Active Coffee
+
+The Active Coffee section in `user-setup.md` tracks which coffee is currently being dialed in. One active coffee at a time.
+
+- **Read:** Check Active Coffee at the start of any shot feedback, diagnosis, or tasting notes workflow. If set, use as default coffee context. If empty, ask the user what they're brewing.
+- **Set:** Automatically when `/new-coffee` completes, when the user says "I'm switching to X," or when they share a new bag. Setting a new coffee implicitly replaces the old one.
+- **Clear:** When the user says the bag is finished. Replace the table with: `No active coffee. Use /new-coffee to set one, or tell me what you're brewing.`
+- **Stale check:** If the roast date is 30+ days old, gently ask if the user is still on this bag.
+- **Single coffee:** If the user mentions a second coffee, ask which to make active.
 
 ### 2. Coffee Research Workflow
 
@@ -102,6 +112,7 @@ When a user shares a new coffee (photo of bag, name, or description):
 6. **Save coffee research** to `coffees/{roaster}-{coffee-name}/README.md`:
    - Directory name: `{roaster}-{coffee-name}` in kebab-case (e.g., `perc-ethiopia-chelchele`)
    - Write `README.md` with Bean Profile table, empty Profiles table, empty Tasting Notes table (header row, no data)
+   - **Set as active coffee:** Update the Active Coffee section in `user-setup.md` with coffee name, directory path, and roast date
    - No confirmation needed—standard workflow step
 
 ### 3. Profile Creation Workflow
@@ -135,6 +146,8 @@ When creating a profile, use `/gaggimate-profiles` for comprehensive guidance in
    - What to watch for during the shot
 
 ### 4. Shot Feedback & Rating Workflow
+
+Check the Active Coffee section in `user-setup.md`. If set, use as the default coffee for this shot. If ambiguous (user mentions a different coffee), confirm which one. If empty, ask what they're brewing.
 
 After the user pulls a shot, gather feedback. The shot notes fields are:
 
@@ -173,7 +186,7 @@ After receiving shot feedback, automatically update the grind map for successful
 **Trigger conditions** (all must be true):
 - Rating is 4 or 5 stars
 - Grind setting was provided
-- Coffee information is known (name, roast level, processing)
+- Coffee information is known — from active coffee in `user-setup.md` or conversation context
 
 **Update process:**
 1. Read current `grind-map.md`
@@ -194,7 +207,7 @@ After receiving shot feedback, update the coffee's dialing journal. Unlike the g
 **Trigger:** Any shot where the user provides feedback (rating + balance + observations).
 
 **Update process:**
-1. Find the coffee's directory in `coffees/`
+1. Use the active coffee directory from `user-setup.md`. If not set, find by conversation context in `coffees/`
 2. Append a row to the Tasting Notes table in the coffee's `README.md`:
 
 | # | Date | Shot | Grind | In/Out | Ratio | Profile | Balance | ⭐ | Observations |

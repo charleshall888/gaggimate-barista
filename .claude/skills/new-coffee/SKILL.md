@@ -120,6 +120,15 @@ Create a coffee directory and save the research:
 4. **Remove `.gitkeep`** from `coffees/` if it exists (no longer needed once real content is present)
 5. No confirmation needed—this is a standard workflow step
 
+### 8. Set Active Coffee
+
+Update the Active Coffee section in `user-setup.md` with:
+- **Coffee**: Full coffee name (e.g., "PERC Ethiopia Chelchele")
+- **Directory**: Path to the coffee directory (e.g., `coffees/perc-ethiopia-chelchele`)
+- **Roast Date**: From bag info, or "—" if unknown
+
+No confirmation needed—standard workflow step.
+
 ---
 
 ## Output Format
@@ -153,6 +162,7 @@ Create a coffee directory and save the research:
 
 ### Saved To
 `coffees/{roaster}-{coffee-name}/README.md`
+Set as active coffee in `user-setup.md`
 
 ### What to Watch For
 - [Specific guidance for first shot based on bean characteristics]
@@ -165,10 +175,10 @@ Create a coffee directory and save the research:
 ## Quick Reference
 
 **User says:** "I got a new bag of [coffee]"
-**Action:** Extract info → research → consult grind map → recommend → confirm
+**Action:** Extract info → research → consult grind map → recommend → confirm → **set active**
 
 **User shares photo:**
-**Action:** Vision extract → research → consult grind map → recommend → confirm
+**Action:** Vision extract → research → consult grind map → recommend → confirm → **set active**
 
 **User says:** "/new-coffee"
-**Action:** Ask what coffee they have, then proceed with workflow
+**Action:** Ask what coffee they have, then proceed with workflow → **set active**

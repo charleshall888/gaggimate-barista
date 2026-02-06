@@ -20,6 +20,14 @@
 - **Roast Preference**: Light to medium roasts
 - **Flavor Profile**: Fruity/floral notes — prefers drinks where these are prominent, not masked
 
+## Active Coffee
+
+| Field | Value |
+|-------|-------|
+| **Coffee** | PERC Ethiopia Chelchele |
+| **Directory** | `coffees/perc-ethiopia-chelchele` |
+| **Roast Date** | — |
+
 ## Bluetooth Scale & Auto-Stop
 
 The Bookoo Themis Ultra connects to the Gaggimate Pro via Bluetooth Low Energy (BLE) for automatic shot stopping.

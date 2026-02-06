@@ -20,7 +20,7 @@ Create custom espresso extraction profiles for Gaggimate-equipped machines. Gagg
 
 ### Step 1: Gather Information
 
-If not provided, ask about (or check `user-setup.md`):
+If not provided, check `user-setup.md` (including Active Coffee section) and the coffee's `README.md`. Ask about anything still missing:
 - Coffee type/origin and roast level
 - **Processing method** (washed, natural, anaerobic — affects target pressure)
 - Dose amount (**dose = basket size** from user-setup.md; don't underdose)
@@ -83,7 +83,7 @@ After generating JSON, explain:
 
 After explaining the profile, save it to the `coffees/` directory:
 
-1. **Find or create** the coffee's directory: `coffees/{roaster}-{coffee-name}/`
+1. **Find or create** the coffee's directory: use the active coffee directory from `user-setup.md` if the profile is for the active coffee, otherwise `coffees/{roaster}-{coffee-name}/`
    - If the directory exists, use it
    - If not, create it with a minimal `README.md` (Bean Profile table with known info, empty Profiles and Tasting Notes sections)
 2. **Write the profile JSON** to `coffees/{coffee-dir}/{profile-style}.json` (kebab-case, e.g., `natural-bloom.json`, `turbo.json`)
