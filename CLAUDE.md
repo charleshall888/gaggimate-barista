@@ -33,18 +33,21 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 
 ### Deep Reference Files (in `knowledge/reference/`)
 
-Load only when explicitly needed for deep-dive questions:
-- `ESPRESSO_BREWING_REFERENCE.md` - Shot styles, extraction theory, dialing methodology, salami shot, common mistakes
-- `ESPRESSO_TASTING_REFERENCE.md` - Flavor wheel, palate exercises, aroma evaluation, off-flavors, palate fatigue
-- `BEAN_FRESHNESS_REFERENCE.md` - Degassing science, storage methods, freezing protocols, staleness indicators
-- `BASKETS_REFERENCE.md` - Basket type specs (IMS, VST, stock), comparisons, ridged vs ridgeless, wall geometry
-- `EXTRACTION_SCIENCE_REFERENCE.md` - TDS/EY theory, grind science, particle distribution, channeling physics, CO2 degassing
-- `PROFILE_CREATION_REFERENCE.md` - Transition details, taste-driven profile tuning, advanced techniques, troubleshooting, file management
-- `PRESSURE_REFERENCE.md` - Matrix explanations, flavor compound effects, pressure variable interactions, misconceptions
-- `MILK_AND_DRINKS_REFERENCE.md` - Milk chemistry, foam science, latte art, detailed drink descriptions, iced drinks
-- `PROFILE_LIBRARY_REFERENCE.md` - Full profile definitions with JSON, parameters, flavor expectations, usage notes
-- `SPECIAL_CATEGORIES_REFERENCE.md` - Decaffeination science, process comparisons, blend philosophy, SO vs blend analysis
-- `SETTE_270_REFERENCE.md` - Single-dosing tips, clumping/static, calibration, maintenance, burr wear, troubleshooting
+**Cascade prevention rule:** Load at most **ONE** quick-reference file and **ONE** deep reference file per question. If the quick-reference answers it, stop there. Never chain quick→deep→second-quick→second-deep.
+
+| Deep Reference (lines) | Load ONLY when user asks about… |
+|------------------------|--------------------------------|
+| `ESPRESSO_BREWING_REFERENCE.md` (229) | Shot style theory, salami shots, dialing methodology deep-dive |
+| `ESPRESSO_TASTING_REFERENCE.md` (191) | Flavor wheel, palate development exercises, off-flavor identification |
+| `BEAN_FRESHNESS_REFERENCE.md` (197) | Degassing science, freezing protocols, staleness chemistry |
+| `BASKETS_REFERENCE.md` (124) | Basket type specs (IMS/VST), ridged vs ridgeless comparison, wall geometry |
+| `EXTRACTION_SCIENCE_REFERENCE.md` (255) | TDS/EY theory, particle distribution, channeling physics |
+| `PROFILE_CREATION_REFERENCE.md` (529) | Transition tuning details, advanced profile techniques — only via `/gaggimate-profiles` skill |
+| `PRESSURE_REFERENCE.md` (95) | Pressure-compound interactions, pressure misconceptions deep-dive |
+| `MILK_AND_DRINKS_REFERENCE.md` (118) | Milk chemistry, foam science, latte art technique |
+| `PROFILE_LIBRARY_REFERENCE.md` (505) | Full profile JSON definitions — only via `/gaggimate-profiles` skill |
+| `SPECIAL_CATEGORIES_REFERENCE.md` (85) | Decaffeination chemistry, blend philosophy analysis |
+| `SETTE_270_REFERENCE.md` (156) | Grinder calibration, burr wear, maintenance deep-dive |
 
 ## Dynamic Data Files
 

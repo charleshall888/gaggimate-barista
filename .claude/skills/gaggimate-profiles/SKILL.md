@@ -26,15 +26,20 @@ Consult these knowledge files to determine settings:
 - **Pressure**: `knowledge/PRESSURE_GUIDE.md` → roast × processing matrix
 - **Profile pattern**: `knowledge/PROFILE_LIBRARY.md` → select by roast, process, and style
 
-### Step 3: Load Reference Files
+### Step 3: Load Reference Files (conditionally)
 
-For complete documentation, load the appropriate reference file:
+**Default: load ZERO reference files.** Steps 2 + 4 (knowledge files + inline JSON template) are sufficient for standard profiles built from library patterns. Only load a reference file when a specific trigger applies.
 
-- **JSON Schema & Fields**: See [references/PROFILE_STRUCTURE.md](references/PROFILE_STRUCTURE.md)
-- **Pump & Transitions**: See [references/PUMP_AND_TRANSITIONS.md](references/PUMP_AND_TRANSITIONS.md)
-- **Stop Conditions**: See [references/STOP_CONDITIONS.md](references/STOP_CONDITIONS.md)
-- **Complete Examples**: See [references/EXAMPLES.md](references/EXAMPLES.md)
-- **Troubleshooting**: See [references/TROUBLESHOOTING.md](references/TROUBLESHOOTING.md)
+**Stop rule:** Load at most **2 reference files** per profile creation session.
+
+| Reference (lines) | Load ONLY when… |
+|--------------------|-----------------|
+| [EXAMPLES.md](references/EXAMPLES.md) (713) | Need a JSON template for a style **not** in `coffees/` history or `PROFILE_LIBRARY.md` |
+| [PUMP_AND_TRANSITIONS.md](references/PUMP_AND_TRANSITIONS.md) (406) | User asks about adaptive flow, ease-in-out transitions, or power mode |
+| [STOP_CONDITIONS.md](references/STOP_CONDITIONS.md) (347) | User asks about combining multiple stop conditions or non-volumetric targets |
+| [TROUBLESHOOTING.md](references/TROUBLESHOOTING.md) (454) | User reports a problem with an **existing** profile — never for new creation |
+| [FLOW_VARIABLE_PRESSURE.md](references/FLOW_VARIABLE_PRESSURE.md) (173) | User specifically asks about Automatic Pro technique or flow-based variable pressure |
+| [PROFILE_STRUCTURE.md](references/PROFILE_STRUCTURE.md) (166) | Almost never — `knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md` covers the same fields |
 
 ### Step 4: Generate Profile JSON
 
@@ -83,13 +88,18 @@ After explaining the profile, save it to the `coffees/` directory:
 3. **Update the Profiles table** in the coffee's `README.md` with: Profile name, Style, Temp, Pressure, Ratio, and link to the JSON file
 4. **Remove `.gitkeep`** from `coffees/` if present
 
-## Quick Reference
+## Quick Reference Index
 
-For detailed documentation beyond the workflow above:
-- **Profile patterns & full JSON examples**: [references/EXAMPLES.md](references/EXAMPLES.md)
-- **Pump modes & transition types**: [references/PUMP_AND_TRANSITIONS.md](references/PUMP_AND_TRANSITIONS.md)
-- **Stop conditions**: [references/STOP_CONDITIONS.md](references/STOP_CONDITIONS.md)
-- **Troubleshooting**: [references/TROUBLESHOOTING.md](references/TROUBLESHOOTING.md)
+> **Note:** This is a human-readable index, not a loading instruction. See Step 3 for when to load each file.
+
+| File | Contents |
+|------|----------|
+| [EXAMPLES.md](references/EXAMPLES.md) | Profile patterns & full JSON examples |
+| [PUMP_AND_TRANSITIONS.md](references/PUMP_AND_TRANSITIONS.md) | Pump modes & transition types |
+| [STOP_CONDITIONS.md](references/STOP_CONDITIONS.md) | Stop conditions reference |
+| [TROUBLESHOOTING.md](references/TROUBLESHOOTING.md) | Profile troubleshooting |
+| [FLOW_VARIABLE_PRESSURE.md](references/FLOW_VARIABLE_PRESSURE.md) | Automatic Pro flow technique |
+| [PROFILE_STRUCTURE.md](references/PROFILE_STRUCTURE.md) | JSON schema & field reference |
 
 ## Output Requirements
 

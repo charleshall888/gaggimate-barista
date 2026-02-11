@@ -144,24 +144,21 @@ Always explain WHY each recommendation addresses the diagnosed issue.
 
 ## Integration with Other Knowledge
 
-**For style-specific expected parameters (pressure, time, ratio, flow):**
-→ Reference `knowledge/PRESSURE_GUIDE.md` (Pressure by Shot Style section)
-→ Reference `knowledge/PROFILE_LIBRARY.md` (Quick Reference table)
+**Always loaded** (already referenced in Steps 1-4 — no additional loading needed):
+- `knowledge/PRESSURE_GUIDE.md` — style-specific pressure expectations (Step 2)
+- `knowledge/PROFILE_LIBRARY.md` — expected time, ratio, flow by style (Step 2)
+- `knowledge/ESPRESSO_BREWING_BASICS.md` — adjustment strategies (Step 4)
 
-**For adjustment strategies and diagnostics:**
-→ Reference `knowledge/ESPRESSO_BREWING_BASICS.md`
+**Load ONLY when trigger applies:**
 
-**For deeper extraction theory (shot styles, salami shot, dialing methodology):**
-→ Reference `knowledge/reference/ESPRESSO_BREWING_REFERENCE.md`
+| File (lines) | Load ONLY when… |
+|--------------|-----------------|
+| `knowledge/ESPRESSO_TASTING_GUIDE.md` (142) | User asks how to evaluate/describe flavors, or needs a structured feedback template |
+| `knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md` (172) | Diagnosis leads to a profile modification — load when building the fix, not during analysis |
+| `knowledge/reference/ESPRESSO_BREWING_REFERENCE.md` (229) | User asks about shot styles theory, salami shots, or dialing methodology — **not** during routine diagnosis |
+| `knowledge/reference/ESPRESSO_TASTING_REFERENCE.md` (191) | User asks about the flavor wheel, palate exercises, or off-flavor identification — **not** during routine diagnosis |
 
-**For shot evaluation and feedback:**
-→ Reference `knowledge/ESPRESSO_TASTING_GUIDE.md`
-
-**For deeper tasting guidance (flavor wheel, palate exercises, off-flavors):**
-→ Reference `knowledge/reference/ESPRESSO_TASTING_REFERENCE.md`
-
-**For profile modifications:**
-→ Reference `knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md`
+**Stop rule:** Standard diagnosis uses only the always-loaded files + skill references (`TELEMETRY_PATTERNS.md`, `DIAGNOSTIC_TREES.md`). Loading `knowledge/reference/` files during routine diagnosis is over-researching.
 
 ---
 
