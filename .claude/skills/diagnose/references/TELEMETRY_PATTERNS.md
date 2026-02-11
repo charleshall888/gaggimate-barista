@@ -4,6 +4,68 @@ Detailed reference for interpreting Gaggimate shot telemetry and correlating wit
 
 ---
 
+## Bluetooth Scale Artifacts
+
+The Bookoo BT scale communicates with the Gaggimate via BLE, and the connection can produce spurious data — especially near the end of a shot when the pump stops or the cup is moved.
+
+### Known Artifact Patterns
+
+| Pattern | Signature | How to Handle |
+|---------|-----------|---------------|
+| **End-of-shot volume spike** | Weight/volume jumps sharply upward in the final 1-3 samples (e.g., 16g → 67g) | Discard. Use the last stable reading before the spike. |
+| **Drop to zero** | Weight drops to 0g in final samples (cup removed or BLE disconnect) | Discard. Use the last non-zero reading before the drop. |
+| **Spike then drop** | Volume spikes up then immediately drops to 0g | Both are artifacts. Use the last stable reading before the spike began. |
+| **Null final weight** | `final_weight_g` is null despite liquid in cup | BLE lost sync before registering final weight. Estimate from last stable weight sample, or use flow meter total minus ~15-20% puck absorption. |
+
+### Detection Rules
+
+1. **Scan the last 3-5 weight/volume samples** of the shot. If any sample differs from the preceding trend by more than 2× the average inter-sample change, treat it as an artifact.
+2. **A reading of exactly 0g after non-zero readings** is always a disconnect artifact — never a real measurement.
+3. **NEVER ask the user for the weight.** When artifacts are detected or `final_weight_g` is null, estimate the dose out yourself: use the last stable weight reading, or fall back to `total_volume_ml × 0.82` (puck absorption estimate). State your estimate and reasoning, then proceed with the diagnosis. A ±2g estimate is sufficient for diagnostic purposes.
+4. **Do not flag artifact-caused anomalies.** Volume overshoots, weight spikes/drops, or volumetric stop failures caused by BLE artifacts are not extraction problems — don't diagnose them as such.
+5. **Pressure, flow rate, and temperature data** from the machine's own sensors are reliable and unaffected by BT scale issues. Only weight/volume readings from the scale are suspect.
+
+---
+
+## Flow Meter vs Cup Weight During Bloom
+
+The flow meter measures water **entering the group head**, not water **exiting the basket**. During bloom (pump off, valve open), these can diverge significantly — and misreading this causes false channeling diagnoses.
+
+### Disambiguation Table
+
+| Flow Meter | Cup Weight | Interpretation |
+|------------|-----------|----------------|
+| 0 ml/s | 0g | Standard bloom — fill water held in puck |
+| >1 ml/s | 0g | **Puck absorption** — gravity/residual pressure feeding water from boiler into group; puck is absorbing it. **Not channeling.** |
+| >1 ml/s | >0g (increasing) | **Through-flow** — water passing through the puck. Possible channel or puck too permeable. |
+
+### Why bloom flow varies between shots
+
+Even with the same grind and profile, bloom-phase flow meter readings can differ shot to shot:
+
+- **Higher dose** = more dry coffee = more absorption capacity = more flow into puck
+- **Shorter fill phase** = less saturated puck entering bloom = puck draws in more water
+- **Residual system pressure** varies with machine warm-up state and flush timing
+
+On the Gaggia Classic Pro, the boiler sits above the group head. When the pump turns off but the solenoid valve stays open (valve: 1), boiler water can drain into the group by gravity. The flow meter registers this, but it's water entering the puck from above — not exiting below.
+
+### Diagnostic Rule
+
+**Never diagnose bloom-phase flow as channeling without corroborating cup weight.** The flow meter alone cannot distinguish absorption from through-flow. Cup weight is ground truth.
+
+- Flow during bloom + **zero cup weight** = absorption (benign, possibly beneficial — more saturation)
+- Flow during bloom + **increasing cup weight** = through-flow (investigate puck prep or grind)
+
+### Impact on Other Metrics
+
+Bloom absorption flow inflates `total_volume_ml` and can trigger a misleadingly early `time_to_first_drip_s` (since first drip is detected from the flow meter, not the scale). When comparing shots with different bloom absorption:
+
+- Subtract bloom-phase flow from `total_volume_ml` before comparing extraction volumes
+- Use first cup weight appearance (not `time_to_first_drip_s`) as the true first-drip indicator
+- The `0.82` puck absorption factor for weight estimation may undercount when bloom absorption is high — cross-reference with weight trajectory instead
+
+---
+
 ## Pressure Patterns
 
 ### Pressure Curve by Style
@@ -25,10 +87,23 @@ Detailed reference for interpreting Gaggimate shot telemetry and correlating wit
 |---------|---------------------|--------------|--------------|-----|
 | **Early spike** | >10.5 bar in first 5s, then drops | Fines migration blocking flow, then channeling breaks through | Sour start, bitter finish, astringent | Better distribution (WDT), coarser fines |
 | **Sustained spike** | >10 bar throughout extraction | Grind too fine, dose too high | Bitter, harsh, over-extracted | Grind coarser, reduce dose |
-| **Never reaches target** | Peak < 8 bar | Grind too coarse, channeling, low dose | Thin, watery, sour | Grind finer, check puck prep |
+| **Never reaches target** | Peak < 8 bar | Grind too coarse (water escapes faster than pump fills), channeling, low dose. **Exception:** post-bloom ramps starting from 0 bar often don't hit target — this is normal ease-in behavior, not a grind issue. | Thin, watery, sour | Grind finer, check puck prep (but verify it's not a normal post-bloom ramp first) |
 | **Oscillating** | 7-10 bar fluctuation | Pump issue, pressure profiling instability | Uneven extraction | Check pump, PID settings |
 | **Rapid decay** | Drops from 9 to 5 bar mid-shot | Channel opened, puck fractured | Starts balanced, ends sour | Better puck prep, consider paper filter |
-| **Slow build** | Takes >8s to reach target | Very fine grind, high dose | May over-extract if not managed | Reduce dose, slightly coarser |
+| **Slow build** | Takes >8s to reach target | Grind too coarse (low resistance lets water escape), or normal post-bloom ramp behavior (ease-in from 0 bar). NOT caused by fine grind — finer grind builds pressure faster. | Under-extraction if coarse; not an issue if post-bloom | If coarse: grind finer. If post-bloom ramp: likely normal — check that Peak Hold reaches target. |
+
+### Pressure-Resistance Physics (bathtub model)
+
+**Pressure = pump force vs. puck drainage.** Think of the group head as a bathtub: the pump is the faucet, the puck is the drain. Resistance affects ALL phases consistently:
+
+| Grind | Resistance | Ramp (filling) | Hold | Decline (draining) |
+|-------|-----------|-----------------|------|---------------------|
+| **Finer** | Higher (small drain) | Pressure builds **faster** — water backs up | Pressure stays high easily | Pressure drops **slowly** — floor stays above target |
+| **Coarser** | Lower (big drain) | Pressure builds **slower** — water escapes | Pump works harder to maintain | Pressure drops **readily** — tracks the declining target |
+
+**CRITICAL: Resistance holds pressure up in BOTH directions.** Do not claim that finer grind causes slow pressure build — the opposite is true. Finer grind = more resistance = pressure builds faster (ramp) AND drops slower (decline). Coarser grind = less resistance = pressure builds slower (ramp) AND drops faster (decline).
+
+**Common misdiagnosis to avoid:** If a ramp phase doesn't reach its pressure target after a bloom pause, this is likely normal behavior for the ease-in curve starting from 0 bar — NOT caused by grind being too fine. If anything, a finer grind helps the ramp. Only flag slow ramp as "too coarse" in non-bloom profiles where the pump starts from pre-infusion pressure (2-4 bar), not from 0.
 
 ### Pressure Profile Considerations
 
@@ -166,7 +241,8 @@ Common misdiagnosis warnings — what NOT to flag for each style.
 
 ### Bloom
 - Delayed first drip (15-25s from shot start) is **EXPECTED** — the bloom pause adds 10-15s.
-- No flow during pump-off phase is **NORMAL** — that's the bloom working.
+- **Flow meter reading >0 during pump-off does NOT mean channeling.** Cross-reference with cup weight. Flow + zero cup weight = puck absorption (normal — boiler gravity feed saturating the puck). Only flag bloom flow as a problem if cup weight is also increasing. See "Flow Meter vs Cup Weight During Bloom" section.
+- `time_to_first_drip_s` may report early if the flow meter detects bloom absorption flow. Use **first cup weight appearance** as the true first-drip indicator for bloom profiles.
 - Total time 30-40s is **EXPECTED**. Do not flag as "too long."
 - Lower extraction pressure (7-8 bar) is **EXPECTED** for naturals/anaerobics.
 - If sour despite correct parameters, consider longer bloom or higher temperature.
@@ -217,7 +293,8 @@ Common misdiagnosis warnings — what NOT to flag for each style.
 |--------|---------|-------------------|
 | Duration | 10-30 seconds | Depends on freshness |
 | Pressure | 2-3 bar (or flow-limited) | Higher defeats purpose |
-| Observation | Should see even drip | Fast drip = channeling |
+| Flow meter during bloom | Variable (0-3 ml/s) | **Not diagnostic alone** — must cross-reference with cup weight. See "Flow Meter vs Cup Weight During Bloom" section. |
+| Cup weight during bloom | 0g | >0g and increasing = through-flow (channel or puck too permeable) |
 
 ### Extraction Phase
 

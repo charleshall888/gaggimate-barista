@@ -6,6 +6,7 @@ A personal record of successful grind settings that grows from your shots. When 
 
 | Coffee | Roast | Process | Origin | Days Off Roast | Grind | Profile | Ratio | Temp | Rating | Date |
 |--------|-------|---------|--------|----------------|-------|---------|-------|------|--------|------|
+| Onyx Ethiopia Bochesa | Light | Anaerobic Natural | Ethiopia | 18 | 13D | Bloom Slide | 1:2.5 | 95°C | 4 | Feb 7 |
 
 *Days Off Roast is optional—use "—" when roast date is unknown.*
 

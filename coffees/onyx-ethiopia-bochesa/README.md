@@ -31,3 +31,4 @@ A fruit-forward anaerobic natural from one of Ethiopia's highest-altitude statio
 
 | # | Date | Shot | Grind | In/Out | Ratio | Profile | Balance | ⭐ | Observations |
 |---|------|------|-------|--------|-------|---------|---------|----|--------------|
+| 1 | Feb 7 | 000071 | 13D | 20.5/51.4g | 1:2.5 | Bloom Slide | Balanced | 4 | Strong blueberry, lavender, blueberry white tea. Great in cortado. |

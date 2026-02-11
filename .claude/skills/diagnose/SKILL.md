@@ -74,6 +74,17 @@ If neither profile definition nor meaningful profile name is available, classify
 
 ### 2. ANALYZE Telemetry
 
+**First, determine the final weight — NEVER ask the user.** The BT scale frequently produces artifacts: spikes, drops to 0g, or null readings near end-of-shot. You MUST estimate the dose out yourself using the telemetry. Do not ask the user what the cup weighs — figure it out from the data.
+
+**Weight estimation priority (use first available):**
+1. **Last stable weight sample** — scan weight samples backward from end-of-shot, skip any that drop to 0g or spike >2× the inter-sample trend. The last reading consistent with the trend is your true weight.
+2. **Flow meter total minus puck absorption** — if weight data is too sparse or entirely null, use `total_volume_ml × 0.82` (≈18% absorbed by puck) as your dose-out estimate. This is approximate but sufficient for diagnosis.
+3. **Interpolate from mid-shot weight + flow** — if you have a reliable weight reading mid-shot and flow data for the remainder, project forward.
+
+State your estimated dose out and how you derived it, then move on. A ±2g estimate is fine for diagnostic purposes — don't let imperfect weight data stall the analysis.
+
+**Then, filter other BT scale artifacts.** Beyond weight, volume readings can also spike. If any late-shot sample differs from the preceding trend by >2× the average inter-sample change, discard it. See `references/TELEMETRY_PATTERNS.md` (Bluetooth Scale Artifacts section) for full detection rules.
+
 **Load style-specific expectations** from `knowledge/PRESSURE_GUIDE.md` (Pressure by Shot Style section) and `knowledge/PROFILE_LIBRARY.md` (Quick Reference table). Compare the shot's telemetry against those style-specific ranges — not generic 9-bar ranges.
 
 **Universal thresholds** (style-independent):
@@ -100,10 +111,11 @@ If you fetched the profile definition in Step 1b (Tier 1), compare each phase's 
 | Comparison | Interpretation |
 |------------|----------------|
 | Pressure exceeded profile target by >1.5 bar | Grind too fine or dose too high |
-| Pressure never reached target (>1.5 bar below) | Grind too coarse or channeling |
-| Bloom phase showed significant flow (>1 ml/s) | Puck too permeable for bloom — grind finer |
+| Pressure never reached target (>1.5 bar below) | **Context matters.** In a post-bloom ramp (starting from 0 bar), this is often normal — the ease-in curve needs time to build from zero, and Peak Hold finishes the job. Only flag as "too coarse" in non-bloom profiles where the pump starts from pre-infusion pressure (2-4 bar). |
+| Bloom phase showed significant flow (>1 ml/s) | **Cross-reference with cup weight.** Flow + zero cup weight = puck absorption, not channeling (see TELEMETRY_PATTERNS.md "Flow Meter vs Cup Weight During Bloom"). Flow + increasing cup weight = through-flow, puck too permeable — grind finer. |
 | Volumetric target reached much earlier than phase duration | Grind too coarse (flow too fast) |
 | Volumetric target not reached within phase duration | Grind too fine (flow too slow) |
+| Decline phase pressure stayed >1 bar above target floor | Grind too fine — high puck resistance prevents pressure from dropping. See Pressure-Resistance Physics in TELEMETRY_PATTERNS.md. |
 | Decline phase dropped pressure faster than intended | Channel opened mid-shot |
 | Flow during extraction well above/below profile's flow target | Grind mismatch for this style |
 
