@@ -19,14 +19,13 @@ Gaggimate Barista is a Claude Code project — not a standalone app, but a struc
 
 - **Claude Code** is the agent runtime. It reads the project's `CLAUDE.md` for its instructions, uses skills for specialized workflows, and calls tools to interact with your machine.
 - **Knowledge files** provide espresso expertise — extraction science, pressure theory, tasting diagnosis, profile design — organized in hot/cold storage so the agent loads only what's needed.
-- **MCP tools** ([gaggimate-mcp](https://github.com/gaggimate/gaggimate-mcp)) give Claude direct access to your Gaggimate hardware: uploading profiles, pulling shot telemetry, and reading extraction data.
+- **MCP tools** (included in `mcp/`, based on [gaggimate-mcp](https://github.com/julianleopold/gaggimate-mcp) by Julian Leopold) give Claude direct access to your Gaggimate hardware: uploading profiles, pulling shot telemetry, and reading extraction data.
 - **Dynamic data files** evolve with use: `grind-map.md` tracks successful settings, `coffees/` stores per-bean research and tasting notes, and `user-setup.md` holds your equipment and preferences.
 
 ## Prerequisites
 
 - [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) (requires Anthropic API key or Claude Pro/Max subscription)
 - A [Gaggimate](https://gaggimate.com/)-equipped espresso machine (Gaggia Classic Pro, Gaggia Classic Evo, or Rancilio Silvia)
-- [gaggimate-mcp](https://github.com/gaggimate/gaggimate-mcp) server
 - [`uv`](https://docs.astral.sh/uv/) (Python package manager, for the MCP server)
 
 ## Setup
@@ -38,20 +37,26 @@ git clone https://github.com/your-username/gaggimate-barista.git
 cd gaggimate-barista
 ```
 
-### 2. Configure the MCP server
+### 2. Install the MCP server
 
-Create `.mcp.json` in the project root (gitignored):
+```bash
+uv sync --directory mcp
+```
+
+### 3. Configure the MCP server
+
+Create `.mcp.json` in the project root (gitignored). Replace the two paths with your actual locations (`which uv` and `pwd`):
 
 ```json
 {
   "mcpServers": {
     "gaggimate": {
       "type": "stdio",
-      "command": "/path/to/uv",
+      "command": "/absolute/path/to/uv",
       "args": [
         "run",
         "--directory",
-        "/path/to/gaggimate-mcp",
+        "/absolute/path/to/gaggimate-barista/mcp",
         "mcp",
         "run",
         "src/gaggimate_mcp/server.py"
@@ -61,9 +66,7 @@ Create `.mcp.json` in the project root (gitignored):
 }
 ```
 
-Replace `/path/to/uv` with the output of `which uv`, and `/path/to/gaggimate-mcp` with wherever you cloned [gaggimate-mcp](https://github.com/gaggimate/gaggimate-mcp).
-
-### 3. Configure Claude Code permissions
+### 4. Configure Claude Code permissions
 
 Create `.claude/settings.local.json` (gitignored):
 
@@ -85,7 +88,7 @@ Create `.claude/settings.local.json` (gitignored):
 
 This pre-approves the Gaggimate MCP tools so Claude can read shots and manage profiles without prompting each time.
 
-### 4. Set up your equipment
+### 5. Set up your equipment
 
 Edit `user-setup.md` with your details:
 
@@ -96,7 +99,7 @@ Edit `user-setup.md` with your details:
 - Drink preferences
 - Puck prep routine
 
-### 5. Start dialing
+### 6. Start dialing
 
 ```bash
 claude
@@ -111,6 +114,10 @@ gaggimate-barista/
 ├── CLAUDE.md                  # Agent instructions and workflow definitions
 ├── user-setup.md              # Your equipment, preferences, active coffee
 ├── grind-map.md               # Auto-populated log of successful grind settings
+│
+├── mcp/                       # Gaggimate MCP server (Python)
+│   ├── src/gaggimate_mcp/     # Server source code
+│   └── tests/                 # Test suite
 │
 ├── coffees/                   # Per-coffee data (created by /new-coffee)
 │   └── roaster-coffee-name/
