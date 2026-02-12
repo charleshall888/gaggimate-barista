@@ -6,14 +6,16 @@ from gaggimate_mcp.transformers.shot import (
     calculate_summary,
     process_phases,
     calculate_total_volume,
+    trim_trailing_artifacts,
+    select_representative_samples,
+    MAX_SAMPLES_PER_PHASE,
 )
 
 
-class TestShotTransformer:
-    """Test shot transformation for AI analysis."""
+class TestCalculateTotalVolume:
+    """Test volume calculation from flow samples."""
 
-    def test_calculate_total_volume(self):
-        """Test volume calculation from flow samples."""
+    def test_basic_volume(self):
         samples = [
             {'pf': 2.0},  # 2 ml/s
             {'pf': 3.0},  # 3 ml/s
@@ -26,7 +28,164 @@ class TestShotTransformer:
         # (2.0 + 3.0 + 2.5) * 0.1 = 0.75 ml
         assert volume == 0.8  # Rounded to 1 decimal
 
-    def test_calculate_summary_basic(self):
+
+class TestTrimTrailingArtifacts:
+    """Test trailing artifact removal."""
+
+    def test_trailing_zeros_removed(self):
+        """5 good samples + 3 trailing artifacts → 5 returned."""
+        samples = [
+            {'cp': 9.0, 'pf': 2.5},
+            {'cp': 8.5, 'pf': 2.0},
+            {'cp': 7.0, 'pf': 1.8},
+            {'cp': 5.0, 'pf': 1.2},
+            {'cp': 3.0, 'pf': 0.8},
+            # Trailing artifacts
+            {'cp': 0.5, 'pf': 0.02},
+            {'cp': 0.2, 'pf': 0.0},
+            {'cp': 0.0, 'pf': 0.0},
+        ]
+        result = trim_trailing_artifacts(samples)
+        assert len(result) == 5
+        assert result[-1]['cp'] == 3.0
+
+    def test_mid_shot_bloom_pause_preserved(self):
+        """Bloom phase (low pressure, low flow) followed by brew → only trailing removed."""
+        samples = [
+            # Pre-infusion fill
+            {'cp': 2.0, 'pf': 3.0},
+            # Bloom pause — low pressure AND low flow, but mid-shot
+            {'cp': 0.5, 'pf': 0.0},
+            {'cp': 0.3, 'pf': 0.0},
+            # Extraction ramp
+            {'cp': 5.0, 'pf': 1.5},
+            {'cp': 8.0, 'pf': 2.0},
+            {'cp': 7.5, 'pf': 1.8},
+            # Trailing artifact
+            {'cp': 0.3, 'pf': 0.0},
+        ]
+        result = trim_trailing_artifacts(samples)
+        assert len(result) == 6
+        # Bloom pause samples preserved
+        assert result[1]['cp'] == 0.5
+        assert result[2]['cp'] == 0.3
+        # Last good sample is the extraction
+        assert result[-1]['cp'] == 7.5
+
+    def test_no_artifacts_unchanged(self):
+        """Samples with no trailing artifacts returned unchanged."""
+        samples = [
+            {'cp': 9.0, 'pf': 2.5},
+            {'cp': 8.0, 'pf': 2.0},
+            {'cp': 7.0, 'pf': 1.5},
+        ]
+        result = trim_trailing_artifacts(samples)
+        assert len(result) == 3
+        assert result is samples  # Same object, not a copy
+
+    def test_single_sample_preserved(self):
+        """Single sample always preserved even if it looks like an artifact."""
+        samples = [{'cp': 0.0, 'pf': 0.0}]
+        result = trim_trailing_artifacts(samples)
+        assert len(result) == 1
+
+    def test_all_artifact_shot_preserves_one(self):
+        """If every sample looks like an artifact, at least 1 is preserved."""
+        samples = [
+            {'cp': 0.0, 'pf': 0.0},
+            {'cp': 0.0, 'pf': 0.0},
+            {'cp': 0.0, 'pf': 0.0},
+        ]
+        result = trim_trailing_artifacts(samples)
+        assert len(result) == 1
+
+    def test_boundary_values_at_thresholds(self):
+        """pf=0.05 and cp=0.99 are artifacts; pf=0.06 or cp=1.0 are not."""
+        # Exactly at threshold — IS an artifact (pf <= 0.05 AND cp < 1.0)
+        samples_at_threshold = [
+            {'cp': 5.0, 'pf': 2.0},
+            {'cp': 0.99, 'pf': 0.05},
+        ]
+        result = trim_trailing_artifacts(samples_at_threshold)
+        assert len(result) == 1
+
+        # Flow just above threshold — NOT an artifact
+        samples_flow_above = [
+            {'cp': 5.0, 'pf': 2.0},
+            {'cp': 0.5, 'pf': 0.06},
+        ]
+        result = trim_trailing_artifacts(samples_flow_above)
+        assert len(result) == 2
+
+        # Pressure at threshold — NOT an artifact (cp < 1.0 required, 1.0 fails)
+        samples_pressure_at = [
+            {'cp': 5.0, 'pf': 2.0},
+            {'cp': 1.0, 'pf': 0.0},
+        ]
+        result = trim_trailing_artifacts(samples_pressure_at)
+        assert len(result) == 2
+
+    def test_empty_samples(self):
+        """Empty list returns empty."""
+        result = trim_trailing_artifacts([])
+        assert result == []
+
+
+class TestSelectRepresentativeSamples:
+    """Test adaptive downsampling."""
+
+    def test_short_phase_step_2(self):
+        """10 samples → step=2, 5 output samples."""
+        phase_samples = [
+            {'t': i * 100, 'ct': 93.0, 'cp': 9.0, 'pf': 2.0, 'v': float(i)}
+            for i in range(10)
+        ]
+        result = select_representative_samples(phase_samples, 100)
+        assert len(result) == 5
+        # Verify indices 0, 2, 4, 6, 8
+        assert result[0]['weight_g'] == 0.0
+        assert result[1]['weight_g'] == 2.0
+        assert result[4]['weight_g'] == 8.0
+
+    def test_long_phase_capped(self):
+        """100 samples → capped at ~25."""
+        phase_samples = [
+            {'t': i * 100, 'ct': 93.0, 'cp': 9.0, 'pf': 2.0, 'v': 0.0}
+            for i in range(100)
+        ]
+        result = select_representative_samples(phase_samples, 100)
+        assert len(result) <= MAX_SAMPLES_PER_PHASE
+
+    def test_empty_returns_empty(self):
+        result = select_representative_samples([], 100)
+        assert result == []
+
+    def test_resistance_populated_from_pr(self):
+        """Resistance field populated from raw 'pr' field."""
+        phase_samples = [
+            {'t': 0, 'ct': 93.0, 'cp': 9.0, 'pf': 2.0, 'v': 0.0, 'pr': 4.56},
+            {'t': 100, 'ct': 93.0, 'cp': 9.0, 'pf': 2.0, 'v': 0.0, 'pr': 5.12},
+            {'t': 200, 'ct': 93.0, 'cp': 9.0, 'pf': 2.0, 'v': 0.0},  # No pr
+        ]
+        result = select_representative_samples(phase_samples, 100)
+        # Step=2, so indices 0 and 2
+        assert result[0]['resistance'] == 4.56
+        assert result[1]['resistance'] == 0.0  # Default when pr missing
+
+    def test_resistance_defaults_to_zero(self):
+        """Resistance defaults to 0.0 when no pr field in samples."""
+        phase_samples = [
+            {'t': 0, 'ct': 93.0, 'cp': 9.0, 'pf': 2.0, 'v': 0.0},
+            {'t': 100, 'ct': 93.0, 'cp': 9.0, 'pf': 2.0, 'v': 0.0},
+        ]
+        result = select_representative_samples(phase_samples, 100)
+        assert result[0]['resistance'] == 0.0
+
+
+class TestCalculateSummary:
+    """Test summary statistics calculation."""
+
+    def test_basic_summary(self):
         """Test summary statistics calculation."""
         shot = ShotData(
             id='1',
@@ -72,14 +231,78 @@ class TestShotTransformer:
         assert summary['flow']['time_to_first_weight_s'] == 0.2  # At sample 2 (first v > 0)
 
         # Extraction timing
-        # Preinfusion is 0.2s (time to reach 50% of peak pressure)
-        # Total time is 25.0s (from shot.duration)
-        # Main extraction is total - preinfusion
         assert summary['extraction']['preinfusion_time_s'] == 0.2
         assert summary['extraction']['main_extraction_time_s'] == 24.8
         assert summary['extraction']['total_time_s'] == 25.0
 
-    def test_process_phases_with_transitions(self):
+    def test_summary_excludes_trailing_artifacts(self):
+        """Verify avg_bar and avg_flow are computed from clean samples only."""
+        shot = ShotData(
+            id='1',
+            version=4,
+            fields_mask=0xFF,
+            sample_count=5,
+            sample_interval=100,
+            profile_id='test',
+            profile_name='Test',
+            timestamp=1640000000,
+            rating=0,
+            duration=5000,
+            weight=36.0,
+            samples=[
+                {'t': 0, 'ct': 93.0, 'tt': 93.0, 'cp': 9.0, 'pf': 2.0, 'v': 0.0},
+                {'t': 100, 'ct': 93.0, 'tt': 93.0, 'cp': 8.0, 'pf': 1.8, 'v': 5.0},
+                {'t': 200, 'ct': 93.0, 'tt': 93.0, 'cp': 7.0, 'pf': 1.5, 'v': 10.0},
+                # Trailing artifacts — should be excluded
+                {'t': 300, 'ct': 91.0, 'tt': 93.0, 'cp': 0.3, 'pf': 0.0, 'v': 10.0},
+                {'t': 400, 'ct': 90.0, 'tt': 93.0, 'cp': 0.0, 'pf': 0.0, 'v': 10.0},
+            ],
+            phases=[],
+        )
+
+        summary = calculate_summary(shot)
+
+        # Without trimming: avg_bar = (9+8+7+0.3+0)/5 = 4.86
+        # With trimming: avg_bar = (9+8+7)/3 = 8.0
+        assert summary['pressure']['avg_bar'] == 8.0
+        # Without trimming: avg_flow = (2.0+1.8+1.5+0+0)/5 = 1.06
+        # With trimming: avg_flow = (2.0+1.8+1.5)/3 = 1.8 (rounded)
+        assert summary['flow']['avg_flow_ml_s'] == 1.8
+
+    def test_summary_preserves_artifacts_for_incomplete_shot(self):
+        """Incomplete shots should NOT have artifacts trimmed."""
+        shot = ShotData(
+            id='1',
+            version=4,
+            fields_mask=0xFF,
+            sample_count=3,
+            sample_interval=100,
+            profile_id='test',
+            profile_name='Test',
+            timestamp=1640000000,
+            rating=0,
+            duration=3000,
+            weight=None,
+            samples=[
+                {'t': 0, 'ct': 93.0, 'tt': 93.0, 'cp': 2.0, 'pf': 0.5, 'v': 0.0},
+                # These look like artifacts but shot is incomplete (aborted mid-bloom)
+                {'t': 100, 'ct': 93.0, 'tt': 93.0, 'cp': 0.3, 'pf': 0.0, 'v': 0.0},
+                {'t': 200, 'ct': 93.0, 'tt': 93.0, 'cp': 0.0, 'pf': 0.0, 'v': 0.0},
+            ],
+            phases=[],
+            incomplete=True,
+        )
+
+        summary = calculate_summary(shot)
+
+        # All 3 samples included: avg_bar = (2.0+0.3+0.0)/3 ≈ 0.8
+        assert summary['pressure']['avg_bar'] == 0.8
+
+
+class TestProcessPhases:
+    """Test phase processing."""
+
+    def test_phases_with_transitions(self):
         """Test phase processing with defined transitions."""
         shot = ShotData(
             id='1',
@@ -128,7 +351,7 @@ class TestShotTransformer:
         assert phases[1]['duration_seconds'] == 0.3
         assert phases[1]['sample_count'] == 3
 
-    def test_process_phases_without_transitions(self):
+    def test_phases_without_transitions(self):
         """Test phase processing when no transitions defined."""
         shot = ShotData(
             id='1',
@@ -160,8 +383,86 @@ class TestShotTransformer:
         assert phases[0]['duration_seconds'] == 30.0
         assert phases[0]['sample_count'] == 3
 
-    def test_transform_shot_for_ai(self):
-        """Test complete shot transformation."""
+    def test_last_phase_trimmed(self):
+        """Verify last phase stats exclude trailing artifacts, earlier phases untouched."""
+        shot = ShotData(
+            id='1',
+            version=5,
+            fields_mask=0xFF,
+            sample_count=8,
+            sample_interval=100,
+            profile_id='test',
+            profile_name='Test',
+            timestamp=1640000000,
+            rating=0,
+            duration=8000,
+            weight=36.0,
+            samples=[
+                # Phase 0: Preinfusion (3 samples)
+                {'t': 0, 'ct': 90.0, 'cp': 2.0, 'pf': 0.5, 'phase': 0},
+                {'t': 100, 'ct': 91.0, 'cp': 3.0, 'pf': 0.8, 'phase': 0},
+                {'t': 200, 'ct': 92.0, 'cp': 4.0, 'pf': 1.0, 'phase': 0},
+                # Phase 1: Extraction (3 good + 2 trailing artifacts)
+                {'t': 300, 'ct': 93.0, 'cp': 9.0, 'pf': 2.5, 'phase': 1},
+                {'t': 400, 'ct': 93.0, 'cp': 8.0, 'pf': 2.0, 'phase': 1},
+                {'t': 500, 'ct': 93.0, 'cp': 7.0, 'pf': 1.5, 'phase': 1},
+                # Trailing artifacts
+                {'t': 600, 'ct': 91.0, 'cp': 0.3, 'pf': 0.0, 'phase': 1},
+                {'t': 700, 'ct': 90.0, 'cp': 0.0, 'pf': 0.0, 'phase': 1},
+            ],
+            phases=[
+                PhaseTransition(sample_index=0, phase_number=0, phase_name='Preinfusion'),
+                PhaseTransition(sample_index=3, phase_number=1, phase_name='Extraction'),
+            ],
+        )
+
+        phases = process_phases(shot)
+
+        assert len(phases) == 2
+
+        # Phase 0 (preinfusion): NOT trimmed — all 3 samples
+        assert phases[0]['sample_count'] == 3
+        assert phases[0]['avg_pressure_bar'] == 3.0
+
+        # Phase 1 (extraction): trimmed — only 3 good samples, not 5
+        assert phases[1]['sample_count'] == 3
+        # Without trimming: avg = (9+8+7+0.3+0)/5 = 4.86
+        # With trimming: avg = (9+8+7)/3 = 8.0
+        assert phases[1]['avg_pressure_bar'] == 8.0
+
+    def test_samples_have_resistance_field(self):
+        """Verify representative samples include resistance from pr field."""
+        shot = ShotData(
+            id='1',
+            version=5,
+            fields_mask=0xFFF,
+            sample_count=3,
+            sample_interval=100,
+            profile_id='test',
+            profile_name='Test',
+            timestamp=1640000000,
+            rating=0,
+            duration=3000,
+            weight=None,
+            samples=[
+                {'t': 0, 'ct': 93.0, 'cp': 9.0, 'pf': 2.0, 'v': 0.0, 'pr': 3.5},
+                {'t': 100, 'ct': 93.0, 'cp': 8.0, 'pf': 1.8, 'v': 5.0, 'pr': 4.2},
+                {'t': 200, 'ct': 93.0, 'cp': 7.0, 'pf': 1.5, 'v': 10.0, 'pr': 5.0},
+            ],
+            phases=[],
+        )
+
+        phases = process_phases(shot)
+        # Step=2 from 3 samples → indices [0, 2]
+        assert len(phases[0]['samples']) == 2
+        assert phases[0]['samples'][0]['resistance'] == 3.5
+        assert phases[0]['samples'][1]['resistance'] == 5.0
+
+
+class TestTransformShotForAI:
+    """Test complete shot transformation."""
+
+    def test_full_transformation(self):
         shot = ShotData(
             id='000123',
             version=5,
@@ -208,7 +509,7 @@ class TestShotTransformer:
         assert transformed['phases'][0]['name'] == 'Preinfusion'
         assert transformed['phases'][1]['name'] == 'Extraction'
 
-    def test_transform_shot_no_weight(self):
+    def test_no_weight(self):
         """Test transformation when weight is not available."""
         shot = ShotData(
             id='1',
@@ -233,58 +534,7 @@ class TestShotTransformer:
 
         assert transformed['final_weight_g'] is None
 
-    def test_time_to_first_weight(self):
-        """Test time_to_first_weight_s is computed from cup weight."""
-        shot = ShotData(
-            id='1',
-            version=4,
-            fields_mask=0xFF,
-            sample_count=4,
-            sample_interval=100,
-            profile_id='test',
-            profile_name='Test',
-            timestamp=1640000000,
-            rating=0,
-            duration=25000,
-            weight=36.0,
-            samples=[
-                {'t': 0, 'ct': 90.0, 'cp': 0.0, 'pf': 0.5, 'v': 0.0},
-                {'t': 100, 'ct': 91.0, 'cp': 2.0, 'pf': 1.0, 'v': 0.0},
-                {'t': 200, 'ct': 92.0, 'cp': 9.0, 'pf': 2.5, 'v': 0.0},
-                {'t': 300, 'ct': 93.0, 'cp': 8.5, 'pf': 2.0, 'v': 2.1},
-            ],
-            phases=[],
-        )
-
-        summary = calculate_summary(shot)
-        assert summary['flow']['time_to_first_weight_s'] == 0.3
-
-    def test_time_to_first_weight_no_weight_data(self):
-        """Test time_to_first_weight_s is None when no weight data exists."""
-        shot = ShotData(
-            id='1',
-            version=4,
-            fields_mask=0xFF,
-            sample_count=3,
-            sample_interval=100,
-            profile_id='test',
-            profile_name='Test',
-            timestamp=1640000000,
-            rating=0,
-            duration=25000,
-            weight=None,
-            samples=[
-                {'t': 0, 'ct': 90.0, 'cp': 0.0, 'pf': 0.0},
-                {'t': 100, 'ct': 91.0, 'cp': 2.0, 'pf': 1.0},
-                {'t': 200, 'ct': 92.0, 'cp': 9.0, 'pf': 2.5},
-            ],
-            phases=[],
-        )
-
-        summary = calculate_summary(shot)
-        assert summary['flow']['time_to_first_weight_s'] is None
-
-    def test_transform_shot_incomplete(self):
+    def test_incomplete_shot(self):
         """Test transformation with incomplete shot data."""
         shot = ShotData(
             id='1',
@@ -311,3 +561,56 @@ class TestShotTransformer:
         # Should still transform successfully
         assert transformed['shot_id'] == '1'
         assert len(transformed['phases']) == 1
+
+
+class TestTimeToFirstWeight:
+    """Test time_to_first_weight_s computation."""
+
+    def test_computed_from_cup_weight(self):
+        shot = ShotData(
+            id='1',
+            version=4,
+            fields_mask=0xFF,
+            sample_count=4,
+            sample_interval=100,
+            profile_id='test',
+            profile_name='Test',
+            timestamp=1640000000,
+            rating=0,
+            duration=25000,
+            weight=36.0,
+            samples=[
+                {'t': 0, 'ct': 90.0, 'cp': 0.0, 'pf': 0.5, 'v': 0.0},
+                {'t': 100, 'ct': 91.0, 'cp': 2.0, 'pf': 1.0, 'v': 0.0},
+                {'t': 200, 'ct': 92.0, 'cp': 9.0, 'pf': 2.5, 'v': 0.0},
+                {'t': 300, 'ct': 93.0, 'cp': 8.5, 'pf': 2.0, 'v': 2.1},
+            ],
+            phases=[],
+        )
+
+        summary = calculate_summary(shot)
+        assert summary['flow']['time_to_first_weight_s'] == 0.3
+
+    def test_none_when_no_weight_data(self):
+        shot = ShotData(
+            id='1',
+            version=4,
+            fields_mask=0xFF,
+            sample_count=3,
+            sample_interval=100,
+            profile_id='test',
+            profile_name='Test',
+            timestamp=1640000000,
+            rating=0,
+            duration=25000,
+            weight=None,
+            samples=[
+                {'t': 0, 'ct': 90.0, 'cp': 0.0, 'pf': 0.0},
+                {'t': 100, 'ct': 91.0, 'cp': 2.0, 'pf': 1.0},
+                {'t': 200, 'ct': 92.0, 'cp': 9.0, 'pf': 2.5},
+            ],
+            phases=[],
+        )
+
+        summary = calculate_summary(shot)
+        assert summary['flow']['time_to_first_weight_s'] is None

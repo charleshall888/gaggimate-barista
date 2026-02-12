@@ -4,8 +4,11 @@ This module converts raw binary shot data into a structured format
 optimized for AI analysis and natural language processing.
 """
 
+from math import ceil
 from typing import TypedDict, Optional
 from gaggimate_mcp.parsers.shot import ShotData
+
+MAX_SAMPLES_PER_PHASE = 25
 
 
 class TemperatureSummary(TypedDict):
@@ -55,6 +58,7 @@ class TransformedSample(TypedDict):
     pressure_bar: float
     flow_ml_s: float
     weight_g: float
+    resistance: float
 
 
 class PhaseData(TypedDict):
@@ -102,6 +106,74 @@ def calculate_total_volume(samples: list[dict], interval_ms: int) -> float:
     return round(total_volume * 10) / 10
 
 
+def trim_trailing_artifacts(samples: list[dict]) -> list[dict]:
+    """Remove trailing post-pump-stop artifact samples.
+
+    After the pump stops, firmware continues recording for ~0.5-1s.
+    These trailing samples show pressure decaying toward 0 and flow at 0,
+    which distort summary stats and mislead analysis.
+
+    Walks backwards and removes contiguous trailing samples where
+    pf (puck flow) <= 0.05 AND cp (current pressure) < 1.0.
+    Always preserves at least 1 sample.
+
+    Args:
+        samples: List of raw sample dicts
+
+    Returns:
+        Trimmed list (may be same object if no trimming needed)
+    """
+    if len(samples) <= 1:
+        return samples
+
+    trim_from = len(samples)
+    for i in range(len(samples) - 1, 0, -1):  # stop at index 1 to preserve at least 1
+        s = samples[i]
+        if s.get('pf', 0.0) <= 0.05 and s.get('cp', 0.0) < 1.0:
+            trim_from = i
+        else:
+            break
+
+    return samples[:trim_from] if trim_from < len(samples) else samples
+
+
+def select_representative_samples(
+    phase_samples: list[dict], sample_interval: int
+) -> list['TransformedSample']:
+    """Select representative samples from a phase for AI analysis.
+
+    Adaptive downsampling: caps output at MAX_SAMPLES_PER_PHASE (25).
+    Short phases use step=2 (current behavior). Long phases increase
+    the step to stay within budget.
+
+    Args:
+        phase_samples: Raw samples for this phase
+        sample_interval: Sample interval in ms (unused, reserved)
+
+    Returns:
+        List of TransformedSample dicts
+    """
+    if not phase_samples:
+        return []
+
+    step = max(2, ceil(len(phase_samples) / MAX_SAMPLES_PER_PHASE))
+    indices = range(0, len(phase_samples), step)
+
+    result: list[TransformedSample] = []
+    for idx in indices:
+        sample = phase_samples[idx]
+        result.append(TransformedSample(
+            time_seconds=round((sample.get('t', 0.0) / 1000.0) * 10) / 10,
+            temperature_c=round(sample.get('ct', 0.0) * 10) / 10,
+            pressure_bar=round(sample.get('cp', 0.0) * 10) / 10,
+            flow_ml_s=round(sample.get('pf', 0.0) * 10) / 10,
+            weight_g=round(sample.get('v', 0.0) * 10) / 10,
+            resistance=round(sample.get('pr', 0.0) * 100) / 100,
+        ))
+
+    return result
+
+
 def calculate_summary(shot: ShotData) -> ShotSummary:
     """Calculate summary statistics for shot.
 
@@ -113,12 +185,15 @@ def calculate_summary(shot: ShotData) -> ShotSummary:
     """
     samples = shot.samples
 
-    # Extract values - only include samples that have the measurement
-    temperatures = [s['ct'] for s in samples if 'ct' in s]
-    target_temps = [s['tt'] for s in samples if 'tt' in s]
-    pressures = [s['cp'] for s in samples if 'cp' in s]
-    flows = [s['pf'] for s in samples if 'pf' in s]
-    times = [s.get('t', 0.0) / 1000.0 for s in samples]  # Convert to seconds
+    # Trim trailing post-pump artifacts for clean stats (skip for incomplete shots)
+    clean_samples = samples if shot.incomplete else trim_trailing_artifacts(samples)
+
+    # Extract values from clean samples for averages
+    temperatures = [s['ct'] for s in clean_samples if 'ct' in s]
+    target_temps = [s['tt'] for s in clean_samples if 'tt' in s]
+    pressures = [s['cp'] for s in clean_samples if 'cp' in s]
+    flows = [s['pf'] for s in clean_samples if 'pf' in s]
+    times = [s.get('t', 0.0) / 1000.0 for s in clean_samples]  # Convert to seconds
 
     # Temperature summary
     temp_summary = TemperatureSummary(
@@ -140,24 +215,25 @@ def calculate_summary(shot: ShotData) -> ShotSummary:
         peak_time_s=round(peak_time * 10) / 10,
     )
 
-    # Flow summary
-    total_volume = calculate_total_volume(samples, shot.sample_interval)
+    # Flow summary — use clean samples for volume/avg/peak
+    total_volume = calculate_total_volume(clean_samples, shot.sample_interval)
     avg_flow = round(sum(flows) / len(flows) * 10) / 10 if flows else 0.0
     peak_flow = round(max(flows) * 10) / 10 if flows else 0.0
 
-    # Find time to first drip (first non-zero flow)
+    # Find time to first drip (first non-zero flow) — use all samples
+    all_times = [s.get('t', 0.0) / 1000.0 for s in samples]
     time_to_first_drip = None
-    for i, flow in enumerate(flows):
-        if flow > 0.0:
-            time_to_first_drip = round(times[i] * 10) / 10 if i < len(times) else None
+    for i, sample in enumerate(samples):
+        if sample.get('pf', 0.0) > 0.0:
+            time_to_first_drip = round(all_times[i] * 10) / 10 if i < len(all_times) else None
             break
 
-    # Find time to first weight (first non-zero cup weight)
+    # Find time to first weight (first non-zero cup weight) — use all samples
     time_to_first_weight = None
     for i, sample in enumerate(samples):
         weight = sample.get('v', 0.0)
         if weight is not None and weight > 0.0:
-            time_to_first_weight = round(times[i] * 10) / 10 if i < len(times) else None
+            time_to_first_weight = round(all_times[i] * 10) / 10 if i < len(all_times) else None
             break
 
     flow_summary = FlowSummary(
@@ -212,37 +288,33 @@ def process_phases(shot: ShotData) -> list[PhaseData]:
 
     # If shot has defined phases, process each one
     if shot.phases:
+        num_phases = len(shot.phases)
         for i, phase in enumerate(shot.phases):
             start_index = phase.sample_index
-            end_index = shot.phases[i + 1].sample_index if i + 1 < len(shot.phases) else len(samples)
+            end_index = shot.phases[i + 1].sample_index if i + 1 < num_phases else len(samples)
             phase_samples = samples[start_index:end_index]
 
             if not phase_samples:
                 continue
 
-            # Calculate phase statistics - only include samples that have the measurement
-            temperatures = [s['ct'] for s in phase_samples if 'ct' in s]
-            pressures = [s['cp'] for s in phase_samples if 'cp' in s]
+            is_last_phase = (i == num_phases - 1)
+
+            # Trim trailing artifacts from last phase only (skip for incomplete shots)
+            stats_samples = phase_samples
+            if is_last_phase and not shot.incomplete:
+                stats_samples = trim_trailing_artifacts(phase_samples)
+
+            # Calculate phase statistics from (possibly trimmed) samples
+            temperatures = [s['ct'] for s in stats_samples if 'ct' in s]
+            pressures = [s['cp'] for s in stats_samples if 'cp' in s]
 
             avg_temp = round(sum(temperatures) / len(temperatures) * 10) / 10 if temperatures else 0.0
             avg_pressure = round(sum(pressures) / len(pressures) * 10) / 10 if pressures else 0.0
-            total_flow = calculate_total_volume(phase_samples, shot.sample_interval)
+            total_flow = calculate_total_volume(stats_samples, shot.sample_interval)
 
-            # Select every other sample for good curve resolution without context bloat
-            representative_samples: list[TransformedSample] = []
-            indices = list(range(0, len(phase_samples), 2))
-            unique_indices = sorted(set(indices))
-
-            for idx in unique_indices:
-                if idx < len(phase_samples):
-                    sample = phase_samples[idx]
-                    representative_samples.append(TransformedSample(
-                        time_seconds=round((sample.get('t', 0.0) / 1000.0) * 10) / 10,
-                        temperature_c=round(sample.get('ct', 0.0) * 10) / 10,
-                        pressure_bar=round(sample.get('cp', 0.0) * 10) / 10,
-                        flow_ml_s=round(sample.get('pf', 0.0) * 10) / 10,
-                        weight_g=round(sample.get('v', 0.0) * 10) / 10,
-                    ))
+            representative_samples = select_representative_samples(
+                stats_samples, shot.sample_interval
+            )
 
             start_time = phase_samples[0].get('t', 0.0) / 1000.0
             end_time = phase_samples[-1].get('t', 0.0) / 1000.0
@@ -253,7 +325,7 @@ def process_phases(shot: ShotData) -> list[PhaseData]:
                 phase_number=phase.phase_number,
                 start_time_seconds=round(start_time * 10) / 10,
                 duration_seconds=round(duration * 10) / 10,
-                sample_count=len(phase_samples),
+                sample_count=len(stats_samples),
                 avg_temperature_c=avg_temp,
                 avg_pressure_bar=avg_pressure,
                 total_flow_ml=total_flow,
@@ -261,35 +333,26 @@ def process_phases(shot: ShotData) -> list[PhaseData]:
             ))
     else:
         # No phases defined - create single 'extraction' phase
-        temperatures = [s.get('ct', 0.0) for s in samples]
-        pressures = [s.get('cp', 0.0) for s in samples]
+        # Trim trailing artifacts (skip for incomplete shots)
+        clean_samples = samples if shot.incomplete else trim_trailing_artifacts(samples)
+
+        temperatures = [s.get('ct', 0.0) for s in clean_samples]
+        pressures = [s.get('cp', 0.0) for s in clean_samples]
 
         avg_temp = round(sum(temperatures) / len(temperatures) * 10) / 10 if temperatures else 0.0
         avg_pressure = round(sum(pressures) / len(pressures) * 10) / 10 if pressures else 0.0
-        total_flow = calculate_total_volume(samples, shot.sample_interval)
+        total_flow = calculate_total_volume(clean_samples, shot.sample_interval)
 
-        # Select every other sample for good curve resolution without context bloat
-        representative_samples: list[TransformedSample] = []
-        indices = list(range(0, len(samples), 2))
-        unique_indices = sorted(set(indices))
-
-        for idx in unique_indices:
-            if idx < len(samples):
-                sample = samples[idx]
-                representative_samples.append(TransformedSample(
-                    time_seconds=round((sample.get('t', 0.0) / 1000.0) * 10) / 10,
-                    temperature_c=round(sample.get('ct', 0.0) * 10) / 10,
-                    pressure_bar=round(sample.get('cp', 0.0) * 10) / 10,
-                    flow_ml_s=round(sample.get('pf', 0.0) * 10) / 10,
-                    weight_g=round(sample.get('v', 0.0) * 10) / 10,
-                ))
+        representative_samples = select_representative_samples(
+            clean_samples, shot.sample_interval
+        )
 
         phases.append(PhaseData(
             name='extraction',
             phase_number=0,
             start_time_seconds=0.0,
             duration_seconds=round(shot.duration / 1000.0 * 10) / 10,
-            sample_count=len(samples),
+            sample_count=len(clean_samples),
             avg_temperature_c=avg_temp,
             avg_pressure_bar=avg_pressure,
             total_flow_ml=total_flow,
