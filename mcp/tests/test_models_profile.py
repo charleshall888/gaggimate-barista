@@ -74,6 +74,16 @@ class TestTransitionSettings:
         transition = TransitionSettings(type="instant", duration=0.0)
         assert transition.type == "instant"
 
+    def test_transition_with_adaptive(self):
+        """Test transition with adaptive flag."""
+        transition = TransitionSettings(type="ease-in", duration=3.0, adaptive=True)
+        assert transition.adaptive is True
+
+    def test_transition_adaptive_defaults_false(self):
+        """Test adaptive defaults to False."""
+        transition = TransitionSettings(type="linear", duration=2.0)
+        assert transition.adaptive is False
+
     def test_transition_invalid_type(self):
         """Test invalid transition type raises error."""
         with pytest.raises(ValidationError):
@@ -156,16 +166,58 @@ class TestPhaseData:
         )
         assert phase.phase == "brew"
 
+    def test_phase_decline(self):
+        """Test decline phase type."""
+        phase = PhaseData(
+            name="Decline",
+            phase="decline",
+            duration=15.0,
+            pump=PumpSettings(target="pressure", pressure=4.0, flow=0.0)
+        )
+        assert phase.phase == "decline"
+
+    def test_phase_with_valve(self):
+        """Test phase with explicit valve setting."""
+        phase = PhaseData(
+            name="Extraction",
+            phase="brew",
+            duration=25.0,
+            valve=1,
+            pump=PumpSettings(target="pressure", pressure=9.0, flow=0.0)
+        )
+        assert phase.valve == 1
+
+    def test_phase_valve_defaults_to_one(self):
+        """Test valve defaults to 1."""
+        phase = PhaseData(
+            name="Extraction",
+            phase="brew",
+            duration=25.0,
+            pump=PumpSettings(target="pressure", pressure=9.0, flow=0.0)
+        )
+        assert phase.valve == 1
+
+    def test_phase_with_temperature_offset(self):
+        """Test phase with temperature offset (typically 0)."""
+        phase = PhaseData(
+            name="Extraction",
+            phase="brew",
+            duration=25.0,
+            temperature=0,
+            pump=PumpSettings(target="pressure", pressure=9.0, flow=0.0)
+        )
+        assert phase.temperature == 0
+
     def test_phase_with_temperature(self):
         """Test phase with specific temperature."""
         phase = PhaseData(
             name="Extraction",
             phase="brew",
             duration=25.0,
-            temperature=93.0,
+            temperature=93,
             pump=PumpSettings(target="pressure", pressure=9.0, flow=0.0)
         )
-        assert phase.temperature == 93.0
+        assert phase.temperature == 93
 
     def test_phase_with_targets(self):
         """Test phase with stop conditions."""

@@ -3,6 +3,7 @@
 import pytest
 from pydantic import ValidationError
 from gaggimate_mcp.models.rating import BalanceTaste, ShotRating, RatingUpdate
+from gaggimate_mcp.storage.ratings import RatingStorage
 
 
 class TestBalanceTaste:
@@ -175,6 +176,72 @@ class TestRatingUpdate:
         assert merged.dose_in == 18.0  # Kept
         assert merged.balance_taste == BalanceTaste.BALANCED  # Added
         assert merged.notes == "Initial notes"  # Kept
+
+
+class TestRatingStorage:
+    """Test RatingStorage persists all fields."""
+
+    def test_save_rating_round_trips_all_fields(self, tmp_path, monkeypatch):
+        """Test save_rating persists all ShotRating fields."""
+        import logging
+        monkeypatch.setattr("gaggimate_mcp.storage.ratings.logger", logging.getLogger("test"))
+
+        from gaggimate_mcp.config import GaggimateConfig
+        config = GaggimateConfig(storage_path=tmp_path)
+        storage = RatingStorage(config=config)
+
+        rating = ShotRating(
+            shot_id="000200",
+            rating=4,
+            dose_in=22.0,
+            dose_out=44.0,
+            grind_setting="9D",
+            balance_taste=BalanceTaste.BALANCED,
+            bean_type="Ethiopia Chelchele",
+            notes="Fruity and floral, clean finish"
+        )
+
+        saved = storage.save_rating(rating)
+
+        assert saved["shot_id"] == "000200"
+        assert saved["rating"] == 4
+        assert saved["notes"] == "Fruity and floral, clean finish"
+        assert saved["balance_taste"] == "balanced"
+        assert saved["grind_setting"] == "9D"
+        assert saved["dose_in"] == 22.0
+        assert saved["dose_out"] == 44.0
+        assert saved["bean_type"] == "Ethiopia Chelchele"
+        assert "timestamp" in saved
+
+        # Verify it round-trips through get_rating
+        retrieved = storage.get_rating("000200")
+        assert retrieved["balance_taste"] == "balanced"
+        assert retrieved["grind_setting"] == "9D"
+        assert retrieved["dose_in"] == 22.0
+        assert retrieved["dose_out"] == 44.0
+        assert retrieved["bean_type"] == "Ethiopia Chelchele"
+
+    def test_save_rating_with_none_fields(self, tmp_path, monkeypatch):
+        """Test save_rating handles None optional fields."""
+        import logging
+        monkeypatch.setattr("gaggimate_mcp.storage.ratings.logger", logging.getLogger("test"))
+
+        from gaggimate_mcp.config import GaggimateConfig
+        config = GaggimateConfig(storage_path=tmp_path)
+        storage = RatingStorage(config=config)
+
+        rating = ShotRating(
+            shot_id="000201",
+            rating=3,
+        )
+
+        saved = storage.save_rating(rating)
+
+        assert saved["balance_taste"] is None
+        assert saved["grind_setting"] is None
+        assert saved["dose_in"] is None
+        assert saved["dose_out"] is None
+        assert saved["bean_type"] is None
 
 
 class TestRatingJsonSerialization:

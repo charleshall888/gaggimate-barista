@@ -71,6 +71,11 @@ class RatingStorage:
             "shot_id": rating.shot_id,
             "rating": rating.rating,
             "notes": rating.notes,
+            "balance_taste": rating.balance_taste.value if rating.balance_taste else None,
+            "grind_setting": rating.grind_setting,
+            "dose_in": rating.dose_in,
+            "dose_out": rating.dose_out,
+            "bean_type": rating.bean_type,
             "timestamp": datetime.now().isoformat(),
         }
 

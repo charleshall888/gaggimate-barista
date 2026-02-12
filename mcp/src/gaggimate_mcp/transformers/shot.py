@@ -30,6 +30,7 @@ class FlowSummary(TypedDict):
     avg_flow_ml_s: float
     peak_flow_ml_s: float
     time_to_first_drip_s: Optional[float]
+    time_to_first_weight_s: Optional[float]
 
 
 class ExtractionSummary(TypedDict):
@@ -151,11 +152,20 @@ def calculate_summary(shot: ShotData) -> ShotSummary:
             time_to_first_drip = round(times[i] * 10) / 10 if i < len(times) else None
             break
 
+    # Find time to first weight (first non-zero cup weight)
+    time_to_first_weight = None
+    for i, sample in enumerate(samples):
+        weight = sample.get('v', 0.0)
+        if weight is not None and weight > 0.0:
+            time_to_first_weight = round(times[i] * 10) / 10 if i < len(times) else None
+            break
+
     flow_summary = FlowSummary(
         total_volume_ml=total_volume,
         avg_flow_ml_s=avg_flow,
         peak_flow_ml_s=peak_flow,
         time_to_first_drip_s=time_to_first_drip,
+        time_to_first_weight_s=time_to_first_weight,
     )
 
     # Extraction timing

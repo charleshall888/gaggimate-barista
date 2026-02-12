@@ -31,6 +31,10 @@ class TransitionSettings(BaseModel):
         ge=0.0,
         description="Transition duration in seconds"
     )
+    adaptive: bool = Field(
+        default=False,
+        description="Whether transition adapts to conditions"
+    )
 
 
 class TargetCondition(BaseModel):
@@ -55,19 +59,22 @@ class PhaseData(BaseModel):
         max_length=100,
         description="Phase name (e.g., Preinfusion, Extraction)"
     )
-    phase: Literal["preinfusion", "brew"] = Field(
+    phase: Literal["preinfusion", "brew", "decline"] = Field(
         description="Phase type"
+    )
+    valve: int = Field(
+        default=1,
+        ge=0,
+        description="Valve setting"
     )
     duration: float = Field(
         gt=0.0,
         le=120.0,
         description="Duration in seconds"
     )
-    temperature: Optional[float] = Field(
+    temperature: Optional[int] = Field(
         default=None,
-        ge=60.0,
-        le=96.0,
-        description="Phase-specific temperature in Celsius (optional)"
+        description="Phase-specific temperature offset"
     )
     pump: PumpSettings = Field(
         description="Pump control settings"

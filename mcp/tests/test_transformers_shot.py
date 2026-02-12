@@ -41,11 +41,11 @@ class TestShotTransformer:
             duration=25000,
             weight=36.0,
             samples=[
-                {'t': 0, 'ct': 90.0, 'tt': 93.0, 'cp': 0.0, 'tp': 9.0, 'pf': 0.0},
-                {'t': 100, 'ct': 91.0, 'tt': 93.0, 'cp': 2.0, 'tp': 9.0, 'pf': 1.0},
-                {'t': 200, 'ct': 92.0, 'tt': 93.0, 'cp': 9.0, 'tp': 9.0, 'pf': 2.5},
-                {'t': 300, 'ct': 93.0, 'tt': 93.0, 'cp': 8.5, 'tp': 9.0, 'pf': 2.0},
-                {'t': 400, 'ct': 93.0, 'tt': 93.0, 'cp': 8.0, 'tp': 9.0, 'pf': 1.5},
+                {'t': 0, 'ct': 90.0, 'tt': 93.0, 'cp': 0.0, 'tp': 9.0, 'pf': 0.0, 'v': 0.0},
+                {'t': 100, 'ct': 91.0, 'tt': 93.0, 'cp': 2.0, 'tp': 9.0, 'pf': 1.0, 'v': 0.0},
+                {'t': 200, 'ct': 92.0, 'tt': 93.0, 'cp': 9.0, 'tp': 9.0, 'pf': 2.5, 'v': 1.2},
+                {'t': 300, 'ct': 93.0, 'tt': 93.0, 'cp': 8.5, 'tp': 9.0, 'pf': 2.0, 'v': 5.0},
+                {'t': 400, 'ct': 93.0, 'tt': 93.0, 'cp': 8.0, 'tp': 9.0, 'pf': 1.5, 'v': 10.0},
             ],
             phases=[],
         )
@@ -69,6 +69,7 @@ class TestShotTransformer:
         assert summary['flow']['avg_flow_ml_s'] == 1.4
         assert summary['flow']['peak_flow_ml_s'] == 2.5
         assert summary['flow']['time_to_first_drip_s'] == 0.1  # At sample 1
+        assert summary['flow']['time_to_first_weight_s'] == 0.2  # At sample 2 (first v > 0)
 
         # Extraction timing
         # Preinfusion is 0.2s (time to reach 50% of peak pressure)
@@ -231,6 +232,57 @@ class TestShotTransformer:
         transformed = transform_shot_for_ai(shot)
 
         assert transformed['final_weight_g'] is None
+
+    def test_time_to_first_weight(self):
+        """Test time_to_first_weight_s is computed from cup weight."""
+        shot = ShotData(
+            id='1',
+            version=4,
+            fields_mask=0xFF,
+            sample_count=4,
+            sample_interval=100,
+            profile_id='test',
+            profile_name='Test',
+            timestamp=1640000000,
+            rating=0,
+            duration=25000,
+            weight=36.0,
+            samples=[
+                {'t': 0, 'ct': 90.0, 'cp': 0.0, 'pf': 0.5, 'v': 0.0},
+                {'t': 100, 'ct': 91.0, 'cp': 2.0, 'pf': 1.0, 'v': 0.0},
+                {'t': 200, 'ct': 92.0, 'cp': 9.0, 'pf': 2.5, 'v': 0.0},
+                {'t': 300, 'ct': 93.0, 'cp': 8.5, 'pf': 2.0, 'v': 2.1},
+            ],
+            phases=[],
+        )
+
+        summary = calculate_summary(shot)
+        assert summary['flow']['time_to_first_weight_s'] == 0.3
+
+    def test_time_to_first_weight_no_weight_data(self):
+        """Test time_to_first_weight_s is None when no weight data exists."""
+        shot = ShotData(
+            id='1',
+            version=4,
+            fields_mask=0xFF,
+            sample_count=3,
+            sample_interval=100,
+            profile_id='test',
+            profile_name='Test',
+            timestamp=1640000000,
+            rating=0,
+            duration=25000,
+            weight=None,
+            samples=[
+                {'t': 0, 'ct': 90.0, 'cp': 0.0, 'pf': 0.0},
+                {'t': 100, 'ct': 91.0, 'cp': 2.0, 'pf': 1.0},
+                {'t': 200, 'ct': 92.0, 'cp': 9.0, 'pf': 2.5},
+            ],
+            phases=[],
+        )
+
+        summary = calculate_summary(shot)
+        assert summary['flow']['time_to_first_weight_s'] is None
 
     def test_transform_shot_incomplete(self):
         """Test transformation with incomplete shot data."""
