@@ -31,24 +31,6 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 - `MILK_AND_DRINKS.md` - Steaming technique, temperature thresholds, drink specs, single-boiler workflow
 - `BASKETS.md` - Dose = basket size rule, puck depth effects, precision basket puck prep
 
-### Deep Reference Files (in `knowledge/reference/`)
-
-**Cascade prevention rule:** Load at most **ONE** quick-reference file and **ONE** deep reference file per question. If the quick-reference answers it, stop there. Never chain quick→deep→second-quick→second-deep.
-
-| Deep Reference (lines) | Load ONLY when user asks about… |
-|------------------------|--------------------------------|
-| `ESPRESSO_BREWING_REFERENCE.md` (229) | Shot style theory, salami shots, dialing methodology deep-dive |
-| `ESPRESSO_TASTING_REFERENCE.md` (191) | Flavor wheel, palate development exercises, off-flavor identification |
-| `BEAN_FRESHNESS_REFERENCE.md` (197) | Degassing science, freezing protocols, staleness chemistry |
-| `BASKETS_REFERENCE.md` (124) | Basket type specs (IMS/VST), ridged vs ridgeless comparison, wall geometry |
-| `EXTRACTION_SCIENCE_REFERENCE.md` (255) | TDS/EY theory, particle distribution, channeling physics |
-| `PROFILE_CREATION_REFERENCE.md` (529) | Transition tuning details, advanced profile techniques — only via `/gaggimate-profiles` skill |
-| `PRESSURE_REFERENCE.md` (95) | Pressure-compound interactions, pressure misconceptions deep-dive |
-| `MILK_AND_DRINKS_REFERENCE.md` (118) | Milk chemistry, foam science, latte art technique |
-| `PROFILE_LIBRARY_REFERENCE.md` (505) | Full profile JSON definitions — only via `/gaggimate-profiles` skill |
-| `SPECIAL_CATEGORIES_REFERENCE.md` (85) | Decaffeination chemistry, blend philosophy analysis |
-| `SETTE_270_REFERENCE.md` (156) | Grinder calibration, burr wear, maintenance deep-dive |
-
 ## Dynamic Data Files
 
 These files in the project root grow from user interactions:
@@ -62,6 +44,8 @@ Invoke these with `/skill-name` for specialized workflows:
 - `/new-coffee` - Research a new coffee and propose starting parameters (grind, temp, ratio, profile)
 - `/gaggimate-profiles` - Create custom extraction profiles with detailed pump, transition, and stop condition guidance
 - `/diagnose` - Analyze shot telemetry to diagnose extraction issues (correlates pressure/flow/temp with taste)
+- `/feedback` - Gather shot feedback, analyze extraction, recommend adjustments, record to grind map + tasting notes
+- `/consult` - Answer espresso knowledge questions from authoritative files (temperature, pressure, ratios, freshness, etc.)
 
 ## Core Workflow
 
@@ -99,94 +83,13 @@ Use `/gaggimate-profiles` — it owns the full workflow: gathering info, selecti
 
 **Volumetric targets must match the user's dose × ratio.** Check `user-setup.md` for basket size. Library profiles in `PROFILE_LIBRARY.md` are sized for 22g.
 
-### 4. Shot Feedback & Rating Workflow
+### 4. Shot Feedback & Dialing Loop
 
-Check the Active Coffee section in `user-setup.md`. If set, use as the default coffee for this shot. If ambiguous (user mentions a different coffee), confirm which one. If empty, ask what they're brewing.
+Use `/feedback` — it owns the full workflow: gathering taste feedback, recording ratings, analyzing extraction, recommending adjustments, updating grind map (4-5 star shots), logging tasting notes (all shots), syncing to device, and recommending drink formats. See the skill for details.
 
-After the user pulls a shot, gather feedback. The shot notes fields are:
+### 5. Espresso Knowledge Questions
 
-| Field | Description | Notes |
-|-------|-------------|-------|
-| **Rating** | 1-5 stars | Overall satisfaction |
-| **Bean Type** | Coffee name | Usually auto-filled |
-| **Dose In (g)** | Dry coffee weight | From user |
-| **Dose Out (g)** | Liquid espresso weight | From scale |
-| **Ratio** | Calculated from in/out | Displayed as 1:X.XX |
-| **Grind Setting** | Grinder number | Grinder-specific, note changes |
-| **Balance/Taste** | Sour / Balanced / Bitter | Primary extraction indicator |
-| **Notes** | Free text | Detailed tasting observations |
-
-**Questions to ask for feedback:**
-- "How would you rate that shot overall? (1-5 stars)"
-- "Was it balanced, or pulling toward sour or bitter?"
-
-**Minimum viable feedback needs:**
-- Star rating (1-5)
-- Balance direction (sour/balanced/bitter)
-- At least one specific observation (body, sweetness, finish, or a flavor note)
-
-### Drink Format Recommendation
-
-After dialing in, recommend a drink format based on the shot's characteristics — not the other way around. Don't adjust extraction to "cut through milk."
-
--> *For the complete drink format framework, milk science, steaming technique, and drink recipes, see `knowledge/MILK_AND_DRINKS.md`*
-
-**Core principle:** Extract for the bean's best expression first, then match the appropriate drink format. Never adjust grind, ratio, pressure, or temperature to "make the shot work in milk."
-
-### 5. Grind Map Learning
-
-After receiving shot feedback, automatically update the grind map for successful shots:
-
-**Trigger conditions** (all must be true):
-- Rating is 4 or 5 stars
-- Grind setting was provided
-- Coffee information is known — from active coffee in `user-setup.md` or conversation context
-
-**Update process:**
-1. Read current `grind-map.md`
-2. Append new row to the "Successful Settings" table with: Coffee, Roast, Process, Origin, Days Off Roast, Grind, Profile, Ratio, Temp, Rating, Date
-   - **Profile**: The profile style name used (e.g., "Natural Bloom", "Turbo", "Classic 9-bar")
-   - **Ratio**: Actual dose-in:dose-out as 1:X.X
-   - **Temp**: Profile temperature in °C
-   - If roast date is known (from coffee research or bag photo), calculate Days Off Roast
-   - If roast date is unknown, use "—" for Days Off Roast
-3. No confirmation needed—silent learning
-
-**Grind notation:** Use full Sette 270 format: macro number + micro letter (e.g., "9D", "10M", "11A")
-
-### 5b. Coffee Tasting Notes
-
-After receiving shot feedback, update the coffee's dialing journal. Unlike the grind map (successes only), tasting notes capture **all rated shots** — failures show what didn't work and why.
-
-**Trigger:** Any shot where the user provides feedback (rating + balance + observations).
-
-**Update process:**
-1. Use the active coffee directory from `user-setup.md`. If not set, find by conversation context in `coffees/`
-2. Append a row to the Tasting Notes table in the coffee's `README.md`:
-
-| # | Date | Shot | Grind | In/Out | Ratio | Profile | Balance | ⭐ | Observations |
-|---|------|------|-------|--------|-------|---------|---------|----|--------------|
-
-   - **#**: Sequential shot number for this coffee
-   - **Date**: Compact format (e.g., Feb 6)
-   - **Shot**: Gaggimate shot ID (6-digit, for `/diagnose` cross-reference)
-   - **In/Out**: Dose in/out as "22/48g"
-   - **Ratio**: Actual ratio as 1:X.X
-   - **Profile**: Short profile style name (matches Profiles table)
-   - **Balance**: Sour / Balanced / Bitter
-   - **Observations**: Brief sensory notes (5-10 words — flavor, body, finish, issues)
-3. If a profile was modified based on feedback, overwrite the JSON file in the coffee directory
-4. No confirmation needed — silent learning
-
-### 6. Iterative Improvement Loop
-
-Based on feedback, consult `knowledge/ESPRESSO_BREWING_BASICS.md` for adjustment strategies (the 5g rule, traditional vs turbo adjustments, temperature tuning). General direction:
-
-- **Sour** → extract more (finer grind, higher temp, longer time, more pre-infusion)
-- **Bitter** → extract less (coarser grind, lower temp, shorter time, lower pressure)
-- **Balanced but lacking** → fine-tune (body ↔ grind, brightness ↔ temp, sweetness ↔ bloom)
-
-Always explain *why* you're suggesting a change. For deeper diagnosis, use `/diagnose`.
+Use `/consult` — it routes questions to the right knowledge file and enforces the cascade prevention rule (max 1 quick-reference + 1 deep reference per question). See the skill for details.
 
 ## MCP Tools Available
 
@@ -206,13 +109,41 @@ You have access to Gaggimate MCP tools for:
 - **Personal taste**: Conventional wisdom isn't always right. If a user prefers 1:4 ratios, help them optimize for that, don't push them toward "correct" ratios.
 - **AI profiles**: Mark AI-created profiles with `[AI]` suffix in the label for safety.
 
-## Core Rules (detailed references in knowledge/)
+## Core Rules
+
+These inline tables are quick-reference summaries. For full context, load the knowledge file via `/consult`.
 
 - **Dose = basket size.** Never underdose. (See `user-setup.md`)
-- **Temperature varies by roast.** (See `knowledge/ESPRESSO_BREWING_BASICS.md`)
-- **Pressure varies by processing method — not always 9 bar.** (See `knowledge/PRESSURE_GUIDE.md`)
-- **Turbo shots require 1:2.5-1:3 ratio.** Coarse grind + short contact time needs more water. (See `knowledge/ESPRESSO_BREWING_BASICS.md`)
-- **Extract for the coffee, then recommend the drink.** Never adjust grind/ratio/pressure/temp for milk. (See `knowledge/MILK_AND_DRINKS.md`)
+- **Extract for the coffee, then recommend the drink.** Never adjust grind/ratio/pressure/temp for milk.
+- **Sour AND bitter = channeling.** Fix puck prep (WDT, distribution, even tamp) — NOT grind. Grinding finer makes channeling worse.
+- **Turbo shots require 1:2.5-1:3 ratio.** Coarse grind + short contact time needs more water.
+
+### Temperature by Roast
+
+| Roast | Temp |
+|-------|------|
+| Light | 94-96°C |
+| Medium | 92-94°C |
+| Medium-Dark | 90-92°C |
+| Dark | 88-90°C |
+
+### Pressure by Processing (main extraction, after pre-infusion)
+
+| | Light | Medium | Dark |
+|---|---|---|---|
+| **Washed** | 8-9 | 9 | 7-8 |
+| **Natural** | 7-8 | 8-9 | 6-7 |
+| **Honey** | 7-9 | 8-9 | 7-8 |
+| **Anaerobic/CM** | 6-8 | 7-8 | 6-7 |
+
+### Ratio by Style
+
+| Ratio | Style |
+|-------|-------|
+| 1:1-1:1.5 | Ristretto |
+| 1:2 | Classic |
+| 1:2.5-1:3 | Lungo/Modern/Turbo |
+| 1:3+ | Allonge |
 
 ---
 
