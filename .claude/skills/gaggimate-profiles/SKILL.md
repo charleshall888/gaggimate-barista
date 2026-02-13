@@ -77,16 +77,23 @@ After generating JSON, explain:
 
 ### Step 6: Save Profile to Repository
 
-After explaining the profile, save it to the `coffees/` directory:
+**Repo first, device second.** The JSON file in `coffees/` is the source of truth. Save here BEFORE uploading to the device.
 
 1. **Find or create** the coffee's directory: use the active coffee directory from `user-setup.md` if the profile is for the active coffee, otherwise `coffees/{roaster}-{coffee-name}/`
    - If the directory exists, use it
    - If not, create it with a minimal `README.md` (Bean Profile table with known info, empty Profiles and Tasting Notes sections)
 2. **Write the profile JSON** to `coffees/{coffee-dir}/{profile-style}.json` (kebab-case, e.g., `natural-bloom.json`, `turbo.json`)
-   - Same JSON content that was uploaded to the device
    - Overwrite existing files on update—git tracks iterations
 3. **Update the Profiles table** in the coffee's `README.md` with: Profile name, Style, Temp, Pressure, Ratio, and link to the JSON file
 4. **Remove `.gitkeep`** from `coffees/` if present
+
+### Step 7: Upload to Device
+
+After saving to repo, confirm with user then upload:
+
+1. **Ask for confirmation**: "Profile saved to repo. Shall I upload it to your machine?"
+2. **Create or update** via `manage_profile` MCP tool (action: `create` for new, `update` for existing)
+3. **Verify** the upload succeeded by checking the MCP response
 
 ## Quick Reference Index
 
@@ -108,5 +115,6 @@ After explaining the profile, save it to the `coffees/` directory:
 3. **Use sensible defaults** - valve: 1, adaptive: true for most cases
 4. **Add a volumetric target** on the final extraction phase (if scale available)
 5. **Explain your choices** after the JSON
-6. **Save to `coffees/` directory** alongside the coffee's README.md
+6. **Save to `coffees/` directory** alongside the coffee's README.md (repo first)
+7. **Upload to device** via MCP after user confirms (device second)
 

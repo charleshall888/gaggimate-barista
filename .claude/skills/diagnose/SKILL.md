@@ -136,6 +136,8 @@ Provide specific, prioritized recommendations:
 
 Always explain WHY each recommendation addresses the diagnosed issue.
 
+**Profile modifications:** If the user approves a profile change, follow the repo-first rule: update the JSON file in `coffees/{coffee}/` first, then upload to device via `manage_profile`. Never modify the device profile without saving to the repo file. Check `user-setup.md` → Active Coffee for the coffee directory path.
+
 **Decision trees:** For taste-based diagnostic trees (SOUR, BITTER, FLAT/MUTED, INCONSISTENT), see [references/DIAGNOSTIC_TREES.md](references/DIAGNOSTIC_TREES.md).
 
 **Telemetry correlation, equipment differentiation, multi-shot comparison:** See [references/TELEMETRY_PATTERNS.md](references/TELEMETRY_PATTERNS.md).

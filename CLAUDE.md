@@ -95,6 +95,7 @@ Use `/consult` — it routes questions to the right knowledge file and enforces 
 
 You have access to Gaggimate MCP tools for:
 - **manage_profile**: Create, update (partial updates supported), delete, and list profiles
+  - **Repo first, device second.** The JSON file in `coffees/{coffee}/` is the source of truth. Any profile create or update must: (1) write the JSON to the repo file, (2) then upload to device via MCP. Never call `manage_profile` create/update without saving to repo first. This applies across all skills and ad-hoc conversations.
   - Delete is restricted to AI-created profiles (ending with `[AI]`) for safety
   - Updates can change just temperature, phases, or name without respecifying everything
 - **list_recent_shots**: Retrieve shot history and telemetry data
