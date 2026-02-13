@@ -8,6 +8,7 @@ A personal record of successful grind settings that grows from your shots. When 
 |--------|-------|---------|--------|----------------|-------|---------|-------|------|--------|------|
 | Onyx Ethiopia Bochesa | Light | Anaerobic Natural | Ethiopia | 18 | 13D | Bloom Slide | 1:2.5 | 95°C | 4 | Feb 7 |
 | Onyx Ethiopia Bochesa | Light | Anaerobic Natural | Ethiopia | 21 | 13D | Bloom Slide | 1:2.6 | 96°C | 5 | Feb 10 |
+| Onyx Ethiopia Bochesa | Light | Anaerobic Natural | Ethiopia | 24 | 13D | Bloom Slide | 1:2.5 | 96°C | 5 | Feb 13 |
 
 *Days Off Roast is optional—use "—" when roast date is unknown.*
 

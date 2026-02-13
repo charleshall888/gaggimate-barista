@@ -34,3 +34,4 @@ A fruit-forward anaerobic natural from one of Ethiopia's highest-altitude statio
 |---|------|------|-------|--------|-------|---------|---------|----|--------------|
 | 1 | Feb 7 | 000071 | 13D | 20.5/51.4g | 1:2.5 | Bloom Slide | Balanced | 4 | Strong blueberry, lavender, blueberry white tea. Great in cortado. |
 | 2 | Feb 10 | 000083 | 13D | 21/54.5g | 1:2.6 | Bloom Slide | Balanced | 5 | Blueberry, mango, cranberry emerging. Meticulous puck prep required. |
+| 3 | Feb 13 | 000092 | 13D | 21/52g | 1:2.5 | Bloom Slide | Balanced | 5 | Strong blueberry, mango/cranberry, balance much improved. |
