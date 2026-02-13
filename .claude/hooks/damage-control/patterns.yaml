@@ -1,0 +1,188 @@
+# Damage Control Patterns - Tailored for Espresso Dialing Agent
+# See: https://github.com/disler/claude-code-damage-control
+
+# ============================================================================
+# BASH COMMAND PATTERNS
+# ============================================================================
+# pattern: regex to match against the full command string
+# reason: human-readable explanation shown when blocked
+# ask: true = prompt user for confirmation, false = hard block
+
+bashToolPatterns:
+  # --- Destructive file operations ---
+  - pattern: '\brm\s+.*(-[rRf]|--recursive|--force)'
+    reason: "Recursive/force delete detected"
+  - pattern: '\bsudo\s+rm\b'
+    reason: "Sudo rm detected"
+  - pattern: '\brmdir\s+--ignore-fail'
+    reason: "rmdir with ignore-fail detected"
+
+  # --- Dangerous permissions ---
+  - pattern: '\bchmod\s+777\b'
+    reason: "chmod 777 detected (world-writable)"
+  - pattern: '\bchown\s+-R\s+root\b'
+    reason: "Recursive chown to root detected"
+
+  # --- Git destructive (hard block) ---
+  - pattern: '\bgit\s+reset\s+--hard\b'
+    reason: "git reset --hard discards all uncommitted changes"
+  - pattern: '\bgit\s+clean\s+-fd'
+    reason: "git clean -fd removes untracked files permanently"
+  - pattern: '\bgit\s+push\s+--force\b(?!-with-lease)'
+    reason: "git push --force can overwrite remote history (use --force-with-lease)"
+  - pattern: '\bgit\s+stash\s+clear\b'
+    reason: "git stash clear removes all stashes permanently"
+  - pattern: '\bgit\s+reflog\s+expire\b'
+    reason: "git reflog expire removes recovery points"
+  - pattern: '\bgit\s+gc\s+--prune=now\b'
+    reason: "git gc --prune=now removes unreachable objects immediately"
+  - pattern: '\bgit\s+filter-branch\b'
+    reason: "git filter-branch rewrites history destructively"
+
+  # --- Git risky (ask user) ---
+  - pattern: '\bgit\s+checkout\s+--\s+\.'
+    reason: "git checkout -- . discards all unstaged changes"
+    ask: true
+  - pattern: '\bgit\s+restore\s+\.'
+    reason: "git restore . discards all unstaged changes"
+    ask: true
+  - pattern: '\bgit\s+stash\s+drop\b'
+    reason: "git stash drop removes a stash entry"
+    ask: true
+  - pattern: '\bgit\s+branch\s+-D\b'
+    reason: "git branch -D force-deletes a branch"
+    ask: true
+  - pattern: '\bgit\s+push\s+--delete\b'
+    reason: "git push --delete removes a remote branch"
+    ask: true
+
+  # --- System-level destructive ---
+  - pattern: '\bmkfs\.'
+    reason: "Filesystem format detected"
+  - pattern: '\bdd\s+of=/dev/'
+    reason: "dd write to device detected"
+  - pattern: '\bkill\s+-9\s+-1\b'
+    reason: "Kill all processes detected"
+  - pattern: '\bkillall\s+-9\b'
+    reason: "killall -9 detected"
+  - pattern: '\bpkill\s+-9\b'
+    reason: "pkill -9 detected"
+  - pattern: '\bhistory\s+-c\b'
+    reason: "Shell history clear detected"
+
+# ============================================================================
+# ZERO-ACCESS PATHS (no read, write, edit, or delete)
+# ============================================================================
+
+zeroAccessPaths:
+  # Credentials & secrets
+  - ".env"
+  - ".env.*"
+  - "*.env"
+  - "credentials.json"
+  - "secrets.yaml"
+  - ".mcp.json"                    # Gaggimate device IP/auth
+
+  # SSH & GPG
+  - "~/.ssh/"
+  - "~/.gnupg/"
+
+  # Cloud credentials
+  - "~/.aws/"
+  - "~/.config/gcloud/"
+  - "~/.azure/"
+  - "~/.kube/"
+  - "~/.docker/"
+
+  # SSL/TLS
+  - "*.pem"
+  - "*.key"
+  - "*.p12"
+  - "*.pfx"
+
+  # Auth tokens
+  - "~/.netrc"
+  - "~/.npmrc"
+  - "~/.pypirc"
+  - "~/.git-credentials"
+
+# ============================================================================
+# READ-ONLY PATHS (read allowed, no modify/write/edit/delete)
+# ============================================================================
+
+readOnlyPaths:
+  # System directories
+  - "/etc/"
+  - "/usr/"
+  - "/bin/"
+  - "/sbin/"
+  - "/boot/"
+  - "/root/"
+
+  # Shell config
+  - "~/.bash_history"
+  - "~/.zsh_history"
+  - "~/.bashrc"
+  - "~/.zshrc"
+  - "~/.profile"
+
+  # Project pinned files
+  - ".python-version"
+
+  # Lock files
+  - "uv.lock"
+  - "*.lock"
+  - "*.lockb"
+  - "package-lock.json"
+  - "yarn.lock"
+  - "pnpm-lock.yaml"
+  - "Pipfile.lock"
+  - "poetry.lock"
+  - "composer.lock"
+  - "Gemfile.lock"
+  - "Cargo.lock"
+
+  # Build artifacts
+  - "__pycache__/"
+  - ".venv/"
+  - "node_modules/"
+  - "dist/"
+  - "build/"
+
+# ============================================================================
+# NO-DELETE PATHS (read/write/edit allowed, no delete)
+# ============================================================================
+
+noDeletePaths:
+  # Claude config
+  - "~/.claude/"
+  - ".claude/"
+  - "CLAUDE.md"
+
+  # Agent knowledge (the brain)
+  - "knowledge/"
+  - "knowledge/**/*.md"
+
+  # Agent skills (workflows)
+  - ".claude/skills/"
+  - ".claude/skills/**/*"
+
+  # User data
+  - "user-setup.md"
+  - "grind-map.md"
+
+  # Coffee research & profiles
+  - "coffees/"
+  - "coffees/*/"
+  - "coffees/*/README.md"
+  - "coffees/**/*.json"
+
+  # Research data
+  - "RESEARCH_CHECKLIST.md"
+
+  # Standard repo files
+  - "LICENSE"
+  - "README.md"
+  - ".git/"
+  - ".gitignore"
+  - ".github/"
