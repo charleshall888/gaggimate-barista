@@ -26,8 +26,12 @@ Follow this sequence for every diagnosis:
 
 **Required inputs:**
 - Shot ID (from `list_recent_shots` if not provided)
+
+**Optional inputs (enhance diagnosis but do NOT wait for them):**
 - Taste feedback: sour, bitter, flat, astringent, balanced, or specific descriptors
-- Any visual observations (channeling, spurting, blonde early, etc.)
+- Visual observations (channeling, spurting, blonde early, etc.)
+
+**Always lead with the full telemetry analysis.** Do NOT ask the user how it tasted before presenting the analysis. The telemetry tells its own story — present it first. If the user hasn't volunteered taste feedback, ask at the END of the analysis so you can refine recommendations.
 
 **Fetch telemetry:**
 ```
@@ -114,7 +118,7 @@ If you fetched the profile definition in Step 1b (Tier 1), compare each phase's 
 | Pressure never reached target (>1.5 bar below) | **Context matters.** In a post-bloom ramp (starting from 0 bar), this is often normal — the ease-in curve needs time to build from zero, and Peak Hold finishes the job. Only flag as "too coarse" in non-bloom profiles where the pump starts from pre-infusion pressure (2-4 bar). |
 | Bloom phase showed significant flow (>1 ml/s) | **Cross-reference with cup weight.** Flow + zero cup weight = puck absorption, not channeling (see TELEMETRY_PATTERNS.md "Flow Meter vs Cup Weight During Bloom"). Flow + increasing cup weight = through-flow, puck too permeable — grind finer. |
 | Volumetric target reached much earlier than phase duration | Grind too coarse (flow too fast) |
-| Volumetric target not reached within phase duration | Grind too fine (flow too slow) |
+| Phase duration reached before volumetric target | **The volumetric target controls the final cup weight; duration is just a safeguard.** If the phase timed out before reaching its volumetric target, the most likely fix is extending the phase duration — not changing grind. Only suspect grind if the flow rate is abnormally low for the style. |
 | Decline phase pressure stayed >1 bar above target floor | Grind too fine — high puck resistance prevents pressure from dropping. See Pressure-Resistance Physics in TELEMETRY_PATTERNS.md. |
 | Decline phase dropped pressure faster than intended | Channel opened mid-shot |
 | Flow during extraction well above/below profile's flow target | Grind mismatch for this style |

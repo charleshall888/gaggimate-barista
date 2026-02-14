@@ -158,6 +158,8 @@ For ready-to-use profile patterns, see `PROFILE_LIBRARY.md`.
 | Hold phase | 15-30 seconds | Main extraction |
 | Decline/taper | 3-6 seconds | Smooth finish |
 
+> **Duration vs volumetric stop:** On phases with a volumetric stop, the volumetric target is the real exit condition — it controls the cup weight. Duration is a safeguard timeout. Set it generously (at least 1.5× expected extraction time) so it never cuts the shot short under normal conditions.
+
 ### Flow Rate Guidelines
 
 | Flow Rate | Use Case | Pressure |

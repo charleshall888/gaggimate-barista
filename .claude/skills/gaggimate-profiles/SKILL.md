@@ -68,6 +68,8 @@ Always output complete, valid JSON with ALL required fields:
 
 **Volumetric target:** Always set to `dose × ratio` using the user's basket size from `user-setup.md`. Library profiles in `PROFILE_LIBRARY.md` are sized for 22g.
 
+**Duration vs volumetric stop:** On phases with a volumetric stop condition, the volumetric target controls the final cup weight — it's the real exit condition. The phase duration is a safeguard (timeout) in case something goes wrong (choked puck, scale disconnect). Set duration generously — at least 1.5× the expected time to reach the volumetric target — so it never cuts the shot short under normal conditions.
+
 ### Step 5: Explain the Profile
 
 After generating JSON, explain:
