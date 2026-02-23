@@ -24,9 +24,9 @@
 
 | Field | Value |
 |-------|-------|
-| **Coffee** | Onyx Ethiopia Bochesa Anaerobic Natural |
-| **Directory** | `coffees/onyx-ethiopia-bochesa` |
-| **Roast Date** | January 20, 2026 |
+| **Coffee** | Chrome Yellow Indonesia Sumatra Gayo Natural |
+| **Directory** | `coffees/chrome-yellow-sumatra-gayo` |
+| **Roast Date** | February 2, 2026 |
 
 ## Bluetooth Scale & Auto-Stop
 
