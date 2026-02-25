@@ -29,7 +29,13 @@ The critic only checks what you surface here.
 
 ## Critic Prompt Template
 
-Copy this prompt exactly into the Task tool call, substituting `{{DRAFT}}` and `{{CLAIMS}}`:
+Task tool call parameters:
+- `description`: "Sonnet critic for diagnose self-check" (short label only)
+- `subagent_type`: `general-purpose`
+- `model`: `sonnet`
+- `prompt`: the full text below, with `{{DRAFT}}` and `{{CLAIMS}}` substituted
+
+**`description` is just a short label — the full critic prompt goes in `prompt`, not `description`.**
 
 ```
 You are an espresso diagnosis critic. Your job is to find reasoning errors in a draft
@@ -98,6 +104,12 @@ CHECK 4: Style-Relative Thresholds
 ---
 
 ## Arbiter Prompt Template
+
+Task tool call parameters:
+- `description`: "Opus arbiter for diagnose self-check"
+- `subagent_type`: `general-purpose`
+- `model`: `opus`
+- `prompt`: the full text below, with `{{DRAFT}}`, `{{CLAIMS}}`, and `{{OBJECTIONS}}` substituted
 
 Use this prompt only when the critic returned OBJECTIONS. Substitute `{{DRAFT}}`,
 `{{CLAIMS}}`, and `{{OBJECTIONS}}`:

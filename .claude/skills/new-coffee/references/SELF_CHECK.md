@@ -31,7 +31,13 @@ ADJUSTMENT_COUNT: [count of distinct variables being adjusted in the first-shot 
 
 ## Critic Prompt Template
 
-Copy this prompt exactly into the Task tool call, substituting `{{DRAFT}}` and `{{CLAIMS}}`:
+Task tool call parameters:
+- `description`: "Sonnet critic for new-coffee self-check" (short label only)
+- `subagent_type`: `general-purpose`
+- `model`: `sonnet`
+- `prompt`: the full text below, with `{{DRAFT}}` and `{{CLAIMS}}` substituted
+
+**`description` is just a short label — the full critic prompt goes in `prompt`, not `description`.**
 
 ```
 You are a new-coffee recommendation critic. Your job is to find reasoning errors in a
@@ -104,6 +110,12 @@ CHECK 4: Internal Alignment
 ---
 
 ## Arbiter Prompt Template
+
+Task tool call parameters:
+- `description`: "Opus arbiter for new-coffee self-check"
+- `subagent_type`: `general-purpose`
+- `model`: `opus`
+- `prompt`: the full text below, with `{{DRAFT}}`, `{{CLAIMS}}`, and `{{OBJECTIONS}}` substituted
 
 Use this prompt only when the critic returned OBJECTIONS. Substitute `{{DRAFT}}`,
 `{{CLAIMS}}`, and `{{OBJECTIONS}}`:
