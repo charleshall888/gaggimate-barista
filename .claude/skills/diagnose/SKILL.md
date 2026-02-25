@@ -152,6 +152,33 @@ Always explain WHY each recommendation addresses the diagnosed issue.
 
 **Telemetry correlation, equipment differentiation, multi-shot comparison:** See [references/TELEMETRY_PATTERNS.md](references/TELEMETRY_PATTERNS.md).
 
+### 4b. SELF-CHECK via Multi-Agent Review
+
+After forming all recommendations (Step 4) but before presenting to the user, run a
+two-stage reasoning check. Full protocol (claims format, prompt templates, confidence
+calibration) in [references/SELF_CHECK.md](references/SELF_CHECK.md).
+
+**Step 1 — Extract claims block:**
+From your full draft (telemetry summary + diagnosis + recommendations), extract a
+`<claims>` block listing: SHOT_STYLE, one GRIND_DIRECTION line per grind signal
+(including taste-based signals — especially if they conflict with telemetry signals),
+PRESSURE_NARRATIVE, TASTE_SIGNAL, PRIMARY_DIAGNOSIS, PRIMARY_RECOMMENDATION.
+Include every grind direction signal in the draft, even conflicting ones.
+
+**Step 2 — Spawn Sonnet critic:**
+Spawn a critic via the Task tool (`subagent_type: general-purpose`) using the
+Critic Prompt Template from `references/SELF_CHECK.md`, with your draft and claims
+block substituted in.
+
+**Step 3 — Evaluate result:**
+- `STATUS: CLEAR` → present draft to user as-is (omit claims block from output)
+- `STATUS: OBJECTIONS` → proceed to Step 4
+
+**Step 4 — Spawn Opus arbiter (only when objections found):**
+Spawn via Task tool (`subagent_type: general-purpose`, `model: opus`) using the
+Arbiter Prompt Template from `references/SELF_CHECK.md`. Present the arbiter's
+corrected output to the user. Add a confidence note only if confidence is Low or Medium.
+
 ---
 
 ## Integration with Other Knowledge

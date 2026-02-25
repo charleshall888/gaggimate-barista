@@ -64,6 +64,36 @@ Build recommendations using:
 - **Dose:** From `user-setup.md` basket size. **Dose = basket size** (e.g., 22g basket → 22g dose). Don't underdose.
 - **Volumetric target:** When using a library profile, confirm its volumetric stop matches dose × ratio. Library profiles are sized for 22g.
 
+### 4b. SELF-CHECK via Multi-Agent Review
+
+Before confirming with the user, run a two-stage reasoning check.
+Full protocol (claims format, prompt templates, confidence calibration) in
+[references/SELF_CHECK.md](references/SELF_CHECK.md).
+
+**Step 1 — Extract claims block:**
+From your synthesis, extract a `<claims>` block listing: GRIND_ESTIMATE (setting +
+source), GRIND_MATCH_SIMILARITY, GRIND_CONFIDENCE, TEMP, PRESSURE, PROFILE, RATIO,
+one CONDITIONAL_RECOMMENDATION line per "if X → Y" in the draft, ADJUSTMENT_COUNT.
+
+**Step 2 — Spawn Sonnet critic:**
+Spawn a critic via the Task tool (`subagent_type: general-purpose`) using the
+Critic Prompt Template from `references/SELF_CHECK.md`, with your draft and claims
+block substituted in.
+
+**Step 3 — Evaluate result:**
+- `STATUS: CLEAR` → proceed to "CONFIRM with User" using your draft
+- `STATUS: OBJECTIONS` → proceed to Step 4
+
+**Step 4 — Spawn Opus arbiter (only when objections found):**
+Spawn via Task tool (`subagent_type: general-purpose`, `model: opus`) using the
+Arbiter Prompt Template from `references/SELF_CHECK.md`. Use the arbiter's corrected
+output when confirming with the user.
+
+The grind confidence note from `references/SELF_CHECK.md` is always included in the
+Starting Parameters table — even when the critic returns CLEAR.
+
+---
+
 ### 5. CONFIRM with User
 
 Before finalizing, ask:
