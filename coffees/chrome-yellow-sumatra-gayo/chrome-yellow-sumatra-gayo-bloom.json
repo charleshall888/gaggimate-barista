@@ -27,8 +27,8 @@
       "duration": 5,
       "temperature": 0,
       "transition": {"type": "ease-in", "duration": 4, "adaptive": true},
-      "pump": {"target": "pressure", "pressure": 7.5, "flow": 0},
-      "targets": [{"type": "pressure", "operator": "gte", "value": 7}]
+      "pump": {"target": "pressure", "pressure": 8, "flow": 0},
+      "targets": [{"type": "pressure", "operator": "gte", "value": 7.5}]
     },
     {
       "name": "Peak Hold",
@@ -37,7 +37,7 @@
       "duration": 4,
       "temperature": 0,
       "transition": {"type": "instant", "duration": 0, "adaptive": true},
-      "pump": {"target": "pressure", "pressure": 7.5, "flow": 4}
+      "pump": {"target": "pressure", "pressure": 8, "flow": 4}
     },
     {
       "name": "Fruit Slide",
