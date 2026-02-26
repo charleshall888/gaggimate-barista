@@ -125,6 +125,17 @@ If you fetched the profile definition in Step 1b (Tier 1), compare each phase's 
 
 This phase-by-phase comparison is the most precise diagnostic — it shows exactly *where* in the shot things diverged from intent. Include the comparison in your diagnosis when available.
 
+**Compliance metrics (quantitative grind-direction signal):** When `analyze_shot` returns a `compliance_metrics` block, use it alongside the manual table above to sharpen your diagnosis. The metrics operate on brew-phase samples only (filtered at ≥50% of peak pressure), so bloom and ramp data are excluded automatically.
+
+| Metric | Threshold | Interpretation |
+|--------|-----------|----------------|
+| `max_pressure_overshoot_bar` | > 1.5 bar | Strong "grind too fine" signal — puck resistance is pushing pressure above the profile target. Matches the manual spike check above; this metric makes it automatic. |
+| `max_pressure_undershoot_bar` | > 1.5 bar | **Context matters.** Only flag as "grind too coarse" in steady-state brew phases. In profiles with a post-bloom ramp (ease-in from 0 bar), large undershoot values are normal — the machine is climbing from zero to target. Cross-reference with shot style: Bloom profiles always have a ramp. See §2b table row above for full guidance. |
+| `pressure_rmse_bar` | No fixed threshold yet | Overall pressure adherence quality. Lower is better. A value materially above 1 bar is worth noting as general context; avoid pinning a diagnosis on it until calibrated data is available. |
+| `flow_rmse_ml_s` | No fixed threshold yet | Informational context only. Surface when non-None but do not attach a grind direction to it — calibrate thresholds once real shot data is available. |
+
+`brew_phase_sample_count` is available for confidence context: a count of 3–4 means the metrics are based on very few samples and should be weighted lightly.
+
 ### 3. CORRELATE Taste with Telemetry
 
 Cross-reference the user's taste feedback with telemetry patterns.
