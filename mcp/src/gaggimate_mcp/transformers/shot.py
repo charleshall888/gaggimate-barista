@@ -4,7 +4,7 @@ This module converts raw binary shot data into a structured format
 optimized for AI analysis and natural language processing.
 """
 
-from math import ceil
+from math import ceil, sqrt
 from typing import TypedDict, Optional
 from gaggimate_mcp.parsers.shot import ShotData
 
@@ -182,6 +182,80 @@ def select_representative_samples(
         ))
 
     return result
+
+
+def _get_brew_phase_samples(samples: list[dict]) -> list[dict]:
+    """Return samples that belong to the brew (main extraction) phase.
+
+    Identifies the brew phase using a 50% peak-pressure threshold:
+    any sample whose current pressure ('cp') is at least half the
+    overall peak pressure is considered a brew-phase sample.
+
+    Args:
+        samples: Full list of raw sample dicts for a shot.
+
+    Returns:
+        Filtered list of brew-phase samples.  Returns an empty list
+        when there are no samples or when peak pressure is zero.
+    """
+    if not samples:
+        return []
+
+    peak_cp = max(s.get('cp', 0.0) for s in samples)
+    if peak_cp == 0:
+        return []
+
+    threshold = peak_cp * 0.5
+    return [s for s in samples if s.get('cp', 0.0) >= threshold]
+
+
+def compute_compliance_metrics(shot: ShotData) -> ComplianceMetrics:
+    """Compute profile-compliance metrics for a shot.
+
+    Compares actual pump behaviour ('cp' current pressure, 'pf' puck flow)
+    against the profile targets ('tp' target pressure, 'tf' target flow)
+    across brew-phase samples only.
+
+    Args:
+        shot: Parsed shot data.
+
+    Returns:
+        ComplianceMetrics TypedDict.  Always populated — degenerate cases
+        (no brew samples, fewer than 3 samples with targets) produce None
+        for the metric fields but brew_phase_sample_count is always set.
+    """
+    brew_samples = _get_brew_phase_samples(shot.samples)
+    brew_phase_sample_count = len(brew_samples)
+
+    # Pressure metrics — require at least 3 samples that carry a target pressure
+    brew_samples_with_tp = [s for s in brew_samples if 'tp' in s]
+
+    if len(brew_samples_with_tp) < 3:
+        pressure_rmse_bar = None
+        max_pressure_overshoot_bar = None
+        max_pressure_undershoot_bar = None
+    else:
+        errors = [s['cp'] - s['tp'] for s in brew_samples_with_tp]
+        pressure_rmse_bar = round(sqrt(sum(e ** 2 for e in errors) / len(errors)), 2)
+        max_pressure_overshoot_bar = round(max(0.0, max(e for e in errors)), 2)
+        max_pressure_undershoot_bar = round(max(0.0, max(-e for e in errors)), 2)
+
+    # Flow metric — require at least 3 samples that carry a target flow
+    brew_samples_with_tf = [s for s in brew_samples if 'tf' in s]
+
+    if len(brew_samples_with_tf) < 3:
+        flow_rmse_ml_s = None
+    else:
+        flow_errors = [s.get('pf', 0.0) - s['tf'] for s in brew_samples_with_tf]
+        flow_rmse_ml_s = round(sqrt(sum(e ** 2 for e in flow_errors) / len(flow_errors)), 2)
+
+    return ComplianceMetrics(
+        pressure_rmse_bar=pressure_rmse_bar,
+        max_pressure_overshoot_bar=max_pressure_overshoot_bar,
+        max_pressure_undershoot_bar=max_pressure_undershoot_bar,
+        flow_rmse_ml_s=flow_rmse_ml_s,
+        brew_phase_sample_count=brew_phase_sample_count,
+    )
 
 
 def calculate_summary(shot: ShotData) -> ShotSummary:
@@ -386,6 +460,7 @@ def transform_shot_for_ai(shot: ShotData) -> TransformedShot:
     """
     summary = calculate_summary(shot)
     phases = process_phases(shot)
+    compliance = compute_compliance_metrics(shot)
 
     return TransformedShot(
         shot_id=shot.id,
@@ -396,4 +471,5 @@ def transform_shot_for_ai(shot: ShotData) -> TransformedShot:
         final_weight_g=shot.weight,
         summary=summary,
         phases=phases,
+        compliance_metrics=compliance,
     )
