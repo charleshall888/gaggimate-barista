@@ -1,6 +1,6 @@
 ---
 title: Add profile compliance metrics (RMSE + overshoot) to shot analysis
-status: open
+status: resolved
 priority: medium
 type: feature
 tags: [mcp, diagnostics, profiles]
