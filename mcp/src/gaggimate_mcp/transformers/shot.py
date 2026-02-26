@@ -51,6 +51,15 @@ class ShotSummary(TypedDict):
     extraction: ExtractionSummary
 
 
+class ComplianceMetrics(TypedDict):
+    """Profile compliance metrics comparing actual vs target pump behaviour."""
+    pressure_rmse_bar: Optional[float]
+    max_pressure_overshoot_bar: Optional[float]
+    max_pressure_undershoot_bar: Optional[float]
+    flow_rmse_ml_s: Optional[float]
+    brew_phase_sample_count: int
+
+
 class TransformedSample(TypedDict):
     """Transformed sample data point."""
     time_seconds: float
@@ -84,6 +93,7 @@ class TransformedShot(TypedDict):
     final_weight_g: Optional[float]
     summary: ShotSummary
     phases: list[PhaseData]
+    compliance_metrics: ComplianceMetrics
 
 
 def calculate_total_volume(samples: list[dict], interval_ms: int) -> float:
