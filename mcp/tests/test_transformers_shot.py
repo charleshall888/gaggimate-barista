@@ -8,6 +8,7 @@ from gaggimate_mcp.transformers.shot import (
     calculate_total_volume,
     trim_trailing_artifacts,
     select_representative_samples,
+    compute_compliance_metrics,
     MAX_SAMPLES_PER_PHASE,
 )
 
@@ -614,3 +615,189 @@ class TestTimeToFirstWeight:
 
         summary = calculate_summary(shot)
         assert summary['flow']['time_to_first_weight_s'] is None
+
+
+class TestComputeComplianceMetrics:
+    """Test compliance metrics computation."""
+
+    def _make_shot(self, samples):
+        """Build a minimal ShotData fixture with the given samples."""
+        return ShotData(
+            id='1',
+            version=4,
+            fields_mask=0xFF,
+            sample_count=len(samples),
+            sample_interval=100,
+            profile_id='test',
+            profile_name='Test Profile',
+            timestamp=1640000000,
+            rating=0,
+            duration=25000,
+            weight=None,
+            samples=samples,
+            phases=[],
+        )
+
+    def test_happy_path(self):
+        """5 brew-phase samples with tp and tf, 2 preinfusion samples without.
+
+        All 4 metrics should be non-None and mathematically correct.
+        brew_phase_sample_count should equal 5.
+
+        Sample math:
+          - cp=7.0, tp=7.5 → error = cp - tp = -0.5 (undershoot 0.5)
+          - RMSE = sqrt(5 * 0.25 / 5) = sqrt(0.25) = 0.5
+          - max overshoot = max(0, max(-0.5)) = 0.0
+          - max undershoot = max(0, max(0.5)) = 0.5
+          - pf=2.0, tf=2.5 → flow error = pf - tf = -0.5
+          - flow RMSE = sqrt(5 * 0.25 / 5) = 0.5
+        """
+        # 2 preinfusion samples (cp=0.5, below 50% threshold of 7.5 peak → excluded)
+        preinfusion = [
+            {'cp': 0.5, 'pf': 1.0},
+            {'cp': 0.5, 'pf': 1.0},
+        ]
+        # 5 brew-phase samples at cp=7.0 with tp=7.5 and tf=2.5
+        brew = [
+            {'cp': 7.0, 'tp': 7.5, 'pf': 2.0, 'tf': 2.5},
+            {'cp': 7.0, 'tp': 7.5, 'pf': 2.0, 'tf': 2.5},
+            {'cp': 7.0, 'tp': 7.5, 'pf': 2.0, 'tf': 2.5},
+            {'cp': 7.0, 'tp': 7.5, 'pf': 2.0, 'tf': 2.5},
+            {'cp': 7.0, 'tp': 7.5, 'pf': 2.0, 'tf': 2.5},
+        ]
+        shot = self._make_shot(preinfusion + brew)
+        metrics = compute_compliance_metrics(shot)
+
+        assert metrics['brew_phase_sample_count'] == 5
+        assert metrics['pressure_rmse_bar'] == 0.5
+        assert metrics['max_pressure_overshoot_bar'] == 0.0
+        assert metrics['max_pressure_undershoot_bar'] == 0.5
+        assert metrics['flow_rmse_ml_s'] == 0.5
+
+    def test_sparse_tp_fewer_than_3(self):
+        """Only 2 brew-phase samples with tp → pressure metrics are None.
+
+        Flow metrics may still compute if tf is present on those samples.
+        """
+        samples = [
+            {'cp': 8.0, 'tp': 9.0, 'pf': 2.0, 'tf': 2.5},
+            {'cp': 8.0, 'tp': 9.0, 'pf': 2.0, 'tf': 2.5},
+        ]
+        shot = self._make_shot(samples)
+        metrics = compute_compliance_metrics(shot)
+
+        assert metrics['pressure_rmse_bar'] is None
+        assert metrics['max_pressure_overshoot_bar'] is None
+        assert metrics['max_pressure_undershoot_bar'] is None
+        # Only 2 tf samples also — flow RMSE is also None
+        assert metrics['flow_rmse_ml_s'] is None
+
+    def test_no_tp_at_all(self):
+        """Brew-phase samples have no tp key → all pressure metrics None."""
+        samples = [
+            {'cp': 8.0, 'pf': 2.0},
+            {'cp': 8.0, 'pf': 2.0},
+            {'cp': 8.0, 'pf': 2.0},
+            {'cp': 8.0, 'pf': 2.0},
+            {'cp': 8.0, 'pf': 2.0},
+        ]
+        shot = self._make_shot(samples)
+        metrics = compute_compliance_metrics(shot)
+
+        assert metrics['pressure_rmse_bar'] is None
+        assert metrics['max_pressure_overshoot_bar'] is None
+        assert metrics['max_pressure_undershoot_bar'] is None
+        # No tf either
+        assert metrics['flow_rmse_ml_s'] is None
+
+    def test_no_tf(self):
+        """Brew-phase samples have tp but no tf → flow_rmse_ml_s is None.
+
+        Pressure metrics should still be computed normally.
+        """
+        samples = [
+            {'cp': 7.0, 'tp': 7.5, 'pf': 2.0},
+            {'cp': 7.0, 'tp': 7.5, 'pf': 2.0},
+            {'cp': 7.0, 'tp': 7.5, 'pf': 2.0},
+            {'cp': 7.0, 'tp': 7.5, 'pf': 2.0},
+            {'cp': 7.0, 'tp': 7.5, 'pf': 2.0},
+        ]
+        shot = self._make_shot(samples)
+        metrics = compute_compliance_metrics(shot)
+
+        assert metrics['flow_rmse_ml_s'] is None
+        # Pressure metrics computed from the 5 tp samples
+        assert metrics['pressure_rmse_bar'] == 0.5
+        assert metrics['max_pressure_overshoot_bar'] == 0.0
+        assert metrics['max_pressure_undershoot_bar'] == 0.5
+
+    def test_zero_peak_cp(self):
+        """All samples have cp=0.0 → brew_phase_sample_count=0, all metrics None."""
+        samples = [
+            {'cp': 0.0, 'tp': 9.0, 'pf': 0.0, 'tf': 2.5},
+            {'cp': 0.0, 'tp': 9.0, 'pf': 0.0, 'tf': 2.5},
+            {'cp': 0.0, 'tp': 9.0, 'pf': 0.0, 'tf': 2.5},
+        ]
+        shot = self._make_shot(samples)
+        metrics = compute_compliance_metrics(shot)
+
+        assert metrics['brew_phase_sample_count'] == 0
+        assert metrics['pressure_rmse_bar'] is None
+        assert metrics['max_pressure_overshoot_bar'] is None
+        assert metrics['max_pressure_undershoot_bar'] is None
+        assert metrics['flow_rmse_ml_s'] is None
+
+    def test_brew_phase_filter(self):
+        """Brew-phase filter excludes bloom samples using peak * 0.5 threshold.
+
+        3 bloom samples at cp=0.5, 5 brew samples at cp=7.5.
+        Peak = 7.5, threshold = 3.75.
+        Only the 5 brew samples (cp >= 3.75) are included.
+        """
+        bloom = [
+            {'cp': 0.5, 'tp': 0.5, 'pf': 1.0, 'tf': 1.0},
+            {'cp': 0.5, 'tp': 0.5, 'pf': 1.0, 'tf': 1.0},
+            {'cp': 0.5, 'tp': 0.5, 'pf': 1.0, 'tf': 1.0},
+        ]
+        brew = [
+            {'cp': 7.5, 'tp': 7.5, 'pf': 2.0, 'tf': 2.0},
+            {'cp': 7.5, 'tp': 7.5, 'pf': 2.0, 'tf': 2.0},
+            {'cp': 7.5, 'tp': 7.5, 'pf': 2.0, 'tf': 2.0},
+            {'cp': 7.5, 'tp': 7.5, 'pf': 2.0, 'tf': 2.0},
+            {'cp': 7.5, 'tp': 7.5, 'pf': 2.0, 'tf': 2.0},
+        ]
+        shot = self._make_shot(bloom + brew)
+        metrics = compute_compliance_metrics(shot)
+
+        # Only the 5 brew samples should be used
+        assert metrics['brew_phase_sample_count'] == 5
+        # cp == tp for brew samples → error=0 → RMSE=0.0, no overshoot, no undershoot
+        assert metrics['pressure_rmse_bar'] == 0.0
+        assert metrics['max_pressure_overshoot_bar'] == 0.0
+        assert metrics['max_pressure_undershoot_bar'] == 0.0
+        # pf == tf for brew samples → flow RMSE=0.0
+        assert metrics['flow_rmse_ml_s'] == 0.0
+
+    def test_flush_cleaning_shot_undershoot(self):
+        """Flush/cleaning shot: actual pressure far below profile target.
+
+        Samples with cp≈2.0, tp≈7.5 → undershoot ≈ 5.5 bar.
+        Should not crash.
+        """
+        samples = [
+            {'cp': 2.0, 'tp': 7.5, 'pf': 3.0},
+            {'cp': 2.0, 'tp': 7.5, 'pf': 3.0},
+            {'cp': 2.0, 'tp': 7.5, 'pf': 3.0},
+            {'cp': 2.0, 'tp': 7.5, 'pf': 3.0},
+            {'cp': 2.0, 'tp': 7.5, 'pf': 3.0},
+        ]
+        shot = self._make_shot(samples)
+        metrics = compute_compliance_metrics(shot)
+
+        # Error per sample = cp - tp = 2.0 - 7.5 = -5.5 (pure undershoot)
+        assert metrics['max_pressure_undershoot_bar'] == 5.5
+        assert metrics['max_pressure_overshoot_bar'] == 0.0
+        # RMSE = sqrt(5 * 5.5^2 / 5) = 5.5
+        assert metrics['pressure_rmse_bar'] == 5.5
+        # No crash
+        assert metrics['brew_phase_sample_count'] == 5
