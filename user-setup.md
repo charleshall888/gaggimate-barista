@@ -24,9 +24,9 @@
 
 | Field | Value |
 |-------|-------|
-| **Coffee** | Chrome Yellow Indonesia Sumatra Gayo Natural |
-| **Directory** | `coffees/chrome-yellow-sumatra-gayo` |
-| **Roast Date** | February 2, 2026 |
+| **Coffee** | Choco Coffee Hacienda La Papaya Typica Anaerobic |
+| **Directory** | `coffees/choco-coffee-hacienda-la-papaya-typica-anaerobic` |
+| **Roast Date** | February 12, 2026 |
 
 ## Bluetooth Scale & Auto-Stop
 

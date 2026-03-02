@@ -29,3 +29,7 @@ Sumatran naturals are a rarity — the region almost exclusively uses wet-hullin
 | Chrome Yellow Sumatra Gayo [AI] | Bloom Slide | 94°C | 8→4 bar | 1:2.5 (22g in → 55g out) | [chrome-yellow-sumatra-gayo-bloom.json](chrome-yellow-sumatra-gayo-bloom.json) |
 
 ## Tasting Notes
+
+| # | Date | Shot | Grind | In/Out | Ratio | Profile | Balance | Stars | Observations |
+|---|------|------|-------|--------|-------|---------|---------|-------|--------------|
+| 1 | Feb 28 | 000141 | 12E | 22/54g | 1:2.5 | Bloom Slide | Balanced | ⭐⭐⭐⭐ | Strawberry, chocolate, very tasty |

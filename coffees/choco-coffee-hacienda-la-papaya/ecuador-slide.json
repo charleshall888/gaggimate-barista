@@ -1,0 +1,46 @@
+{
+  "label": "La Papaya Ecuador Slide [AI]",
+  "type": "pro",
+  "description": "Pre-infusion + declining pressure for Ecuador natural - no pump-off, 8 bar peak, 95°C, 22g dose, 1:2.5 ratio (55g out). Sette 270-friendly. Short 4s soak reduces fines migration.",
+  "temperature": 95,
+  "phases": [
+    {
+      "name": "Gentle Soak",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 0,
+      "transition": {"type": "instant", "duration": 0, "adaptive": true},
+      "pump": {"target": "flow", "pressure": 4, "flow": 2.0}
+    },
+    {
+      "name": "Ramp",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 6,
+      "temperature": 0,
+      "transition": {"type": "ease-in", "duration": 4, "adaptive": true},
+      "pump": {"target": "pressure", "pressure": 8, "flow": 0},
+      "targets": [{"type": "pressure", "operator": "gte", "value": 7.5}]
+    },
+    {
+      "name": "Peak Hold",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 3,
+      "temperature": 0,
+      "transition": {"type": "instant", "duration": 0, "adaptive": true},
+      "pump": {"target": "pressure", "pressure": 8, "flow": 0}
+    },
+    {
+      "name": "Ecuador Slide",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 45,
+      "temperature": 0,
+      "transition": {"type": "linear", "duration": 30, "adaptive": true},
+      "pump": {"target": "pressure", "pressure": 4, "flow": 0},
+      "targets": [{"type": "volumetric", "operator": "gte", "value": 55}]
+    }
+  ]
+}
