@@ -47,13 +47,13 @@ cp user-setup.example.md user-setup.md
 mkdir -p coffees
 cp grind-map.example.md grind-map.md
 ```
-Then edit `user-setup.md` with your equipment details.
+Then edit `user-setup.md` with your equipment details. Note: data files (`coffees/`, `grind-map.md`, `user-setup.md`) are stored locally and won't carry over to a new machine. Use the private repo path if you want persistence across machines.
 
 **With a private repo** (recommended — data syncs across machines, history is preserved):
 ```bash
 bin/setup-data-repo.sh /absolute/path/to/gaggimate-barista-data
 ```
-The script creates symlinks for `coffees/`, `grind-map.md`, and `user-setup.md`, and configures the MCP server to use your private repo's `mcp-data/` directory. See [Data Architecture](#data-architecture) for details.
+The script creates symlinks for `coffees/`, `grind-map.md`, and `user-setup.md`, and configures `GAGGIMATE_STORAGE_PATH` in `mcp/.env` to point to your private repo's `mcp-data/` directory. If `GAGGIMATE_STORAGE_PATH` is misconfigured, shot ratings and profile data are silently lost — the setup script handles this automatically. See [Data Architecture](#data-architecture) for details.
 
 ### 3. Install the MCP server
 

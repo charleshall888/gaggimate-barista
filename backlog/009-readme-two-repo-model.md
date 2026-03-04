@@ -1,7 +1,7 @@
 ---
 id: "009"
 title: "Update README for two-repo model"
-status: open
+status: closed
 priority: medium
 type: feature
 parent: "005"

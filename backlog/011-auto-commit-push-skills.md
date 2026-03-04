@@ -1,7 +1,7 @@
 ---
 id: "011"
 title: "Add auto-commit and push to data-writing skills"
-status: open
+status: closed
 priority: medium
 type: feature
 parent: "005"

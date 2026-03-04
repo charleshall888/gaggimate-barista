@@ -1,7 +1,7 @@
 ---
 id: "012"
 title: "Update CLAUDE.md with data architecture note"
-status: open
+status: closed
 priority: low
 type: chore
 parent: "005"
@@ -11,6 +11,7 @@ research: research/multi-user-data-isolation/research.md
 spec: research/multi-user-data-isolation/spec.md
 created: 2026-03-04
 updated: 2026-03-04
+closed-reason: already-done
 ---
 
 # Update CLAUDE.md with data architecture note
