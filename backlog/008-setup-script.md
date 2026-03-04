@@ -1,16 +1,17 @@
 ---
 id: "008"
 title: "Write setup script (bin/setup-data-repo.sh)"
-status: open
+status: complete
 priority: high
 type: feature
 parent: "005"
-blocked-by: ["007"]
+blocked-by: []
 tags: [multi-user-data-isolation]
 research: research/multi-user-data-isolation/research.md
 spec: research/multi-user-data-isolation/spec.md
 created: 2026-03-04
 updated: 2026-03-04
+lifecycle_phase: complete
 ---
 
 # Write setup script (bin/setup-data-repo.sh)
