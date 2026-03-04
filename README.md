@@ -37,13 +37,31 @@ git clone https://github.com/your-username/gaggimate-barista.git
 cd gaggimate-barista
 ```
 
-### 2. Install the MCP server
+### 2. Set up personal data
+
+Your equipment profile, grind map, and coffee notes live outside this repo. Choose one path:
+
+**Without a private repo** (quickest start, data stays local):
+```bash
+cp user-setup.example.md user-setup.md
+mkdir -p coffees
+cp grind-map.example.md grind-map.md
+```
+Then edit `user-setup.md` with your equipment details.
+
+**With a private repo** (recommended — data syncs across machines, history is preserved):
+```bash
+bin/setup-data-repo.sh /absolute/path/to/gaggimate-barista-data
+```
+The script creates symlinks for `coffees/`, `grind-map.md`, and `user-setup.md`, and configures the MCP server to use your private repo's `mcp-data/` directory. See [Data Architecture](#data-architecture) for details.
+
+### 3. Install the MCP server
 
 ```bash
 uv sync --directory mcp
 ```
 
-### 3. Configure the MCP server
+### 4. Configure the MCP server
 
 Create `.mcp.json` in the project root (gitignored). Replace the two paths with your actual locations (`which uv` and `pwd`):
 
@@ -66,7 +84,7 @@ Create `.mcp.json` in the project root (gitignored). Replace the two paths with 
 }
 ```
 
-### 4. Configure Claude Code permissions
+### 5. Configure Claude Code permissions
 
 Create `.claude/settings.local.json` (gitignored):
 
@@ -88,17 +106,6 @@ Create `.claude/settings.local.json` (gitignored):
 
 This pre-approves the Gaggimate MCP tools so Claude can read shots and manage profiles without prompting each time.
 
-### 5. Set up your equipment
-
-Edit `user-setup.md` with your details:
-
-- Machine (brand, model, modifications)
-- Grinder (brand, model)
-- Basket (size in grams, type)
-- Scale (Bluetooth-connected?)
-- Drink preferences
-- Puck prep routine
-
 ### 6. Start dialing
 
 ```bash
@@ -112,14 +119,18 @@ Tell the agent about your coffee, or use `/new-coffee` to start the research wor
 ```
 gaggimate-barista/
 ├── CLAUDE.md                  # Agent instructions and workflow definitions
-├── user-setup.md              # Your equipment, preferences, active coffee
-├── grind-map.md               # Auto-populated log of successful grind settings
+├── user-setup.md              # → symlink to private repo (your equipment + active coffee)
+├── user-setup.example.md      # Example template for new users
+├── grind-map.md               # → symlink to private repo (successful grind settings)
+├── grind-map.example.md       # Example template for new users
+├── bin/
+│   └── setup-data-repo.sh     # Wires private data repo via symlinks
 │
 ├── mcp/                       # Gaggimate MCP server (Python)
 │   ├── src/gaggimate_mcp/     # Server source code
 │   └── tests/                 # Test suite
 │
-├── coffees/                   # Per-coffee data (created by /new-coffee)
+├── coffees/                   # → symlink to private repo (per-coffee data)
 │   └── roaster-coffee-name/
 │       ├── README.md          # Bean research, profiles table, tasting journal
 │       └── *.json             # Extraction profiles for this coffee
@@ -169,9 +180,25 @@ After a shot, the agent pulls telemetry data from your machine and correlates pr
 
 Pull a shot, tell the agent how it tasted (rating, balance, observations), and get specific adjustments for the next shot. The agent records everything — successful settings go to `grind-map.md`, all shots go to the coffee's tasting journal.
 
+## Data Architecture
+
+Personal data (`coffees/`, `grind-map.md`, `user-setup.md`) is stored in a separate private repo and linked into this repo via symlinks. This keeps the public repo free of personal data while allowing it to function as a reusable template.
+
+The MCP server's storage path (`GAGGIMATE_STORAGE_PATH` in `mcp/.env`) points to `{private-repo}/mcp-data/` for shot ratings and profile persistence. `bin/setup-data-repo.sh` configures everything automatically.
+
+### Keeping up with upstream
+
+If you set up this project from the template, you can pull in future improvements:
+
+```bash
+git remote add upstream https://github.com/charlie-hall/gaggimate-barista.git
+git fetch upstream
+git merge upstream/main
+```
+
 ## Customization
 
-This project is designed to be forked and adapted:
+This project is designed to be used as a template (click "Use this template" on GitHub) and adapted:
 
 - **Different grinder** — Replace `knowledge/grinders/SETTE_270.md` with a guide for your grinder. Update `user-setup.md` with your model.
 - **Different basket size** — Update `user-setup.md`. Profile volumetric targets auto-scale based on your dose.
