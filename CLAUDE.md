@@ -38,6 +38,14 @@ These files in the project root grow from user interactions:
 - `grind-map.md` - Personal record of successful grind settings (auto-updated from 4-5 star shots)
 - `coffees/` - Per-coffee directories containing research (README.md), profiles (.json), and dialing notes
 
+## Data Architecture
+
+`coffees/`, `grind-map.md`, and `user-setup.md` are expected to be **symlinks** pointing into a private data repo. Run `bin/setup-data-repo.sh /path/to/private-repo` to wire them up on any machine. `GAGGIMATE_STORAGE_PATH` in `mcp/.env` points to `{private-repo}/mcp-data/` for MCP ratings and profile storage.
+
+**Unconfigured check**: If `user-setup.md` reads like an unconfigured template (generic equipment, "No active coffee" placeholder, no grind history), warn the user and suggest running `bin/setup-data-repo.sh` or copying from `user-setup.example.md`.
+
+**Auto-commit policy**: After any data-writing skill step, read `.data-repo-path` at the project root. If present, commit and push to the private repo (separate Bash calls, no chaining, no `git -C`; use `--git-dir={private_repo}/.git --work-tree={private_repo}`). If `.data-repo-path` is absent, skip silently. If present but `git push` fails, inform the user: "Private repo push failed — changes saved locally. Run `git push` manually in `{private_repo_path}` when credentials are available."
+
 ## Skills
 
 Invoke these with `/skill-name` for specialized workflows:
