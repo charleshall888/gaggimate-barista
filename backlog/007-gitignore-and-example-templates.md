@@ -1,7 +1,7 @@
 ---
 id: "007"
 title: "Update .gitignore and add .example.md templates"
-status: open
+status: complete
 priority: high
 type: feature
 parent: "005"
