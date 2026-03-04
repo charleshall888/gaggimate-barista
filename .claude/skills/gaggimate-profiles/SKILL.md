@@ -89,7 +89,18 @@ After generating JSON, explain:
 3. **Update the Profiles table** in the coffee's `README.md` with: Profile name, Style, Temp, Pressure, Ratio, and link to the JSON file
 4. **Remove `.gitkeep`** from `coffees/` if present
 
-### Step 7: Upload to Device
+### Step 7: Private Repo Commit
+
+1. Read `.data-repo-path` at the project root.
+   - If absent: skip silently (user has no private repo — this is expected for new setups).
+   - If present: proceed.
+2. Run as separate Bash calls (no chaining, no `git -C`), substituting `{private_repo}` with the path from `.data-repo-path`:
+   - `git --git-dir={private_repo}/.git --work-tree={private_repo} add -A`
+   - `git --git-dir={private_repo}/.git --work-tree={private_repo} commit -m "gaggimate-profiles: {profile-name} for {coffee-name}"`
+   - `git --git-dir={private_repo}/.git --work-tree={private_repo} push`
+3. If push fails: inform the user — "Private repo push failed — changes saved locally. Run `git push` manually in `{private_repo_path}` when credentials are available."
+
+### Step 8: Upload to Device
 
 After saving to repo, confirm with user then upload:
 

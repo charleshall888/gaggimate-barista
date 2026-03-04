@@ -170,6 +170,17 @@ Update the Active Coffee section in `user-setup.md` with:
 
 No confirmation needed—standard workflow step.
 
+### 9. Private Repo Commit
+
+1. Read `.data-repo-path` at the project root.
+   - If absent: skip silently (user has no private repo — this is expected for new setups).
+   - If present: proceed.
+2. Run as separate Bash calls (no chaining, no `git -C`), substituting `{private_repo}` with the path from `.data-repo-path`:
+   - `git --git-dir={private_repo}/.git --work-tree={private_repo} add -A`
+   - `git --git-dir={private_repo}/.git --work-tree={private_repo} commit -m "new-coffee: add {coffee-name}"`
+   - `git --git-dir={private_repo}/.git --work-tree={private_repo} push`
+3. If push fails: inform the user — "Private repo push failed — changes saved locally. Run `git push` manually in `{private_repo_path}` when credentials are available."
+
 ---
 
 ## Output Format
