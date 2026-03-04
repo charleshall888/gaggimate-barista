@@ -1,7 +1,7 @@
 ---
 id: "006"
 title: "Migrate personal data to private repo and rewrite public history"
-status: open
+status: complete
 priority: high
 type: feature
 parent: "005"

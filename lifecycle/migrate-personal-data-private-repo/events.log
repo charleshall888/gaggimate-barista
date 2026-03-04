@@ -1,0 +1,28 @@
+{"ts": "2026-03-04T00:00:00Z", "event": "lifecycle_start", "feature": "migrate-personal-data-private-repo", "tier": "complex", "criticality": "critical"}
+{"ts": "2026-03-04T00:00:01Z", "event": "discovery_bootstrap", "feature": "migrate-personal-data-private-repo", "research": "research/multi-user-data-isolation/research.md", "spec": "research/multi-user-data-isolation/spec.md"}
+{"ts": "2026-03-04T00:00:02Z", "event": "phase_skip", "feature": "migrate-personal-data-private-repo", "phase": "research", "reason": "discovery-bootstrap"}
+{"ts": "2026-03-04T00:00:03Z", "event": "phase_skip", "feature": "migrate-personal-data-private-repo", "phase": "specify", "reason": "discovery-bootstrap"}
+{"ts": "2026-03-04T00:01:00Z", "event": "orchestrator_review", "feature": "migrate-personal-data-private-repo", "phase": "plan", "verdict": "pass", "cycle": 1, "issues": []}
+{"ts": "2026-03-04T00:02:00Z", "event": "plan_comparison", "feature": "migrate-personal-data-private-repo", "variants": [{"label": "Plan A", "approach": "Migrate data to private repo first, establish symlinks, then history rewrite last", "task_count": 9, "risk": "Medium — symlinks live before history is clean"}, {"label": "Plan B", "approach": "Rewrite history immediately, then build private repo and infrastructure", "task_count": 11, "risk": "Low-medium — origin remote removed by filter-repo, must re-add"}, {"label": "Plan C", "approach": "All public infrastructure committed first, then data migration, then history rewrite last", "task_count": 10, "risk": "Lowest — destructive step truly last"}], "selected": "Plan C"}
+{"ts": "2026-03-04T10:00:00Z", "event": "batch_dispatch", "feature": "migrate-personal-data-private-repo", "batch": 0, "tasks": [1, 3]}
+{"ts": "2026-03-04T10:15:00Z", "event": "task_complete", "feature": "migrate-personal-data-private-repo", "task": 1, "batch": 0, "status": "success"}
+{"ts": "2026-03-04T10:15:01Z", "event": "task_complete", "feature": "migrate-personal-data-private-repo", "task": 3, "batch": 0, "status": "success"}
+{"ts": "2026-03-04T10:20:00Z", "event": "batch_dispatch", "feature": "migrate-personal-data-private-repo", "batch": 1, "tasks": [2]}
+{"ts": "2026-03-04T10:20:01Z", "event": "task_complete", "feature": "migrate-personal-data-private-repo", "task": 2, "batch": 1, "status": "success"}
+{"ts": "2026-03-04T10:25:00Z", "event": "batch_dispatch", "feature": "migrate-personal-data-private-repo", "batch": 2, "tasks": [4]}
+{"ts": "2026-03-04T10:25:01Z", "event": "task_complete", "feature": "migrate-personal-data-private-repo", "task": 4, "batch": 2, "status": "success"}
+{"ts": "2026-03-04T10:35:00Z", "event": "batch_dispatch", "feature": "migrate-personal-data-private-repo", "batch": 3, "tasks": [5, 6]}
+{"ts": "2026-03-04T10:35:01Z", "event": "task_complete", "feature": "migrate-personal-data-private-repo", "task": 5, "batch": 3, "status": "success"}
+{"ts": "2026-03-04T10:35:02Z", "event": "task_complete", "feature": "migrate-personal-data-private-repo", "task": 6, "batch": 3, "status": "success"}
+{"ts": "2026-03-04T10:45:00Z", "event": "batch_dispatch", "feature": "migrate-personal-data-private-repo", "batch": 4, "tasks": [7]}
+{"ts": "2026-03-04T10:45:01Z", "event": "task_complete", "feature": "migrate-personal-data-private-repo", "task": 7, "batch": 4, "status": "success"}
+{"ts": "2026-03-04T10:55:00Z", "event": "batch_dispatch", "feature": "migrate-personal-data-private-repo", "batch": 5, "tasks": [8]}
+{"ts": "2026-03-04T10:55:01Z", "event": "task_complete", "feature": "migrate-personal-data-private-repo", "task": 8, "batch": 5, "status": "success"}
+{"ts": "2026-03-04T11:00:00Z", "event": "batch_dispatch", "feature": "migrate-personal-data-private-repo", "batch": 6, "tasks": [9]}
+{"ts": "2026-03-04T11:00:01Z", "event": "task_complete", "feature": "migrate-personal-data-private-repo", "task": 9, "batch": 6, "status": "success"}
+{"ts": "2026-03-04T11:05:00Z", "event": "batch_dispatch", "feature": "migrate-personal-data-private-repo", "batch": 7, "tasks": [10]}
+{"ts": "2026-03-04T11:05:01Z", "event": "task_complete", "feature": "migrate-personal-data-private-repo", "task": 10, "batch": 7, "status": "skipped", "reason": "history rewrite unnecessary - data is not sensitive"}
+{"ts": "2026-03-04T11:05:02Z", "event": "phase_transition", "feature": "migrate-personal-data-private-repo", "tier": "complex", "from": "implement", "to": "review"}
+{"ts": "2026-03-04T11:15:00Z", "event": "review_verdict", "feature": "migrate-personal-data-private-repo", "verdict": "APPROVED", "cycle": 1}
+{"ts": "2026-03-04T11:15:01Z", "event": "phase_transition", "feature": "migrate-personal-data-private-repo", "from": "review", "to": "complete"}
+{"ts": "2026-03-04T11:16:00Z", "event": "feature_complete", "feature": "migrate-personal-data-private-repo", "tasks_total": 10, "rework_cycles": 0}
