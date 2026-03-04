@@ -20,3 +20,9 @@ htmlcov/
 
 # MCP runtime data
 mcp/data/
+
+# Personal data (lives in private repo, symlinked back)
+coffees
+grind-map.md
+user-setup.md
+.data-repo-path
