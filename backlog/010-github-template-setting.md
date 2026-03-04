@@ -1,7 +1,7 @@
 ---
 id: "010"
 title: "Enable GitHub Template repository setting"
-status: open
+status: closed
 priority: low
 type: chore
 parent: "005"
