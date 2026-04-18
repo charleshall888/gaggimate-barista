@@ -35,7 +35,7 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 
 These files in the project root grow from user interactions:
 - `user-setup.md` - User's equipment, preferences, and active coffee pointer
-- `grind-map.md` - Personal record of successful grind settings (auto-updated from 4-5 star shots)
+- `grind-map.md` - Grind history from rated shots (auto-updated when a grind setting is provided)
 - `coffees/` - Per-coffee directories containing research (README.md), profiles (.json), and dialing notes
 
 ## Data Architecture
@@ -93,7 +93,7 @@ Use `/gaggimate-profiles` — it owns the full workflow: gathering info, selecti
 
 ### 4. Shot Feedback & Dialing Loop
 
-Use `/feedback` — it owns the full workflow: gathering taste feedback, recording ratings, analyzing extraction, recommending adjustments, updating grind map (4-5 star shots), logging tasting notes (all shots), syncing to device, and recommending drink formats. See the skill for details.
+Use `/feedback` — it owns the full workflow: gathering taste feedback, recording ratings, analyzing extraction, recommending adjustments, updating grind map (any rated shot with a grind setting), logging tasting notes (all shots), syncing to device, and recommending drink formats. See the skill for details.
 
 ### 5. Espresso Knowledge Questions
 

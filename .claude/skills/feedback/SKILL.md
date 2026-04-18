@@ -27,7 +27,7 @@ Read these files before proceeding:
 |------|------|
 | `knowledge/PRESSURE_GUIDE.md` (152) | Feedback suggests pressure/profile style change |
 | `knowledge/grinders/SETTE_270.md` (64) | User provides or asks about grind settings |
-| `grind-map.md` | Rating 4-5 stars AND grind setting provided |
+| `grind-map.md` | Grind setting provided |
 | `knowledge/MILK_AND_DRINKS.md` (148) | User asks about drink format, or shot is dialed in (4+ balanced) and user has milk drink preferences |
 
 ---
@@ -111,12 +111,13 @@ Append a row to the Tasting Notes table in the active coffee's `README.md`:
 - **Balance**: Sour / Balanced / Bitter
 - **Observations**: Brief sensory notes (5-10 words)
 
-#### 4b. Grind Map → grind-map.md (successes only)
+#### 4b. Grind Map → grind-map.md
 
 **Trigger conditions** (all must be true):
-- Rating is 4 or 5 stars
 - Grind setting was provided
 - Coffee information is known
+
+The Rating column records whether the shot worked — low-rated rows are diagnostic data, not noise.
 
 **Update process:**
 1. Read current `grind-map.md`
@@ -181,7 +182,7 @@ If user wants full milk science, steaming technique, or drink recipes → load `
 ## Quick Reference
 
 **User says:** "3 stars, sour, 14E grind, 22g in"
-**Action:** Load context → record → diagnose (sour = extract more) → recommend grind/yield change → update tasting notes + shot notes
+**Action:** Load context → record → diagnose (sour = extract more) → recommend grind/yield change → update tasting notes + grind map + shot notes
 
 **User says:** "5 stars, balanced, amazing sweetness"
 **Action:** Load context → celebrate → record to grind map + tasting notes → recommend drink format

@@ -1,8 +1,8 @@
 # Grind Map
 
-A personal record of successful grind settings that grows from your shots. When you rate a shot 4-5 stars with a grind setting, it gets added here automatically.
+A record of grind settings from rated shots. When you rate a shot with a grind setting, it gets added here automatically. The Rating column tells you whether the shot worked.
 
-## Successful Settings
+## Shot History
 
 | Coffee | Roast | Process | Origin | Days Off Roast | Grind | Profile | Ratio | Temp | Rating | Date |
 |--------|-------|---------|--------|----------------|-------|---------|-------|------|--------|------|
@@ -12,4 +12,4 @@ A personal record of successful grind settings that grows from your shots. When 
 
 ---
 
-*This file is automatically updated when you rate shots 4-5 stars with grind settings provided.*
+*This file is automatically updated when you rate shots with grind settings provided.*
