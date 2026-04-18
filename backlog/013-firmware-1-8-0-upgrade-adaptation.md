@@ -16,37 +16,46 @@ Adapt our barista agent system (MCP tools, skills, knowledge files) to Gaggimate
 
 ## Motivation
 
-The user's Gaggimate was upgraded from 1.7.3 to 1.8.0. A full audit of every integration touchpoint found the upgrade is **technically low-risk** (profile JSON unchanged, shot binary format unchanged, HTTP endpoints unchanged) but exposes several adaptation opportunities and one front-line verification blocker:
+The user's Gaggimate was upgraded from 1.7.3 to 1.8.0. A full audit of every integration touchpoint found the upgrade is **technically low-risk** (profile JSON unchanged, shot binary format unchanged, HTTP endpoints unchanged) but exposes several adaptation opportunities and one critical verification blocker:
 
 - `manage_shot_notes` may now persist to a sidecar `.json` rather than the path our WebSocket request wrote to in 1.7.3. `/feedback` runs after every rated shot — must verify before claiming the upgrade is safe.
 - Per-sample weight flow (`vf`) is emitted in shot data; our parser already reads it but the transformer does not surface it.
 - A full DDSA / PhaseEndStop classification algorithm is available in the device's web analyzer; porting it gives `/diagnose` autonomous exit-reason output.
-- Several documentation traps (shot-history retention shift, `evt:status.bt` semantic flip, new `rssi` fields) need propagation through CLAUDE.md + knowledge files.
+- Several semantic traps (the `evt:status.bt` flip, shot-history retention shift) need to be documented so future contributors don't inherit them silently.
 
 ## Scope
 
-- P0 verification: confirm `manage_shot_notes` still round-trips with native note editor
-- Transformer upgrade: surface `weight_flow_g_s` per sample
-- Regression harness: checked-in fixture shots + golden transformer output (prerequisite for all parser/transformer changes)
-- Documentation: retention shift, `evt:status.bt` trap, `rssi` fields, DDSA in native UI, `vf` surfacing
-- DDSA port: port `calculateShotMetrics` + support functions from `AnalyzerService.js` v1.8.0 to Python for autonomous exit-reason output in `/diagnose`
-- Shot-notes alignment: extend `manage_shot_notes` with `dose_in_g`, `dose_out_g`, `grind_setting`, `bean_type`
-- Deep-link: add `http://{host}/analyze/{shot_id}` line to `/diagnose` output as a complement
-- Verification spikes: mixed-era shot compatibility, retention ordering invariants, BLE-precision round-trip drift
+- `manage_shot_notes` verified to round-trip with native editor on 1.8.0, then extended with native sidecar fields (014)
+- Transformer upgrade: surface `weight_flow_g_s` per sample (015)
+- Regression harness: checked-in fixture shots + golden transformer output (016) — prerequisite for 015, 018, 021
+- DDSA port: port `calculateShotMetrics` + support functions from `AnalyzerService.js` v1.8.0 to Python for autonomous exit-reason output in `/diagnose`; includes deep-link to native analyzer UI in `/diagnose` output (018)
+- Documentation: `evt:status.bt` semantic flip + retention shift (017)
+- Post-upgrade drift investigation: mixed-era compatibility + retention ordering + BLE precision (021)
 
 ## Explicitly out of scope (dropped during critical review)
 
 - mDNS service-browse discovery in MCP (DR-3 dropped — `.local` already resolves; own DR argued against)
 - Profile `utility: true` tagging (zero extraction value)
 
-## Children
+## Epic acceptance criteria
 
-- 014: Round-trip verify `manage_shot_notes` on 1.8.0
-- 015: Surface `weight_flow_g_s` in `TransformedSample` + `FlowSummary`
-- 016: Shot-fixture regression harness
-- 017: Documentation pass for 1.8.0 semantics
-- 018: Port DDSA / PhaseEndStop algorithm into `/diagnose`
-- 019: Extend `manage_shot_notes` with native note fields
-- 020: Add deep-link to `/analyze/{shot_id}` in `/diagnose` output
-- 021: Post-upgrade behavior verification spike
-- 022: BLE-precision round-trip drift investigation
+- All children closed.
+- `mcp/tests/test_shot_regression.py` passes against 016's fixtures.
+- `mcp/tests/test_phase_end_stop_parity.py` passes with DDSA port matching reference JS output within tolerance (018).
+- 021 investigation outcome recorded in verification-notes.md; if drift detected, follow-up tickets spawned and epic reassessed before close.
+
+## Children (post-critical-review consolidation — 6, not 9)
+
+- **014** (critical): Align manage_shot_notes with 1.8.0 native sidecar schema — verification is first AC, alignment is second
+- **015** (medium): Surface weight_flow_g_s in TransformedSample + FlowSummary — blocked by 016
+- **016** (high): Shot-fixture regression harness — blocks 015, 018, 021
+- **017** (medium): Document evt:status.bt semantic flip + retention shift
+- **018** (medium): Port DDSA / PhaseEndStop algorithm into /diagnose — includes deep-link; blocked by 016
+- **021** (high): Post-upgrade drift investigation — mixed-era + retention + BLE precision; blocked by 016
+
+### Consolidations applied during critical review
+
+- Original 014 (verification) + 019 (field alignment) → single 014 (same file, §3 same-file merge rule)
+- Original 020 (deep-link) → folded into 018 (same /diagnose output)
+- Original 022 (BLE precision) → folded into 021 question (c) (same mechanical activity)
+- Original 017 bundled 7 doc topics → narrowed to 2 cross-cutting semantic traps; `vf` doc moved into 015, DDSA doc moved into 018

@@ -1,5 +1,31 @@
 [
   {
+    "id": 14,
+    "title": "Align manage_shot_notes with 1.8.0 native sidecar schema",
+    "status": "backlog",
+    "priority": "critical",
+    "type": "feature",
+    "tags": [
+      "gaggimate-1-8-0-upgrade"
+    ],
+    "areas": [],
+    "created": "2026-04-18",
+    "updated": "2026-04-18",
+    "blocks": [],
+    "blocked_by": [],
+    "parent": "013",
+    "research": null,
+    "spec": null,
+    "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
+    "plan": null,
+    "uuid": null,
+    "lifecycle_slug": null,
+    "session_id": null,
+    "lifecycle_phase": null,
+    "schema_version": null,
+    "repo": null
+  },
+  {
     "id": 5,
     "title": "Multi-user data isolation",
     "status": "backlog",
@@ -52,58 +78,6 @@
     "repo": null
   },
   {
-    "id": 14,
-    "title": "Round-trip verify manage_shot_notes on 1.8.0",
-    "status": "backlog",
-    "priority": "high",
-    "type": "chore",
-    "tags": [
-      "gaggimate-1-8-0-upgrade"
-    ],
-    "areas": [],
-    "created": "2026-04-18",
-    "updated": "2026-04-18",
-    "blocks": [],
-    "blocked_by": [],
-    "parent": "013",
-    "research": null,
-    "spec": null,
-    "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
-    "plan": null,
-    "uuid": null,
-    "lifecycle_slug": null,
-    "session_id": null,
-    "lifecycle_phase": null,
-    "schema_version": null,
-    "repo": null
-  },
-  {
-    "id": 15,
-    "title": "Surface weight_flow_g_s in TransformedSample + FlowSummary",
-    "status": "backlog",
-    "priority": "high",
-    "type": "feature",
-    "tags": [
-      "gaggimate-1-8-0-upgrade"
-    ],
-    "areas": [],
-    "created": "2026-04-18",
-    "updated": "2026-04-18",
-    "blocks": [],
-    "blocked_by": [],
-    "parent": "013",
-    "research": null,
-    "spec": null,
-    "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
-    "plan": null,
-    "uuid": null,
-    "lifecycle_slug": null,
-    "session_id": null,
-    "lifecycle_phase": null,
-    "schema_version": null,
-    "repo": null
-  },
-  {
     "id": 16,
     "title": "Shot-fixture regression harness",
     "status": "backlog",
@@ -130,8 +104,64 @@
     "repo": null
   },
   {
+    "id": 21,
+    "title": "Post-upgrade drift investigation: mixed-era, retention ordering, BLE precision",
+    "status": "backlog",
+    "priority": "high",
+    "type": "spike",
+    "tags": [
+      "gaggimate-1-8-0-upgrade"
+    ],
+    "areas": [],
+    "created": "2026-04-18",
+    "updated": "2026-04-18",
+    "blocks": [],
+    "blocked_by": [
+      "016"
+    ],
+    "parent": "013",
+    "research": null,
+    "spec": null,
+    "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
+    "plan": null,
+    "uuid": null,
+    "lifecycle_slug": null,
+    "session_id": null,
+    "lifecycle_phase": null,
+    "schema_version": null,
+    "repo": null
+  },
+  {
+    "id": 15,
+    "title": "Surface weight_flow_g_s in TransformedSample + FlowSummary",
+    "status": "backlog",
+    "priority": "medium",
+    "type": "feature",
+    "tags": [
+      "gaggimate-1-8-0-upgrade"
+    ],
+    "areas": [],
+    "created": "2026-04-18",
+    "updated": "2026-04-18",
+    "blocks": [],
+    "blocked_by": [
+      "016"
+    ],
+    "parent": "013",
+    "research": null,
+    "spec": null,
+    "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
+    "plan": null,
+    "uuid": null,
+    "lifecycle_slug": null,
+    "session_id": null,
+    "lifecycle_phase": null,
+    "schema_version": null,
+    "repo": null
+  },
+  {
     "id": 17,
-    "title": "Documentation pass for 1.8.0 semantics",
+    "title": "Document evt:status.bt semantic flip and retention shift",
     "status": "backlog",
     "priority": "medium",
     "type": "chore",
@@ -184,34 +214,6 @@
     "repo": null
   },
   {
-    "id": 19,
-    "title": "Extend manage_shot_notes with native note fields",
-    "status": "backlog",
-    "priority": "medium",
-    "type": "feature",
-    "tags": [
-      "gaggimate-1-8-0-upgrade"
-    ],
-    "areas": [],
-    "created": "2026-04-18",
-    "updated": "2026-04-18",
-    "blocks": [],
-    "blocked_by": [
-      "014"
-    ],
-    "parent": "013",
-    "research": null,
-    "spec": null,
-    "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
-    "plan": null,
-    "uuid": null,
-    "lifecycle_slug": null,
-    "session_id": null,
-    "lifecycle_phase": null,
-    "schema_version": null,
-    "repo": null
-  },
-  {
     "id": 1,
     "title": "Add three-level detail parameter to analyze_shot",
     "status": "backlog",
@@ -231,86 +233,6 @@
     "research": null,
     "spec": null,
     "discovery_source": null,
-    "plan": null,
-    "uuid": null,
-    "lifecycle_slug": null,
-    "session_id": null,
-    "lifecycle_phase": null,
-    "schema_version": null,
-    "repo": null
-  },
-  {
-    "id": 20,
-    "title": "Add deep-link to /analyze/{shot_id} in /diagnose output",
-    "status": "backlog",
-    "priority": "low",
-    "type": "feature",
-    "tags": [
-      "gaggimate-1-8-0-upgrade"
-    ],
-    "areas": [],
-    "created": "2026-04-18",
-    "updated": "2026-04-18",
-    "blocks": [],
-    "blocked_by": [],
-    "parent": "013",
-    "research": null,
-    "spec": null,
-    "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
-    "plan": null,
-    "uuid": null,
-    "lifecycle_slug": null,
-    "session_id": null,
-    "lifecycle_phase": null,
-    "schema_version": null,
-    "repo": null
-  },
-  {
-    "id": 21,
-    "title": "Post-upgrade behavior verification spike",
-    "status": "backlog",
-    "priority": "low",
-    "type": "spike",
-    "tags": [
-      "gaggimate-1-8-0-upgrade"
-    ],
-    "areas": [],
-    "created": "2026-04-18",
-    "updated": "2026-04-18",
-    "blocks": [],
-    "blocked_by": [],
-    "parent": "013",
-    "research": null,
-    "spec": null,
-    "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
-    "plan": null,
-    "uuid": null,
-    "lifecycle_slug": null,
-    "session_id": null,
-    "lifecycle_phase": null,
-    "schema_version": null,
-    "repo": null
-  },
-  {
-    "id": 22,
-    "title": "BLE-precision round-trip drift investigation",
-    "status": "backlog",
-    "priority": "low",
-    "type": "spike",
-    "tags": [
-      "gaggimate-1-8-0-upgrade"
-    ],
-    "areas": [],
-    "created": "2026-04-18",
-    "updated": "2026-04-18",
-    "blocks": [],
-    "blocked_by": [
-      "016"
-    ],
-    "parent": "013",
-    "research": null,
-    "spec": null,
-    "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
     "plan": null,
     "uuid": null,
     "lifecycle_slug": null,

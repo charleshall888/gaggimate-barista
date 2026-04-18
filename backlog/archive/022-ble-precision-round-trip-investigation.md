@@ -1,7 +1,7 @@
 ---
 id: "022"
 title: "BLE-precision round-trip drift investigation"
-status: open
+status: superseded
 priority: low
 type: spike
 parent: "013"
@@ -10,7 +10,10 @@ tags: [gaggimate-1-8-0-upgrade]
 discovery_source: research/gaggimate-1-8-0-upgrade/research.md
 created: 2026-04-18
 updated: 2026-04-18
+superseded-by: "021"
 ---
+
+> **Superseded** by ticket 021 during critical review. Same mechanical activity as 021's mixed-era check (pull pre/post-upgrade shots, diff fields) with a different analytical lens. Merged into 021 as question (c); priority elevated to `high` as part of the merge to reflect blast radius. Archive-only.
 
 # BLE-precision round-trip drift investigation
 

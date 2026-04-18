@@ -1,7 +1,7 @@
 ---
 id: "020"
 title: "Add deep-link to /analyze/{shot_id} in /diagnose output"
-status: open
+status: superseded
 priority: low
 type: feature
 parent: "013"
@@ -9,7 +9,10 @@ tags: [gaggimate-1-8-0-upgrade]
 discovery_source: research/gaggimate-1-8-0-upgrade/research.md
 created: 2026-04-18
 updated: 2026-04-18
+superseded-by: "018"
 ---
+
+> **Superseded** by ticket 018 during critical review. Three-line URL addition to `/diagnose` output should land in the same PR as the DDSA port that also modifies `/diagnose` output. Archive-only.
 
 # Add deep-link to /analyze/{shot_id} in /diagnose output
 

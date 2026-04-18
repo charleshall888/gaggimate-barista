@@ -1,7 +1,7 @@
 ---
 id: "019"
 title: "Extend manage_shot_notes with native note fields"
-status: open
+status: superseded
 priority: medium
 type: feature
 parent: "013"
@@ -10,7 +10,10 @@ tags: [gaggimate-1-8-0-upgrade]
 discovery_source: research/gaggimate-1-8-0-upgrade/research.md
 created: 2026-04-18
 updated: 2026-04-18
+superseded-by: "014"
 ---
+
+> **Superseded** by ticket 014 during critical review of the decomposition. Verification (old 014) and alignment (this 019) were merged because they modify the same file and split per decompose skill §3 same-file rule. Archive-only; do not work this ticket.
 
 # Extend manage_shot_notes with native note fields
 
