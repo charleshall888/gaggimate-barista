@@ -353,8 +353,18 @@ class GaggimateWebSocketClient:
         grind_setting: Optional[str] = None,
         dose_in: Optional[float] = None,
         dose_out: Optional[float] = None,
+        bean_type: Optional[str] = None,
     ) -> dict:
         """Save notes for a specific shot to the device.
+
+        Implements read-modify-write semantics against the firmware 1.8.0
+        native sidecar schema. Firmware truncate-writes the sidecar on save,
+        so any existing fields not present in the payload would be silently
+        clobbered. We read the existing sidecar first, overlay only the
+        non-None caller fields (mapped to camelCase), stringify numeric
+        fields that firmware reads with .is<String>() (doseIn/doseOut/ratio),
+        preserve/synthesize the id field, and short-circuit if nothing
+        actually changed.
 
         Args:
             shot_id: Shot identifier (will be normalized to integer string)
@@ -364,9 +374,10 @@ class GaggimateWebSocketClient:
             grind_setting: Grinder setting used
             dose_in: Coffee dose in grams
             dose_out: Espresso output in grams
+            bean_type: Bean/coffee identifier
 
         Returns:
-            Response from the API
+            Response from the API (or synthetic no-op response if unchanged)
 
         Raises:
             GaggimateError: If request fails
@@ -376,26 +387,83 @@ class GaggimateWebSocketClient:
         request_id = generate_request_id()
         logger.info("saving_shot_notes", shot_id=normalized_id, url=self.ws_url)
 
-        # Build notes object with only provided fields
-        notes_data: dict[str, Any] = {}
+        # Read existing sidecar (RMW step 1). Treat None / non-dict / falsy
+        # returns as "no existing notes" and start from an empty dict.
+        existing_raw = await self.get_shot_notes(normalized_id)
+        if isinstance(existing_raw, dict):
+            existing: dict[str, Any] = existing_raw
+        else:
+            existing = {}
+
+        # Spread existing state into the merged payload.
+        merged_notes: dict[str, Any] = dict(existing)
+
+        # Track whether the caller actually passed any field updates. Used
+        # for the no-op short-circuit: if nothing was passed AND nothing
+        # changed in the merge, skip the wire write entirely.
+        caller_provided_any = False
+
         if rating is not None:
-            notes_data["rating"] = rating
+            merged_notes["rating"] = rating
+            caller_provided_any = True
         if notes is not None:
-            notes_data["notes"] = notes
+            merged_notes["notes"] = notes
+            caller_provided_any = True
         if balance_taste is not None:
-            notes_data["balanceTaste"] = balance_taste
+            merged_notes["balanceTaste"] = balance_taste
+            caller_provided_any = True
         if grind_setting is not None:
-            notes_data["grindSetting"] = grind_setting
+            merged_notes["grindSetting"] = grind_setting
+            caller_provided_any = True
         if dose_in is not None:
-            notes_data["doseIn"] = dose_in
+            # Firmware reads doseIn as String (.is<String>()) - stringify
+            merged_notes["doseIn"] = str(dose_in)
+            caller_provided_any = True
         if dose_out is not None:
-            notes_data["doseOut"] = dose_out
+            # Firmware reads doseOut as String (.is<String>()) - stringify
+            # to avoid the index-volume column being zeroed.
+            merged_notes["doseOut"] = str(dose_out)
+            caller_provided_any = True
+        if bean_type is not None:
+            merged_notes["beanType"] = bean_type
+            caller_provided_any = True
+
+        # Compute ratio when both doses are provided as truthy numerics.
+        # If only one is provided, leave any pre-existing ratio untouched.
+        if dose_in is not None and dose_out is not None:
+            try:
+                dose_in_f = float(dose_in)
+                dose_out_f = float(dose_out)
+                if dose_in_f != 0:
+                    ratio_val = round(dose_out_f / dose_in_f, 3)
+                    merged_notes["ratio"] = str(ratio_val)
+            except (TypeError, ValueError):
+                # Non-numeric input - skip ratio computation rather than crash
+                pass
+
+        # Preserve existing id if present, else synthesize from normalized_id
+        # (unpadded integer string). The merged payload MUST carry an id key
+        # because firmware uses it as the sidecar primary key.
+        if "id" not in merged_notes:
+            merged_notes["id"] = normalized_id
+
+        # No-op short-circuit: if the caller passed no field updates AND the
+        # merged payload is dict-equal to what was already on the device,
+        # skip the wire write. Return a synthetic success response so
+        # callers (e.g. manage_shot_notes) still observe device_synced=True.
+        if not caller_provided_any and merged_notes == existing:
+            logger.debug(
+                "rmw_merge_skipped_noop",
+                shot_id=normalized_id,
+                request_id=request_id,
+            )
+            return {"msg": "no-op: unchanged", "id": normalized_id}
 
         response = await self._send_request(
             "req:history:notes:save",
             request_id,
             id=normalized_id,
-            notes=notes_data
+            notes=merged_notes,
         )
 
         logger.info("shot_notes_saved", shot_id=normalized_id, msg=response.get("msg"))
