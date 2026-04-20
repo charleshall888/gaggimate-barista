@@ -447,11 +447,12 @@ class GaggimateWebSocketClient:
         if "id" not in merged_notes:
             merged_notes["id"] = normalized_id
 
-        # No-op short-circuit: if the caller passed no field updates AND the
-        # merged payload is dict-equal to what was already on the device,
-        # skip the wire write. Return a synthetic success response so
-        # callers (e.g. manage_shot_notes) still observe device_synced=True.
-        if not caller_provided_any and merged_notes == existing:
+        # No-op short-circuit: if the merged payload is dict-equal to what
+        # was already on the device, nothing changed regardless of whether
+        # the caller passed same-value fields — skip the wire write. Return
+        # a synthetic success response so callers (e.g. manage_shot_notes)
+        # still observe device_synced=True.
+        if merged_notes == existing:
             logger.debug(
                 "rmw_merge_skipped_noop",
                 shot_id=normalized_id,
