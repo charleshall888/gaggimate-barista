@@ -1,0 +1,567 @@
+{
+  "compliance_metrics": {
+    "brew_phase_sample_count": 116,
+    "flow_rmse_ml_s": 2.64,
+    "max_pressure_overshoot_bar": 6.3,
+    "max_pressure_undershoot_bar": 3.8,
+    "pressure_rmse_bar": 1.28
+  },
+  "duration_seconds": 44.8,
+  "final_weight_g": 49.6,
+  "phases": [
+    {
+      "avg_pressure_bar": 0.6,
+      "avg_temperature_c": 93.6,
+      "duration_seconds": 3.0,
+      "name": "Gentle Fill",
+      "phase_number": 0,
+      "sample_count": 12,
+      "samples": [
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.7,
+          "resistance": 1.47,
+          "temperature_c": 93.5,
+          "time_seconds": 0.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.7,
+          "resistance": 0.17,
+          "temperature_c": 93.6,
+          "time_seconds": 0.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.5,
+          "resistance": 0.3,
+          "temperature_c": 93.6,
+          "time_seconds": 1.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.6,
+          "resistance": 0.29,
+          "temperature_c": 93.6,
+          "time_seconds": 1.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.7,
+          "resistance": 0.31,
+          "temperature_c": 93.6,
+          "time_seconds": 2.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.7,
+          "resistance": 0.31,
+          "temperature_c": 93.5,
+          "time_seconds": 2.5,
+          "weight_g": 0.0
+        }
+      ],
+      "start_time_seconds": 0.0,
+      "total_flow_ml": 0.0
+    },
+    {
+      "avg_pressure_bar": 0.4,
+      "avg_temperature_c": 93.5,
+      "duration_seconds": 6.0,
+      "name": "Bloom",
+      "phase_number": 1,
+      "sample_count": 24,
+      "samples": [
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.6,
+          "resistance": 0.13,
+          "temperature_c": 93.6,
+          "time_seconds": 3.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.6,
+          "resistance": 0.24,
+          "temperature_c": 93.5,
+          "time_seconds": 3.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.5,
+          "resistance": 0.24,
+          "temperature_c": 93.5,
+          "time_seconds": 4.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.4,
+          "resistance": 0.24,
+          "temperature_c": 93.5,
+          "time_seconds": 4.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.4,
+          "resistance": 0.24,
+          "temperature_c": 93.5,
+          "time_seconds": 5.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.4,
+          "resistance": 0.24,
+          "temperature_c": 93.5,
+          "time_seconds": 5.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.3,
+          "resistance": 0.24,
+          "temperature_c": 93.5,
+          "time_seconds": 6.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.3,
+          "resistance": 0.24,
+          "temperature_c": 93.4,
+          "time_seconds": 6.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.3,
+          "resistance": 0.24,
+          "temperature_c": 93.4,
+          "time_seconds": 7.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.3,
+          "resistance": 0.24,
+          "temperature_c": 93.4,
+          "time_seconds": 7.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.3,
+          "resistance": 0.24,
+          "temperature_c": 93.4,
+          "time_seconds": 8.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.3,
+          "resistance": 0.24,
+          "temperature_c": 93.4,
+          "time_seconds": 8.5,
+          "weight_g": 0.0
+        }
+      ],
+      "start_time_seconds": 3.0,
+      "total_flow_ml": 0.0
+    },
+    {
+      "avg_pressure_bar": 1.4,
+      "avg_temperature_c": 93.1,
+      "duration_seconds": 5.2,
+      "name": "Ramp",
+      "phase_number": 2,
+      "sample_count": 21,
+      "samples": [
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.3,
+          "resistance": 0.24,
+          "temperature_c": 93.3,
+          "time_seconds": 9.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.3,
+          "resistance": 0.24,
+          "temperature_c": 93.3,
+          "time_seconds": 9.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.4,
+          "resistance": 0.24,
+          "temperature_c": 93.3,
+          "time_seconds": 10.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.5,
+          "resistance": 0.76,
+          "temperature_c": 93.2,
+          "time_seconds": 10.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.5,
+          "resistance": 0.86,
+          "temperature_c": 93.1,
+          "time_seconds": 11.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 5.5,
+          "pressure_bar": 0.7,
+          "resistance": 0.16,
+          "temperature_c": 93.0,
+          "time_seconds": 11.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 6.1,
+          "pressure_bar": 0.7,
+          "resistance": 0.12,
+          "temperature_c": 93.0,
+          "time_seconds": 12.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 7.1,
+          "pressure_bar": 1.3,
+          "resistance": 0.2,
+          "temperature_c": 93.0,
+          "time_seconds": 12.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 7.1,
+          "pressure_bar": 2.3,
+          "resistance": 0.26,
+          "temperature_c": 93.0,
+          "time_seconds": 13.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 7.0,
+          "pressure_bar": 3.7,
+          "resistance": 0.34,
+          "temperature_c": 93.0,
+          "time_seconds": 13.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 6.5,
+          "pressure_bar": 5.8,
+          "resistance": 0.53,
+          "temperature_c": 92.9,
+          "time_seconds": 14.0,
+          "weight_g": 0.0
+        }
+      ],
+      "start_time_seconds": 9.0,
+      "total_flow_ml": 19.6
+    },
+    {
+      "avg_pressure_bar": 8.3,
+      "avg_temperature_c": 92.8,
+      "duration_seconds": 4.0,
+      "name": "Peak Hold",
+      "phase_number": 3,
+      "sample_count": 16,
+      "samples": [
+        {
+          "flow_ml_s": 6.1,
+          "pressure_bar": 6.7,
+          "resistance": 0.65,
+          "temperature_c": 92.9,
+          "time_seconds": 14.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 4.9,
+          "pressure_bar": 8.2,
+          "resistance": 1.09,
+          "temperature_c": 92.9,
+          "time_seconds": 14.8,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 3.7,
+          "pressure_bar": 8.5,
+          "resistance": 1.43,
+          "temperature_c": 92.9,
+          "time_seconds": 15.2,
+          "weight_g": 0.1
+        },
+        {
+          "flow_ml_s": 2.8,
+          "pressure_bar": 8.6,
+          "resistance": 1.93,
+          "temperature_c": 92.9,
+          "time_seconds": 15.8,
+          "weight_g": 0.6
+        },
+        {
+          "flow_ml_s": 2.1,
+          "pressure_bar": 8.6,
+          "resistance": 2.32,
+          "temperature_c": 92.8,
+          "time_seconds": 16.2,
+          "weight_g": 1.0
+        },
+        {
+          "flow_ml_s": 1.7,
+          "pressure_bar": 8.6,
+          "resistance": 2.84,
+          "temperature_c": 92.7,
+          "time_seconds": 16.8,
+          "weight_g": 1.2
+        },
+        {
+          "flow_ml_s": 1.4,
+          "pressure_bar": 8.5,
+          "resistance": 2.77,
+          "temperature_c": 92.7,
+          "time_seconds": 17.2,
+          "weight_g": 1.5
+        },
+        {
+          "flow_ml_s": 1.2,
+          "pressure_bar": 8.5,
+          "resistance": 2.82,
+          "temperature_c": 92.6,
+          "time_seconds": 17.8,
+          "weight_g": 1.8
+        }
+      ],
+      "start_time_seconds": 14.2,
+      "total_flow_ml": 11.2
+    },
+    {
+      "avg_pressure_bar": 7.2,
+      "avg_temperature_c": 91.3,
+      "duration_seconds": 25.8,
+      "name": "Tropical Slide",
+      "phase_number": 4,
+      "sample_count": 103,
+      "samples": [
+        {
+          "flow_ml_s": 1.1,
+          "pressure_bar": 8.5,
+          "resistance": 2.91,
+          "temperature_c": 92.6,
+          "time_seconds": 18.2,
+          "weight_g": 2.2
+        },
+        {
+          "flow_ml_s": 1.0,
+          "pressure_bar": 8.5,
+          "resistance": 3.1,
+          "temperature_c": 92.4,
+          "time_seconds": 19.5,
+          "weight_g": 3.0
+        },
+        {
+          "flow_ml_s": 1.0,
+          "pressure_bar": 8.3,
+          "resistance": 2.54,
+          "temperature_c": 92.1,
+          "time_seconds": 20.8,
+          "weight_g": 3.9
+        },
+        {
+          "flow_ml_s": 1.2,
+          "pressure_bar": 8.2,
+          "resistance": 2.24,
+          "temperature_c": 91.9,
+          "time_seconds": 22.0,
+          "weight_g": 5.0
+        },
+        {
+          "flow_ml_s": 1.3,
+          "pressure_bar": 8.2,
+          "resistance": 2.07,
+          "temperature_c": 91.6,
+          "time_seconds": 23.2,
+          "weight_g": 6.1
+        },
+        {
+          "flow_ml_s": 1.5,
+          "pressure_bar": 8.0,
+          "resistance": 1.8,
+          "temperature_c": 91.4,
+          "time_seconds": 24.5,
+          "weight_g": 7.5
+        },
+        {
+          "flow_ml_s": 1.7,
+          "pressure_bar": 7.9,
+          "resistance": 1.5,
+          "temperature_c": 91.1,
+          "time_seconds": 25.8,
+          "weight_g": 9.1
+        },
+        {
+          "flow_ml_s": 2.0,
+          "pressure_bar": 7.8,
+          "resistance": 1.36,
+          "temperature_c": 91.1,
+          "time_seconds": 27.0,
+          "weight_g": 11.1
+        },
+        {
+          "flow_ml_s": 2.2,
+          "pressure_bar": 7.6,
+          "resistance": 1.12,
+          "temperature_c": 91.0,
+          "time_seconds": 28.2,
+          "weight_g": 13.2
+        },
+        {
+          "flow_ml_s": 2.4,
+          "pressure_bar": 7.4,
+          "resistance": 0.94,
+          "temperature_c": 90.9,
+          "time_seconds": 29.5,
+          "weight_g": 15.9
+        },
+        {
+          "flow_ml_s": 2.7,
+          "pressure_bar": 7.6,
+          "resistance": 1.04,
+          "temperature_c": 90.9,
+          "time_seconds": 30.8,
+          "weight_g": 18.4
+        },
+        {
+          "flow_ml_s": 2.8,
+          "pressure_bar": 7.3,
+          "resistance": 0.89,
+          "temperature_c": 90.9,
+          "time_seconds": 32.0,
+          "weight_g": 21.1
+        },
+        {
+          "flow_ml_s": 3.1,
+          "pressure_bar": 7.2,
+          "resistance": 0.8,
+          "temperature_c": 90.9,
+          "time_seconds": 33.2,
+          "weight_g": 24.3
+        },
+        {
+          "flow_ml_s": 3.2,
+          "pressure_bar": 7.2,
+          "resistance": 0.82,
+          "temperature_c": 90.9,
+          "time_seconds": 34.5,
+          "weight_g": 27.3
+        },
+        {
+          "flow_ml_s": 3.5,
+          "pressure_bar": 7.0,
+          "resistance": 0.71,
+          "temperature_c": 91.0,
+          "time_seconds": 35.8,
+          "weight_g": 30.9
+        },
+        {
+          "flow_ml_s": 3.7,
+          "pressure_bar": 7.0,
+          "resistance": 0.72,
+          "temperature_c": 91.1,
+          "time_seconds": 37.0,
+          "weight_g": 34.4
+        },
+        {
+          "flow_ml_s": 3.8,
+          "pressure_bar": 6.8,
+          "resistance": 0.67,
+          "temperature_c": 91.2,
+          "time_seconds": 38.2,
+          "weight_g": 38.5
+        },
+        {
+          "flow_ml_s": 4.0,
+          "pressure_bar": 6.7,
+          "resistance": 0.6,
+          "temperature_c": 91.2,
+          "time_seconds": 39.5,
+          "weight_g": 42.6
+        },
+        {
+          "flow_ml_s": 4.2,
+          "pressure_bar": 6.8,
+          "resistance": 0.63,
+          "temperature_c": 91.2,
+          "time_seconds": 40.8,
+          "weight_g": 47.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 4.9,
+          "resistance": 0.58,
+          "temperature_c": 91.4,
+          "time_seconds": 42.0,
+          "weight_g": 49.7
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 3.7,
+          "resistance": 0.58,
+          "temperature_c": 91.4,
+          "time_seconds": 43.2,
+          "weight_g": 49.6
+        }
+      ],
+      "start_time_seconds": 18.2,
+      "total_flow_ml": 56.6
+    }
+  ],
+  "profile_id": "hHF4cHtuR3",
+  "profile_name": "Tropical Bloom [AI]",
+  "shot_id": "000249",
+  "summary": {
+    "extraction": {
+      "main_extraction_time_s": 31.1,
+      "preinfusion_time_s": 13.8,
+      "total_time_s": 44.8
+    },
+    "flow": {
+      "avg_flow_ml_s": 2.0,
+      "peak_flow_ml_s": 7.1,
+      "time_to_first_drip_s": 11.2,
+      "time_to_first_weight_s": 15.0,
+      "total_volume_ml": 87.4
+    },
+    "pressure": {
+      "avg_bar": 5.3,
+      "max_bar": 8.6,
+      "min_bar": 0.3,
+      "peak_time_s": 15.5
+    },
+    "temperature": {
+      "avg_c": 92.1,
+      "max_c": 93.6,
+      "min_c": 90.8,
+      "target_avg_c": 93.3
+    }
+  },
+  "timestamp": 1776602777
+}

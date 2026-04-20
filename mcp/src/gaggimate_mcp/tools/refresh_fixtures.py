@@ -18,6 +18,11 @@ from typing import Optional
 
 import aiohttp
 
+try:
+    _TIMEOUT_EXC: tuple[type[BaseException], ...] = (asyncio.TimeoutError, TimeoutError)
+except NameError:  # pragma: no cover - py<3.11
+    _TIMEOUT_EXC = (asyncio.TimeoutError,)
+
 from gaggimate_mcp.config import GaggimateConfig
 from gaggimate_mcp.parsers.shot import parse_binary_shot
 from gaggimate_mcp.transformers.shot import transform_shot_for_ai
@@ -59,6 +64,9 @@ async def _fetch_bytes(shot_id: str) -> Optional[bytes]:
                 return await response.read()
     except aiohttp.ClientError as exc:
         print(f"Error: device unreachable: {exc}", file=sys.stderr)
+        return None
+    except _TIMEOUT_EXC as exc:
+        print(f"Error: device unreachable: timed out after 5s", file=sys.stderr)
         return None
 
 

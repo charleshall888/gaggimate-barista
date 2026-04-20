@@ -1,0 +1,531 @@
+{
+  "compliance_metrics": {
+    "brew_phase_sample_count": 51,
+    "flow_rmse_ml_s": 2.53,
+    "max_pressure_overshoot_bar": 2.8,
+    "max_pressure_undershoot_bar": 8.2,
+    "pressure_rmse_bar": 5.59
+  },
+  "duration_seconds": 25.9,
+  "final_weight_g": 37.8,
+  "phases": [
+    {
+      "avg_pressure_bar": 1.2,
+      "avg_temperature_c": 93.6,
+      "duration_seconds": 4.2,
+      "name": "Prefill",
+      "phase_number": 0,
+      "sample_count": 17,
+      "samples": [
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.7,
+          "resistance": 0.5,
+          "temperature_c": 93.7,
+          "time_seconds": 0.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 1.0,
+          "resistance": 0.38,
+          "temperature_c": 93.7,
+          "time_seconds": 0.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.9,
+          "resistance": 0.12,
+          "temperature_c": 93.6,
+          "time_seconds": 1.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.9,
+          "resistance": 0.13,
+          "temperature_c": 93.6,
+          "time_seconds": 1.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 1.2,
+          "resistance": 0.18,
+          "temperature_c": 93.6,
+          "time_seconds": 2.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 6.8,
+          "pressure_bar": 1.4,
+          "resistance": 0.15,
+          "temperature_c": 93.5,
+          "time_seconds": 2.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 7.2,
+          "pressure_bar": 1.6,
+          "resistance": 0.19,
+          "temperature_c": 93.5,
+          "time_seconds": 3.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 7.5,
+          "pressure_bar": 1.5,
+          "resistance": 0.13,
+          "temperature_c": 93.5,
+          "time_seconds": 3.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 7.8,
+          "pressure_bar": 1.7,
+          "resistance": 0.18,
+          "temperature_c": 93.5,
+          "time_seconds": 4.0,
+          "weight_g": 0.0
+        }
+      ],
+      "start_time_seconds": 0.0,
+      "total_flow_ml": 12.8
+    },
+    {
+      "avg_pressure_bar": 2.2,
+      "avg_temperature_c": 93.5,
+      "duration_seconds": 1.2,
+      "name": "Fill",
+      "phase_number": 1,
+      "sample_count": 5,
+      "samples": [
+        {
+          "flow_ml_s": 7.8,
+          "pressure_bar": 1.8,
+          "resistance": 0.16,
+          "temperature_c": 93.5,
+          "time_seconds": 4.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 7.8,
+          "pressure_bar": 2.1,
+          "resistance": 0.23,
+          "temperature_c": 93.5,
+          "time_seconds": 4.8,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 7.4,
+          "pressure_bar": 2.8,
+          "resistance": 0.29,
+          "temperature_c": 93.5,
+          "time_seconds": 5.2,
+          "weight_g": 1.2
+        }
+      ],
+      "start_time_seconds": 4.2,
+      "total_flow_ml": 9.6
+    },
+    {
+      "avg_pressure_bar": 3.6,
+      "avg_temperature_c": 93.4,
+      "duration_seconds": 0.5,
+      "name": "Compressing",
+      "phase_number": 2,
+      "sample_count": 2,
+      "samples": [
+        {
+          "flow_ml_s": 7.2,
+          "pressure_bar": 3.4,
+          "resistance": 0.35,
+          "temperature_c": 93.5,
+          "time_seconds": 5.5,
+          "weight_g": 2.4
+        }
+      ],
+      "start_time_seconds": 5.5,
+      "total_flow_ml": 3.5
+    },
+    {
+      "avg_pressure_bar": 1.5,
+      "avg_temperature_c": 93.0,
+      "duration_seconds": 6.0,
+      "name": "Dripping",
+      "phase_number": 3,
+      "sample_count": 24,
+      "samples": [
+        {
+          "flow_ml_s": 6.5,
+          "pressure_bar": 3.3,
+          "resistance": 0.25,
+          "temperature_c": 93.5,
+          "time_seconds": 6.0,
+          "weight_g": 4.8
+        },
+        {
+          "flow_ml_s": 6.2,
+          "pressure_bar": 2.7,
+          "resistance": 0.32,
+          "temperature_c": 93.4,
+          "time_seconds": 6.5,
+          "weight_g": 5.9
+        },
+        {
+          "flow_ml_s": 5.2,
+          "pressure_bar": 2.3,
+          "resistance": 0.38,
+          "temperature_c": 93.4,
+          "time_seconds": 7.0,
+          "weight_g": 6.9
+        },
+        {
+          "flow_ml_s": 4.3,
+          "pressure_bar": 1.8,
+          "resistance": 0.39,
+          "temperature_c": 93.3,
+          "time_seconds": 7.5,
+          "weight_g": 7.7
+        },
+        {
+          "flow_ml_s": 3.4,
+          "pressure_bar": 1.4,
+          "resistance": 0.6,
+          "temperature_c": 93.3,
+          "time_seconds": 8.0,
+          "weight_g": 8.3
+        },
+        {
+          "flow_ml_s": 2.5,
+          "pressure_bar": 1.2,
+          "resistance": 0.7,
+          "temperature_c": 93.2,
+          "time_seconds": 8.5,
+          "weight_g": 8.8
+        },
+        {
+          "flow_ml_s": 1.8,
+          "pressure_bar": 1.1,
+          "resistance": 1.88,
+          "temperature_c": 93.1,
+          "time_seconds": 9.0,
+          "weight_g": 9.2
+        },
+        {
+          "flow_ml_s": 1.3,
+          "pressure_bar": 1.0,
+          "resistance": 1.01,
+          "temperature_c": 93.0,
+          "time_seconds": 9.5,
+          "weight_g": 9.6
+        },
+        {
+          "flow_ml_s": 0.9,
+          "pressure_bar": 0.9,
+          "resistance": 13.87,
+          "temperature_c": 92.8,
+          "time_seconds": 10.0,
+          "weight_g": 9.9
+        },
+        {
+          "flow_ml_s": 0.7,
+          "pressure_bar": 0.9,
+          "resistance": 1.42,
+          "temperature_c": 92.7,
+          "time_seconds": 10.5,
+          "weight_g": 10.1
+        },
+        {
+          "flow_ml_s": 0.5,
+          "pressure_bar": 0.9,
+          "resistance": 11.73,
+          "temperature_c": 92.6,
+          "time_seconds": 11.0,
+          "weight_g": 10.2
+        },
+        {
+          "flow_ml_s": 0.5,
+          "pressure_bar": 0.8,
+          "resistance": 2.05,
+          "temperature_c": 92.5,
+          "time_seconds": 11.5,
+          "weight_g": 10.2
+        }
+      ],
+      "start_time_seconds": 6.0,
+      "total_flow_ml": 16.1
+    },
+    {
+      "avg_pressure_bar": 1.9,
+      "avg_temperature_c": 91.2,
+      "duration_seconds": 6.0,
+      "name": "Pressurize",
+      "phase_number": 4,
+      "sample_count": 24,
+      "samples": [
+        {
+          "flow_ml_s": 0.4,
+          "pressure_bar": 0.8,
+          "resistance": 109.51,
+          "temperature_c": 92.4,
+          "time_seconds": 12.0,
+          "weight_g": 10.7
+        },
+        {
+          "flow_ml_s": 0.4,
+          "pressure_bar": 0.8,
+          "resistance": 6.22,
+          "temperature_c": 92.2,
+          "time_seconds": 12.5,
+          "weight_g": 10.7
+        },
+        {
+          "flow_ml_s": 0.3,
+          "pressure_bar": 1.0,
+          "resistance": 19.47,
+          "temperature_c": 91.9,
+          "time_seconds": 13.0,
+          "weight_g": 11.0
+        },
+        {
+          "flow_ml_s": 0.5,
+          "pressure_bar": 1.2,
+          "resistance": 0.78,
+          "temperature_c": 91.7,
+          "time_seconds": 13.5,
+          "weight_g": 11.1
+        },
+        {
+          "flow_ml_s": 1.0,
+          "pressure_bar": 1.7,
+          "resistance": 0.93,
+          "temperature_c": 91.5,
+          "time_seconds": 14.0,
+          "weight_g": 11.3
+        },
+        {
+          "flow_ml_s": 1.5,
+          "pressure_bar": 2.0,
+          "resistance": 0.68,
+          "temperature_c": 91.3,
+          "time_seconds": 14.5,
+          "weight_g": 11.9
+        },
+        {
+          "flow_ml_s": 2.0,
+          "pressure_bar": 2.3,
+          "resistance": 0.52,
+          "temperature_c": 91.2,
+          "time_seconds": 15.0,
+          "weight_g": 13.0
+        },
+        {
+          "flow_ml_s": 2.5,
+          "pressure_bar": 2.5,
+          "resistance": 0.57,
+          "temperature_c": 91.0,
+          "time_seconds": 15.5,
+          "weight_g": 14.3
+        },
+        {
+          "flow_ml_s": 2.8,
+          "pressure_bar": 2.5,
+          "resistance": 0.45,
+          "temperature_c": 90.7,
+          "time_seconds": 16.0,
+          "weight_g": 15.8
+        },
+        {
+          "flow_ml_s": 3.2,
+          "pressure_bar": 2.5,
+          "resistance": 0.42,
+          "temperature_c": 90.5,
+          "time_seconds": 16.5,
+          "weight_g": 17.5
+        },
+        {
+          "flow_ml_s": 3.4,
+          "pressure_bar": 2.4,
+          "resistance": 0.38,
+          "temperature_c": 90.3,
+          "time_seconds": 17.0,
+          "weight_g": 18.9
+        },
+        {
+          "flow_ml_s": 3.5,
+          "pressure_bar": 2.5,
+          "resistance": 0.52,
+          "temperature_c": 90.2,
+          "time_seconds": 17.5,
+          "weight_g": 20.0
+        }
+      ],
+      "start_time_seconds": 12.0,
+      "total_flow_ml": 11.1
+    },
+    {
+      "avg_pressure_bar": 2.3,
+      "avg_temperature_c": 88.3,
+      "duration_seconds": 7.2,
+      "name": "Extraction",
+      "phase_number": 5,
+      "sample_count": 29,
+      "samples": [
+        {
+          "flow_ml_s": 3.5,
+          "pressure_bar": 2.4,
+          "resistance": 0.38,
+          "temperature_c": 90.0,
+          "time_seconds": 18.0,
+          "weight_g": 21.5
+        },
+        {
+          "flow_ml_s": 3.6,
+          "pressure_bar": 2.5,
+          "resistance": 0.42,
+          "temperature_c": 89.7,
+          "time_seconds": 18.5,
+          "weight_g": 23.1
+        },
+        {
+          "flow_ml_s": 3.6,
+          "pressure_bar": 2.4,
+          "resistance": 0.43,
+          "temperature_c": 89.5,
+          "time_seconds": 19.0,
+          "weight_g": 24.3
+        },
+        {
+          "flow_ml_s": 3.6,
+          "pressure_bar": 2.4,
+          "resistance": 0.47,
+          "temperature_c": 89.3,
+          "time_seconds": 19.5,
+          "weight_g": 25.7
+        },
+        {
+          "flow_ml_s": 3.6,
+          "pressure_bar": 2.4,
+          "resistance": 0.44,
+          "temperature_c": 89.0,
+          "time_seconds": 20.0,
+          "weight_g": 27.1
+        },
+        {
+          "flow_ml_s": 3.6,
+          "pressure_bar": 2.4,
+          "resistance": 0.39,
+          "temperature_c": 88.8,
+          "time_seconds": 20.5,
+          "weight_g": 28.8
+        },
+        {
+          "flow_ml_s": 3.6,
+          "pressure_bar": 2.3,
+          "resistance": 0.42,
+          "temperature_c": 88.5,
+          "time_seconds": 21.0,
+          "weight_g": 30.2
+        },
+        {
+          "flow_ml_s": 3.6,
+          "pressure_bar": 2.3,
+          "resistance": 0.41,
+          "temperature_c": 88.3,
+          "time_seconds": 21.5,
+          "weight_g": 31.6
+        },
+        {
+          "flow_ml_s": 3.6,
+          "pressure_bar": 2.4,
+          "resistance": 0.46,
+          "temperature_c": 88.0,
+          "time_seconds": 22.0,
+          "weight_g": 33.0
+        },
+        {
+          "flow_ml_s": 3.6,
+          "pressure_bar": 2.4,
+          "resistance": 0.45,
+          "temperature_c": 87.7,
+          "time_seconds": 22.5,
+          "weight_g": 34.3
+        },
+        {
+          "flow_ml_s": 3.5,
+          "pressure_bar": 2.4,
+          "resistance": 0.46,
+          "temperature_c": 87.5,
+          "time_seconds": 23.0,
+          "weight_g": 35.7
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 2.3,
+          "resistance": 0.43,
+          "temperature_c": 87.3,
+          "time_seconds": 23.5,
+          "weight_g": 37.1
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 2.1,
+          "resistance": 0.43,
+          "temperature_c": 87.1,
+          "time_seconds": 24.0,
+          "weight_g": 37.7
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 1.9,
+          "resistance": 0.43,
+          "temperature_c": 87.0,
+          "time_seconds": 24.5,
+          "weight_g": 37.8
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 1.8,
+          "resistance": 0.43,
+          "temperature_c": 86.8,
+          "time_seconds": 25.0,
+          "weight_g": 37.8
+        }
+      ],
+      "start_time_seconds": 18.0,
+      "total_flow_ml": 19.7
+    }
+  ],
+  "profile_id": "adapt",
+  "profile_name": "Adaptive v2",
+  "shot_id": "000246",
+  "summary": {
+    "extraction": {
+      "main_extraction_time_s": 21.2,
+      "preinfusion_time_s": 4.8,
+      "total_time_s": 25.9
+    },
+    "flow": {
+      "avg_flow_ml_s": 2.9,
+      "peak_flow_ml_s": 7.9,
+      "time_to_first_drip_s": 2.5,
+      "time_to_first_weight_s": 5.2,
+      "total_volume_ml": 72.8
+    },
+    "pressure": {
+      "avg_bar": 1.8,
+      "max_bar": 3.9,
+      "min_bar": 0.7,
+      "peak_time_s": 5.8
+    },
+    "temperature": {
+      "avg_c": 91.4,
+      "max_c": 93.7,
+      "min_c": 86.8,
+      "target_avg_c": 89.5
+    }
+  },
+  "timestamp": 1776542795
+}

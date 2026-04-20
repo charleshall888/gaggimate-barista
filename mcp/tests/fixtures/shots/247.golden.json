@@ -1,0 +1,431 @@
+{
+  "compliance_metrics": {
+    "brew_phase_sample_count": 9,
+    "flow_rmse_ml_s": 5.71,
+    "max_pressure_overshoot_bar": 0.0,
+    "max_pressure_undershoot_bar": 7.3,
+    "pressure_rmse_bar": 6.66
+  },
+  "duration_seconds": 20.8,
+  "final_weight_g": null,
+  "phases": [
+    {
+      "avg_pressure_bar": 0.5,
+      "avg_temperature_c": 92.7,
+      "duration_seconds": 3.2,
+      "name": "Gentle Fill",
+      "phase_number": 0,
+      "sample_count": 13,
+      "samples": [
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.4,
+          "resistance": 1.28,
+          "temperature_c": 92.8,
+          "time_seconds": 0.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.4,
+          "resistance": 1.28,
+          "temperature_c": 92.8,
+          "time_seconds": 0.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.4,
+          "resistance": 0.37,
+          "temperature_c": 92.7,
+          "time_seconds": 1.0,
+          "weight_g": 27.7
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.5,
+          "resistance": 0.37,
+          "temperature_c": 92.6,
+          "time_seconds": 1.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.5,
+          "resistance": 0.51,
+          "temperature_c": 92.7,
+          "time_seconds": 2.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.5,
+          "resistance": 0.35,
+          "temperature_c": 92.7,
+          "time_seconds": 2.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.5,
+          "resistance": 0.17,
+          "temperature_c": 92.7,
+          "time_seconds": 3.0,
+          "weight_g": 0.0
+        }
+      ],
+      "start_time_seconds": 0.0,
+      "total_flow_ml": 0.0
+    },
+    {
+      "avg_pressure_bar": 0.2,
+      "avg_temperature_c": 92.8,
+      "duration_seconds": 5.8,
+      "name": "Bloom",
+      "phase_number": 1,
+      "sample_count": 23,
+      "samples": [
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.5,
+          "resistance": 0.17,
+          "temperature_c": 92.7,
+          "time_seconds": 3.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.4,
+          "resistance": 0.17,
+          "temperature_c": 92.8,
+          "time_seconds": 3.8,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.4,
+          "resistance": 0.17,
+          "temperature_c": 92.8,
+          "time_seconds": 4.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.3,
+          "resistance": 0.17,
+          "temperature_c": 92.8,
+          "time_seconds": 4.8,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.3,
+          "resistance": 0.17,
+          "temperature_c": 92.8,
+          "time_seconds": 5.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.2,
+          "resistance": 0.17,
+          "temperature_c": 92.8,
+          "time_seconds": 5.8,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.2,
+          "resistance": 0.17,
+          "temperature_c": 92.9,
+          "time_seconds": 6.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.1,
+          "resistance": 0.17,
+          "temperature_c": 92.9,
+          "time_seconds": 6.8,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.2,
+          "resistance": 0.17,
+          "temperature_c": 92.9,
+          "time_seconds": 7.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.1,
+          "resistance": 0.17,
+          "temperature_c": 92.8,
+          "time_seconds": 7.8,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.1,
+          "resistance": 0.17,
+          "temperature_c": 92.9,
+          "time_seconds": 8.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.1,
+          "resistance": 0.17,
+          "temperature_c": 92.9,
+          "time_seconds": 8.8,
+          "weight_g": 0.0
+        }
+      ],
+      "start_time_seconds": 3.2,
+      "total_flow_ml": 0.0
+    },
+    {
+      "avg_pressure_bar": 0.7,
+      "avg_temperature_c": 92.8,
+      "duration_seconds": 5.2,
+      "name": "Ramp",
+      "phase_number": 2,
+      "sample_count": 21,
+      "samples": [
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.1,
+          "resistance": 0.17,
+          "temperature_c": 92.9,
+          "time_seconds": 9.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.1,
+          "resistance": 0.17,
+          "temperature_c": 92.9,
+          "time_seconds": 9.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.2,
+          "resistance": 0.17,
+          "temperature_c": 92.9,
+          "time_seconds": 10.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.2,
+          "resistance": 0.17,
+          "temperature_c": 92.9,
+          "time_seconds": 10.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.4,
+          "resistance": 0.17,
+          "temperature_c": 92.9,
+          "time_seconds": 11.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.6,
+          "resistance": 0.14,
+          "temperature_c": 92.8,
+          "time_seconds": 11.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.6,
+          "resistance": 0.12,
+          "temperature_c": 92.8,
+          "time_seconds": 12.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 0.7,
+          "resistance": 0.1,
+          "temperature_c": 92.8,
+          "time_seconds": 12.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 0.0,
+          "pressure_bar": 1.4,
+          "resistance": 0.2,
+          "temperature_c": 92.8,
+          "time_seconds": 13.0,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 7.8,
+          "pressure_bar": 2.1,
+          "resistance": 0.19,
+          "temperature_c": 92.7,
+          "time_seconds": 13.5,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 8.4,
+          "pressure_bar": 2.1,
+          "resistance": 0.16,
+          "temperature_c": 92.6,
+          "time_seconds": 14.0,
+          "weight_g": 0.0
+        }
+      ],
+      "start_time_seconds": 9.0,
+      "total_flow_ml": 6.1
+    },
+    {
+      "avg_pressure_bar": 0.9,
+      "avg_temperature_c": 92.4,
+      "duration_seconds": 4.0,
+      "name": "Peak Hold",
+      "phase_number": 3,
+      "sample_count": 16,
+      "samples": [
+        {
+          "flow_ml_s": 8.6,
+          "pressure_bar": 2.3,
+          "resistance": 0.19,
+          "temperature_c": 92.6,
+          "time_seconds": 14.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 9.1,
+          "pressure_bar": 1.5,
+          "resistance": 0.08,
+          "temperature_c": 92.6,
+          "time_seconds": 14.8,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 9.3,
+          "pressure_bar": 0.9,
+          "resistance": 0.08,
+          "temperature_c": 92.6,
+          "time_seconds": 15.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 9.3,
+          "pressure_bar": 0.7,
+          "resistance": 0.08,
+          "temperature_c": 92.6,
+          "time_seconds": 15.8,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 9.2,
+          "pressure_bar": 0.6,
+          "resistance": 0.15,
+          "temperature_c": 92.5,
+          "time_seconds": 16.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 8.5,
+          "pressure_bar": 0.6,
+          "resistance": 0.21,
+          "temperature_c": 92.4,
+          "time_seconds": 16.8,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 8.3,
+          "pressure_bar": 0.5,
+          "resistance": 0.18,
+          "temperature_c": 92.3,
+          "time_seconds": 17.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 8.3,
+          "pressure_bar": 0.5,
+          "resistance": 0.18,
+          "temperature_c": 92.1,
+          "time_seconds": 17.8,
+          "weight_g": 0.0
+        }
+      ],
+      "start_time_seconds": 14.2,
+      "total_flow_ml": 35.3
+    },
+    {
+      "avg_pressure_bar": 0.8,
+      "avg_temperature_c": 91.9,
+      "duration_seconds": 1.5,
+      "name": "Tropical Slide",
+      "phase_number": 4,
+      "sample_count": 6,
+      "samples": [
+        {
+          "flow_ml_s": 8.1,
+          "pressure_bar": 0.5,
+          "resistance": 0.19,
+          "temperature_c": 92.1,
+          "time_seconds": 18.2,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 6.6,
+          "pressure_bar": 1.1,
+          "resistance": 0.25,
+          "temperature_c": 91.9,
+          "time_seconds": 18.8,
+          "weight_g": 0.0
+        },
+        {
+          "flow_ml_s": 6.6,
+          "pressure_bar": 0.9,
+          "resistance": 0.13,
+          "temperature_c": 91.8,
+          "time_seconds": 19.2,
+          "weight_g": 0.0
+        }
+      ],
+      "start_time_seconds": 18.2,
+      "total_flow_ml": 10.7
+    }
+  ],
+  "profile_id": "hHF4cHtuR3",
+  "profile_name": "Tropical Bloom [AI]",
+  "shot_id": "000247",
+  "summary": {
+    "extraction": {
+      "main_extraction_time_s": 7.8,
+      "preinfusion_time_s": 13.0,
+      "total_time_s": 20.8
+    },
+    "flow": {
+      "avg_flow_ml_s": 2.6,
+      "peak_flow_ml_s": 9.3,
+      "time_to_first_drip_s": 13.5,
+      "time_to_first_weight_s": 0.8,
+      "total_volume_ml": 52.1
+    },
+    "pressure": {
+      "avg_bar": 0.6,
+      "max_bar": 2.3,
+      "min_bar": 0.1,
+      "peak_time_s": 14.2
+    },
+    "temperature": {
+      "avg_c": 92.7,
+      "max_c": 93.0,
+      "min_c": 91.7,
+      "target_avg_c": 93.0
+    }
+  },
+  "timestamp": 1776602492
+}
