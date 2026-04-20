@@ -520,6 +520,7 @@ async def manage_shot_notes(
     grind_setting: Optional[str] = None,
     dose_in: Optional[float] = None,
     dose_out: Optional[float] = None,
+    bean_type: Optional[str] = None,
     sync_to_device: bool = True
 ) -> str:
     """Manage shot notes and ratings.
@@ -536,6 +537,7 @@ async def manage_shot_notes(
         grind_setting: Grinder setting used (optional)
         dose_in: Coffee dose in grams (optional)
         dose_out: Espresso output in grams (optional)
+        bean_type: Coffee bean / origin description (optional, max 200 chars — truncated if longer)
         sync_to_device: Whether to sync to Gaggimate device (default: True)
 
     Returns:
@@ -551,6 +553,13 @@ async def manage_shot_notes(
             "success": False,
             "error": f"Invalid shot ID: '{shot_id}'. Must be a number."
         })
+
+    # Defense-in-depth: truncate bean_type to 200 chars before passing to either sink.
+    # /feedback skill is supposed to truncate too, but this server-side belt prevents
+    # oversized strings from reaching the device sidecar or local ratings.json if the
+    # skill misbehaves. Applied here so device sync and local backup get the same value.
+    if bean_type is not None:
+        bean_type = bean_type[:200]
 
     logger.info("manage_shot_notes_called", shot_id=shot_id, api_id=api_id, storage_id=storage_id, action=action, rating=rating)
 
@@ -600,6 +609,7 @@ async def manage_shot_notes(
                         grind_setting=grind_setting,
                         dose_in=dose_in,
                         dose_out=dose_out,
+                        bean_type=bean_type,
                     )
                     results["device_synced"] = True
                     logger.info("shot_notes_synced_to_device", shot_id=api_id)
@@ -625,6 +635,7 @@ async def manage_shot_notes(
                 grind_setting=grind_setting,
                 dose_in=dose_in,
                 dose_out=dose_out,
+                bean_type=bean_type,
             )
             rating_data = rating_storage.save_rating(shot_rating)
             results["local_saved"] = True
