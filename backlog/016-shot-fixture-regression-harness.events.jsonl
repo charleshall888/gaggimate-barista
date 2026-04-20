@@ -1,0 +1,5 @@
+{"v":1,"ts":"2026-04-19T12:36:05Z","event":"status_changed","item_uuid":null,"session_id":"28909692-23c5-4c0d-910b-bd0afcdd6c05","details":{"from":"open","to":"in_progress"}}
+{"v":1,"ts":"2026-04-19T12:36:05Z","event":"phase_changed","item_uuid":null,"session_id":"28909692-23c5-4c0d-910b-bd0afcdd6c05","details":{"from":null,"to":"research"}}
+{"v":1,"ts":"2026-04-20T01:17:03Z","event":"status_changed","item_uuid":null,"session_id":"28909692-23c5-4c0d-910b-bd0afcdd6c05","details":{"from":"in_progress","to":"refined"}}
+{"v":1,"ts":"2026-04-20T11:24:33Z","event":"status_changed","item_uuid":null,"session_id":"c889643a-1717-4c1a-890b-d56b4b26fde8","details":{"from":"refined","to":"complete"}}
+{"v":1,"ts":"2026-04-20T11:24:33Z","event":"phase_changed","item_uuid":null,"session_id":"c889643a-1717-4c1a-890b-d56b4b26fde8","details":{"from":"research","to":"complete"}}

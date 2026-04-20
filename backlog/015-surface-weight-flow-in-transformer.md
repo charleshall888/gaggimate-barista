@@ -5,11 +5,11 @@ status: open
 priority: medium
 type: feature
 parent: "013"
-blocked-by: ["016"]
+blocked-by: []
 tags: [gaggimate-1-8-0-upgrade]
 discovery_source: research/gaggimate-1-8-0-upgrade/research.md
 created: 2026-04-18
-updated: 2026-04-18
+updated: 2026-04-20
 ---
 
 # Surface weight_flow_g_s in TransformedSample + FlowSummary

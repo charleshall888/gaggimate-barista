@@ -1,14 +1,21 @@
 ---
 id: "016"
 title: "Shot-fixture regression harness"
-status: open
+status: complete
 priority: high
 type: chore
 parent: "013"
 tags: [gaggimate-1-8-0-upgrade]
 discovery_source: research/gaggimate-1-8-0-upgrade/research.md
 created: 2026-04-18
-updated: 2026-04-18
+updated: 2026-04-20
+session_id: null
+lifecycle_phase: complete
+lifecycle_slug: shot-fixture-regression-harness
+complexity: complex
+criticality: medium
+spec: lifecycle/shot-fixture-regression-harness/spec.md
+areas: [tests]
 ---
 
 # Shot-fixture regression harness
