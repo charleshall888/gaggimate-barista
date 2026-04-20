@@ -130,5 +130,31 @@
     "lifecycle_phase": null,
     "schema_version": null,
     "repo": null
+  },
+  {
+    "id": 22,
+    "title": "Capture weight-flow hygiene-coverage fixtures (retained-negatives + non-null pathology)",
+    "status": "backlog",
+    "priority": "low",
+    "type": "chore",
+    "tags": [
+      "gaggimate-1-8-0-upgrade"
+    ],
+    "areas": [],
+    "created": "2026-04-20",
+    "updated": "2026-04-20",
+    "blocks": [],
+    "blocked_by": [],
+    "parent": "015",
+    "research": null,
+    "spec": null,
+    "discovery_source": null,
+    "plan": null,
+    "uuid": "9ec1a00d-533a-4ac2-90b4-4cf865bc122b",
+    "lifecycle_slug": null,
+    "session_id": null,
+    "lifecycle_phase": null,
+    "schema_version": "1",
+    "repo": null
   }
 ]
