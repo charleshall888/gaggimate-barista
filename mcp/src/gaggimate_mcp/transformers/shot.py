@@ -27,6 +27,8 @@ class PressureSummary(TypedDict):
     peak_time_s: float
 
 
+# Aggregates use round(x * 10) / 10 — Python 3 banker's rounding (round-half-to-even).
+# Golden fixtures are byte-stable under this mode.
 class FlowSummary(TypedDict):
     """Flow summary statistics."""
     total_volume_ml: float
@@ -34,6 +36,9 @@ class FlowSummary(TypedDict):
     peak_flow_ml_s: float
     time_to_first_drip_s: Optional[float]
     time_to_first_weight_s: Optional[float]
+    peak_weight_flow_g_s: Optional[float]
+    avg_weight_flow_g_s: Optional[float]
+    time_to_first_nonzero_weight_flow_s: Optional[float]
 
 
 class ExtractionSummary(TypedDict):
@@ -66,6 +71,7 @@ class TransformedSample(TypedDict):
     temperature_c: float
     pressure_bar: float
     flow_ml_s: float
+    weight_flow_g_s: float
     weight_g: float
     resistance: float
 
@@ -177,11 +183,20 @@ def select_representative_samples(
             temperature_c=round(sample.get('ct', 0.0) * 10) / 10,
             pressure_bar=round(sample.get('cp', 0.0) * 10) / 10,
             flow_ml_s=round(sample.get('pf', 0.0) * 10) / 10,
+            weight_flow_g_s=round(sample.get('vf', 0.0) * 10) / 10,
             weight_g=round(sample.get('v', 0.0) * 10) / 10,
             resistance=round(sample.get('pr', 0.0) * 100) / 100,
         ))
 
     return result
+
+
+def _is_valid_vf_sample(sample: dict) -> bool:
+    # Unified Hygiene Rule: 'vf' present, within the firmware int16/FLOW_SCALE=100
+    # clamp window (±20.00 g/s, strict-less-than), and pump actually flowing (pf > 0).
+    # A firmware change to the clamp bounds or scaling factor would silently degrade
+    # this filter — revisit if the clamp ever moves.
+    return 'vf' in sample and abs(sample['vf']) < 20.0 and sample.get('pf', 0.0) > 0.0
 
 
 def _get_brew_phase_samples(samples: list[dict]) -> list[dict]:
@@ -320,12 +335,43 @@ def calculate_summary(shot: ShotData) -> ShotSummary:
             time_to_first_weight = round(all_times[i] * 10) / 10 if i < len(all_times) else None
             break
 
+    # Weight-flow aggregates (Unified Hygiene Rule via _is_valid_vf_sample)
+    peak_vf_values = [
+        s['vf'] for s in clean_samples
+        if _is_valid_vf_sample(s) and s['vf'] > 0.0
+    ]
+    peak_weight_flow_g_s = round(max(peak_vf_values) * 10) / 10 if peak_vf_values else None
+
+    brew_vf_values = [
+        s['vf'] for s in _get_brew_phase_samples(samples)
+        if _is_valid_vf_sample(s)
+    ]
+    if len(brew_vf_values) < 3:
+        avg_weight_flow_g_s = None
+    else:
+        avg_weight_flow_g_s = round(sum(brew_vf_values) / len(brew_vf_values) * 10) / 10
+
+    time_to_first_nonzero_weight_flow_s = None
+    for i, sample in enumerate(samples):
+        if (
+            _is_valid_vf_sample(sample)
+            and sample['vf'] > 0.3
+            and sample.get('v', 0.0) > 0.0
+        ):
+            time_to_first_nonzero_weight_flow_s = (
+                round(all_times[i] * 10) / 10 if i < len(all_times) else None
+            )
+            break
+
     flow_summary = FlowSummary(
         total_volume_ml=total_volume,
         avg_flow_ml_s=avg_flow,
         peak_flow_ml_s=peak_flow,
         time_to_first_drip_s=time_to_first_drip,
         time_to_first_weight_s=time_to_first_weight,
+        peak_weight_flow_g_s=peak_weight_flow_g_s,
+        avg_weight_flow_g_s=avg_weight_flow_g_s,
+        time_to_first_nonzero_weight_flow_s=time_to_first_nonzero_weight_flow_s,
     )
 
     # Extraction timing

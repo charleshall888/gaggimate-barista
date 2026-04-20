@@ -78,32 +78,6 @@
     "repo": null
   },
   {
-    "id": 15,
-    "title": "Surface weight_flow_g_s in TransformedSample + FlowSummary",
-    "status": "backlog",
-    "priority": "medium",
-    "type": "feature",
-    "tags": [
-      "gaggimate-1-8-0-upgrade"
-    ],
-    "areas": [],
-    "created": "2026-04-18",
-    "updated": "2026-04-20",
-    "blocks": [],
-    "blocked_by": [],
-    "parent": "013",
-    "research": null,
-    "spec": null,
-    "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
-    "plan": null,
-    "uuid": null,
-    "lifecycle_slug": null,
-    "session_id": null,
-    "lifecycle_phase": null,
-    "schema_version": null,
-    "repo": null
-  },
-  {
     "id": 18,
     "title": "Port DDSA / PhaseEndStop algorithm into /diagnose",
     "status": "backlog",

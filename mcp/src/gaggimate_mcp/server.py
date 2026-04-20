@@ -463,7 +463,27 @@ async def analyze_shot(shot_id: str) -> str:
         shot_id: Shot ID to analyze (will be normalized to 6 digits)
 
     Returns:
-        JSON string with shot analysis
+        JSON string with shot analysis. Weight-flow fields surfaced alongside
+        existing flow metrics:
+
+        Per-sample (phases[*].samples[*]):
+          weight_flow_g_s: Instantaneous BT-scale-derived weight-flow rate
+            (g/s). Raw signal — may be negative (scale drift) or at the
+            firmware clamp sentinel (±20.0). No hygiene filter applied at
+            the per-sample level; aggregates filter separately.
+
+        Aggregates (summary.flow.*; all nullable):
+          peak_weight_flow_g_s: Maximum weight_flow_g_s across trimmed
+            samples where the Unified Hygiene Rule holds (vf in sample,
+            |vf| < 20.0, pf > 0.0) and vf is strictly positive. null when
+            no sample qualifies.
+          avg_weight_flow_g_s: Mean weight_flow_g_s across brew-phase
+            samples satisfying the Unified Hygiene Rule. Retains negative
+            samples as honest scale drift. null when fewer than 3 qualify.
+          time_to_first_nonzero_weight_flow_s: First timestamp where the
+            hygiene rule holds AND vf > 0.3 AND cup weight (v) > 0.0 —
+            the first observably real weight_flow_g_s sample. null when
+            no sample qualifies.
     """
     # Normalize shot ID to 6 digits for consistent lookups
     normalized_id = shot_id.zfill(6)

@@ -1,0 +1,6 @@
+{"v":1,"ts":"2026-04-20T11:30:56Z","event":"status_changed","item_uuid":null,"session_id":"fba55e61-c543-4eae-b731-0d6eef25bf0b","details":{"from":"open","to":"in_progress"}}
+{"v":1,"ts":"2026-04-20T11:30:56Z","event":"phase_changed","item_uuid":null,"session_id":"fba55e61-c543-4eae-b731-0d6eef25bf0b","details":{"from":null,"to":"research"}}
+{"v":1,"ts":"2026-04-20T20:14:41Z","event":"status_changed","item_uuid":null,"session_id":"376e6724-2f55-4132-95a5-011e1319288d","details":{"from":"in_progress","to":"refined"}}
+{"v":1,"ts":"2026-04-20T20:15:45Z","event":"status_changed","item_uuid":null,"session_id":"376e6724-2f55-4132-95a5-011e1319288d","details":{"from":"refined","to":"in_progress"}}
+{"v":1,"ts":"2026-04-20T20:15:45Z","event":"phase_changed","item_uuid":null,"session_id":"376e6724-2f55-4132-95a5-011e1319288d","details":{"from":"research","to":"plan"}}
+{"v":1,"ts":"2026-04-20T20:47:35Z","event":"status_changed","item_uuid":null,"session_id":"bc7298e9-d0fc-480d-9a9b-26c9fbb09eef","details":{"from":"in_progress","to":"complete"}}

@@ -1,7 +1,7 @@
 ---
 id: "015"
 title: "Surface weight_flow_g_s in TransformedSample + FlowSummary"
-status: open
+status: complete
 priority: medium
 type: feature
 parent: "013"
@@ -10,6 +10,13 @@ tags: [gaggimate-1-8-0-upgrade]
 discovery_source: research/gaggimate-1-8-0-upgrade/research.md
 created: 2026-04-18
 updated: 2026-04-20
+session_id: null
+lifecycle_phase: plan
+lifecycle_slug: surface-weight-flow-g-s-in-transformedsample-flowsummary
+complexity: complex
+criticality: high
+spec: lifecycle/surface-weight-flow-g-s-in-transformedsample-flowsummary/spec.md
+areas: [mcp]
 ---
 
 # Surface weight_flow_g_s in TransformedSample + FlowSummary

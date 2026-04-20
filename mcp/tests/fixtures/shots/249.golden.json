@@ -23,6 +23,7 @@
           "resistance": 1.47,
           "temperature_c": 93.5,
           "time_seconds": 0.0,
+          "weight_flow_g_s": -20.0,
           "weight_g": 0.0
         },
         {
@@ -31,6 +32,7 @@
           "resistance": 0.17,
           "temperature_c": 93.6,
           "time_seconds": 0.5,
+          "weight_flow_g_s": -20.0,
           "weight_g": 0.0
         },
         {
@@ -39,6 +41,7 @@
           "resistance": 0.3,
           "temperature_c": 93.6,
           "time_seconds": 1.0,
+          "weight_flow_g_s": -15.7,
           "weight_g": 0.0
         },
         {
@@ -47,6 +50,7 @@
           "resistance": 0.29,
           "temperature_c": 93.6,
           "time_seconds": 1.5,
+          "weight_flow_g_s": -8.8,
           "weight_g": 0.0
         },
         {
@@ -55,6 +59,7 @@
           "resistance": 0.31,
           "temperature_c": 93.6,
           "time_seconds": 2.0,
+          "weight_flow_g_s": -5.0,
           "weight_g": 0.0
         },
         {
@@ -63,6 +68,7 @@
           "resistance": 0.31,
           "temperature_c": 93.5,
           "time_seconds": 2.5,
+          "weight_flow_g_s": -2.8,
           "weight_g": 0.0
         }
       ],
@@ -83,6 +89,7 @@
           "resistance": 0.13,
           "temperature_c": 93.6,
           "time_seconds": 3.0,
+          "weight_flow_g_s": -1.6,
           "weight_g": 0.0
         },
         {
@@ -91,6 +98,7 @@
           "resistance": 0.24,
           "temperature_c": 93.5,
           "time_seconds": 3.5,
+          "weight_flow_g_s": -0.9,
           "weight_g": 0.0
         },
         {
@@ -99,6 +107,7 @@
           "resistance": 0.24,
           "temperature_c": 93.5,
           "time_seconds": 4.0,
+          "weight_flow_g_s": -0.5,
           "weight_g": 0.0
         },
         {
@@ -107,6 +116,7 @@
           "resistance": 0.24,
           "temperature_c": 93.5,
           "time_seconds": 4.5,
+          "weight_flow_g_s": -0.3,
           "weight_g": 0.0
         },
         {
@@ -115,6 +125,7 @@
           "resistance": 0.24,
           "temperature_c": 93.5,
           "time_seconds": 5.0,
+          "weight_flow_g_s": -0.2,
           "weight_g": 0.0
         },
         {
@@ -123,6 +134,7 @@
           "resistance": 0.24,
           "temperature_c": 93.5,
           "time_seconds": 5.5,
+          "weight_flow_g_s": -0.1,
           "weight_g": 0.0
         },
         {
@@ -131,6 +143,7 @@
           "resistance": 0.24,
           "temperature_c": 93.5,
           "time_seconds": 6.0,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -139,6 +152,7 @@
           "resistance": 0.24,
           "temperature_c": 93.4,
           "time_seconds": 6.5,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -147,6 +161,7 @@
           "resistance": 0.24,
           "temperature_c": 93.4,
           "time_seconds": 7.0,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -155,6 +170,7 @@
           "resistance": 0.24,
           "temperature_c": 93.4,
           "time_seconds": 7.5,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -163,6 +179,7 @@
           "resistance": 0.24,
           "temperature_c": 93.4,
           "time_seconds": 8.0,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -171,6 +188,7 @@
           "resistance": 0.24,
           "temperature_c": 93.4,
           "time_seconds": 8.5,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         }
       ],
@@ -191,6 +209,7 @@
           "resistance": 0.24,
           "temperature_c": 93.3,
           "time_seconds": 9.0,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -199,6 +218,7 @@
           "resistance": 0.24,
           "temperature_c": 93.3,
           "time_seconds": 9.5,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -207,6 +227,7 @@
           "resistance": 0.24,
           "temperature_c": 93.3,
           "time_seconds": 10.0,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -215,6 +236,7 @@
           "resistance": 0.76,
           "temperature_c": 93.2,
           "time_seconds": 10.5,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -223,6 +245,7 @@
           "resistance": 0.86,
           "temperature_c": 93.1,
           "time_seconds": 11.0,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -231,6 +254,7 @@
           "resistance": 0.16,
           "temperature_c": 93.0,
           "time_seconds": 11.5,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -239,6 +263,7 @@
           "resistance": 0.12,
           "temperature_c": 93.0,
           "time_seconds": 12.0,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -247,6 +272,7 @@
           "resistance": 0.2,
           "temperature_c": 93.0,
           "time_seconds": 12.5,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -255,6 +281,7 @@
           "resistance": 0.26,
           "temperature_c": 93.0,
           "time_seconds": 13.0,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -263,6 +290,7 @@
           "resistance": 0.34,
           "temperature_c": 93.0,
           "time_seconds": 13.5,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -271,6 +299,7 @@
           "resistance": 0.53,
           "temperature_c": 92.9,
           "time_seconds": 14.0,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         }
       ],
@@ -291,6 +320,7 @@
           "resistance": 0.65,
           "temperature_c": 92.9,
           "time_seconds": 14.2,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -299,6 +329,7 @@
           "resistance": 1.09,
           "temperature_c": 92.9,
           "time_seconds": 14.8,
+          "weight_flow_g_s": 0.0,
           "weight_g": 0.0
         },
         {
@@ -307,6 +338,7 @@
           "resistance": 1.43,
           "temperature_c": 92.9,
           "time_seconds": 15.2,
+          "weight_flow_g_s": 0.1,
           "weight_g": 0.1
         },
         {
@@ -315,6 +347,7 @@
           "resistance": 1.93,
           "temperature_c": 92.9,
           "time_seconds": 15.8,
+          "weight_flow_g_s": 0.5,
           "weight_g": 0.6
         },
         {
@@ -323,6 +356,7 @@
           "resistance": 2.32,
           "temperature_c": 92.8,
           "time_seconds": 16.2,
+          "weight_flow_g_s": 0.6,
           "weight_g": 1.0
         },
         {
@@ -331,6 +365,7 @@
           "resistance": 2.84,
           "temperature_c": 92.7,
           "time_seconds": 16.8,
+          "weight_flow_g_s": 0.6,
           "weight_g": 1.2
         },
         {
@@ -339,6 +374,7 @@
           "resistance": 2.77,
           "temperature_c": 92.7,
           "time_seconds": 17.2,
+          "weight_flow_g_s": 0.6,
           "weight_g": 1.5
         },
         {
@@ -347,6 +383,7 @@
           "resistance": 2.82,
           "temperature_c": 92.6,
           "time_seconds": 17.8,
+          "weight_flow_g_s": 0.6,
           "weight_g": 1.8
         }
       ],
@@ -367,6 +404,7 @@
           "resistance": 2.91,
           "temperature_c": 92.6,
           "time_seconds": 18.2,
+          "weight_flow_g_s": 0.7,
           "weight_g": 2.2
         },
         {
@@ -375,6 +413,7 @@
           "resistance": 3.1,
           "temperature_c": 92.4,
           "time_seconds": 19.5,
+          "weight_flow_g_s": 0.7,
           "weight_g": 3.0
         },
         {
@@ -383,6 +422,7 @@
           "resistance": 2.54,
           "temperature_c": 92.1,
           "time_seconds": 20.8,
+          "weight_flow_g_s": 0.8,
           "weight_g": 3.9
         },
         {
@@ -391,6 +431,7 @@
           "resistance": 2.24,
           "temperature_c": 91.9,
           "time_seconds": 22.0,
+          "weight_flow_g_s": 0.9,
           "weight_g": 5.0
         },
         {
@@ -399,6 +440,7 @@
           "resistance": 2.07,
           "temperature_c": 91.6,
           "time_seconds": 23.2,
+          "weight_flow_g_s": 0.9,
           "weight_g": 6.1
         },
         {
@@ -407,6 +449,7 @@
           "resistance": 1.8,
           "temperature_c": 91.4,
           "time_seconds": 24.5,
+          "weight_flow_g_s": 1.1,
           "weight_g": 7.5
         },
         {
@@ -415,6 +458,7 @@
           "resistance": 1.5,
           "temperature_c": 91.1,
           "time_seconds": 25.8,
+          "weight_flow_g_s": 1.3,
           "weight_g": 9.1
         },
         {
@@ -423,6 +467,7 @@
           "resistance": 1.36,
           "temperature_c": 91.1,
           "time_seconds": 27.0,
+          "weight_flow_g_s": 1.6,
           "weight_g": 11.1
         },
         {
@@ -431,6 +476,7 @@
           "resistance": 1.12,
           "temperature_c": 91.0,
           "time_seconds": 28.2,
+          "weight_flow_g_s": 1.7,
           "weight_g": 13.2
         },
         {
@@ -439,6 +485,7 @@
           "resistance": 0.94,
           "temperature_c": 90.9,
           "time_seconds": 29.5,
+          "weight_flow_g_s": 2.2,
           "weight_g": 15.9
         },
         {
@@ -447,6 +494,7 @@
           "resistance": 1.04,
           "temperature_c": 90.9,
           "time_seconds": 30.8,
+          "weight_flow_g_s": 2.1,
           "weight_g": 18.4
         },
         {
@@ -455,6 +503,7 @@
           "resistance": 0.89,
           "temperature_c": 90.9,
           "time_seconds": 32.0,
+          "weight_flow_g_s": 2.1,
           "weight_g": 21.1
         },
         {
@@ -463,6 +512,7 @@
           "resistance": 0.8,
           "temperature_c": 90.9,
           "time_seconds": 33.2,
+          "weight_flow_g_s": 2.5,
           "weight_g": 24.3
         },
         {
@@ -471,6 +521,7 @@
           "resistance": 0.82,
           "temperature_c": 90.9,
           "time_seconds": 34.5,
+          "weight_flow_g_s": 2.4,
           "weight_g": 27.3
         },
         {
@@ -479,6 +530,7 @@
           "resistance": 0.71,
           "temperature_c": 91.0,
           "time_seconds": 35.8,
+          "weight_flow_g_s": 2.8,
           "weight_g": 30.9
         },
         {
@@ -487,6 +539,7 @@
           "resistance": 0.72,
           "temperature_c": 91.1,
           "time_seconds": 37.0,
+          "weight_flow_g_s": 2.8,
           "weight_g": 34.4
         },
         {
@@ -495,6 +548,7 @@
           "resistance": 0.67,
           "temperature_c": 91.2,
           "time_seconds": 38.2,
+          "weight_flow_g_s": 3.1,
           "weight_g": 38.5
         },
         {
@@ -503,6 +557,7 @@
           "resistance": 0.6,
           "temperature_c": 91.2,
           "time_seconds": 39.5,
+          "weight_flow_g_s": 3.3,
           "weight_g": 42.6
         },
         {
@@ -511,6 +566,7 @@
           "resistance": 0.63,
           "temperature_c": 91.2,
           "time_seconds": 40.8,
+          "weight_flow_g_s": 3.6,
           "weight_g": 47.0
         },
         {
@@ -519,6 +575,7 @@
           "resistance": 0.58,
           "temperature_c": 91.4,
           "time_seconds": 42.0,
+          "weight_flow_g_s": 2.2,
           "weight_g": 49.7
         },
         {
@@ -527,6 +584,7 @@
           "resistance": 0.58,
           "temperature_c": 91.4,
           "time_seconds": 43.2,
+          "weight_flow_g_s": 0.5,
           "weight_g": 49.6
         }
       ],
@@ -545,8 +603,11 @@
     },
     "flow": {
       "avg_flow_ml_s": 2.0,
+      "avg_weight_flow_g_s": 1.6,
       "peak_flow_ml_s": 7.1,
+      "peak_weight_flow_g_s": 3.6,
       "time_to_first_drip_s": 11.2,
+      "time_to_first_nonzero_weight_flow_s": 15.8,
       "time_to_first_weight_s": 15.0,
       "total_volume_ml": 87.4
     },
