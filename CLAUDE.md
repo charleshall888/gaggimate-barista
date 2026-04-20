@@ -118,6 +118,11 @@ You have access to Gaggimate MCP tools for:
 - **Personal taste**: Conventional wisdom isn't always right. If a user prefers 1:4 ratios, help them optimize for that, don't push them toward "correct" ratios.
 - **AI profiles**: Mark AI-created profiles with `[AI]` suffix in the label for safety.
 
+### Firmware 1.8.0 semantic traps
+
+- **`evt:status.bt` semantic flip**: pre-1.8.0 this field reflected `settings.isVolumetricTarget()`; in 1.8.0 it reflects `profile.isVolumetric()` — future `diagnose_connection`-style extensions reading this field must account for the flip.
+- **Shot history retention**: 1.8.0 replaced `MAX_HISTORY_ENTRIES = 100` (pre-1.8.0 count cap) with a `MIN_FREE_SPACE_BYTES = 500 KB` free-space floor; capacity purge also deletes the companion `.json` sidecar, so old `shot_id` references in `grind-map.md` may orphan silently.
+
 ## Core Rules
 
 These inline tables are quick-reference summaries. For full context, load the knowledge file via `/consult`.

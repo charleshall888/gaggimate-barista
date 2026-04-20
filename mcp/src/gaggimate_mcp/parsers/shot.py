@@ -1,6 +1,12 @@
 """Parser for .slog binary shot files.
 
 Mirrors shot_log_format.h from the Gaggimate firmware.
+
+Firmware 1.8.0 retention note: old `shot_id` references (e.g. from `grind-map.md`)
+may be silently orphaned. The pre-1.8.0 count cap `MAX_HISTORY_ENTRIES = 100` was
+replaced in 1.8.0 by a `MIN_FREE_SPACE_BYTES = 500 KB` free-space floor, and
+capacity purge also deletes the companion `.json` sidecar.
+See CLAUDE.md § Firmware 1.8.0 semantic traps.
 """
 
 import struct

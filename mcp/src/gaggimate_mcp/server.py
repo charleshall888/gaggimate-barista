@@ -696,6 +696,11 @@ async def diagnose_connection() -> str:
     - HTTPS misconfiguration
     - Network latency issues
 
+    WARNING: Future extensions reading `evt:status.bt` must account for firmware
+    1.8.0's semantic flip: before 1.8.0 it reflected `settings.isVolumetricTarget()`,
+    and in 1.8.0 it reflects `profile.isVolumetric()`.
+    See CLAUDE.md § Firmware 1.8.0 semantic traps.
+
     Returns:
         JSON string with diagnostic results and troubleshooting recommendations
     """
