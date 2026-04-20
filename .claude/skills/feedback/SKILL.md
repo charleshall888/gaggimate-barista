@@ -128,8 +128,14 @@ The Rating column records whether the shot worked — low-rated rows are diagnos
 
 If a shot ID is available, sync feedback to the device:
 ```
-manage_shot_notes(shot_id, action="update", rating=X, balance_taste="...", notes="...", grind_setting="...", dose_in=X, dose_out=X)
+manage_shot_notes(shot_id, action="update", rating=X, balance_taste="...", notes="...", grind_setting="...", dose_in=X, dose_out=X, bean_type="...")
 ```
+
+**`bean_type` parameter — source rules:**
+1. Read `user-setup.md` → Active Coffee section.
+2. If the section is present and not the placeholder `No active coffee`, parse the coffee's display title from the table and pass it as `bean_type`, **truncated to 200 characters** (`bean_type[:200]`, no word-boundary fanciness).
+3. If the user's feedback prose explicitly names a different bean (e.g. "this was actually the decaf bag"), prefer the user's value over the Active Coffee title (still truncate to 200 chars).
+4. If Active Coffee is absent or matches the `No active coffee` placeholder, **omit `bean_type` entirely** — do not pass the placeholder string. The device sidecar's existing `beanType` (if any) will be preserved by the MCP read-modify-write logic.
 
 #### 4d. Profile Updates
 
