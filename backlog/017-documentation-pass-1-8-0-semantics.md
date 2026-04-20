@@ -1,14 +1,21 @@
 ---
 id: "017"
 title: "Document evt:status.bt semantic flip and retention shift"
-status: open
+status: complete
 priority: medium
 type: chore
 parent: "013"
 tags: [gaggimate-1-8-0-upgrade]
 discovery_source: research/gaggimate-1-8-0-upgrade/research.md
 created: 2026-04-18
-updated: 2026-04-18
+updated: 2026-04-19
+session_id: null
+lifecycle_phase: complete
+lifecycle_slug: document-evtstatusbt-semantic-flip-and-retention-shift
+complexity: simple
+criticality: medium
+spec: lifecycle/document-evtstatusbt-semantic-flip-and-retention-shift/spec.md
+areas: [docs]
 ---
 
 # Document evt:status.bt semantic flip and retention shift
