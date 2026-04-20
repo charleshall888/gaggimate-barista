@@ -1,14 +1,21 @@
 ---
 id: "014"
 title: "Align manage_shot_notes with 1.8.0 native sidecar schema"
-status: open
+status: complete
 priority: critical
 type: feature
 parent: "013"
 tags: [gaggimate-1-8-0-upgrade]
 discovery_source: research/gaggimate-1-8-0-upgrade/research.md
 created: 2026-04-18
-updated: 2026-04-18
+updated: 2026-04-19
+session_id: null
+lifecycle_phase: complete
+lifecycle_slug: align-manage-shot-notes-with-180-native-sidecar-schema
+complexity: complex
+criticality: critical
+spec: lifecycle/align-manage-shot-notes-with-180-native-sidecar-schema/spec.md
+areas: []
 ---
 
 # Align manage_shot_notes with 1.8.0 native sidecar schema

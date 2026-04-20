@@ -1,31 +1,5 @@
 [
   {
-    "id": 14,
-    "title": "Align manage_shot_notes with 1.8.0 native sidecar schema",
-    "status": "in_progress",
-    "priority": "critical",
-    "type": "feature",
-    "tags": [
-      "gaggimate-1-8-0-upgrade"
-    ],
-    "areas": [],
-    "created": "2026-04-18",
-    "updated": "2026-04-19",
-    "blocks": [],
-    "blocked_by": [],
-    "parent": "013",
-    "research": null,
-    "spec": "lifecycle/align-manage-shot-notes-with-180-native-sidecar-schema/spec.md",
-    "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
-    "plan": null,
-    "uuid": null,
-    "lifecycle_slug": "align-manage-shot-notes-with-180-native-sidecar-schema",
-    "session_id": "7f03b6db-5124-4e43-9bf1-a4c1f05f7603",
-    "lifecycle_phase": "implement",
-    "schema_version": null,
-    "repo": null
-  },
-  {
     "id": 5,
     "title": "Multi-user data isolation",
     "status": "backlog",
@@ -101,7 +75,7 @@
     "uuid": null,
     "lifecycle_slug": "shot-fixture-regression-harness",
     "session_id": "28909692-23c5-4c0d-910b-bd0afcdd6c05",
-    "lifecycle_phase": "plan",
+    "lifecycle_phase": "implement",
     "schema_version": null,
     "repo": null
   },

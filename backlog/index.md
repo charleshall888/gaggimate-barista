@@ -2,7 +2,6 @@
 
 | ID | Title | Status | Priority | Type | Blocked By | Parent | Spec |
 |-----|-------|--------|----------|------|------------|--------|------|
-| 14 | Align manage_shot_notes with 1.8.0 native sidecar schema | in_progress | critical | feature | — | 013 | ✓ |
 | 5 | Multi-user data isolation | backlog | high | feature | — | — | ✓ |
 | 13 | Gaggimate firmware 1.8.0 upgrade adaptation | backlog | high | epic | — | — | — |
 | 16 | Shot-fixture regression harness | refined | high | chore | — | 013 | ✓ |
@@ -23,4 +22,3 @@
 
 ## In-Progress
 
-- **14** Align manage_shot_notes with 1.8.0 native sidecar schema (in_progress)
