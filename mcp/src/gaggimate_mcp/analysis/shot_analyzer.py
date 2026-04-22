@@ -19,6 +19,7 @@ The runbook content is fleshed out in Task 15; this docstring section
 reserves the heading and points readers to the canonical location.
 """
 
+import math
 from typing import TypedDict, Literal, Optional
 
 
@@ -118,3 +119,20 @@ class ProfileData(TypedDict, total=False):
     selected: bool
     utility: bool
     phases: list[ProfilePhase]
+
+
+def js_round(value: float) -> int:
+    """Round ``value`` to the nearest integer matching JS ``Math.round`` semantics.
+
+    Python's built-in ``round`` uses banker's rounding (``round(0.5) == 0``,
+    ``round(2.5) == 2``), which would produce off-by-one errors versus the
+    AnalyzerService.js reference. JS ``Math.round`` rounds halves toward
+    positive infinity: ``Math.round(0.5) === 1``, ``Math.round(-0.5) === 0``,
+    ``Math.round(2.5) === 3``, ``Math.round(-2.5) === -2``.
+
+    This helper is the foundational rounding primitive used by every
+    ``Math.round`` call site in AnalyzerService.js v1.8.0 (lines 407, 447,
+    545, 624, 691-692, 804). It is imported by all subsequent DDSA porting
+    work (helpers, ``classify_phase_exits``, ``estimate_auto_delay``).
+    """
+    return math.floor(value + 0.5)
