@@ -1,0 +1,3396 @@
+{
+  "delayReviewHint": false,
+  "delayReviewMessage": null,
+  "delayReviewMs": null,
+  "delayReviewPhaseNumber": null,
+  "globalScaleLost": false,
+  "highScaleDelay": false,
+  "highScaleDelayMs": null,
+  "isAutoAdjusted": true,
+  "isBrewByWeight": true,
+  "phases": [
+    {
+      "delayReviewHint": false,
+      "delayReviewMs": null,
+      "delayReviewReason": null,
+      "displayName": "Prefill",
+      "duration": 4,
+      "end": 4,
+      "estimatedScaleDelayMs": null,
+      "exit": {
+        "reason": null,
+        "type": null
+      },
+      "highScaleDelay": false,
+      "name": "Prefill",
+      "number": "0",
+      "prediction": {
+        "finalWeight": null
+      },
+      "profilePhase": {
+        "duration": 5,
+        "name": "Prefill",
+        "phase": "preinfusion",
+        "pump": {
+          "flow": 8,
+          "pressure": 0,
+          "target": "flow"
+        },
+        "targets": [
+          {
+            "operator": "gte",
+            "type": "pumped",
+            "value": 100
+          }
+        ],
+        "temperature": 93,
+        "transition": {
+          "adaptive": true,
+          "duration": 2,
+          "type": "ease-out"
+        },
+        "valve": 1
+      },
+      "scaleLost": false,
+      "scalePermanentlyLost": false,
+      "start": 0,
+      "stats": {
+        "f": {
+          "avg": 7.2993749999999995,
+          "end": 8,
+          "max": 8,
+          "min": 2.48,
+          "start": 2.48
+        },
+        "p": {
+          "avg": 1.23125,
+          "end": 1.7,
+          "max": 1.7,
+          "min": 0.7,
+          "start": 0.7
+        },
+        "pf": {
+          "avg": 3.209375,
+          "end": 7.82,
+          "max": 7.83,
+          "min": 0,
+          "start": 0
+        },
+        "sys_curr_vol": false,
+        "sys_ext": false,
+        "sys_raw": 13,
+        "sys_scale": true,
+        "sys_shot_vol": true,
+        "sys_vol_avail": true,
+        "t": {
+          "avg": 93.56875000000001,
+          "end": 93.5,
+          "max": 93.7,
+          "min": 93.5,
+          "start": 93.7
+        },
+        "tf": {
+          "avg": 7.838125,
+          "end": 8,
+          "max": 8,
+          "min": 5.64,
+          "start": 5.64
+        },
+        "tp": {
+          "avg": 0,
+          "end": 0,
+          "max": 0,
+          "min": 0,
+          "start": 0
+        },
+        "tt": {
+          "avg": 93,
+          "end": 93,
+          "max": 93,
+          "min": 93,
+          "start": 93
+        },
+        "w": {
+          "avg": 0,
+          "end": 0,
+          "max": 0,
+          "min": 0,
+          "start": 0
+        },
+        "wf": {
+          "avg": 0,
+          "end": 0,
+          "max": 0,
+          "min": 0,
+          "start": 0
+        }
+      },
+      "targetCalcValues": null,
+      "water": 29.197499999999998,
+      "weight": 0
+    },
+    {
+      "delayReviewHint": false,
+      "delayReviewMs": null,
+      "delayReviewReason": null,
+      "displayName": "Fill",
+      "duration": 1,
+      "end": 5.25,
+      "estimatedScaleDelayMs": 250,
+      "exit": {
+        "reason": "Pressure Stop",
+        "type": "pressure"
+      },
+      "highScaleDelay": false,
+      "name": "Fill",
+      "number": "1",
+      "prediction": {
+        "finalWeight": null
+      },
+      "profilePhase": {
+        "duration": 12,
+        "name": "Fill",
+        "phase": "preinfusion",
+        "pump": {
+          "flow": 8,
+          "pressure": 0,
+          "target": "flow"
+        },
+        "targets": [
+          {
+            "operator": "gte",
+            "type": "pumped",
+            "value": 100
+          },
+          {
+            "operator": "gte",
+            "type": "pressure",
+            "value": 3
+          }
+        ],
+        "temperature": 93,
+        "transition": {
+          "adaptive": true,
+          "duration": 0,
+          "type": "instant"
+        },
+        "valve": 1
+      },
+      "scaleLost": false,
+      "scalePermanentlyLost": false,
+      "start": 4.25,
+      "stats": {
+        "f": {
+          "avg": 8,
+          "end": 8,
+          "max": 8,
+          "min": 8,
+          "start": 8
+        },
+        "p": {
+          "avg": 2.275,
+          "end": 2.8,
+          "max": 2.8,
+          "min": 1.8,
+          "start": 1.8
+        },
+        "pf": {
+          "avg": 7.657500000000001,
+          "end": 7.42,
+          "max": 7.87,
+          "min": 7.42,
+          "start": 7.76
+        },
+        "sys_curr_vol": false,
+        "sys_ext": false,
+        "sys_raw": 13,
+        "sys_scale": true,
+        "sys_shot_vol": true,
+        "sys_vol_avail": true,
+        "t": {
+          "avg": 93.5,
+          "end": 93.5,
+          "max": 93.5,
+          "min": 93.5,
+          "start": 93.5
+        },
+        "tf": {
+          "avg": 8,
+          "end": 8,
+          "max": 8,
+          "min": 8,
+          "start": 8
+        },
+        "tp": {
+          "avg": 0,
+          "end": 0,
+          "max": 0,
+          "min": 0,
+          "start": 0
+        },
+        "tt": {
+          "avg": 93,
+          "end": 93,
+          "max": 93,
+          "min": 93,
+          "start": 93
+        },
+        "w": {
+          "avg": 0.3,
+          "end": 1.2,
+          "max": 1.2,
+          "min": 0,
+          "start": 0
+        },
+        "wf": {
+          "avg": 0.3,
+          "end": 1.2,
+          "max": 1.2,
+          "min": 0,
+          "start": 0
+        }
+      },
+      "targetCalcValues": {
+        "pressure": {
+          "isStopReason": true,
+          "value": 3.4
+        },
+        "pumped": {
+          "isStopReason": false,
+          "value": 10
+        }
+      },
+      "water": 8,
+      "weight": 1.2
+    },
+    {
+      "delayReviewHint": false,
+      "delayReviewMs": null,
+      "delayReviewReason": null,
+      "displayName": "Compressing",
+      "duration": 0.25,
+      "end": 5.75,
+      "estimatedScaleDelayMs": 250,
+      "exit": {
+        "reason": "Flow Stop",
+        "type": "flow"
+      },
+      "highScaleDelay": false,
+      "name": "Compressing",
+      "number": "2",
+      "prediction": {
+        "finalWeight": null
+      },
+      "profilePhase": {
+        "duration": 12,
+        "name": "Compressing",
+        "phase": "preinfusion",
+        "pump": {
+          "flow": 0,
+          "pressure": 3,
+          "target": "pressure"
+        },
+        "targets": [
+          {
+            "operator": "gte",
+            "type": "pumped",
+            "value": 100
+          },
+          {
+            "operator": "lte",
+            "type": "flow",
+            "value": 3
+          }
+        ],
+        "temperature": 88,
+        "transition": {
+          "adaptive": true,
+          "duration": 2,
+          "type": "ease-out"
+        },
+        "valve": 1
+      },
+      "scaleLost": false,
+      "scalePermanentlyLost": false,
+      "start": 5.5,
+      "stats": {
+        "f": {
+          "avg": 4.63,
+          "end": 4.63,
+          "max": 8,
+          "min": 4.63,
+          "start": 8
+        },
+        "p": {
+          "avg": 3.9,
+          "end": 3.9,
+          "max": 3.9,
+          "min": 3.4,
+          "start": 3.4
+        },
+        "pf": {
+          "avg": 6.74,
+          "end": 6.74,
+          "max": 7.15,
+          "min": 6.74,
+          "start": 7.15
+        },
+        "sys_curr_vol": false,
+        "sys_ext": false,
+        "sys_raw": 13,
+        "sys_scale": true,
+        "sys_shot_vol": true,
+        "sys_vol_avail": true,
+        "t": {
+          "avg": 93.4,
+          "end": 93.4,
+          "max": 93.5,
+          "min": 93.4,
+          "start": 93.5
+        },
+        "tf": {
+          "avg": 0,
+          "end": 0,
+          "max": 0,
+          "min": 0,
+          "start": 0
+        },
+        "tp": {
+          "avg": 3.3,
+          "end": 3.3,
+          "max": 3.3,
+          "min": 3.3,
+          "start": 3.3
+        },
+        "tt": {
+          "avg": 88,
+          "end": 88,
+          "max": 88,
+          "min": 88,
+          "start": 88
+        },
+        "w": {
+          "avg": 4.1,
+          "end": 4.1,
+          "max": 4.1,
+          "min": 2.4,
+          "start": 2.4
+        },
+        "wf": {
+          "avg": 3.28,
+          "end": 3.28,
+          "max": 3.28,
+          "min": 2.1,
+          "start": 2.1
+        }
+      },
+      "targetCalcValues": {
+        "flow": {
+          "isStopReason": true,
+          "value": 2.25
+        },
+        "pumped": {
+          "isStopReason": false,
+          "value": 1.72
+        }
+      },
+      "water": 1.1575,
+      "weight": 4.1
+    },
+    {
+      "delayReviewHint": false,
+      "delayReviewMs": null,
+      "delayReviewReason": null,
+      "displayName": "Dripping",
+      "duration": 5.75,
+      "end": 11.75,
+      "estimatedScaleDelayMs": null,
+      "exit": {
+        "reason": "Time Limit",
+        "type": "duration"
+      },
+      "highScaleDelay": false,
+      "name": "Dripping",
+      "number": "3",
+      "prediction": {
+        "finalWeight": null
+      },
+      "profilePhase": {
+        "duration": 6,
+        "name": "Dripping",
+        "phase": "preinfusion",
+        "pump": {
+          "flow": 0,
+          "pressure": 0.1,
+          "target": "pressure"
+        },
+        "temperature": 88,
+        "transition": {
+          "adaptive": true,
+          "duration": 2,
+          "type": "ease-out"
+        },
+        "valve": 1
+      },
+      "scaleLost": false,
+      "scalePermanentlyLost": false,
+      "start": 6,
+      "stats": {
+        "f": {
+          "avg": 0.40782608695652167,
+          "end": 0,
+          "max": 2.4,
+          "min": 0,
+          "start": 2.25
+        },
+        "p": {
+          "avg": 1.3782608695652172,
+          "end": 0.8,
+          "max": 3.3,
+          "min": 0.8,
+          "start": 3.3
+        },
+        "pf": {
+          "avg": 2.5182608695652173,
+          "end": 0.41,
+          "max": 6.51,
+          "min": 0.41,
+          "start": 6.51
+        },
+        "sys_curr_vol": false,
+        "sys_ext": false,
+        "sys_raw": 13,
+        "sys_scale": true,
+        "sys_shot_vol": true,
+        "sys_vol_avail": true,
+        "t": {
+          "avg": 93.02173913043478,
+          "end": 92.4,
+          "max": 93.5,
+          "min": 92.4,
+          "start": 93.5
+        },
+        "tf": {
+          "avg": 0,
+          "end": 0,
+          "max": 0,
+          "min": 0,
+          "start": 0
+        },
+        "tp": {
+          "avg": 0.352173913043478,
+          "end": 0.1,
+          "max": 2.8,
+          "min": 0.1,
+          "start": 2.8
+        },
+        "tt": {
+          "avg": 88,
+          "end": 88,
+          "max": 88,
+          "min": 88,
+          "start": 88
+        },
+        "w": {
+          "avg": 8.786956521739127,
+          "end": 10.6,
+          "max": 10.6,
+          "min": 4.8,
+          "start": 4.8
+        },
+        "wf": {
+          "avg": 1.3447826086956518,
+          "end": 0.58,
+          "max": 3.16,
+          "min": 0.24,
+          "start": 3.16
+        }
+      },
+      "targetCalcValues": null,
+      "water": 2.3449999999999998,
+      "weight": 10.6
+    },
+    {
+      "delayReviewHint": false,
+      "delayReviewMs": null,
+      "delayReviewReason": null,
+      "displayName": "Pressurize",
+      "duration": 5.75,
+      "end": 17.75,
+      "estimatedScaleDelayMs": null,
+      "exit": {
+        "reason": "Time Limit",
+        "type": "duration"
+      },
+      "highScaleDelay": false,
+      "name": "Pressurize",
+      "number": "4",
+      "prediction": {
+        "finalWeight": null
+      },
+      "profilePhase": {
+        "duration": 6,
+        "name": "Pressurize",
+        "phase": "brew",
+        "pump": {
+          "flow": 3.5,
+          "pressure": 11,
+          "target": "pressure"
+        },
+        "targets": [
+          {
+            "operator": "gte",
+            "type": "pumped",
+            "value": 100
+          },
+          {
+            "operator": "gte",
+            "type": "pressure",
+            "value": 8.8
+          },
+          {
+            "operator": "gte",
+            "type": "volumetric",
+            "value": 38
+          }
+        ],
+        "temperature": 88,
+        "transition": {
+          "adaptive": true,
+          "duration": 6,
+          "type": "linear"
+        },
+        "valve": 1
+      },
+      "scaleLost": false,
+      "scalePermanentlyLost": false,
+      "start": 12,
+      "stats": {
+        "f": {
+          "avg": 2.9799999999999995,
+          "end": 3.5,
+          "max": 3.5,
+          "min": 0,
+          "start": 0
+        },
+        "p": {
+          "avg": 1.934782608695652,
+          "end": 2.5,
+          "max": 2.5,
+          "min": 0.8,
+          "start": 0.8
+        },
+        "pf": {
+          "avg": 1.915652173913043,
+          "end": 3.47,
+          "max": 3.51,
+          "min": 0.3,
+          "start": 0.38
+        },
+        "sys_curr_vol": true,
+        "sys_ext": false,
+        "sys_raw": 15,
+        "sys_scale": true,
+        "sys_shot_vol": true,
+        "sys_vol_avail": true,
+        "t": {
+          "avg": 91.14347826086956,
+          "end": 90.1,
+          "max": 92.4,
+          "min": 90.1,
+          "start": 92.4
+        },
+        "tf": {
+          "avg": 3.5,
+          "end": 3.5,
+          "max": 3.5,
+          "min": 3.5,
+          "start": 3.5
+        },
+        "tp": {
+          "avg": 6.091304347826087,
+          "end": 10.7,
+          "max": 10.7,
+          "min": 1.1,
+          "start": 1.1
+        },
+        "tt": {
+          "avg": 88,
+          "end": 88,
+          "max": 88,
+          "min": 88,
+          "start": 88
+        },
+        "w": {
+          "avg": 14.217391304347824,
+          "end": 20.9,
+          "max": 20.9,
+          "min": 10.7,
+          "start": 10.7
+        },
+        "wf": {
+          "avg": 1.4752173913043478,
+          "end": 2.83,
+          "max": 2.85,
+          "min": 0.21,
+          "start": 0.54
+        }
+      },
+      "targetCalcValues": null,
+      "water": 17.134999999999998,
+      "weight": 20.9
+    },
+    {
+      "delayReviewHint": true,
+      "delayReviewMs": 1000,
+      "delayReviewReason": "auto-delay",
+      "displayName": "Extraction",
+      "duration": 7,
+      "end": 25,
+      "estimatedScaleDelayMs": 1000,
+      "exit": {
+        "reason": "Weight Stop",
+        "type": "volumetric"
+      },
+      "highScaleDelay": false,
+      "name": "Extraction",
+      "number": "5",
+      "prediction": {
+        "finalWeight": 38.57
+      },
+      "profilePhase": {
+        "duration": 60,
+        "name": "Extraction",
+        "phase": "brew",
+        "pump": {
+          "flow": -1,
+          "pressure": 9.5,
+          "target": "flow"
+        },
+        "targets": [
+          {
+            "operator": "gte",
+            "type": "pumped",
+            "value": 100
+          },
+          {
+            "operator": "gte",
+            "type": "volumetric",
+            "value": 38
+          }
+        ],
+        "temperature": 88,
+        "transition": {
+          "adaptive": true,
+          "duration": 0,
+          "type": "instant"
+        },
+        "valve": 1
+      },
+      "scaleLost": false,
+      "scalePermanentlyLost": false,
+      "start": 18,
+      "stats": {
+        "f": {
+          "avg": 2.7628571428571425,
+          "end": 0.02,
+          "max": 3.5,
+          "min": 0.02,
+          "start": 3.5
+        },
+        "p": {
+          "avg": 2.2892857142857137,
+          "end": 1.8,
+          "max": 2.5,
+          "min": 1.8,
+          "start": 2.4
+        },
+        "pf": {
+          "avg": 2.6875,
+          "end": 0,
+          "max": 3.65,
+          "min": 0,
+          "start": 3.53
+        },
+        "sys_anomalies": {
+          "sys_curr_vol": {
+            "sampleCountInPhase": 29,
+            "sampleInPhase": 1,
+            "value": true
+          },
+          "sys_ext": {
+            "sampleCountInPhase": 29,
+            "sampleInPhase": 1,
+            "value": false
+          }
+        },
+        "sys_curr_vol": false,
+        "sys_ext": true,
+        "sys_raw": 29,
+        "sys_scale": true,
+        "sys_shot_vol": true,
+        "sys_vol_avail": true,
+        "t": {
+          "avg": 88.23214285714288,
+          "end": 86.8,
+          "max": 90,
+          "min": 86.8,
+          "start": 90
+        },
+        "tf": {
+          "avg": 2.5,
+          "end": 0,
+          "max": 3.5,
+          "min": 0,
+          "start": 3.5
+        },
+        "tp": {
+          "avg": 6.785714285714286,
+          "end": 0,
+          "max": 9.5,
+          "min": 0,
+          "start": 9.5
+        },
+        "tt": {
+          "avg": 89.42857142857143,
+          "end": 93,
+          "max": 93,
+          "min": 88,
+          "start": 88
+        },
+        "w": {
+          "avg": 31.467857142857145,
+          "end": 37.8,
+          "max": 37.8,
+          "min": 21.5,
+          "start": 21.5
+        },
+        "wf": {
+          "avg": 2.5496428571428575,
+          "end": 0.67,
+          "max": 3.04,
+          "min": 0.67,
+          "start": 2.72
+        }
+      },
+      "targetCalcValues": {
+        "pumped": {
+          "isStopReason": false,
+          "value": 21
+        },
+        "volumetric": {
+          "isStopReason": true,
+          "value": 38.57
+        }
+      },
+      "water": 19.339999999999996,
+      "weight": 37.8
+    }
+  ],
+  "rawSamples": [
+    {
+      "cp": 0.7,
+      "ct": 93.7,
+      "ev": 0,
+      "fl": 2.48,
+      "pf": 0,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.5,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 0,
+      "tf": 5.64,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 0.7,
+      "ct": 93.7,
+      "ev": 0,
+      "fl": 3.93,
+      "pf": 0,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.22,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 250,
+      "tf": 6.42,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 1,
+      "ct": 93.7,
+      "ev": 0,
+      "fl": 5.07,
+      "pf": 0,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.38,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 500,
+      "tf": 7.31,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 0.9,
+      "ct": 93.6,
+      "ev": 0,
+      "fl": 6.02,
+      "pf": 0,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.18,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 750,
+      "tf": 7.7,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 0.9,
+      "ct": 93.6,
+      "ev": 0,
+      "fl": 6.88,
+      "pf": 0,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.12,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 1000,
+      "tf": 7.98,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 0.9,
+      "ct": 93.6,
+      "ev": 0,
+      "fl": 7.4,
+      "pf": 0,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.13,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 1250,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 0.9,
+      "ct": 93.6,
+      "ev": 0,
+      "fl": 7.73,
+      "pf": 0,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.13,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 1500,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 0.9,
+      "ct": 93.6,
+      "ev": 0,
+      "fl": 7.87,
+      "pf": 0,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.12,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 1750,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 1.2,
+      "ct": 93.6,
+      "ev": 0,
+      "fl": 7.94,
+      "pf": 0,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.18,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 2000,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 1.4,
+      "ct": 93.6,
+      "ev": 0,
+      "fl": 7.97,
+      "pf": 0,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.22,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 2250,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 1.4,
+      "ct": 93.5,
+      "ev": 8,
+      "fl": 7.99,
+      "pf": 6.76,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.15,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 2500,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 1.4,
+      "ct": 93.5,
+      "ev": 9.7,
+      "fl": 7.99,
+      "pf": 7.04,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.16,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 2750,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 1.6,
+      "ct": 93.5,
+      "ev": 11.6,
+      "fl": 8,
+      "pf": 7.16,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.19,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 3000,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 1.7,
+      "ct": 93.5,
+      "ev": 13.3,
+      "fl": 8,
+      "pf": 7.22,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.16,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 3250,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 1.5,
+      "ct": 93.5,
+      "ev": 15.1,
+      "fl": 8,
+      "pf": 7.52,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.13,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 3500,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 1.6,
+      "ct": 93.5,
+      "ev": 17.2,
+      "fl": 8,
+      "pf": 7.83,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.18,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 3750,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 1.7,
+      "ct": 93.5,
+      "ev": 19.1,
+      "fl": 8,
+      "pf": 7.82,
+      "phaseDisplayNumber": 1,
+      "phaseName": "Prefill",
+      "phaseNumber": 0,
+      "pr": 0.18,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 4000,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 1.8,
+      "ct": 93.5,
+      "ev": 21.2,
+      "fl": 8,
+      "pf": 7.76,
+      "phaseDisplayNumber": 2,
+      "phaseName": "Fill",
+      "phaseNumber": 1,
+      "pr": 0.16,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 4250,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 1.9,
+      "ct": 93.5,
+      "ev": 23.1,
+      "fl": 8,
+      "pf": 7.87,
+      "phaseDisplayNumber": 2,
+      "phaseName": "Fill",
+      "phaseNumber": 1,
+      "pr": 0.19,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 4500,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 2.1,
+      "ct": 93.5,
+      "ev": 24.9,
+      "fl": 8,
+      "pf": 7.76,
+      "phaseDisplayNumber": 2,
+      "phaseName": "Fill",
+      "phaseNumber": 1,
+      "pr": 0.23,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 4750,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 2.3,
+      "ct": 93.5,
+      "ev": 27,
+      "fl": 8,
+      "pf": 7.58,
+      "phaseDisplayNumber": 2,
+      "phaseName": "Fill",
+      "phaseNumber": 1,
+      "pr": 0.23,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 5000,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 0,
+      "vf": 0
+    },
+    {
+      "cp": 2.8,
+      "ct": 93.5,
+      "ev": 28.8,
+      "fl": 8,
+      "pf": 7.42,
+      "phaseDisplayNumber": 2,
+      "phaseName": "Fill",
+      "phaseNumber": 1,
+      "pr": 0.29,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 5250,
+      "tf": 8,
+      "tp": 0,
+      "tt": 93,
+      "v": 1.2,
+      "vf": 1.2
+    },
+    {
+      "cp": 3.4,
+      "ct": 93.5,
+      "ev": 30.5,
+      "fl": 8,
+      "pf": 7.15,
+      "phaseDisplayNumber": 3,
+      "phaseName": "Compressing",
+      "phaseNumber": 2,
+      "pr": 0.35,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 5500,
+      "tf": 0,
+      "tp": 3.3,
+      "tt": 88,
+      "v": 2.4,
+      "vf": 2.1
+    },
+    {
+      "cp": 3.9,
+      "ct": 93.4,
+      "ev": 32.4,
+      "fl": 4.63,
+      "pf": 6.74,
+      "phaseDisplayNumber": 3,
+      "phaseName": "Compressing",
+      "phaseNumber": 2,
+      "pr": 0.38,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 5750,
+      "tf": 0,
+      "tp": 3.3,
+      "tt": 88,
+      "v": 4.1,
+      "vf": 3.28
+    },
+    {
+      "cp": 3.3,
+      "ct": 93.5,
+      "ev": 34,
+      "fl": 2.25,
+      "pf": 6.51,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 0.25,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 6000,
+      "tf": 0,
+      "tp": 2.8,
+      "tt": 88,
+      "v": 4.8,
+      "vf": 3.16
+    },
+    {
+      "cp": 2.9,
+      "ct": 93.4,
+      "ev": 35.7,
+      "fl": 2.4,
+      "pf": 6.47,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 0.24,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 6250,
+      "tf": 0,
+      "tp": 2.3,
+      "tt": 88,
+      "v": 5.5,
+      "vf": 3.07
+    },
+    {
+      "cp": 2.7,
+      "ct": 93.4,
+      "ev": 37.3,
+      "fl": 2.17,
+      "pf": 6.17,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 0.32,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 6500,
+      "tf": 0,
+      "tp": 1.6,
+      "tt": 88,
+      "v": 5.9,
+      "vf": 2.7
+    },
+    {
+      "cp": 2.5,
+      "ct": 93.4,
+      "ev": 38.7,
+      "fl": 2.24,
+      "pf": 5.74,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 0.35,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 6750,
+      "tf": 0,
+      "tp": 1.2,
+      "tt": 88,
+      "v": 6.5,
+      "vf": 2.63
+    },
+    {
+      "cp": 2.3,
+      "ct": 93.4,
+      "ev": 40.2,
+      "fl": 1.27,
+      "pf": 5.17,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 0.38,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 7000,
+      "tf": 0,
+      "tp": 0.7,
+      "tt": 88,
+      "v": 6.9,
+      "vf": 2.37
+    },
+    {
+      "cp": 2,
+      "ct": 93.3,
+      "ev": 41.3,
+      "fl": 0.68,
+      "pf": 4.71,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 0.4,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 7250,
+      "tf": 0,
+      "tp": 0.4,
+      "tt": 88,
+      "v": 7.4,
+      "vf": 2.28
+    },
+    {
+      "cp": 1.8,
+      "ct": 93.3,
+      "ev": 42.4,
+      "fl": 0.33,
+      "pf": 4.28,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 0.39,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 7500,
+      "tf": 0,
+      "tp": 0.2,
+      "tt": 88,
+      "v": 7.7,
+      "vf": 2.01
+    },
+    {
+      "cp": 1.6,
+      "ct": 93.3,
+      "ev": 43.5,
+      "fl": 0.15,
+      "pf": 3.85,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 0.44,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 7750,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 8.2,
+      "vf": 2.01
+    },
+    {
+      "cp": 1.4,
+      "ct": 93.3,
+      "ev": 44.4,
+      "fl": 0.07,
+      "pf": 3.41,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 0.6,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 8000,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 8.3,
+      "vf": 1.6
+    },
+    {
+      "cp": 1.3,
+      "ct": 93.2,
+      "ev": 45.1,
+      "fl": 0.04,
+      "pf": 2.93,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 0.79,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 8250,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 8.6,
+      "vf": 1.5
+    },
+    {
+      "cp": 1.2,
+      "ct": 93.2,
+      "ev": 45.8,
+      "fl": 0.02,
+      "pf": 2.48,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 0.7,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 8500,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 8.8,
+      "vf": 1.33
+    },
+    {
+      "cp": 1.1,
+      "ct": 93.2,
+      "ev": 46.4,
+      "fl": 0.01,
+      "pf": 2.19,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 0.81,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 8750,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 9.1,
+      "vf": 1.3
+    },
+    {
+      "cp": 1.1,
+      "ct": 93.1,
+      "ev": 46.9,
+      "fl": 0,
+      "pf": 1.79,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 1.88,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 9000,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 9.2,
+      "vf": 1.07
+    },
+    {
+      "cp": 1,
+      "ct": 93,
+      "ev": 47.3,
+      "fl": 0,
+      "pf": 1.46,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 1.8,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 9250,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 9.3,
+      "vf": 0.9
+    },
+    {
+      "cp": 1,
+      "ct": 93,
+      "ev": 47.6,
+      "fl": 0,
+      "pf": 1.28,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 1.01,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 9500,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 9.6,
+      "vf": 0.98
+    },
+    {
+      "cp": 0.9,
+      "ct": 92.9,
+      "ev": 47.9,
+      "fl": 0,
+      "pf": 1.11,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 2.2,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 9750,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 9.7,
+      "vf": 0.83
+    },
+    {
+      "cp": 0.9,
+      "ct": 92.8,
+      "ev": 48.2,
+      "fl": 0,
+      "pf": 0.87,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 13.87,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 10000,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 9.9,
+      "vf": 0.82
+    },
+    {
+      "cp": 0.9,
+      "ct": 92.8,
+      "ev": 48.3,
+      "fl": 0,
+      "pf": 0.74,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 2.56,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 10250,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 10,
+      "vf": 0.72
+    },
+    {
+      "cp": 0.9,
+      "ct": 92.7,
+      "ev": 48.4,
+      "fl": 0,
+      "pf": 0.73,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 1.42,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 10500,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 10.1,
+      "vf": 0.64
+    },
+    {
+      "cp": 0.9,
+      "ct": 92.7,
+      "ev": 48.5,
+      "fl": 0,
+      "pf": 0.63,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 6.68,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 10750,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 10.2,
+      "vf": 0.58
+    },
+    {
+      "cp": 0.9,
+      "ct": 92.6,
+      "ev": 48.6,
+      "fl": 0,
+      "pf": 0.53,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 11.73,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 11000,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 10.2,
+      "vf": 0.44
+    },
+    {
+      "cp": 0.8,
+      "ct": 92.6,
+      "ev": 48.7,
+      "fl": 0,
+      "pf": 0.49,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 8.81,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 11250,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 10.2,
+      "vf": 0.33
+    },
+    {
+      "cp": 0.8,
+      "ct": 92.5,
+      "ev": 48.7,
+      "fl": 0,
+      "pf": 0.48,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 2.05,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 11500,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 10.2,
+      "vf": 0.24
+    },
+    {
+      "cp": 0.8,
+      "ct": 92.4,
+      "ev": 48.8,
+      "fl": 0,
+      "pf": 0.41,
+      "phaseDisplayNumber": 4,
+      "phaseName": "Dripping",
+      "phaseNumber": 3,
+      "pr": 655.35,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": false,
+        "raw": 13,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 11750,
+      "tf": 0,
+      "tp": 0.1,
+      "tt": 88,
+      "v": 10.6,
+      "vf": 0.58
+    },
+    {
+      "cp": 0.8,
+      "ct": 92.4,
+      "ev": 48.8,
+      "fl": 0,
+      "pf": 0.38,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 109.51,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 12000,
+      "tf": 3.5,
+      "tp": 1.1,
+      "tt": 88,
+      "v": 10.7,
+      "vf": 0.54
+    },
+    {
+      "cp": 0.8,
+      "ct": 92.2,
+      "ev": 48.8,
+      "fl": 0,
+      "pf": 0.38,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 109.51,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 12250,
+      "tf": 3.5,
+      "tp": 1.4,
+      "tt": 88,
+      "v": 10.8,
+      "vf": 0.5
+    },
+    {
+      "cp": 0.8,
+      "ct": 92.2,
+      "ev": 48.8,
+      "fl": 0,
+      "pf": 0.38,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 6.22,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 12500,
+      "tf": 3.5,
+      "tp": 1.9,
+      "tt": 88,
+      "v": 10.7,
+      "vf": 0.28
+    },
+    {
+      "cp": 0.9,
+      "ct": 92.1,
+      "ev": 48.8,
+      "fl": 1.1,
+      "pf": 0.33,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 26.18,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 12750,
+      "tf": 3.5,
+      "tp": 2.2,
+      "tt": 88,
+      "v": 10.7,
+      "vf": 0.21
+    },
+    {
+      "cp": 1,
+      "ct": 91.9,
+      "ev": 48.9,
+      "fl": 2.2,
+      "pf": 0.3,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 19.47,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 13000,
+      "tf": 3.5,
+      "tp": 2.7,
+      "tt": 88,
+      "v": 11,
+      "vf": 0.46
+    },
+    {
+      "cp": 1.1,
+      "ct": 91.8,
+      "ev": 48.9,
+      "fl": 2.84,
+      "pf": 0.34,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 1.86,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 13250,
+      "tf": 3.5,
+      "tp": 3.1,
+      "tt": 88,
+      "v": 11,
+      "vf": 0.34
+    },
+    {
+      "cp": 1.2,
+      "ct": 91.7,
+      "ev": 49,
+      "fl": 3.18,
+      "pf": 0.54,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.78,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 13500,
+      "tf": 3.5,
+      "tp": 3.6,
+      "tt": 88,
+      "v": 11.1,
+      "vf": 0.36
+    },
+    {
+      "cp": 1.4,
+      "ct": 91.6,
+      "ev": 49.2,
+      "fl": 3.34,
+      "pf": 0.8,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.95,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 13750,
+      "tf": 3.5,
+      "tp": 3.9,
+      "tt": 88,
+      "v": 11.1,
+      "vf": 0.27
+    },
+    {
+      "cp": 1.7,
+      "ct": 91.5,
+      "ev": 49.5,
+      "fl": 3.43,
+      "pf": 1.01,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.93,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 14000,
+      "tf": 3.5,
+      "tp": 4.5,
+      "tt": 88,
+      "v": 11.3,
+      "vf": 0.4
+    },
+    {
+      "cp": 1.9,
+      "ct": 91.4,
+      "ev": 49.7,
+      "fl": 3.47,
+      "pf": 1.22,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.74,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 14250,
+      "tf": 3.5,
+      "tp": 4.8,
+      "tt": 88,
+      "v": 11.5,
+      "vf": 0.5
+    },
+    {
+      "cp": 2,
+      "ct": 91.3,
+      "ev": 50.1,
+      "fl": 3.49,
+      "pf": 1.48,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.68,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 14500,
+      "tf": 3.5,
+      "tp": 5.3,
+      "tt": 88,
+      "v": 11.9,
+      "vf": 0.78
+    },
+    {
+      "cp": 2.2,
+      "ct": 91.3,
+      "ev": 50.5,
+      "fl": 3.49,
+      "pf": 1.74,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.61,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 14750,
+      "tf": 3.5,
+      "tp": 5.6,
+      "tt": 88,
+      "v": 12.4,
+      "vf": 1.08
+    },
+    {
+      "cp": 2.3,
+      "ct": 91.2,
+      "ev": 50.9,
+      "fl": 3.5,
+      "pf": 2.02,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.52,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 15000,
+      "tf": 3.5,
+      "tp": 6.1,
+      "tt": 88,
+      "v": 13,
+      "vf": 1.41
+    },
+    {
+      "cp": 2.4,
+      "ct": 91.1,
+      "ev": 51.5,
+      "fl": 3.5,
+      "pf": 2.26,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.56,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 15250,
+      "tf": 3.5,
+      "tp": 6.5,
+      "tt": 88,
+      "v": 13.8,
+      "vf": 1.86
+    },
+    {
+      "cp": 2.5,
+      "ct": 91,
+      "ev": 52.1,
+      "fl": 3.5,
+      "pf": 2.46,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.57,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 15500,
+      "tf": 3.5,
+      "tp": 7,
+      "tt": 88,
+      "v": 14.3,
+      "vf": 1.89
+    },
+    {
+      "cp": 2.5,
+      "ct": 90.9,
+      "ev": 52.7,
+      "fl": 3.5,
+      "pf": 2.63,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.55,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 15750,
+      "tf": 3.5,
+      "tp": 7.3,
+      "tt": 88,
+      "v": 15.2,
+      "vf": 2.32
+    },
+    {
+      "cp": 2.5,
+      "ct": 90.7,
+      "ev": 53.4,
+      "fl": 3.5,
+      "pf": 2.82,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.45,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 16000,
+      "tf": 3.5,
+      "tp": 7.8,
+      "tt": 88,
+      "v": 15.8,
+      "vf": 2.34
+    },
+    {
+      "cp": 2.5,
+      "ct": 90.6,
+      "ev": 54.1,
+      "fl": 3.5,
+      "pf": 3.04,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.44,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 16250,
+      "tf": 3.5,
+      "tp": 8.2,
+      "tt": 88,
+      "v": 16.7,
+      "vf": 2.66
+    },
+    {
+      "cp": 2.5,
+      "ct": 90.5,
+      "ev": 55,
+      "fl": 3.5,
+      "pf": 3.17,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.42,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 16500,
+      "tf": 3.5,
+      "tp": 8.7,
+      "tt": 88,
+      "v": 17.5,
+      "vf": 2.79
+    },
+    {
+      "cp": 2.4,
+      "ct": 90.4,
+      "ev": 55.8,
+      "fl": 3.5,
+      "pf": 3.27,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.39,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 16750,
+      "tf": 3.5,
+      "tp": 9,
+      "tt": 88,
+      "v": 18,
+      "vf": 2.59
+    },
+    {
+      "cp": 2.4,
+      "ct": 90.3,
+      "ev": 56.6,
+      "fl": 3.5,
+      "pf": 3.42,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.38,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 17000,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 18.9,
+      "vf": 2.85
+    },
+    {
+      "cp": 2.5,
+      "ct": 90.3,
+      "ev": 57.5,
+      "fl": 3.5,
+      "pf": 3.51,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.48,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 17250,
+      "tf": 3.5,
+      "tp": 9.9,
+      "tt": 88,
+      "v": 19.4,
+      "vf": 2.63
+    },
+    {
+      "cp": 2.5,
+      "ct": 90.2,
+      "ev": 58.3,
+      "fl": 3.5,
+      "pf": 3.47,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.52,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 17500,
+      "tf": 3.5,
+      "tp": 10.4,
+      "tt": 88,
+      "v": 20,
+      "vf": 2.58
+    },
+    {
+      "cp": 2.5,
+      "ct": 90.1,
+      "ev": 59.2,
+      "fl": 3.5,
+      "pf": 3.47,
+      "phaseDisplayNumber": 5,
+      "phaseName": "Pressurize",
+      "phaseNumber": 4,
+      "pr": 0.46,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 17750,
+      "tf": 3.5,
+      "tp": 10.7,
+      "tt": 88,
+      "v": 20.9,
+      "vf": 2.83
+    },
+    {
+      "cp": 2.4,
+      "ct": 90,
+      "ev": 60.1,
+      "fl": 3.5,
+      "pf": 3.53,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.38,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 18000,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 21.5,
+      "vf": 2.72
+    },
+    {
+      "cp": 2.4,
+      "ct": 89.9,
+      "ev": 61,
+      "fl": 3.5,
+      "pf": 3.59,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.42,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 18250,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 22.2,
+      "vf": 2.74
+    },
+    {
+      "cp": 2.5,
+      "ct": 89.7,
+      "ev": 61.8,
+      "fl": 3.5,
+      "pf": 3.57,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.42,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 18500,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 23.1,
+      "vf": 2.96
+    },
+    {
+      "cp": 2.4,
+      "ct": 89.6,
+      "ev": 62.8,
+      "fl": 3.5,
+      "pf": 3.59,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.41,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 18750,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 23.7,
+      "vf": 2.82
+    },
+    {
+      "cp": 2.4,
+      "ct": 89.5,
+      "ev": 63.7,
+      "fl": 3.5,
+      "pf": 3.62,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.43,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 19000,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 24.3,
+      "vf": 2.71
+    },
+    {
+      "cp": 2.4,
+      "ct": 89.4,
+      "ev": 64.6,
+      "fl": 3.5,
+      "pf": 3.59,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.45,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 19250,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 25.1,
+      "vf": 2.84
+    },
+    {
+      "cp": 2.4,
+      "ct": 89.3,
+      "ev": 65.5,
+      "fl": 3.5,
+      "pf": 3.55,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.47,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 19500,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 25.7,
+      "vf": 2.73
+    },
+    {
+      "cp": 2.4,
+      "ct": 89.1,
+      "ev": 66.3,
+      "fl": 3.5,
+      "pf": 3.56,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.43,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 19750,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 26.5,
+      "vf": 2.84
+    },
+    {
+      "cp": 2.4,
+      "ct": 89,
+      "ev": 67.3,
+      "fl": 3.5,
+      "pf": 3.58,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.44,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 20000,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 27.1,
+      "vf": 2.73
+    },
+    {
+      "cp": 2.5,
+      "ct": 88.9,
+      "ev": 68.2,
+      "fl": 3.5,
+      "pf": 3.56,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.41,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 20250,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 27.9,
+      "vf": 2.85
+    },
+    {
+      "cp": 2.4,
+      "ct": 88.8,
+      "ev": 69,
+      "fl": 3.5,
+      "pf": 3.56,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.39,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 20500,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 28.8,
+      "vf": 3.04
+    },
+    {
+      "cp": 2.3,
+      "ct": 88.7,
+      "ev": 70,
+      "fl": 3.5,
+      "pf": 3.63,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.39,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 20750,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 29.5,
+      "vf": 2.98
+    },
+    {
+      "cp": 2.3,
+      "ct": 88.5,
+      "ev": 70.9,
+      "fl": 3.5,
+      "pf": 3.65,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.42,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 21000,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 30.2,
+      "vf": 2.93
+    },
+    {
+      "cp": 2.3,
+      "ct": 88.4,
+      "ev": 71.7,
+      "fl": 3.5,
+      "pf": 3.63,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.45,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 21250,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 31,
+      "vf": 3
+    },
+    {
+      "cp": 2.3,
+      "ct": 88.3,
+      "ev": 72.7,
+      "fl": 3.5,
+      "pf": 3.6,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.41,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 21500,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 31.6,
+      "vf": 2.85
+    },
+    {
+      "cp": 2.3,
+      "ct": 88.1,
+      "ev": 73.6,
+      "fl": 3.5,
+      "pf": 3.62,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.4,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 21750,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 32.1,
+      "vf": 2.63
+    },
+    {
+      "cp": 2.4,
+      "ct": 88,
+      "ev": 74.6,
+      "fl": 3.5,
+      "pf": 3.61,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.46,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 22000,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 33,
+      "vf": 2.88
+    },
+    {
+      "cp": 2.3,
+      "ct": 87.8,
+      "ev": 75.4,
+      "fl": 3.5,
+      "pf": 3.58,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.42,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 22250,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 33.8,
+      "vf": 2.96
+    },
+    {
+      "cp": 2.4,
+      "ct": 87.7,
+      "ev": 76.3,
+      "fl": 3.5,
+      "pf": 3.57,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.45,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 22500,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 34.3,
+      "vf": 2.72
+    },
+    {
+      "cp": 2.3,
+      "ct": 87.6,
+      "ev": 77.2,
+      "fl": 3.5,
+      "pf": 3.54,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.44,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 22750,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 35.2,
+      "vf": 2.94
+    },
+    {
+      "cp": 2.4,
+      "ct": 87.5,
+      "ev": 78.1,
+      "fl": 3.5,
+      "pf": 3.53,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.46,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": true,
+        "extendedRecording": false,
+        "raw": 15,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 23000,
+      "tf": 3.5,
+      "tp": 9.5,
+      "tt": 88,
+      "v": 35.7,
+      "vf": 2.71
+    },
+    {
+      "cp": 2.4,
+      "ct": 87.4,
+      "ev": 78.9,
+      "fl": 3.5,
+      "pf": 3.52,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.38,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": true,
+        "raw": 29,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 23250,
+      "tf": 0,
+      "tp": 0,
+      "tt": 93,
+      "v": 36.6,
+      "vf": 2.92
+    },
+    {
+      "cp": 2.3,
+      "ct": 87.3,
+      "ev": 78.9,
+      "fl": 2.04,
+      "pf": 0,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.43,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": true,
+        "raw": 29,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 23500,
+      "tf": 0,
+      "tp": 0,
+      "tt": 93,
+      "v": 37.1,
+      "vf": 2.69
+    },
+    {
+      "cp": 2.2,
+      "ct": 87.2,
+      "ev": 78.9,
+      "fl": 0.99,
+      "pf": 0,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.43,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": true,
+        "raw": 29,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 23750,
+      "tf": 0,
+      "tp": 0,
+      "tt": 93,
+      "v": 37.7,
+      "vf": 2.63
+    },
+    {
+      "cp": 2.1,
+      "ct": 87.1,
+      "ev": 78.9,
+      "fl": 0.44,
+      "pf": 0,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.43,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": true,
+        "raw": 29,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 24000,
+      "tf": 0,
+      "tp": 0,
+      "tt": 93,
+      "v": 37.7,
+      "vf": 1.97
+    },
+    {
+      "cp": 2,
+      "ct": 87,
+      "ev": 78.9,
+      "fl": 0.22,
+      "pf": 0,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.43,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": true,
+        "raw": 29,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 24250,
+      "tf": 0,
+      "tp": 0,
+      "tt": 93,
+      "v": 37.8,
+      "vf": 1.58
+    },
+    {
+      "cp": 1.9,
+      "ct": 87,
+      "ev": 78.9,
+      "fl": 0.1,
+      "pf": 0,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.43,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": true,
+        "raw": 29,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 24500,
+      "tf": 0,
+      "tp": 0,
+      "tt": 93,
+      "v": 37.8,
+      "vf": 1.18
+    },
+    {
+      "cp": 1.9,
+      "ct": 86.9,
+      "ev": 78.9,
+      "fl": 0.05,
+      "pf": 0,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.43,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": true,
+        "raw": 29,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 24750,
+      "tf": 0,
+      "tp": 0,
+      "tt": 93,
+      "v": 37.8,
+      "vf": 0.89
+    },
+    {
+      "cp": 1.8,
+      "ct": 86.8,
+      "ev": 78.9,
+      "fl": 0.02,
+      "pf": 0,
+      "phaseDisplayNumber": 6,
+      "phaseName": "Extraction",
+      "phaseNumber": 5,
+      "pr": 0.43,
+      "systemInfo": {
+        "bluetoothScaleConnected": true,
+        "currentlyVolumetric": false,
+        "extendedRecording": true,
+        "raw": 29,
+        "shotStartedVolumetric": true,
+        "volumetricAvailable": true
+      },
+      "t": 25000,
+      "tf": 0,
+      "tp": 0,
+      "tt": 93,
+      "v": 37.8,
+      "vf": 0.67
+    }
+  ],
+  "startTime": 0,
+  "total": {
+    "duration": 25,
+    "f": {
+      "avg": 3.304500000000001,
+      "end": 0.02,
+      "max": 8,
+      "min": 0,
+      "start": 2.48
+    },
+    "p": {
+      "avg": 1.8470000000000022,
+      "end": 1.8,
+      "max": 3.9,
+      "min": 0.7,
+      "start": 0.7
+    },
+    "pf": {
+      "avg": 2.9128,
+      "end": 0,
+      "max": 7.87,
+      "min": 0,
+      "start": 0
+    },
+    "sys_curr_vol": false,
+    "sys_ext": true,
+    "sys_raw": 29,
+    "sys_scale": true,
+    "sys_shot_vol": true,
+    "sys_vol_avail": true,
+    "t": {
+      "avg": 91.337,
+      "end": 86.8,
+      "max": 93.7,
+      "min": 86.8,
+      "start": 93.7
+    },
+    "tf": {
+      "avg": 3.2291,
+      "end": 0,
+      "max": 8,
+      "min": 0,
+      "start": 5.64
+    },
+    "tp": {
+      "avg": 3.5820000000000003,
+      "end": 0,
+      "max": 10.7,
+      "min": 0,
+      "start": 0
+    },
+    "tt": {
+      "avg": 89.45,
+      "end": 93,
+      "max": 93,
+      "min": 88,
+      "start": 93
+    },
+    "w": {
+      "avg": 14.549,
+      "end": 37.8,
+      "max": 37.8,
+      "min": 0,
+      "start": 0
+    },
+    "water": 82.61250000000003,
+    "weight": 37.8,
+    "wf": {
+      "avg": 1.4924999999999995,
+      "end": 0.67,
+      "max": 3.28,
+      "min": 0,
+      "start": 0
+    }
+  },
+  "usedSettings": {
+    "scaleDelayMs": 1000,
+    "sensorDelayMs": 250
+  }
+}
