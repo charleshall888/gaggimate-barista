@@ -151,3 +151,151 @@
   tier: complex
   from: plan
   to: implement
+
+- ts: 2026-04-22T01:40:13Z
+  event: batch_dispatch
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  batch: 0
+  tasks: [1, 2, 3, 6, 8, 9a, 9b, 10, 11]
+  note: "Tasks 1 and 2 executed inline by orchestrator; tasks 3, 6, 8, 9a, 9b, 10, 11 dispatched to parallel opus sub-agents (scratch artifacts, no per-task commits)."
+
+- ts: 2026-04-22T01:43:10Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "1"
+  batch: 0
+  status: success
+
+- ts: 2026-04-22T01:43:10Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "2"
+  batch: 0
+  status: success
+
+- ts: 2026-04-22T01:43:10Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "3"
+  batch: 0
+  status: success
+
+- ts: 2026-04-22T01:43:10Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "6"
+  batch: 0
+  status: success
+
+- ts: 2026-04-22T01:43:10Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "8"
+  batch: 0
+  status: success
+
+- ts: 2026-04-22T01:43:10Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "9a"
+  batch: 0
+  status: success
+
+- ts: 2026-04-22T01:43:10Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "9b"
+  batch: 0
+  status: success
+
+- ts: 2026-04-22T01:43:10Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "10"
+  batch: 0
+  status: success
+
+- ts: 2026-04-22T01:43:10Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "11"
+  batch: 0
+  status: success
+
+- ts: 2026-04-22T01:43:25Z
+  event: batch_dispatch
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  batch: 1
+  tasks: [5, 7]
+  note: "Parallel opus sub-agents; both feed compose tasks in batch 2."
+
+- ts: 2026-04-22T01:53:08Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "5"
+  batch: 1
+  status: success
+
+- ts: 2026-04-22T01:53:08Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "7"
+  batch: 1
+  status: success
+
+- ts: 2026-04-22T01:53:08Z
+  event: batch_dispatch
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  batch: 2
+  tasks: [4, 12, 13]
+  note: "Compose tasks write to scratch section drafts; orchestrator merges into verification-notes.md after batch completes to avoid file write races."
+
+- ts: 2026-04-22T02:00:50Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "4"
+  batch: 2
+  status: success
+
+- ts: 2026-04-22T02:00:50Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "12"
+  batch: 2
+  status: success
+
+- ts: 2026-04-22T02:00:50Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "13"
+  batch: 2
+  status: success
+
+- ts: 2026-04-22T02:00:50Z
+  event: batch_dispatch
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  batch: 3
+  tasks: [14]
+  note: "Re-fetch verification of every SHA-pinned URL in the three new verification-notes sections."
+
+- ts: 2026-04-22T02:05:45Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "14"
+  batch: 3
+  status: success
+
+- ts: 2026-04-22T02:05:45Z
+  event: task_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  task: "15"
+  batch: 4
+  status: success
+
+- ts: 2026-04-22T02:06:57Z
+  event: phase_transition
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  tier: complex
+  from: implement
+  to: review
+  note: "All 16 tasks complete; 3 new sections in verification-notes.md; 2/3 unable-to-test (not 3/3 cascade); refetch-audit 0 MISMATCH; private-repo invariant diff empty."

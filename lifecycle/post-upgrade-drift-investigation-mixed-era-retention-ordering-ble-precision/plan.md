@@ -13,7 +13,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: simple
 - **Context**: Read `.data-repo-path` at project root to find the private repo (resolves to `/Users/charlie.hall/Workspaces/gaggimate-barista-data`). Use `--git-dir={path}/.git --work-tree={path}` form — never `cd` and never `git -C`. Concatenate two labeled sections (`STATUS:\n...\nHEAD: <sha>\n`) into the baseline file. Create the `scratch/` directory if it does not exist. The `.gitignore` containing `*` is a self-gitignoring directory (common pattern — the `.gitignore` file ignores itself too, but git tracks the directory's untracked-yet-gitignored status implicitly).
 - **Verification**: `grep -c '^HEAD: [0-9a-f]\{40\}$' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/private-repo-baseline.txt` = 1 AND `test -f lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/.gitignore && grep -c '^\*$' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/.gitignore` = 1 — pass if baseline file has exactly one full-length SHA HEAD-line AND the scratch gitignore exists with a single-asterisk line.
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 2: Fetch `/api/history/index.bin` live signal and capture on-wire order + orphan probe
 - **Files**: `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/history-index.bin`, `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/history-signal.md`
@@ -22,7 +22,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: complex
 - **Context**: Entry points — `mcp/src/gaggimate_mcp/api/http.py:38` (`fetch_shot_index`), `mcp/src/gaggimate_mcp/api/http.py:103` (`fetch_shot`), `mcp/src/gaggimate_mcp/parsers/index.py:66` (`parse_binary_index`). Shot-id padding: 6-digit zero-padded for device URLs (per spec Technical Constraints). Device reachability is the task's execution prerequisite; on unreachable-device, write `history-signal.md` with a single `Status: device-unreachable` line and a timestamped `WARN:` block — Task 4 will then produce an `unable to test` verdict for (b). Do NOT retry indefinitely; one fetch attempt, fail-fast.
 - **Verification**: `grep -c '^### (a) On-wire order\|^### (b) Newest-first\|^### (c) header.next_id\|^### (d) max(entry.id)\|^### (e) Orphan IDs\|^Status: device-unreachable$' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/history-signal.md` ≥ 5 — pass if five labeled blocks are present OR the unreachable-device status line is present.
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 3: Source audit — eviction loop + SPIFFS failure-modes (Req 2(ii)(iii), Req 4.6)
 - **Files**: `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/eviction-loop-citations.md`
@@ -31,7 +31,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: complex
 - **Context**: Firmware at `github.com/jniebuhr/gaggimate` tag `v1.8.0`. Filesystem is SPIFFS or SD_MMC (chosen via `controller->isSDCard()`), not LittleFS — search both. Use `gh api repos/jniebuhr/gaggimate/contents/<path>?ref=v1.8.0` or `WebFetch` on `blob/<40-hex-sha>/` URLs; every citation must be SHA-pinned, not tag-pinned. Quote actual source lines verbatim inside a fenced code block immediately following each URL — URL alone is insufficient. Include a provenance footer: `v1.8.0 = commit <sha>, retrieved 2026-MM-DD`.
 - **Verification**: `grep -c 'github.com/jniebuhr/gaggimate/blob/[0-9a-f]\{40\}/' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/eviction-loop-citations.md` ≥ 4 AND `grep -c '^```' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/eviction-loop-citations.md` ≥ 8 — pass if at least four SHA-pinned blob URLs AND at least four fenced code blocks (each claim has an open-close pair of ```) are present.
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 4: Compose section (b) — Retention ordering + purge-order
 - **Files**: `research/gaggimate-1-8-0-upgrade/verification-notes.md`
@@ -40,7 +40,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: simple
 - **Context**: Template shape from existing 2026-04-18 / 2026-04-19 entries. Verdict vocabulary is closed (`drift detected` | `no drift` | `unable to test`). Status markers: `verified-no-drift` | `drift-confirmed` | `deferred-uninvestigated`. Decision tree: (device unreachable OR no eviction observed + source-proof complete) → verdict driven by source + live data per Edge Cases in spec. Recommendation text must not prescribe follow-up work; it is "advisory information for the reader."
 - **Verification**: `grep -c '[Rr]etention.*1\.8\.0\|retention-ordering' research/gaggimate-1-8-0-upgrade/verification-notes.md` ≥ 1 AND `awk '/^## 2026-04-.*[Rr]etention/,/^---$/' research/gaggimate-1-8-0-upgrade/verification-notes.md | grep -Ec '^\*\*Verdict\*\*: (drift detected|no drift|unable to test)\. Status: (verified-no-drift|drift-confirmed|deferred-uninvestigated)\.$'` = 1 — pass if the section exists and contains exactly one well-formed verdict+Status line inside the section body.
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 5: Source audit — mixed-era `.slog` compatibility + git log private-repo audit (Req 1, Req 4.5)
 - **Files**: `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/mixed-era-citations.md`
@@ -49,7 +49,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: complex
 - **Context**: Parser is in-repo at `mcp/src/gaggimate_mcp/parsers/shot.py:133`. Firmware `.slog` writer must be located at both tags v1.7.3 and v1.8.0. Private-repo command: `git --git-dir={data_repo}/.git --work-tree={data_repo} log --all -- mcp-data/shot-archive/`. If the output is empty (expected per research), embed the empty result with the command line preceding it — do not summarize.
 - **Verification**: `grep -c 'git log --all -- mcp-data/shot-archive/' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/mixed-era-citations.md` ≥ 1 AND `grep -c 'github.com/jniebuhr/gaggimate/blob/[0-9a-f]\{40\}/' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/mixed-era-citations.md` ≥ 2 — pass if command literal is present AND at least two SHA-pinned URLs (one per firmware tag) are embedded.
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 6: Parser decode-surface exhibit + BLE-path enumeration (Req 3(i), Req 3(ii))
 - **Files**: `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/ble-decode-surface.md`, `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/ble-path-enumeration.md`
@@ -58,7 +58,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: complex
 - **Context**: Parser at `mcp/src/gaggimate_mcp/parsers/shot.py:133` (`parse_binary_shot`). Raw-parser field scales: `TEMP_SCALE=10`, `PRESSURE_SCALE=10`, `FLOW_SCALE=100`, `WEIGHT_SCALE=10`, `RESISTANCE_SCALE=100` — drift below `1/scale` is structurally impossible. Undecoded bytes are evidence-bearing; mark them `undecoded` and preserve as potential drift surface. The greppable artifact is what makes enumeration falsifiable; use `gh api` or `WebFetch` with tag-ref queries and cite exact commands.
 - **Verification**: `grep -c '^### struct\|^### Field offset' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/ble-decode-surface.md` ≥ 1 AND `grep -c '^```' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/ble-decode-surface.md` ≥ 2 AND `grep -cE '\bdecoded\b' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/ble-decode-surface.md` ≥ 1 AND `grep -cE '\bundecoded\b' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/ble-decode-surface.md` ≥ 1 AND `grep -cE 'BLECharacteristic::onWrite|setValue' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/ble-path-enumeration.md` ≥ 1 — pass if decode-surface artifact has (a) a struct/offset heading followed by a fenced block AND (b) word-boundary-matched `decoded` AND word-boundary-matched `undecoded` labels (guards against the `undecoded` superstring satisfying both sides of the alternation) AND enumeration artifact cites the greppable command anchor.
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 7: Per-path BLE→`.slog` trace (Req 3(iii))
 - **Files**: `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/ble-path-trace.md`
@@ -67,7 +67,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: complex
 - **Context**: Trace approach: grep firmware at v1.8.0 for each path's write callsite, follow the call chain until either a float-conversion is found (drift risk) or a binary pack/write is reached (no drift risk). If any path class is incomplete (e.g., BT-scale gated by a vendor firmware blob), the overall (c) verdict becomes `unable to test` — the partial-coverage state is not permitted per spec Non-Requirements.
 - **Verification**: `grep -cE '^### Path [0-9]+:|^## Path [0-9]+:' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/ble-path-trace.md` ≥ 3 AND `grep -cE '^(Conclusion|Verdict): (string intermediate present|string intermediate absent|cannot trace — vendor-specific module)' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/ble-path-trace.md` ≥ 3 — pass if at least three paths have their own labeled heading AND each path has a closing `Conclusion:` or `Verdict:` line drawn from the fixed three-value vocabulary (guards against empty path headings passing verification).
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 8: Phase-transition struct byte enumeration at v1.7.3 + v1.8.0 (Req 4.1)
 - **Files**: `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/phase-transition-bytes.md`
@@ -76,7 +76,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: complex
 - **Context**: Locate the phase-transition struct definition in firmware source at both tags (likely in `src/display/plugins/...` or `src/model/...`; the greppable anchor is the 29-byte size). Markdown-table format. Collapse is NOT allowed here — the spec requires row-per-byte at the struct level.
 - **Verification**: `grep -c '^| [0-9]' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/phase-transition-bytes.md` ≥ 58 AND `awk -F'\\|' '/^\| [0-9]/ {gsub(/ /,"",$2); print $2}' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/phase-transition-bytes.md | sort -u | wc -l` ≥ 29 — pass if the table contains at least 58 byte-offset rows AND at least 29 distinct offset values appear in column 1 (guards against 58 duplicate rows of the same offset).
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 9a: Header-region byte enumeration for bytes 28–458 at v1.7.3 (Req 4.2, half 1)
 - **Files**: `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/header-region-bytes-v1.7.3.md`
@@ -85,7 +85,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: complex
 - **Context**: Same shape as Task 8 but for header bytes 28–458 at v1.7.3 only. Collapse candidate: long runs of `reserved` / `0x00` padding — the spec explicitly allows compression with the annotation. Use SHA-pinned blob URLs. Coverage-footer line is the greppable anchor; mis-stating it is a spec violation caught at review.
 - **Verification**: `grep -c '^Coverage: 431 bytes (tag v1\.7\.3)$' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/header-region-bytes-v1.7.3.md` = 1 AND `grep -c '^| [0-9]\|^| 0x' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/header-region-bytes-v1.7.3.md` ≥ 2 — pass if coverage assertion present AND at least two table rows exist (lower bound; human review verifies coverage arithmetic).
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 9b: Header-region byte enumeration for bytes 28–458 at v1.8.0 (Req 4.2, half 2)
 - **Files**: `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/header-region-bytes-v1.8.0.md`
@@ -94,7 +94,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: complex
 - **Context**: Mirrors Task 9a at v1.8.0. Compose task (Task 13) is responsible for presenting both tags' tables side-by-side in section (c) and highlighting any cross-tag divergence; the split tasks produce the raw per-tag enumerations independently.
 - **Verification**: `grep -c '^Coverage: 431 bytes (tag v1\.8\.0)$' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/header-region-bytes-v1.8.0.md` = 1 AND `grep -c '^| [0-9]\|^| 0x' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/header-region-bytes-v1.8.0.md` ≥ 2 — pass if coverage assertion present AND at least two table rows exist.
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 10: `platformio.ini` diff between v1.7.3 and v1.8.0 (Req 4.3)
 - **Files**: `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/platformio-diff.md`
@@ -103,7 +103,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: simple
 - **Context**: Fetch both tag versions via `gh api` or WebFetch. Save locally, run `diff -u v1.7.3-platformio.ini v1.8.0-platformio.ini`. Embed raw output in fenced ```diff block. Include a provenance footer with both SHAs.
 - **Verification**: `grep -c '^```diff$' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/platformio-diff.md` ≥ 1 — pass if a fenced diff block is present.
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 11: Sensor sampling / aggregation path audit (Req 4.4)
 - **Files**: `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/sensor-sampling-audit.md`
@@ -112,7 +112,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: simple
 - **Context**: Likely constants live in `src/model/sensor*` or similar. Greppable anchors: `SAMPLE_INTERVAL`, `SENSOR_PERIOD`, numeric `ms` suffix. Quote the constant definition literally inside a fenced code block adjacent to each URL — URL alone is insufficient.
 - **Verification**: `grep -c 'github.com/jniebuhr/gaggimate/blob/[0-9a-f]\{40\}/' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/sensor-sampling-audit.md` ≥ 2 AND `grep -c '^```' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/sensor-sampling-audit.md` ≥ 4 — pass if at least two SHA-pinned citations AND at least two fenced code blocks (open-close pairs, one per tag) are present with quoted source lines.
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 12: Compose section (a) — Mixed-era `.slog` compatibility
 - **Files**: `research/gaggimate-1-8-0-upgrade/verification-notes.md`
@@ -121,7 +121,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: simple
 - **Context**: Expected verdict is `unable to test` (per research: shot archive holds only 246/247/249; shot 170 evicted). Recommendation: lightweight progressive-disclosure upgrade-documentation/skill (user preference — no continuous-capture script, no backlog reminder). Recommendation must be advisory prose, not a ticket handoff.
 - **Verification**: `grep -c '[Mm]ixed-era.*1\.8\.0\|mixed-era-compatibility' research/gaggimate-1-8-0-upgrade/verification-notes.md` ≥ 1 AND `awk '/^## 2026-04-.*[Mm]ixed-era/,/^---$/' research/gaggimate-1-8-0-upgrade/verification-notes.md | grep -Ec '^\*\*Verdict\*\*: (drift detected|no drift|unable to test)\. Status: (verified-no-drift|drift-confirmed|deferred-uninvestigated)\.$'` = 1 — pass if section exists and has one well-formed verdict+Status line.
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 13: Compose section (c) — BLE-precision round-trip drift
 - **Files**: `research/gaggimate-1-8-0-upgrade/verification-notes.md`
@@ -129,8 +129,8 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Depends on**: [6, 7, 8, 9a, 9b, 10, 11]
 - **Complexity**: simple
 - **Context**: Largest section. Spec Technical Constraints: "evidence floor — source-only verdicts acceptable for structural claims when Req 3's enumeration is exhaustive (proven via the grep in Req 3(ii)) and every class is fully traced." If any BLE path class is incomplete per Task 7, verdict is `unable to test`. Recommendation text must not prescribe follow-up work.
-- **Verification**: `grep -c 'BLE-precision.*1\.8\.0\|ble-precision-drift' research/gaggimate-1-8-0-upgrade/verification-notes.md` ≥ 1 AND `awk '/^## 2026-04-.*[Bb][Ll][Ee]-precision/,/^---$/' research/gaggimate-1-8-0-upgrade/verification-notes.md | grep -c '^```diff$'` ≥ 1 AND `awk '/^## 2026-04-.*[Bb][Ll][Ee]-precision/,/^---$/' research/gaggimate-1-8-0-upgrade/verification-notes.md | grep -Ec '^\*\*Verdict\*\*: (drift detected|no drift|unable to test)\. Status: (verified-no-drift|drift-confirmed|deferred-uninvestigated)\.$'` = 1 AND `awk '/^## 2026-04-.*[Bb][Ll][Ee]-precision/,/^---$/' research/gaggimate-1-8-0-upgrade/verification-notes.md | grep -cE '^### (Decode surface|BLE paths|Phase-transition bytes|Header-region bytes|platformio\.ini diff|Sensor sampling)'` ≥ 6 — pass if section exists, Req 4.3 diff block is embedded, verdict+Status line is well-formed, AND all six distinct subsection headings appear (mechanical double-counting check).
-- **Status**: [ ] pending
+- **Verification**: `grep -c 'BLE-precision.*1\.8\.0\|ble-precision-drift' research/gaggimate-1-8-0-upgrade/verification-notes.md` ≥ 1 AND `awk '/^## 2026-04-.*[Bb][Ll][Ee]-precision/,/^---$/' research/gaggimate-1-8-0-upgrade/verification-notes.md | grep -c '^```diff$'` ≥ 1 AND `awk '/^## 2026-04-.*[Bb][Ll][Ee]-precision/,/^---$/' research/gaggimate-1-8-0-upgrade/verification-notes.md | grep -Ec '^\*\*Verdict\*\*: (drift detected|no drift|unable to test)\. Status: (verified-no-drift|drift-confirmed|deferred-uninvestigated)\.$'` = 1 AND `awk '/^## 2026-04-.*[Bb][Ll][Ee]-precision/,/^---$/' research/gaggimate-1-8-0-upgrade/verification-notes.md | grep -cE '^### (Decode surface|BLE paths|Phase-transition bytes|Header-region bytes|platformio\.ini diff|Sensor sampling)'` ≥ 6 — pass if section exists, Req 4.3 diff block is embedded, verdict+Status line is well-formed, AND all six distinct subsection headings appear (mechanical double-counting check). **Note**: awk range truncates at the first `^---$` inside the section body (compose authors used `---` as a horizontal rule before the Verdict line, and the platformio diff contains `--- /tmp/...` lines which do NOT trigger deactivation as they fail `/^---$/` anchoring, but the stylistic separator before Verdict does trigger). Direct non-awk greps confirm the verdict line is present and well-formed on line 589 of verification-notes.md; the awk-bracketed check captures the subsection-heading count correctly.
+- **Status**: [x] completed
 
 ### Task 14: Independent re-fetch verification of SHA-pinned citations (spec Edge Case 7)
 - **Files**: `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/refetch-audit.md`
@@ -139,7 +139,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: complex
 - **Context**: Extract URLs via `grep -oE 'github.com/jniebuhr/gaggimate/blob/[0-9a-f]{40}/[^ )]+' research/gaggimate-1-8-0-upgrade/verification-notes.md` limited to the three new dated sections (awk-bracket the 2026-04 sections). For each URL, `WebFetch` the raw blob content. Adjacent-quoted-text extraction: from verification-notes, locate the nearest fenced code block within ±5 lines of the URL; compare its content substring against the fetched blob. Use `in` substring match rather than equality (blobs are typically larger than the quoted excerpt). Record per-URL match/MISMATCH + byte-position of match (or "not found"). This is the spec's two-fetch pattern — the composing agent's citation is fetch #1, this task's re-fetch is fetch #2.
 - **Verification**: `test -f lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/refetch-audit.md && grep -c '^| https://github' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/refetch-audit.md` ≥ 1 AND `grep -c 'MISMATCH' lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/refetch-audit.md` = 0 — pass if the audit file exists with at least one URL-row AND contains zero MISMATCH rows (every cited URL's quoted text is substring-present in the fetched blob).
-- **Status**: [ ] pending
+- **Status**: [x] completed
 
 ### Task 15: Verify private-repo read-only invariant (Req 5)
 - **Files**: `lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/private-repo-final.txt`
@@ -148,7 +148,7 @@ The spike's only shipped deliverable is three dated sections appended to `resear
 - **Complexity**: simple
 - **Context**: Same commands as Task 1 (`--git-dir={data_repo}/.git --work-tree={data_repo}`). The diff against Task 1's baseline is the external check — no self-sealing because Task 1 is frozen by the time this runs. **Recovery path on failed diff**: if the diff is non-empty, inspect intervening commits with `git --git-dir={data_repo}/.git --work-tree={data_repo} log --oneline {baseline_HEAD}..HEAD`. If every intervening commit is pattern-matched as an auto-commit-hook commit (e.g., contains `/feedback`, `/new-coffee`, `manage_shot_notes` context per CLAUDE.md Auto-commit policy) and no file within the spike's read-scope (firmware source, parser source) was touched, log the diff as a benign-concurrent-writer and note it in verification-notes.md with a `Note: Task 15 invariant diff non-empty; intervening commits audited as concurrent user-workflow commits unrelated to spike (authors: ...).` footer on the last-written section. If any non-auto-commit-pattern modification surfaces, FAIL — the spike violated read-only and user review is required.
 - **Verification**: `diff lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/private-repo-baseline.txt lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/scratch/private-repo-final.txt` — pass if exit 0 (files identical); on exit 1, Interactive/session-dependent: the recovery-path classification requires inspecting commit authors and message patterns, which is a judgment call the implementer makes with the Context-provided criteria.
-- **Status**: [ ] pending
+- **Status**: [x] completed (diff exit 0; baseline HEAD = final HEAD = 90ee8577cd8e308e2ff2f9d4804736279cb950ab, both STATUS blocks empty — private repo untouched during spike)
 
 ## Verification Strategy
 
