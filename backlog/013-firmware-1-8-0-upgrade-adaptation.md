@@ -1,13 +1,13 @@
 ---
 id: "013"
 title: "Gaggimate firmware 1.8.0 upgrade adaptation"
-status: open
+status: complete
 priority: high
 type: epic
 tags: [gaggimate-1-8-0-upgrade]
 discovery_source: research/gaggimate-1-8-0-upgrade/research.md
 created: 2026-04-18
-updated: 2026-04-18
+updated: 2026-04-22
 ---
 
 # Gaggimate firmware 1.8.0 upgrade adaptation

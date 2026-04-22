@@ -26,32 +26,6 @@
     "repo": null
   },
   {
-    "id": 13,
-    "title": "Gaggimate firmware 1.8.0 upgrade adaptation",
-    "status": "backlog",
-    "priority": "high",
-    "type": "epic",
-    "tags": [
-      "gaggimate-1-8-0-upgrade"
-    ],
-    "areas": [],
-    "created": "2026-04-18",
-    "updated": "2026-04-18",
-    "blocks": [],
-    "blocked_by": [],
-    "parent": null,
-    "research": null,
-    "spec": null,
-    "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
-    "plan": null,
-    "uuid": null,
-    "lifecycle_slug": null,
-    "session_id": null,
-    "lifecycle_phase": null,
-    "schema_version": null,
-    "repo": null
-  },
-  {
     "id": 1,
     "title": "Add three-level detail parameter to analyze_shot",
     "status": "backlog",
