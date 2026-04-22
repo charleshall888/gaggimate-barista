@@ -5,11 +5,18 @@ of field-path mismatches. Used by ``test_shot_regression.py`` to compare
 transformer output against checked-in golden JSON.
 """
 
+import math
 from dataclasses import dataclass
-from typing import Literal
+from typing import Literal, Optional
 
 
 _MISSING = object()
+
+# Sentinel that, when used as a value in ``per_field_tol``, forces strict
+# equality (``==``) for that field path even when ``float_tol > 0``. The
+# sentinel is exposed as a module-level singleton so callers can write
+# ``per_field_tol={"auto_delay.delay_ms": EXACT}``.
+EXACT = object()
 
 
 @dataclass
@@ -18,13 +25,57 @@ class Mismatch:
     kind: Literal["value", "type", "length", "extra_key", "missing_key"]
     expected: object
     actual: object
+    tolerance: Optional[float] = None
 
 
 def _dict_child_path(path: str, key: str) -> str:
     return f"{path}.{key}" if path else key
 
 
-def _walk(expected: object, actual: object, path: str, out: list[Mismatch], cap: int) -> None:
+def _resolve_tol(
+    path: str,
+    float_tol: float,
+    per_field_tol: Optional[dict[str, float]],
+) -> float:
+    """Return the effective absolute tolerance for the given field path.
+
+    Returns 0.0 to mean "strict equality required". Per-field overrides
+    (including the ``EXACT`` sentinel and explicit ``None``) win over the
+    global ``float_tol``.
+    """
+    if per_field_tol is not None and path in per_field_tol:
+        override = per_field_tol[path]
+        if override is None or override is EXACT:
+            return 0.0
+        return float(override)
+    return float_tol
+
+
+def _floats_equal(expected: float, actual: float, tol: float) -> bool:
+    """Compare two floats with NaN-aware semantics.
+
+    Both NaN -> equal. Exactly one NaN -> not equal. Otherwise: strict ``==``
+    when ``tol == 0.0``, ``math.isclose(abs_tol=tol, rel_tol=0.0)`` when
+    ``tol > 0``.
+    """
+    exp_nan = math.isnan(expected)
+    act_nan = math.isnan(actual)
+    if exp_nan or act_nan:
+        return exp_nan and act_nan
+    if tol > 0.0:
+        return math.isclose(expected, actual, abs_tol=tol, rel_tol=0.0)
+    return expected == actual
+
+
+def _walk(
+    expected: object,
+    actual: object,
+    path: str,
+    out: list[Mismatch],
+    cap: int,
+    float_tol: float,
+    per_field_tol: Optional[dict[str, float]],
+) -> None:
     if len(out) >= cap:
         return
 
@@ -61,7 +112,7 @@ def _walk(expected: object, actual: object, path: str, out: list[Mismatch], cap:
             if key not in actual:
                 out.append(Mismatch(path=child_path, kind="missing_key", expected=expected[key], actual=_MISSING))
                 continue
-            _walk(expected[key], actual[key], child_path, out, cap)
+            _walk(expected[key], actual[key], child_path, out, cap, float_tol, per_field_tol)
         for key in sorted(set(actual.keys()) - set(expected.keys())):
             if len(out) >= cap:
                 return
@@ -76,23 +127,48 @@ def _walk(expected: object, actual: object, path: str, out: list[Mismatch], cap:
         for i in range(len(expected)):
             if len(out) >= cap:
                 return
-            _walk(expected[i], actual[i], f"{path}[{i}]", out, cap)
+            _walk(expected[i], actual[i], f"{path}[{i}]", out, cap, float_tol, per_field_tol)
+        return
+
+    # Leaf scalar comparison. Floats get tolerance + NaN-aware treatment;
+    # everything else (ints, strings, etc.) uses Python's strict ``==``.
+    if isinstance(expected, float) and isinstance(actual, float):
+        tol = _resolve_tol(path, float_tol, per_field_tol)
+        if not _floats_equal(expected, actual, tol):
+            out.append(
+                Mismatch(
+                    path=path,
+                    kind="value",
+                    expected=expected,
+                    actual=actual,
+                    tolerance=tol if tol > 0.0 else None,
+                )
+            )
         return
 
     if expected != actual:
         out.append(Mismatch(path=path, kind="value", expected=expected, actual=actual))
 
 
-def compare(expected: object, actual: object, max_mismatches: int = 10) -> list[Mismatch]:
+def compare(
+    expected: object,
+    actual: object,
+    max_mismatches: int = 10,
+    float_tol: float = 0.0,
+    per_field_tol: Optional[dict[str, float]] = None,
+) -> list[Mismatch]:
     out: list[Mismatch] = []
-    _walk(expected, actual, "", out, max_mismatches)
+    _walk(expected, actual, "", out, max_mismatches, float_tol, per_field_tol)
     return out
 
 
 def _format_mismatch(m: Mismatch) -> str:
     path = m.path or "<root>"
     if m.kind == "value":
-        return f"{path}: expected {m.expected!r}, got {m.actual!r}"
+        base = f"{path}: expected {m.expected!r}, got {m.actual!r}"
+        if m.tolerance is not None:
+            base += f" (abs_tol={m.tolerance!r})"
+        return base
     if m.kind == "type":
         return f"{path}: expected {type(m.expected).__name__}, got {type(m.actual).__name__}"
     if m.kind == "length":
@@ -104,8 +180,20 @@ def _format_mismatch(m: Mismatch) -> str:
     return f"{path}: unknown mismatch kind {m.kind!r}"
 
 
-def assert_equal(expected: object, actual: object, max_mismatches: int = 10) -> None:
-    mismatches = compare(expected, actual, max_mismatches=max_mismatches)
+def assert_equal(
+    expected: object,
+    actual: object,
+    max_mismatches: int = 10,
+    float_tol: float = 0.0,
+    per_field_tol: Optional[dict[str, float]] = None,
+) -> None:
+    mismatches = compare(
+        expected,
+        actual,
+        max_mismatches=max_mismatches,
+        float_tol=float_tol,
+        per_field_tol=per_field_tol,
+    )
     if not mismatches:
         return
     lines = [f"{len(mismatches)} mismatch(es) found:"]
