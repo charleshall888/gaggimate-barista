@@ -54,52 +54,57 @@
   {
     "id": 21,
     "title": "Post-upgrade drift investigation: mixed-era, retention ordering, BLE precision",
-    "status": "backlog",
+    "status": "refined",
     "priority": "high",
     "type": "spike",
     "tags": [
       "gaggimate-1-8-0-upgrade"
     ],
-    "areas": [],
+    "areas": [
+      "docs"
+    ],
     "created": "2026-04-18",
-    "updated": "2026-04-20",
+    "updated": "2026-04-21",
     "blocks": [],
     "blocked_by": [],
     "parent": "013",
     "research": null,
-    "spec": null,
+    "spec": "lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/spec.md",
     "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
     "plan": null,
     "uuid": null,
     "lifecycle_slug": null,
     "session_id": null,
-    "lifecycle_phase": null,
+    "lifecycle_phase": "plan",
     "schema_version": null,
     "repo": null
   },
   {
     "id": 18,
     "title": "Port DDSA / PhaseEndStop algorithm into /diagnose",
-    "status": "backlog",
+    "status": "refined",
     "priority": "medium",
     "type": "feature",
     "tags": [
       "gaggimate-1-8-0-upgrade"
     ],
-    "areas": [],
+    "areas": [
+      "mcp",
+      "tests"
+    ],
     "created": "2026-04-18",
-    "updated": "2026-04-20",
+    "updated": "2026-04-21",
     "blocks": [],
     "blocked_by": [],
     "parent": "013",
     "research": null,
-    "spec": null,
+    "spec": "lifecycle/port-ddsa-phaseendstop-algorithm-into-diagnose/spec.md",
     "discovery_source": "research/gaggimate-1-8-0-upgrade/research.md",
     "plan": null,
     "uuid": null,
     "lifecycle_slug": null,
     "session_id": null,
-    "lifecycle_phase": null,
+    "lifecycle_phase": "plan",
     "schema_version": null,
     "repo": null
   },

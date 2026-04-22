@@ -1,7 +1,7 @@
 ---
 id: "021"
 title: "Post-upgrade drift investigation: mixed-era, retention ordering, BLE precision"
-status: open
+status: refined
 priority: high
 type: spike
 parent: "013"
@@ -9,7 +9,11 @@ blocked-by: []
 tags: [gaggimate-1-8-0-upgrade]
 discovery_source: research/gaggimate-1-8-0-upgrade/research.md
 created: 2026-04-18
-updated: 2026-04-20
+updated: 2026-04-21
+complexity: complex
+criticality: high
+spec: lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/spec.md
+areas: [docs]
 ---
 
 # Post-upgrade drift investigation: mixed-era, retention ordering, BLE precision

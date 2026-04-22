@@ -1,0 +1,58 @@
+- ts: 2026-04-20T00:00:00Z
+  event: lifecycle_start
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  backlog_item: 018-port-ddsa-algorithm-to-diagnose
+  complexity: complex
+  criticality: high
+  status: ok
+
+- ts: 2026-04-20T00:00:00Z
+  event: clarify_critic
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  findings:
+    - "HIGH intent clarity glosses over undefined output-line format: no concrete per-phase line format for multi-phase shots (phase numbering vs naming, ordering), no auto-delay line format, and AutoDelayEstimate bucket enumeration is not given in the ticket."
+    - "HIGH scope boundedness treats the (a)/(b)/(c) prerequisite fork as bounded, but enumeration is not resolution — the three options have materially different tooling footprints and the choice was punted to 'document in the module PR'."
+    - "Complexity 'leaning complex' understates a correctness-critical numeric port of ~700 lines with hard-fail parity test, 1e-3 tolerance, and a reference the ticket itself flags as partially undocumented (English doc omits constants and edge cases)."
+    - "Requirements alignment SKIPPED is not neutral — the project has CLAUDE.md conventions and 1.8.0 semantic traps that were not checked for conflicts with this feature's module/skill changes."
+    - "Ticket 016 'complete' claim rests on commit messages, not verified fixture-shape compatibility with 018's parity-test design (reference-JS JSON sidecar format, TransformedSample contract for classify_phase_exits signature)."
+    - "Deep-link env var 'GAGGIMATE_HOST' is asserted; CLAUDE.md only references GAGGIMATE_STORAGE_PATH — verification of the actual MCP env var contract was deferred to implementation, not grounded at clarify time."
+    - "Merger of old ticket 020 into 018 is asserted as a clean consolidation without inspecting 020's original acceptance criteria for possibly-separate concerns (fallback when host unreachable, shots not yet synced, non-interactive contexts)."
+  dispositions:
+    apply: 1
+    dismiss: 5
+    ask: 1
+  applied_fixes:
+    - "Revised requirements alignment from SKIPPED to 'Partial alignment with project CLAUDE.md conventions — /consult cascade prevention and repo-first device-second don't apply to diagnostics; new module location (mcp/src/gaggimate_mcp/diagnostics/) aligns with existing MCP structure; no conflicts identified.'"
+  dismissals:
+    - finding_index: 0
+      rationale: "Detailed output-line format and AutoDelayEstimate bucket enumeration are Spec-phase concerns. The user-visible intent — per-phase exit reason, auto-delay estimate, analyzer deep-link — is unambiguous at the Clarify level. Spec's structured interview will lock exact formatting."
+    - finding_index: 2
+      rationale: "The lifecycle complexity schema is binary (simple|complex) and criticality is (low|medium|high|critical). 'Complex' + 'high' is the top non-critical rating and is what the assessment lands on. 'Critical' is reserved for security/data-loss/core-capability loss; a lossy port degrades a skill but does not remove core capability. Rating is calibrated as far as the schema allows."
+    - finding_index: 4
+      rationale: "Self-resolved: lifecycle/shot-fixture-regression-harness/ is complete with .slog + .golden.json fixtures under mcp/tests/fixtures/shots/ (shots 246, 247, 249). Adding .reference-js.json sidecars is purely additive — no format conflict. The classify_phase_exits(transformed_shot) signature matches 015's TransformedSample output already surfaced in the transformer. Research will confirm the specific field mapping."
+    - finding_index: 5
+      rationale: "Self-resolved: mcp/tests/fixtures/shots/README.md line 61 confirms GAGGIMATE_HOST is the env var MCP already reads ('Requires GAGGIMATE_HOST to resolve. Fetches the .slog from the device'). The ticket's assertion is grounded."
+    - finding_index: 6
+      rationale: "Self-resolved: read backlog/archive/020-deep-link-analyzer-in-diagnose.md. 020's AC is a single line: 'Interactive chart: http://{gaggimate_host}/analyze/{shot_id}' with 'No other behavior change in /diagnose output'. No fallback/non-sync/non-interactive concerns were folded in silently — 018's one-line requirement matches 020 exactly."
+  status: ok
+
+- ts: 2026-04-21T00:00:00Z
+  event: orchestrator_review
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  phase: specify
+  verdict: pass
+  cycle: 1
+  issues: []
+
+- ts: 2026-04-21T00:00:00Z
+  event: critical_review_applied
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  phase: specify
+  applied_fixes: 22
+  dismiss_count: 3
+  status: ok
+
+- ts: 2026-04-21T00:00:00Z
+  event: spec_approved
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  status: ok

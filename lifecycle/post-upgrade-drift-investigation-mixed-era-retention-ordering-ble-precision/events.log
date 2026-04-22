@@ -1,0 +1,71 @@
+- ts: 2026-04-20T00:00:00Z
+  event: lifecycle_start
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  backlog_id: "021"
+  source: /refine
+  status: ok
+
+- ts: 2026-04-20T00:05:00Z
+  event: clarify_critic
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  findings:
+    - "Intent clarity rated High partly on '014 format template' — but the assessment did not verify the template exists or is usable."
+    - "Intent clarity rated High despite methodological underspecification in (a) ('same coffee family if possible') and (c) ('ANY systematic drift' with no threshold or sample-count floor)."
+    - "Scope boundedness rated High ignores AC's 'spawn a follow-up ticket' action and the triage work needed to characterize drift class enough to scope that ticket."
+    - "Scope boundedness rated High treats the three-branch fallback for (a)/(c) fixture availability as clean, but effort varies substantially across branches and may require judgment calls about fixture adequacy."
+    - "Requirements alignment skipped because no requirements/ dir exists, but CLAUDE.md / MEMORY.md encode behavioral requirements (repo-first, auto-commit on data-repo-path, no-asking-for-weight) that are project requirements in practice."
+    - "Complexity rated simple conflates 'no permanent code' with 'no analytical work.' Question (c)'s field-by-field statistical comparison, bias characterization, and drift-class triage require judgment calls and ad-hoc tooling."
+    - "Criticality 'high' is inherited from the ticket's own elevation rather than independently assessed; probability-weighted criticality (most likely outcome: 'unable to test') is not engaged with."
+    - "Blocked-by 016 is rated satisfied on commit title alone, without confirming fixture and golden artifacts actually exist and are usable as reference points."
+  dispositions:
+    apply: 1
+    dismiss: 7
+    ask: 0
+  applied_fixes:
+    - "Revised complexity from simple to complex. Question (c) requires ad-hoc field-by-field comparison tooling, judgment calls about drift-magnitude thresholds and drift-class characterization, and an analytical workflow that does not follow an existing pattern in the codebase. Per clarify §5.2 ('when in doubt, prefer complex') the judgment-call content justifies the bump."
+  dismissals:
+    - finding_index: 0
+      rationale: "The AC spells out the format inline — 'question restated, method used, raw comparison data or observation, conclusion: \"drift detected\"/\"no drift\"/\"unable to test\"' — and research/gaggimate-1-8-0-upgrade/verification-notes.md demonstrates the format in use. Intent is grounded, not assumed."
+    - finding_index: 1
+      rationale: "The statistical methodology for (c) is implementation detail that research will determine by observing actual drift magnitudes. BLE precision drift (if present) would be systematic across all samples regardless of coffee identity, so 'same coffee family if possible' is a convenience qualifier, not a methodological gap."
+    - finding_index: 2
+      rationale: "Creating a follow-up backlog ticket via the /backlog skill is a mechanical, well-bounded act. The ticket explicitly scopes drift-class characterization to the spike and leaves remediation-ticket authoring as a routine next step."
+    - finding_index: 3
+      rationale: "The three branches (on-device / private-repo / neither) are enumerated with concrete actions for each. Verified directly: private-repo shot-archive contains only post-upgrade shots (246, 247, 249), confirming the 'neither' branch is the likely terminal state — which the ticket anticipates."
+    - finding_index: 4
+      rationale: "None of the CLAUDE.md rules cited are triggered by this spike's deliverable. The repo-first rule applies to profile writes; auto-commit applies when writing to data-repo-backed files (verification-notes.md is in the main repo); no-asking-for-weight is not relevant. The 'requirements/' directory is the named target of the clarify check, which is absent by design for this project."
+    - finding_index: 6
+      rationale: "Clarify's criticality framework rates downstream blast radius, not probability. The ticket's elevation argument ('/feedback runs on every rated shot,' '/diagnose compares to historical shots') is sound and grounded in how the tools are used. Probability-weighting would conflate criticality with risk."
+    - finding_index: 7
+      rationale: "Verified directly: mcp/tests/fixtures/shots/{246,247,249}.slog and the sibling .golden.json files exist; the private repo shot-archive mirrors them. The artifacts are post-upgrade by design (see 016 README: Shot 170 'was evicted by the 1.8.0 free-space purge before capture') — but the ticket body's 'Pre-upgrade fixture availability' section already names this exact constraint. The Dependencies claim is supported: 016 provides the parser/transformer methodology and the golden-output regression mechanism, not pre-upgrade shot binaries."
+  status: ok
+
+- ts: 2026-04-20T00:15:00Z
+  event: orchestrator_review
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  phase: specify
+  verdict: pass
+  cycle: 1
+  issues: []
+
+- ts: 2026-04-20T00:20:00Z
+  event: critical_review
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  phase: specify
+  angles: 3
+  synthesis: opus
+  dispositions:
+    apply: 9
+    dismiss: 0
+    ask: 0
+  applied_fixes:
+    - "Collapsed the soft-fallback verdict state into unable-to-test; removed residual-risk escape hatch."
+    - "Sharpened Req 4 with per-audit evidence-shape AC (row counts, diff blocks, command-output embeds)."
+    - "Added parser decode-surface exhibit requirement (Req 3(i)); enumeration now grounded in greppable artifact (Req 3(ii))."
+    - "git log audit must embed full command output as fenced text block; no summaries."
+    - "Eviction-loop audit must cite PR 604 with SHA and the specific mid-rebuild consistency claim."
+    - "Clarified Req 8 as advisory prose; resolved Req7/Req8/Non-Req contradiction."
+    - "Added Status: deferred-uninvestigated | verified-no-drift | drift-confirmed marker convention for verdict lines."
+    - "Downgraded Edge Case 1 (pre-upgrade fixture surfaces) to low-probability; retained only because 4.5 git-log audit could surface one."
+    - "Added double-counting prohibition between Req 3 and Req 4 evidence artifacts."
+  status: ok

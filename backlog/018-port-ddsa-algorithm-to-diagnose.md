@@ -1,7 +1,7 @@
 ---
 id: "018"
 title: "Port DDSA / PhaseEndStop algorithm into /diagnose"
-status: open
+status: refined
 priority: medium
 type: feature
 parent: "013"
@@ -9,7 +9,11 @@ blocked-by: []
 tags: [gaggimate-1-8-0-upgrade]
 discovery_source: research/gaggimate-1-8-0-upgrade/research.md
 created: 2026-04-18
-updated: 2026-04-20
+updated: 2026-04-21
+complexity: complex
+criticality: high
+spec: lifecycle/port-ddsa-phaseendstop-algorithm-into-diagnose/spec.md
+areas: [mcp,tests]
 ---
 
 # Port DDSA / PhaseEndStop algorithm into /diagnose
