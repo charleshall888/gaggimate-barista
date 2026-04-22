@@ -508,7 +508,65 @@ async def manage_profile(
                 await ws_client.select_profile(_pid)
 
                 # Re-fetch the full profile list so the caller can see the updated state.
-                updated_profiles = await ws_client.list_profiles()
+                # If the refetch fails after select succeeded (split-brain), return a
+                # partial-success response — the device DID change state, so success:true
+                # is correct; omit `profiles` to signal "verification unavailable".
+                try:
+                    updated_profiles = await ws_client.list_profiles()
+                except GaggimateError as refetch_err:
+                    logger.warning(
+                        "select_profile_list_refetch_failed",
+                        profile_id=_pid,
+                        error=str(refetch_err),
+                    )
+                    return json.dumps({
+                        "success": True,
+                        "action": "select",
+                        "selected_profile_id": _pid,
+                        "profiles_refetch_failed": True,
+                        "warning": (
+                            f"Profile selected on device; list verification unavailable: "
+                            f"{refetch_err}. "
+                            "Run manage_profile(action='list') to refresh."
+                        ),
+                    })
+
+                # Post-condition divergence check: verify the target profile is actually
+                # marked selected:true in the returned list. If not, another writer
+                # (touchscreen, concurrent MCP call, firmware edge case) changed state
+                # between our select and our list. Return success:false with the full
+                # profile list so the caller can inspect actual device state.
+                target_entry = next(
+                    (p for p in updated_profiles if p.get("id") == _pid), None
+                )
+                if target_entry is None or not target_entry.get("selected"):
+                    actually_selected = next(
+                        (p.get("id") for p in updated_profiles if p.get("selected")),
+                        None,
+                    )
+                    divergence_err = GaggimateError(
+                        ErrorCode.API_ERROR,
+                        f"Selection divergence: profile '{_pid}' is not marked selected "
+                        f"in device list after select call. "
+                        f"Device may show '{actually_selected}' instead. "
+                        "Another writer may have changed selection between operations.",
+                    )
+                    logger.error(
+                        "manage_profile_select_divergence",
+                        profile_id=_pid,
+                        actually_selected=actually_selected,
+                    )
+                    return json.dumps({
+                        "success": False,
+                        "action": "select",
+                        "error": str(divergence_err),
+                        "error_code": divergence_err.code.value,
+                        "suggestion": (
+                            f"Retry manage_profile(action='select', profile_id='{_pid}'), "
+                            "or call manage_profile(action='list') to inspect current state."
+                        ),
+                        "profiles": updated_profiles,
+                    })
 
                 return json.dumps({
                     "success": True,
