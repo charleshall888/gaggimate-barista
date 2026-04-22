@@ -17,7 +17,7 @@ from gaggimate_mcp.transformers.shot import transform_shot_for_ai
 from gaggimate_mcp.storage.profiles import ProfileStorage
 from gaggimate_mcp.storage.ratings import RatingStorage
 from gaggimate_mcp.models.rating import ShotRating, BalanceTaste
-from gaggimate_mcp.errors import GaggimateError
+from gaggimate_mcp.errors import ErrorCode, GaggimateError
 from gaggimate_mcp.diagnostics import diagnose_connection as run_diagnostics
 from gaggimate_mcp.analysis.shot_analyzer import (
     classify_phase_exits,
@@ -447,8 +447,6 @@ async def manage_profile(
             })
 
         elif action == "select":
-            from gaggimate_mcp.errors import ErrorCode
-
             def _select_error(err: GaggimateError) -> str:
                 """Return the standard five-field error shape for select failures."""
                 return json.dumps({
