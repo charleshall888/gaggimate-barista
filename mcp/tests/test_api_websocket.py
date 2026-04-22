@@ -239,6 +239,87 @@ class TestWebSocketClientShotNotes:
             assert exc_info.value.code == ErrorCode.DEVICE_UNREACHABLE
 
 
+class TestWebSocketClientSelectProfile:
+    """Tests for select_profile WebSocket method."""
+
+    @pytest.fixture
+    def config(self):
+        """Create test configuration."""
+        return GaggimateConfig(gaggimate_host="test.local")
+
+    @pytest.fixture
+    def client(self, config):
+        """Create WebSocket client with test config."""
+        return GaggimateWebSocketClient(config)
+
+    @pytest.mark.asyncio
+    async def test_select_profile_sends_correct_request(self, client):
+        """Test that select_profile sends the correct request type and id."""
+        with patch.object(client, '_send_request', new_callable=AsyncMock) as mock_send:
+            mock_send.return_value = {"tp": "res:profiles:select", "rid": "r1"}
+
+            await client.select_profile("abc-123")
+
+            mock_send.assert_called_once()
+            call_args = mock_send.call_args
+            assert call_args[0][0] == "req:profiles:select"
+            assert call_args[1]["id"] == "abc-123"
+
+    @pytest.mark.asyncio
+    async def test_select_profile_passes_through_response_dict(self, client):
+        """Test that select_profile returns the response dict unmodified."""
+        fixed_response = {"tp": "res:profiles:select", "rid": "r1"}
+
+        with patch.object(client, '_send_request', new_callable=AsyncMock) as mock_send:
+            mock_send.return_value = fixed_response
+
+            result = await client.select_profile("abc-123")
+
+            assert result == fixed_response
+
+    @pytest.mark.asyncio
+    async def test_select_profile_propagates_websocket_error(self, client):
+        """Test that select_profile propagates GaggimateError with WEBSOCKET_ERROR code."""
+        with patch.object(client, '_send_request', new_callable=AsyncMock) as mock_send:
+            mock_send.side_effect = GaggimateError(
+                ErrorCode.WEBSOCKET_ERROR,
+                "conn refused"
+            )
+
+            with pytest.raises(GaggimateError) as exc_info:
+                await client.select_profile("abc-123")
+
+            assert exc_info.value.code == ErrorCode.WEBSOCKET_ERROR
+
+    @pytest.mark.asyncio
+    async def test_select_profile_propagates_timeout(self, client):
+        """Test that select_profile propagates GaggimateError with TIMEOUT code."""
+        with patch.object(client, '_send_request', new_callable=AsyncMock) as mock_send:
+            mock_send.side_effect = GaggimateError(ErrorCode.TIMEOUT, "Request timed out")
+
+            with pytest.raises(GaggimateError) as exc_info:
+                await client.select_profile("abc-123")
+
+            assert exc_info.value.code == ErrorCode.TIMEOUT
+
+    @pytest.mark.asyncio
+    async def test_select_profile_propagates_api_error(self, client):
+        """Test that select_profile propagates GaggimateError with API_ERROR code and message."""
+        firmware_msg = "<firmware msg>"
+
+        with patch.object(client, '_send_request', new_callable=AsyncMock) as mock_send:
+            mock_send.side_effect = GaggimateError(
+                ErrorCode.API_ERROR,
+                firmware_msg
+            )
+
+            with pytest.raises(GaggimateError) as exc_info:
+                await client.select_profile("abc-123")
+
+            assert exc_info.value.code == ErrorCode.API_ERROR
+            assert exc_info.value.message == firmware_msg
+
+
 class TestWebSocketClientUrl:
     """Tests for WebSocket URL construction."""
 
