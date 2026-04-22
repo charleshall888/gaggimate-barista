@@ -19,6 +19,11 @@ from gaggimate_mcp.storage.ratings import RatingStorage
 from gaggimate_mcp.models.rating import ShotRating, BalanceTaste
 from gaggimate_mcp.errors import GaggimateError
 from gaggimate_mcp.diagnostics import diagnose_connection as run_diagnostics
+from gaggimate_mcp.analysis.shot_analyzer import (
+    classify_phase_exits,
+    estimate_auto_delay,
+    ProfileData,
+)
 
 
 # Initialize configuration and logging
@@ -484,6 +489,41 @@ async def analyze_shot(shot_id: str) -> str:
             hygiene rule holds AND vf > 0.3 AND cup weight (v) > 0.0 —
             the first observably real weight_flow_g_s sample. null when
             no sample qualifies.
+
+        Top-level DDSA fields (port of AnalyzerService.js v1.8.0):
+          phase_exits: list[PhaseExitReason] — one entry per observed phase
+            in shot_data.phases (NOT per profile phase). Each entry carries
+            the JS-mirrored per-phase block from calculateShotMetrics
+            (number, name, displayName, start, end, duration, water,
+            weight, stats, exit, profilePhase, scaleLost,
+            scalePermanentlyLost, highScaleDelay, estimatedScaleDelayMs,
+            delayReviewHint, delayReviewReason, delayReviewMs, prediction,
+            targetCalcValues) PLUS two Python-side fields:
+            exit_reason_type (Literal["weight", "volumetric", "pressure",
+            "flow", "pumped", "duration", "unknown"]) and
+            unavailable_reason (Optional[Literal["profile_unavailable"]];
+            always present, null when exit_reason_type != "unknown"). On
+            profile-fetch failure (device offline, missing UUID, profile
+            renamed, WebSocket error), every entry collapses to
+            exit_reason_type="unknown" and
+            unavailable_reason="profile_unavailable" with default zero
+            metrics. No retries, no backoff.
+          auto_delay: AutoDelayEstimate — {"delay_ms": Optional[int],
+            "auto": bool, "unavailable_reason":
+            Optional[Literal["profile_unavailable"]]}. delay_ms is the
+            auto-detected scale-delay in milliseconds (rounded to the
+            nearest 50 ms by the port's JS-parity rounding), or null when
+            no scale hits accumulated or the profile fetch failed. auto
+            is True when the value was computed by the port, False on
+            profile-unavailable degradation. unavailable_reason is always
+            present and is "profile_unavailable" only on degradation.
+          analyzer_url: str — deep-link to the gaggimate web UI's analyzer
+            chart view for this shot, of the form
+            f"http://{config.host}/analyze/{shot_id_no_leading_zeros}".
+            Constructed from the pre-normalization shot_id parameter
+            (leading zeros stripped; "000000" preserves a single "0") —
+            NOT from the 6-digit normalized_id. Always rendered, even on
+            profile-unavailable degradation.
     """
     # Normalize shot ID to 6 digits for consistent lookups
     normalized_id = shot_id.zfill(6)
@@ -498,6 +538,49 @@ async def analyze_shot(shot_id: str) -> str:
                 "error": f"Shot '{shot_id}' not found"
             })
 
+        # DDSA: classify per-phase exits and estimate auto scale-delay using
+        # the live profile snapshot. Wrapped in try/except for graceful
+        # degradation on any profile-fetch failure (network, missing UUID,
+        # renamed profile, WebSocket error). No retries, no backoff.
+        try:
+            profile_snapshot = await ws_client.load_profile(shot_data.profile_id)
+            if not profile_snapshot:
+                raise GaggimateError(
+                    f"Profile '{shot_data.profile_id}' not found on device"
+                )
+            # Cast raw device JSON to ProfileData TypedDict (no validation —
+            # accepts power-mode profiles that the Pydantic model rejects).
+            profile_data: ProfileData = profile_snapshot  # type: ignore[assignment]
+            phase_exits = classify_phase_exits(shot_data, profile_data)
+            auto_delay = estimate_auto_delay(shot_data, profile_data)
+        except Exception as profile_exc:
+            logger.warning(
+                "analyze_shot_profile_unavailable",
+                shot_id=shot_id,
+                profile_id=getattr(shot_data, "profile_id", None),
+                error=str(profile_exc),
+            )
+            phase_exits = [
+                {
+                    "exit_reason_type": "unknown",
+                    "unavailable_reason": "profile_unavailable",
+                    "number": str(pt.phase_number),
+                    "phase_number": pt.phase_number,
+                    "name": pt.phase_name,
+                    "displayName": pt.phase_name or f"Phase {pt.phase_number}",
+                }
+                for pt in shot_data.phases
+            ]
+            auto_delay = {
+                "delay_ms": None,
+                "auto": False,
+                "unavailable_reason": "profile_unavailable",
+            }
+
+        # Analyzer deep-link uses the pre-normalization shot_id parameter
+        # with leading zeros stripped ("000000" preserves a single "0").
+        analyzer_url = f"http://{config.host}/analyze/{shot_id.lstrip('0') or '0'}"
+
         # Transform for AI analysis
         transformed = transform_shot_for_ai(shot_data)
 
@@ -508,7 +591,10 @@ async def analyze_shot(shot_id: str) -> str:
             "success": True,
             "shot": transformed,
             "rating": rating_data,
-            "incomplete": shot_data.incomplete
+            "incomplete": shot_data.incomplete,
+            "phase_exits": phase_exits,
+            "auto_delay": auto_delay,
+            "analyzer_url": analyzer_url,
         })
 
     except GaggimateError as e:
