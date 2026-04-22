@@ -117,17 +117,19 @@ class TestWebSocketClientShotNotes:
             )
 
             assert result["msg"] == "Notes saved successfully"
-            mock_send.assert_called_once()
-            call_args = mock_send.call_args
-            assert call_args[0][0] == "req:history:notes:save"
-            assert call_args[1]["id"] == "100"
-            notes_data = call_args[1]["notes"]
+            assert mock_send.call_count == 2
+            assert mock_send.call_args_list[0][0][0] == "req:history:notes:get"
+            save_call = mock_send.call_args_list[1]
+            assert save_call[0][0] == "req:history:notes:save"
+            assert save_call[1]["id"] == "100"
+            notes_data = save_call[1]["notes"]
             assert notes_data["rating"] == 4
             assert notes_data["notes"] == "Excellent extraction"
             assert notes_data["balanceTaste"] == "balanced"
             assert notes_data["grindSetting"] == "12"
-            assert notes_data["doseIn"] == 18.0
-            assert notes_data["doseOut"] == 36.0
+            assert notes_data["doseIn"] == "18.0"
+            assert notes_data["doseOut"] == "36.0"
+            assert notes_data["id"] == "100"
 
     @pytest.mark.asyncio
     async def test_save_shot_notes_partial_fields(self, client):
@@ -142,10 +144,12 @@ class TestWebSocketClientShotNotes:
                 notes="Slightly sour"
             )
 
+            # call_args is the last call (save); RMW also synthesizes id
             notes_data = mock_send.call_args[1]["notes"]
             assert notes_data == {
                 "rating": 3,
-                "notes": "Slightly sour"
+                "notes": "Slightly sour",
+                "id": "100"
             }
             # Other fields should not be present
             assert "balanceTaste" not in notes_data
@@ -161,8 +165,9 @@ class TestWebSocketClientShotNotes:
 
             await client.save_shot_notes(shot_id="100", rating=5)
 
+            # call_args is the last call (save); RMW also synthesizes id
             notes_data = mock_send.call_args[1]["notes"]
-            assert notes_data == {"rating": 5}
+            assert notes_data == {"rating": 5, "id": "100"}
 
     @pytest.mark.asyncio
     async def test_save_shot_notes_normalizes_id(self, client):
