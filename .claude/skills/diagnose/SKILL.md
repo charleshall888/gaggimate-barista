@@ -230,6 +230,9 @@ Structure your diagnostic response as:
 
 ### Phase Comparison (if profile definition available)
 [Intended vs actual for each phase — pressure, flow, timing]
+- **Phase {n} ({name}):** exited on {exit_reason_type} at t+{elapsed_s}s ({target summary})
+  - Fallback: when a phase's `exit_reason_type == "unknown"` AND `unavailable_reason == "profile_unavailable"`, render the bullet as `- **Phase {n} ({name}):** exit reason unavailable (profile unavailable)` and always emit the Interactive chart link below.
+- **Estimated scale delay:** {delay_s}s ({auto | manual})
 
 ### Diagnosis
 [Correlation between telemetry and reported taste, interpreted through style-specific expectations]
@@ -241,6 +244,8 @@ Structure your diagnostic response as:
 
 ### What to Watch For
 [What user should observe on next shot to confirm diagnosis]
+
+Interactive chart: {analyzer_url}
 ```
 
 ---
