@@ -54,7 +54,7 @@
   {
     "id": 21,
     "title": "Post-upgrade drift investigation: mixed-era, retention ordering, BLE precision",
-    "status": "refined",
+    "status": "in_progress",
     "priority": "high",
     "type": "spike",
     "tags": [
@@ -74,15 +74,15 @@
     "plan": null,
     "uuid": null,
     "lifecycle_slug": null,
-    "session_id": null,
-    "lifecycle_phase": "plan",
+    "session_id": "5f77b070-5a66-405d-af67-032330b90626",
+    "lifecycle_phase": "implement",
     "schema_version": null,
     "repo": null
   },
   {
     "id": 18,
     "title": "Port DDSA / PhaseEndStop algorithm into /diagnose",
-    "status": "refined",
+    "status": "in_progress",
     "priority": "medium",
     "type": "feature",
     "tags": [
@@ -103,7 +103,7 @@
     "plan": null,
     "uuid": null,
     "lifecycle_slug": null,
-    "session_id": null,
+    "session_id": "9719c67c-3fec-441d-be9f-6e066b61edca",
     "lifecycle_phase": "plan",
     "schema_version": null,
     "repo": null

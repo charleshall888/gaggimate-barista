@@ -1,7 +1,7 @@
 ---
 id: "018"
 title: "Port DDSA / PhaseEndStop algorithm into /diagnose"
-status: refined
+status: in_progress
 priority: medium
 type: feature
 parent: "013"
@@ -14,6 +14,8 @@ complexity: complex
 criticality: high
 spec: lifecycle/port-ddsa-phaseendstop-algorithm-into-diagnose/spec.md
 areas: [mcp,tests]
+session_id: 9719c67c-3fec-441d-be9f-6e066b61edca
+lifecycle_phase: plan
 ---
 
 # Port DDSA / PhaseEndStop algorithm into /diagnose

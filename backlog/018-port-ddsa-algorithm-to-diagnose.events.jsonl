@@ -1,1 +1,3 @@
 {"v":1,"ts":"2026-04-21T12:51:12Z","event":"status_changed","item_uuid":null,"session_id":"713fba20-73d7-4032-b8df-c2095b1b7ecb","details":{"from":"open","to":"refined"}}
+{"v":1,"ts":"2026-04-22T01:07:00Z","event":"status_changed","item_uuid":null,"session_id":"9719c67c-3fec-441d-be9f-6e066b61edca","details":{"from":"refined","to":"in_progress"}}
+{"v":1,"ts":"2026-04-22T01:07:00Z","event":"phase_changed","item_uuid":null,"session_id":"9719c67c-3fec-441d-be9f-6e066b61edca","details":{"from":null,"to":"plan"}}

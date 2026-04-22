@@ -56,3 +56,28 @@
   event: spec_approved
   feature: port-ddsa-phaseendstop-algorithm-into-diagnose
   status: ok
+
+- ts: 2026-04-21T20:57:00Z
+  event: fixture_sidecars_precaptured
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  fixtures: [246, 247, 249]
+  source: "manage_profile(action=get) against live device"
+  rationale: "R6 prerequisite fulfilled pre-overnight; no device required during execution"
+  status: ok
+
+- ts: 2026-04-21T21:02:00Z
+  event: orchestrator_review
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  phase: plan
+  verdict: pass
+  cycle: 1
+  issues: []
+
+- ts: 2026-04-21T21:20:00Z
+  event: critical_review_applied
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  phase: plan
+  applied_fixes: 8
+  dismiss_count: 6
+  reviewer_angles: 4
+  status: ok

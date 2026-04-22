@@ -1,0 +1,111 @@
+{
+  "id": "hHF4cHtuR3",
+  "label": "Tropical Bloom [AI]",
+  "type": "pro",
+  "description": "Profile: Tropical Bloom [AI]",
+  "temperature": 93,
+  "favorite": true,
+  "selected": false,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Gentle Fill",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 0,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 9,
+        "flow": 2.5
+      }
+    },
+    {
+      "name": "Bloom",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 6,
+      "temperature": 0,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 0
+      }
+    },
+    {
+      "name": "Ramp",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 5,
+      "temperature": 0,
+      "transition": {
+        "type": "ease-in",
+        "duration": 4,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 8.5,
+        "flow": 0
+      },
+      "targets": [
+        {
+          "type": "pressure",
+          "operator": "gte",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "name": "Peak Hold",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 0,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 8.5,
+        "flow": 4
+      }
+    },
+    {
+      "name": "Tropical Slide",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 30,
+      "temperature": 0,
+      "transition": {
+        "type": "linear",
+        "duration": 30,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 6,
+        "flow": 0
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 50
+        }
+      ]
+    }
+  ]
+}

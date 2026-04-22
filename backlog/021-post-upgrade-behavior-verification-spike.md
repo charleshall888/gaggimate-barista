@@ -1,7 +1,7 @@
 ---
 id: "021"
 title: "Post-upgrade drift investigation: mixed-era, retention ordering, BLE precision"
-status: refined
+status: in_progress
 priority: high
 type: spike
 parent: "013"
@@ -14,6 +14,8 @@ complexity: complex
 criticality: high
 spec: lifecycle/post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision/spec.md
 areas: [docs]
+session_id: 5f77b070-5a66-405d-af67-032330b90626
+lifecycle_phase: plan
 ---
 
 # Post-upgrade drift investigation: mixed-era, retention ordering, BLE precision
