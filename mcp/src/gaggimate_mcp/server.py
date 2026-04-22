@@ -85,6 +85,10 @@ def _get_error_suggestion(error: GaggimateError) -> str:
             "Profile not found on device. "
             "Use 'manage_profile' with action='list' to see available profiles."
         ),
+        ErrorCode.INVALID_INPUT: (
+            "Invalid input parameters. "
+            "Check the error message for details on what needs to be corrected."
+        ),
         ErrorCode.SHOT_NOT_FOUND: (
             "Shot not found on device. "
             "Use 'list_recent_shots' to see available shot IDs. "
@@ -116,6 +120,10 @@ async def manage_profile(
               the profile. Omitted fields will keep their existing values.
             - 'delete': Delete an existing profile (SAFETY: Only AI-created profiles
               with ' [AI]' suffix can be deleted. Requires confirm_delete=True)
+            - 'select': Activate a profile on the device (requires profile_id or
+              profile_name, but not both). Pre-validates existence via load, then
+              sends req:profiles:select, and returns the updated profile list.
+              Note: select during an active shot is forwarded to firmware as-is.
         profile_id: Profile ID (required for 'get' and 'delete', optional for 'update')
         confirm_delete: Must be True to confirm profile deletion. This is a safety
             measure to prevent accidental deletions. Only profiles with the ' [AI]'
@@ -438,10 +446,86 @@ async def manage_profile(
                 "message": f"Profile '{profile_label}' has been permanently deleted"
             })
 
+        elif action == "select":
+            from gaggimate_mcp.errors import ErrorCode
+
+            def _select_error(err: GaggimateError) -> str:
+                """Return the standard five-field error shape for select failures."""
+                return json.dumps({
+                    "success": False,
+                    "action": "select",
+                    "error": str(err),
+                    "error_code": err.code.value,
+                    "suggestion": _get_error_suggestion(err),
+                })
+
+            try:
+                # Treat empty strings as absent for the mutex check.
+                _pid = profile_id if profile_id else None
+                _pname = profile_name if profile_name else None
+
+                # Exactly one of profile_id / profile_name must be supplied.
+                if _pid and _pname:
+                    raise GaggimateError(
+                        ErrorCode.INVALID_INPUT,
+                        "Pass exactly one of profile_id or profile_name, not both.",
+                    )
+                if not _pid and not _pname:
+                    raise GaggimateError(
+                        ErrorCode.INVALID_INPUT,
+                        "One of profile_id or profile_name is required.",
+                    )
+
+                # Name resolution: list profiles and match by label (case-sensitive).
+                if _pname:
+                    all_profiles = await ws_client.list_profiles()
+                    matches = [p for p in all_profiles if p.get("label") == _pname]
+                    if len(matches) == 0:
+                        raise GaggimateError(
+                            ErrorCode.PROFILE_NOT_FOUND,
+                            f"No profile with label '{_pname}'",
+                        )
+                    if len(matches) > 1:
+                        ids = [p.get("id") for p in matches]
+                        raise GaggimateError(
+                            ErrorCode.INVALID_INPUT,
+                            f"Multiple profiles match label '{_pname}': {ids}. "
+                            "Use profile_id to disambiguate.",
+                        )
+                    _pid = matches[0].get("id")
+
+                # Pre-validate: confirm the profile exists before selecting.
+                # load_profile returns None for missing profiles; we translate that here.
+                loaded = await ws_client.load_profile(_pid)
+                if loaded is None:
+                    raise GaggimateError(
+                        ErrorCode.PROFILE_NOT_FOUND,
+                        f"Profile not found: {_pid}",
+                    )
+
+                # Activate the profile on the device.
+                logger.info("selecting_profile_via_action", profile_id=_pid)
+                await ws_client.select_profile(_pid)
+
+                # Re-fetch the full profile list so the caller can see the updated state.
+                updated_profiles = await ws_client.list_profiles()
+
+                return json.dumps({
+                    "success": True,
+                    "action": "select",
+                    "profiles": updated_profiles,
+                    "count": len(updated_profiles),
+                })
+
+            except GaggimateError as e:
+                logger.error("manage_profile_select_error", profile_id=profile_id,
+                             profile_name=profile_name, error=str(e), code=e.code.value)
+                return _select_error(e)
+
         else:
             return json.dumps({
                 "success": False,
-                "error": f"Unknown action '{action}'. Use: list, get, create, update, delete"
+                "error": f"Unknown action '{action}'. Use: list, get, create, update, delete, select"
             })
 
     except GaggimateError as e:
