@@ -1490,21 +1490,24 @@ def _run_phase_analysis(
 
     # JS:893-904 — derive average scale/sensor delays from accumulators.
     # ``Math.round(sum/count/50)*50`` rounds the per-hit average to the
-    # nearest 50 ms bucket. When no hits accumulated under auto-adjust,
-    # the JS source falls back to the manual-mode seed (line 894-895:
-    # ``avgScaleDelay = scaleDelayMs``); the Python port surfaces that
-    # gap as ``None`` instead, matching the AutoDelayEstimate contract
-    # (``delay_ms: Optional[int]``) and Task 9's no-valid-estimate spec.
-    avg_scale_delay: Optional[int] = (
-        js_round(sum_scale_delay / count_scale_hits / 50) * 50
-        if (IS_AUTO_ADJUSTED and count_scale_hits > 0)
-        else None
-    )
-    avg_sensor_delay: Optional[int] = (
-        js_round(sum_sensor_delay / count_sensor_hits / 50) * 50
-        if (IS_AUTO_ADJUSTED and count_sensor_hits > 0)
-        else None
-    )
+    # nearest 50 ms bucket. The JS source seeds ``avgScaleDelay`` /
+    # ``avgSensorDelay`` with the input ``scaleDelayMs`` / ``sensorDelayMs``
+    # (lines 894-895) BEFORE conditionally overriding when hits accumulated;
+    # so when no hits land under auto-adjust the JS returns the seed value
+    # rather than ``null``. The Python port mirrors that seed-echo behaviour
+    # so :func:`estimate_auto_delay` stays parity-faithful for shots that
+    # produce zero scale hits (e.g. fixture 247: all phases exit on
+    # ``duration``, no weight/volumetric match → JS returns 200, the
+    # HARNESS_SETTINGS seed). The ``Optional[int]`` contract is preserved
+    # for callers but in practice the value is now always an int under
+    # auto-adjust.
+    avg_scale_delay: Optional[int] = SCALE_DELAY_MS
+    avg_sensor_delay: Optional[int] = SENSOR_DELAY_MS
+    if IS_AUTO_ADJUSTED:
+        if count_scale_hits > 0:
+            avg_scale_delay = js_round(sum_scale_delay / count_scale_hits / 50) * 50
+        if count_sensor_hits > 0:
+            avg_sensor_delay = js_round(sum_sensor_delay / count_sensor_hits / 50) * 50
 
     return {
         "phases": analyzed_phases,
