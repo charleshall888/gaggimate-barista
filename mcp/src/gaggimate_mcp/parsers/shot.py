@@ -231,7 +231,7 @@ def parse_binary_shot(data: bytes, shot_id: str) -> ShotData:
             # Read value based on type
             if field_def.field_type == 'int16':
                 value = struct.unpack_from('<h', data, field_offset)[0]
-            else:  # uint16 or uint8
+            else:  # uint16 — all non-int16 fields unpack as 2-byte unsigned
                 value = struct.unpack_from('<H', data, field_offset)[0]
 
             # Apply transform or scale

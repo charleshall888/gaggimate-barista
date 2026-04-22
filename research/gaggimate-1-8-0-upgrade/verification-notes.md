@@ -196,7 +196,7 @@ Cross-tag conclusion: `SHOT_LOG_VERSION = 5`, `SHOT_LOG_MAGIC = 0x544F4853`, and
 
 ### Private-repo archive audit
 
-Per CLAUDE.md's "no `git -C`" convention, the private data repo (`/Users/charlie.hall/Workspaces/gaggimate-barista-data`) was queried via `--git-dir`/`--work-tree`:
+The effective command is `git log --all -- mcp-data/shot-archive/`. Per CLAUDE.md's "no `git -C`" convention, it is issued with explicit `--git-dir`/`--work-tree` prefixes against the private data repo (`/Users/charlie.hall/Workspaces/gaggimate-barista-data`):
 
 ```text
 $ git --git-dir=/Users/charlie.hall/Workspaces/gaggimate-barista-data/.git --work-tree=/Users/charlie.hall/Workspaces/gaggimate-barista-data log --all -- mcp-data/shot-archive/
