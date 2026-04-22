@@ -81,3 +81,204 @@
   dismiss_count: 6
   reviewer_angles: 4
   status: ok
+
+- ts: 2026-04-21T22:00:00Z
+  event: plan_approved
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  status: ok
+
+- ts: 2026-04-21T22:00:00Z
+  event: phase_transition
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  from: plan
+  to: implement
+  status: ok
+
+- ts: 2026-04-21T22:01:00Z
+  event: batch_dispatch
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  batch: 0
+  tasks: [1, 4, 7]
+  status: ok
+
+- ts: 2026-04-21T22:10:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 1
+  batch: 0
+  status: success
+
+- ts: 2026-04-21T22:10:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 4
+  batch: 0
+  status: success
+
+- ts: 2026-04-21T22:10:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 7
+  batch: 0
+  status: success
+  note: "walker actually at mcp/tests/shot_fixture_walker.py (not plan's stated path); spec drift carried into Task 10 import"
+
+- ts: 2026-04-21T22:10:00Z
+  event: batch_dispatch
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  batch: 1
+  tasks: [2, 3, 5]
+  status: ok
+
+- ts: 2026-04-21T22:25:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 2
+  batch: 1
+  status: success
+
+- ts: 2026-04-21T22:25:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 3
+  batch: 1
+  status: success
+
+- ts: 2026-04-21T22:25:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 5
+  batch: 1
+  status: success
+
+- ts: 2026-04-21T22:25:00Z
+  event: batch_dispatch
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  batch: 2
+  tasks: [6, "8a", 13]
+  status: ok
+
+- ts: 2026-04-21T22:45:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 6
+  batch: 2
+  status: success
+
+- ts: 2026-04-21T22:45:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: "8a"
+  batch: 2
+  status: success
+
+- ts: 2026-04-21T22:45:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 13
+  batch: 2
+  status: success
+
+- ts: 2026-04-21T22:45:00Z
+  event: batch_dispatch
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  batch: 3
+  tasks: ["8b"]
+  status: ok
+
+- ts: 2026-04-21T22:55:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: "8b"
+  batch: 3
+  status: success
+  note: "PhaseExitReason widened to 22 camelCase fields; match_step omitted (internal-only in JS); smoke parity green on all 3 fixtures including 249 power phase"
+
+- ts: 2026-04-21T22:55:00Z
+  event: batch_dispatch
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  batch: 4
+  tasks: [9]
+  status: ok
+
+- ts: 2026-04-21T23:10:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 9
+  batch: 4
+  status: success
+  note: "Refactored classify_phase_exits + estimate_auto_delay onto shared _run_phase_analysis. Known divergence: fixture 247 auto_delay Python=None vs JS=200 (seed echo not mirrored); T10 must address."
+
+- ts: 2026-04-21T23:10:00Z
+  event: batch_dispatch
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  batch: 5
+  tasks: [11]
+  status: ok
+
+- ts: 2026-04-21T23:30:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 11
+  batch: 5
+  status: success
+  note: "Degraded path uses phase_number (int) per spec §17(c); normal path emits number (str) per JS. T12 must reconcile."
+
+- ts: 2026-04-21T23:30:00Z
+  event: batch_dispatch
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  batch: 6
+  tasks: [10, 12, 14, 15]
+  status: ok
+
+- ts: 2026-04-21T23:55:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 10
+  batch: 6
+  status: success
+  note: "Parity green for all 3 fixtures; seed-echo divergence fixed at source (option a); 13 EXACT entries, 0 float-tolerance entries"
+
+- ts: 2026-04-21T23:55:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 12
+  batch: 6
+  status: success
+
+- ts: 2026-04-21T23:55:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 14
+  batch: 6
+  status: success
+
+- ts: 2026-04-21T23:55:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 15
+  batch: 6
+  status: success
+
+- ts: 2026-04-21T23:55:00Z
+  event: batch_dispatch
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  batch: 7
+  tasks: [16]
+  status: ok
+
+- ts: 2026-04-21T23:55:00Z
+  event: task_complete
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  task: 16
+  batch: 7
+  status: success
+  note: "222 passed, 3 pre-existing failures in test_api_websocket RMW; diagnostics.py unchanged; all 7 gating tests green"
+
+- ts: 2026-04-21T23:55:00Z
+  event: phase_transition
+  feature: port-ddsa-phaseendstop-algorithm-into-diagnose
+  tier: complex
+  from: implement
+  to: review
+  status: ok

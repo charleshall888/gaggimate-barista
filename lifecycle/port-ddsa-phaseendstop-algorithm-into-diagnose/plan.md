@@ -13,7 +13,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: Namespace parallels existing `mcp/src/gaggimate_mcp/transformers/`. Do NOT rename or restructure `mcp/src/gaggimate_mcp/diagnostics.py` — the research doc's original proposal was rejected in favor of a non-colliding namespace.
 - **Verification**: `python -c "import gaggimate_mcp.analysis.shot_analyzer"` — pass if exit 0. AND `uv run pytest mcp/tests/test_shot_regression.py` — pass if exit 0 (the new package must not perturb pytest autodiscovery, fixture paths, or import order for the existing regression test — this is a cheap early gate on package-level side effects).
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 2: Define TypedDicts, constants, ANALYZER_JS_VERSION
 - **Files**: `mcp/src/gaggimate_mcp/analysis/shot_analyzer.py`
@@ -22,7 +22,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: Signatures — `class PhaseExitReason(TypedDict)` with field list matching R5. Reference `mcp/src/gaggimate_mcp/transformers/shot.py` TypedDict style. Do NOT route `ProfileData` through `mcp/src/gaggimate_mcp/models/profile.py` Pydantic — DDSA deliberately reads raw JSON (Technical Constraint §`ProfileData`).
 - **Verification**: `grep -c 'TypedDict' mcp/src/gaggimate_mcp/analysis/shot_analyzer.py` — pass if count ≥ 5. `grep -E 'PREDICTIVE_WINDOW_MS *= *4000|LAST_PHASE_UNDERSHOOT_MIN_G *= *2|LAST_PHASE_UNDERSHOOT_MAX_G *= *6|LAST_PHASE_OVERSHOOT_MAX_G *= *4|LAST_PHASE_ESTIMATED_DELAY_MAX_MS *= *4000|ANALYZER_JS_VERSION *= *.v1.8.0.' mcp/src/gaggimate_mcp/analysis/shot_analyzer.py | wc -l` — pass if count = 6.
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 3: Implement `js_round` helper + `test_js_round.py`
 - **Files**: `mcp/src/gaggimate_mcp/analysis/shot_analyzer.py`, `mcp/tests/test_js_round.py` (new)
@@ -31,7 +31,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: Reference asserts: `js_round(0.5) == 1`, `js_round(-0.5) == 0`, `js_round(2.5) == 3`, `js_round(-2.5) == -2`, `js_round(24.5) == 25`. Implementation sketch: `math.floor(value + 0.5)` for non-negative, `-math.floor(-value + 0.5)` for negative, with an `if value >= 0` branch.
 - **Verification**: `uv run pytest mcp/tests/test_js_round.py -v` — pass if exit 0, 5 asserts green.
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 4: Vendor JS harness files + package.json
 - **Files**: `mcp/tests/fixtures/shots/harness/analyzer-service.v1.8.0.js` (new), `mcp/tests/fixtures/shots/harness/parse-binary-shot.v1.8.0.js` (new), `mcp/tests/fixtures/shots/harness/package.json` (new)
@@ -40,7 +40,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: Source URLs — `https://raw.githubusercontent.com/jniebuhr/gaggimate/v1.8.0/web/src/pages/ShotAnalyzer/services/AnalyzerService.js` and `.../web/src/pages/ShotHistory/parseBinaryShot.js`. Research note: `parseBinaryShot.js` is required because `calculateShotMetrics` expects pre-parsed samples, not `.slog` bytes.
 - **Verification**: `ls mcp/tests/fixtures/shots/harness/analyzer-service.v1.8.0.js mcp/tests/fixtures/shots/harness/parse-binary-shot.v1.8.0.js mcp/tests/fixtures/shots/harness/package.json` — pass if exit 0 (all three present). `node -e "import('./mcp/tests/fixtures/shots/harness/analyzer-service.v1.8.0.js').then(m => console.log(typeof m.calculateShotMetrics))"` — pass if stdout is `function`.
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 5: Write Node `capture.js` entry script
 - **Files**: `mcp/tests/fixtures/shots/harness/capture.js` (new)
@@ -49,7 +49,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: Canonical serializer helper sketch: recursive `sortKeys(obj)` that sorts object keys alphabetically, then `JSON.stringify(sortKeys(result), null, 2)`. Script must be runnable from repo root; use `import.meta.url` / `fileURLToPath` for path resolution. `HARNESS_SETTINGS` is declared at module top with the citation comment so R-drift-risk is mitigated by local readability.
 - **Verification**: `node mcp/tests/fixtures/shots/harness/capture.js --all` — pass if exit 0 and all three `.reference-js.json` files are written (verified by Task 6).
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 6: Generate reference-JS sidecars for 246/247/249
 - **Files**: `mcp/tests/fixtures/shots/246.reference-js.json` (new), `mcp/tests/fixtures/shots/247.reference-js.json` (new), `mcp/tests/fixtures/shots/249.reference-js.json` (new)
@@ -58,7 +58,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: The `.profile.json` sidecars already exist (pre-committed 2026-04-21 via live device capture — see R6). No device needed. Re-run of capture.js against unchanged inputs must produce byte-identical output (canonical serializer guarantee).
 - **Verification**: `ls mcp/tests/fixtures/shots/{246,247,249}.reference-js.json` — pass if exit 0 (all three exist). Idempotency check: `node mcp/tests/fixtures/shots/harness/capture.js --all && git diff --exit-code mcp/tests/fixtures/shots/*.reference-js.json` — pass if exit 0 (re-run leaves no diff; note this verifies determinism, not correctness — reference-JS IS the normative oracle).
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 7: Extend `shot_fixture_walker.py` with tolerance parameters
 - **Files**: `mcp/tests/fixtures/shots/shot_fixture_walker.py`
@@ -67,7 +67,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: Define `EXACT` as a module-level sentinel (e.g., `EXACT = object()`). Default behavior with `float_tol=0.0` must be byte-identical to pre-change — 016's regression contract is preserved by keeping both params opt-in. Field-path string format should match the walker's existing mismatch-message convention.
 - **Verification**: `uv run pytest mcp/tests/test_shot_fixture_walker.py` — pass if exit 0 (existing tests unchanged).
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 8a: Port DDSA helpers + unit tests (scale-lost propagation covered)
 - **Files**: `mcp/src/gaggimate_mcp/analysis/shot_analyzer.py`, `mcp/tests/test_shot_analyzer_helpers.py` (new)
@@ -76,7 +76,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: complex
 - **Context**: `ShotData` is the existing dataclass at `mcp/src/gaggimate_mcp/parsers/shot.py:105` (verified via grep) — DDSA operates on raw ~100 ms samples (Research §Critical gap), NOT downsampled `TransformedShot`. Reference the vendored JS at `mcp/tests/fixtures/shots/harness/analyzer-service.v1.8.0.js` during the port for line-by-line translation. Helpers should NOT import from each other circularly; if a scale-lost site needs a helper, inline the site inside the helper's caller.
 - **Verification**: `uv run pytest mcp/tests/test_shot_analyzer_helpers.py -v` — pass if exit 0, all unit tests green (including ≥ 2 scale-lost flag propagation cases). `grep -nE '^[[:space:]]*round\(' mcp/src/gaggimate_mcp/analysis/shot_analyzer.py` — pass if no output (no bare `round()` calls).
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 8b: Port `classify_phase_exits` main algorithm
 - **Files**: `mcp/src/gaggimate_mcp/analysis/shot_analyzer.py`
@@ -85,7 +85,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: complex
 - **Context**: Re-use Task 8a's private helpers rather than re-implementing — the port is an integration task over helpers, not a full translation. Output shape is `list[PhaseExitReason]` (one per phase of `raw_shot.phases`). Handle empty `profile_snapshot.phases` and `raw_shot.phases` mismatches per the JS source's guards.
 - **Verification**: `python -c "from gaggimate_mcp.analysis.shot_analyzer import classify_phase_exits; import inspect; sig = inspect.signature(classify_phase_exits); assert list(sig.parameters) == ['raw_shot', 'profile_snapshot'], sig"` — pass if exit 0 (function signature matches R4). `grep -nE '^[[:space:]]*round\(' mcp/src/gaggimate_mcp/analysis/shot_analyzer.py` — pass if no output (still no bare `round()` after integration).
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 9: Port `estimate_auto_delay`
 - **Files**: `mcp/src/gaggimate_mcp/analysis/shot_analyzer.py`
@@ -94,7 +94,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: The 14 JS lines are short but operate on derived metrics — Task 8a's helpers provide the shared primitives. `delay_ms` must be an `int` or `None` — never `float` (R17 asserts this). `AutoDelayEstimate` TypedDict from Task 2.
 - **Verification**: `python -c "from gaggimate_mcp.analysis.shot_analyzer import estimate_auto_delay, AutoDelayEstimate; import inspect; sig = inspect.signature(estimate_auto_delay); assert list(sig.parameters) == ['raw_shot', 'profile_snapshot', 'manual_delay_ms'], sig"` — pass if exit 0.
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 10: Parity test `test_phase_end_stop_parity.py`
 - **Files**: `mcp/tests/test_phase_end_stop_parity.py` (new)
@@ -103,7 +103,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: complex
 - **Context**: Follow the gold-standard pattern in `mcp/tests/test_shot_regression.py` (parametrize over `FIXTURE_DIR.glob("*.slog")`, `.stem` as id, `pytest.fail` on missing sibling). `PER_FIELD_TOL` is a `dict[str, Union[float, object]]` where `EXACT` sentinel values force strict equality. Use `from mcp.tests.fixtures.shots.shot_fixture_walker import compare, EXACT`. On failure, the walker's mismatch message (Task 7) reports field path + expected + actual + effective tolerance; this is what overnight uses to route recovery (see Verification Strategy → Recovery Routing).
 - **Verification**: `uv run pytest mcp/tests/test_phase_end_stop_parity.py -v` — pass if exit 0, all three fixtures green. `grep -c 'EXACT' mcp/tests/test_phase_end_stop_parity.py` — pass if count ≥ 7 (3 named fields from R11 plus at least 4 of the 6 Math.round-produced fields; ≥ 7 surfaces under-coverage if the Math.round-producing fields are missed). `grep -B 1 '".*":.*[0-9]' mcp/tests/test_phase_end_stop_parity.py | grep -c '^#'` — pass if count equals the number of non-EXACT numeric entries in `PER_FIELD_TOL`.
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 11: Extend `analyze_shot` MCP tool response
 - **Files**: `mcp/src/gaggimate_mcp/server.py`
@@ -112,7 +112,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: `GaggimateConfig.gaggimate_host` at `mcp/src/gaggimate_mcp/config.py:7-17,42-45` exposes `.host`. `analyze_shot` is at `mcp/src/gaggimate_mcp/server.py:458-530`. Existing keys (`success`, `shot`, `rating`, `incomplete`, `error`, `error_code`, `suggestion`, `exception_type`) remain unchanged — additive only. `ws_client.load_profile` returns a dict matching the device profile JSON shape (raw device output); cast/adapt to `ProfileData` as needed.
 - **Verification**: `grep -cE '"phase_exits"|"auto_delay"|"analyzer_url"' mcp/src/gaggimate_mcp/server.py` — pass if count ≥ 3 (all three keys assigned in the response dict). Note: real correctness of the response is gated by Task 12's end-to-end test; this grep is the task-local smoke check.
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 12: End-to-end `analyze_shot` DDSA response test
 - **Files**: `mcp/tests/test_analyze_shot_ddsa_response.py` (new)
@@ -121,7 +121,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: Async mocking pattern — follow `mcp/tests/test_save_shot_notes_rmw.py` (`AsyncMock`, `monkeypatch`, `importlib.reload`). JSON `NaN`/`Infinity` check: `assert "NaN" not in raw_json_str and "Infinity" not in raw_json_str` after `json.dumps(..., allow_nan=False)` OR via explicit type checks on parsed values.
 - **Verification**: `uv run pytest mcp/tests/test_analyze_shot_ddsa_response.py -v` — pass if exit 0, all parametrized cases + degradation case green.
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 13: `ANALYZER_JS_VERSION` consistency test
 - **Files**: `mcp/tests/test_analyzer_version_consistency.py` (new)
@@ -130,7 +130,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: Use `pathlib.Path(__file__).parent / "fixtures" / "shots" / "harness"` for glob root.
 - **Verification**: `uv run pytest mcp/tests/test_analyzer_version_consistency.py -v` — pass if exit 0.
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 14: Update `/diagnose` skill Response Format
 - **Files**: `.claude/skills/diagnose/SKILL.md`
@@ -139,7 +139,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: Heading targets — use section headings (`### Phase Comparison`, `### What to Watch For`), not line numbers; line ranges in spec are approximate. No behavior change to the "2b. COMPARE Intended vs Actual" section or the `<claims>` block.
 - **Verification**: `grep -c 'exited on' .claude/skills/diagnose/SKILL.md` — pass if count ≥ 1. `grep -c 'Estimated scale delay' .claude/skills/diagnose/SKILL.md` — pass if count ≥ 1. `grep -c 'Interactive chart:' .claude/skills/diagnose/SKILL.md` — pass if count ≥ 1. `grep -c 'profile unavailable' .claude/skills/diagnose/SKILL.md` — pass if count ≥ 1.
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 15: Create `mcp/README.md`
 - **Files**: `mcp/README.md` (new)
@@ -148,7 +148,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: `mcp/README.md` does not currently exist — it is created by this task. The repo-root `README.md` is unchanged (ADDED list in spec).
 - **Verification**: `grep -c '^## Prerequisites' mcp/README.md` = 1; `grep -c '^## Re-syncing shot-analyzer on firmware upgrades' mcp/README.md` = 1; `grep -c '^## Adding a new fixture' mcp/README.md` = 1; `grep -c '^## Known coverage gaps' mcp/README.md` = 1 — all four checks must pass.
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ### Task 16: Full test sweep + regression check
 - **Files**: none (invocation only)
@@ -157,7 +157,7 @@ Port Gaggimate v1.8.0's `calculateShotMetrics` + `detectAutoDelay` from `Analyze
 - **Complexity**: simple
 - **Context**: This is the end-of-feature smoke gate — if anything regresses, the feature is not complete.
 - **Verification**: `uv run pytest mcp/tests/` — pass if exit 0. `git diff HEAD -- mcp/src/gaggimate_mcp/diagnostics.py` — pass if no output (R16).
-- **Status**: [ ] pending
+- **Status**: [x] complete
 
 ## Verification Strategy
 

@@ -15,7 +15,7 @@ criticality: high
 spec: lifecycle/port-ddsa-phaseendstop-algorithm-into-diagnose/spec.md
 areas: [mcp,tests]
 session_id: 9719c67c-3fec-441d-be9f-6e066b61edca
-lifecycle_phase: plan
+lifecycle_phase: review
 ---
 
 # Port DDSA / PhaseEndStop algorithm into /diagnose
