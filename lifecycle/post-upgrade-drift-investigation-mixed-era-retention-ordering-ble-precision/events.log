@@ -69,3 +69,85 @@
     - "Downgraded Edge Case 1 (pre-upgrade fixture surfaces) to low-probability; retained only because 4.5 git-log audit could surface one."
     - "Added double-counting prohibition between Req 3 and Req 4 evidence artifacts."
   status: ok
+
+- ts: 2026-04-21T21:00:00Z
+  event: complexity_override
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  from: simple
+  to: complex
+  source: backfill_from_clarify_critic
+  note: "clarify_critic applied complexity bump but did not log a formal override event; backfilling so state detection resolves correctly on resume"
+
+- ts: 2026-04-21T21:00:00Z
+  event: criticality_override
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  from: medium
+  to: high
+  source: backfill_from_backlog_frontmatter
+  note: "lifecycle_start event omitted criticality field; backfilling from backlog frontmatter (criticality=high, user-approved during refine)"
+
+- ts: 2026-04-21T21:00:00Z
+  event: phase_transition
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  from: specify
+  to: plan
+
+- ts: 2026-04-21T21:05:00Z
+  event: orchestrator_review
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  phase: plan
+  verdict: flag
+  cycle: 1
+  issues:
+    - "P1: Task 9 (header-region byte enumeration, 431 bytes × 2 tags = 862 byte-positions) realistic envelope is 60–120 min — materially exceeds the 5–15 min/task sizing guideline. Fix by splitting into per-tag subtasks (9a: v1.7.3; 9b: v1.8.0) to halve each."
+
+- ts: 2026-04-21T21:06:00Z
+  event: orchestrator_dispatch_fix
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  phase: plan
+  mode: same_context
+  issue: "P1 flag — split Task 9 into Task 9a (v1.7.3 header-region byte enumeration) and Task 9b (v1.8.0 header-region byte enumeration); update Task 13's Depends on from [6, 7, 8, 9, 10, 11] to [6, 7, 8, 9a, 9b, 10, 11]."
+  rationale: "Direct edit by orchestrator — narrow structural split, no anchoring risk given bounded scope; subagent dispatch would amortize 17KB plan reload onto a one-task edit."
+
+- ts: 2026-04-21T21:10:00Z
+  event: orchestrator_review
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  phase: plan
+  verdict: pass
+  cycle: 2
+  issues: []
+  note: "Task 9 split into 9a/9b; per-task envelope halved and parallelism enabled. Remaining oversized audit tasks (3, 5, 6, 7, 8) documented in Veto Surface as inherent-to-deep-audit. P2–P7 unchanged from cycle 1 evaluation."
+
+- ts: 2026-04-21T21:30:00Z
+  event: critical_review
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  phase: plan
+  angles: 4
+  synthesis: opus
+  dispositions:
+    apply: 12
+    dismiss: 2
+    ask: 0
+  applied_fixes:
+    - "Task 6 verification: split `decoded|undecoded` alternation into two word-boundary greps (\\bdecoded\\b and \\bundecoded\\b) to eliminate superstring overlap; added fenced-block check after struct heading."
+    - "Task 7 verification: require Conclusion/Verdict line per path drawn from three-value vocabulary (string intermediate present|absent|cannot trace); guards against empty path headings."
+    - "Task 8 verification: added distinct-offset check (≥ 29 unique column-2 values); guards against 58 duplicate rows of the same offset."
+    - "Task 3 and Task 11 verification: added fenced-block count check in addition to URL count; SHA-pinned URLs must be paired with adjacent quoted-line blocks."
+    - "Task 1: added scratch/.gitignore creation (single asterisk) so all intermediate audit artifacts stay uncommitted by default — resolves Veto Surface ambiguity on scratch-dir commit handling."
+    - "Added Task 14: independent re-fetch verification of SHA-pinned citations — implements spec Edge Case 7's two-fetch anti-hallucination pattern; every URL in the three new sections is re-WebFetched and quoted text substring-matched against blob content. Any MISMATCH fails the audit."
+    - "Renumbered original Task 14 → Task 15 (private-repo invariant); added recovery-path Context with auto-commit-hook filter criteria; Verification marked Interactive/session-dependent on non-empty diff (judgment call per Context criteria)."
+    - "Task 13 verification: added mechanical double-counting check — require six distinct subsection heading strings in section (c) body (Decode surface, BLE paths, Phase-transition bytes, Header-region bytes, platformio.ini diff, Sensor sampling)."
+    - "Verification Strategy: added item 4 (re-fetch audit zero MISMATCH), item 7 (3/3 unable-to-test cascade triggers user review before closure), item 9 (structural vs. content verification boundary explicitly stated); tightened item 3 with SHA consistency cross-check between URL and provenance line."
+    - "Veto Surface: added BT-scale vendor-module pre-loaded-trigger entry; added symmetric SPOF entry for (a) and (c); added private-repo invariant recovery-path entry."
+    - "Overview rewritten to reflect five-strand decomposition (was four) with Tasks 14 and 15 explicitly covered."
+  dismissed:
+    - "Task 5 empty git-log output: spec explicitly permits empty output ('If the output is empty (expected per research), embed the empty result with the command line preceding it'). Mechanically distinguishing real-empty from fabricated-empty requires out-of-band signal the plan cannot produce. Substring defense absent by design."
+    - "Recommendation guardrail as substring check: adding more substrings never catches all rephrasings. Semantic enforcement (catching 'automated periodic capture' etc.) is lifecycle review-phase's responsibility; plan's substring check is first-line defense only."
+  status: ok
+
+- ts: 2026-04-22T01:30:10Z
+  event: phase_transition
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  tier: complex
+  from: plan
+  to: implement
