@@ -619,11 +619,29 @@ def _build_default_phase_exit(
     )
 
 
-def classify_phase_exits(
+def _run_phase_analysis(
     raw_shot: "ShotData",
     profile_snapshot: ProfileData,
-) -> list[PhaseExitReason]:
-    """Classify why each phase ended.
+) -> dict[str, Any]:
+    """Internal port of ``calculateShotMetrics`` (JS lines 208-991).
+
+    Returns a dict with two keys:
+
+    * ``phases``: ``list[PhaseExitReason]`` — one per observed phase, the
+      payload exposed by :func:`classify_phase_exits`.
+    * ``auto_delay_settings``: ``{"scaleDelayMs": Optional[int],
+      "sensorDelayMs": Optional[int]}`` — the JS ``usedSettings`` object
+      consumed by :func:`estimate_auto_delay`. Each value is the average
+      delay across all hits, rounded to the nearest 50 ms via
+      ``Math.round(sum/count/50)*50``; ``None`` when no hits accumulated.
+
+    Both ``classify_phase_exits`` and ``estimate_auto_delay`` are thin
+    wrappers over this single internal pass — neither re-runs the
+    expensive per-phase analysis. The accumulators ``sum_scale_delay`` /
+    ``count_scale_hits`` / ``sum_sensor_delay`` / ``count_sensor_hits``
+    mirror the JS source (lines 263-266) and are incremented at the same
+    three sites: the main match (JS:607-611) and the two last-phase
+    fallback paths (JS:751-752, 781-782).
 
     Direct port of the per-phase body of ``calculateShotMetrics``
     (``AnalyzerService.js`` v1.8.0 lines 208-991). Returns one
@@ -658,10 +676,23 @@ def classify_phase_exits(
     SENSOR_DELAY_MS = 200
     IS_AUTO_ADJUSTED = True
 
+    # JS:263-266 — auto-delay accumulators consumed at JS:893-904 to derive
+    # ``usedSettings``. Surfaced through this helper so estimate_auto_delay
+    # can read them without re-running the per-phase analysis.
+    sum_scale_delay: float = 0.0
+    count_scale_hits: int = 0
+    sum_sensor_delay: float = 0.0
+    count_sensor_hits: int = 0
+
+    empty_settings: dict[str, Optional[int]] = {
+        "scaleDelayMs": None,
+        "sensorDelayMs": None,
+    }
+
     g_samples = _shot_samples(raw_shot)
     if not g_samples:
         # JS line 210-212: defensive guard for empty sample data
-        return []
+        return {"phases": [], "auto_delay_settings": empty_settings}
 
     sample_interval = _shot_sample_interval(raw_shot)
     global_start_time = g_samples[0]["t"]
@@ -678,7 +709,7 @@ def classify_phase_exits(
 
     sorted_phase_keys = sorted(phases.keys())
     if not sorted_phase_keys:
-        return []
+        return {"phases": [], "auto_delay_settings": empty_settings}
     last_phase_key = sorted_phase_keys[-1]
 
     # --- 2. BREW MODE DETECTION ---
@@ -714,7 +745,7 @@ def classify_phase_exits(
                 )
             )
             _ = p_start, p_end  # quiet linters
-        return out
+        return {"phases": out, "auto_delay_settings": empty_settings}
 
     # --- 4. PHASE-BY-PHASE ANALYSIS ---
     analyzed_phases: list[PhaseExitReason] = []
@@ -1151,6 +1182,17 @@ def classify_phase_exits(
                         if IS_AUTO_ADJUSTED and match["delayMs"] >= s_interval * 2:
                             set_phase_delay_review_hint(match["delayMs"], "auto-delay")
 
+                        # JS:605-613 — split match.delayMs into scale vs sensor
+                        # bucket based on exit type. Only accumulated when
+                        # IS_AUTO_ADJUSTED (always True in this port).
+                        if IS_AUTO_ADJUSTED:
+                            if exit_type in ("weight", "volumetric"):
+                                sum_scale_delay += match["delayMs"]
+                                count_scale_hits += 1
+                            else:
+                                sum_sensor_delay += match["delayMs"]
+                                count_sensor_hits += 1
+
                         found_match = True
 
                         # Compute calculated values for ALL targets at matched delay
@@ -1303,6 +1345,11 @@ def classify_phase_exits(
                                         )
                                         exit_type = weight_target["type"]
                                         final_predicted_weight = weight_target["value"]
+                                        # JS:751-752 — fallback-overshoot delay
+                                        # always accumulates into the scale bucket
+                                        # (weight target only).
+                                        sum_scale_delay += calculated_delay
+                                        count_scale_hits += 1
                                         set_phase_delay_review_hint(
                                             calculated_delay, "fallback-overshoot"
                                         )
@@ -1331,6 +1378,10 @@ def classify_phase_exits(
                                         )
                                         exit_type = weight_target["type"]
                                         final_predicted_weight = weight_target["value"]
+                                        # JS:781-782 — fallback-undershoot delay
+                                        # also accumulates into the scale bucket.
+                                        sum_scale_delay += estimated_delay
+                                        count_scale_hits += 1
                                         set_phase_delay_review_hint(
                                             estimated_delay, "fallback-undershoot"
                                         )
@@ -1437,4 +1488,102 @@ def classify_phase_exits(
         )
         analyzed_phases.append(phase_exit)
 
-    return analyzed_phases
+    # JS:893-904 — derive average scale/sensor delays from accumulators.
+    # ``Math.round(sum/count/50)*50`` rounds the per-hit average to the
+    # nearest 50 ms bucket. When no hits accumulated under auto-adjust,
+    # the JS source falls back to the manual-mode seed (line 894-895:
+    # ``avgScaleDelay = scaleDelayMs``); the Python port surfaces that
+    # gap as ``None`` instead, matching the AutoDelayEstimate contract
+    # (``delay_ms: Optional[int]``) and Task 9's no-valid-estimate spec.
+    avg_scale_delay: Optional[int] = (
+        js_round(sum_scale_delay / count_scale_hits / 50) * 50
+        if (IS_AUTO_ADJUSTED and count_scale_hits > 0)
+        else None
+    )
+    avg_sensor_delay: Optional[int] = (
+        js_round(sum_sensor_delay / count_sensor_hits / 50) * 50
+        if (IS_AUTO_ADJUSTED and count_sensor_hits > 0)
+        else None
+    )
+
+    return {
+        "phases": analyzed_phases,
+        "auto_delay_settings": {
+            "scaleDelayMs": avg_scale_delay,
+            "sensorDelayMs": avg_sensor_delay,
+        },
+    }
+
+
+def classify_phase_exits(
+    raw_shot: "ShotData",
+    profile_snapshot: ProfileData,
+) -> list[PhaseExitReason]:
+    """Classify why each phase ended.
+
+    Thin wrapper over :func:`_run_phase_analysis` that returns only the
+    per-phase exit-reason list (the JS ``phases`` field of
+    ``calculateShotMetrics`` output). The auto-delay average is computed
+    in the same internal pass and exposed separately via
+    :func:`estimate_auto_delay`.
+
+    See ``_run_phase_analysis`` for the full algorithm port (JS lines
+    208-991), helper composition, scale-lost-flag wiring, and constraints.
+    """
+    return _run_phase_analysis(raw_shot, profile_snapshot)["phases"]
+
+
+def estimate_auto_delay(
+    raw_shot: "ShotData",
+    profile_snapshot: ProfileData,
+    manual_delay_ms: Optional[int] = None,
+) -> AutoDelayEstimate:
+    """Estimate the auto scale-delay for a shot.
+
+    Direct port of ``detectAutoDelay`` (``AnalyzerService.js`` v1.8.0
+    lines 993-1006).
+
+    When ``manual_delay_ms`` is provided, short-circuits without
+    estimation and returns ``{"delay_ms": manual_delay_ms, "auto": False,
+    "unavailable_reason": None}`` — Python-specific simplification of the
+    JS contract (the JS source seeds calculateShotMetrics with
+    ``manualDelay`` and still runs the optimization loop; the Python
+    surface treats a configured manual delay as authoritative).
+
+    Otherwise delegates to :func:`_run_phase_analysis` (sharing the
+    Task 8a/8b helper composition via module scope, so neither
+    ``classify_phase_exits`` nor this function re-runs the per-phase
+    analysis when both are called) and returns the
+    ``usedSettings.scaleDelayMs`` value as the auto-detected delay.
+    ``delay_ms`` is an ``int`` (rounded to the nearest 50 ms by the
+    internal helper) or ``None`` when no scale hits accumulated and
+    therefore no estimate is available.
+    """
+    if manual_delay_ms is not None:
+        return AutoDelayEstimate(
+            delay_ms=manual_delay_ms,
+            auto=False,
+            unavailable_reason=None,
+        )
+
+    analysis = _run_phase_analysis(raw_shot, profile_snapshot)
+    settings = analysis["auto_delay_settings"]
+    scale_delay_ms = settings.get("scaleDelayMs")
+
+    # ``_run_phase_analysis`` produces ``scaleDelayMs`` via ``js_round(...) * 50``
+    # which is already a Python ``int``; coerce defensively (NaN/inf cannot
+    # reach this branch — guarded by ``count_scale_hits > 0`` upstream) to
+    # satisfy R17's strict-``int`` contract enforced by
+    # test_analyze_shot_ddsa_response.py.
+    if scale_delay_ms is None:
+        delay_ms: Optional[int] = None
+    elif isinstance(scale_delay_ms, int):
+        delay_ms = scale_delay_ms
+    else:
+        delay_ms = js_round(scale_delay_ms)
+
+    return AutoDelayEstimate(
+        delay_ms=delay_ms,
+        auto=True,
+        unavailable_reason=None,
+    )
