@@ -1,0 +1,8 @@
+{"v":1,"ts":"2026-04-22T12:02:53Z","event":"status_changed","item_uuid":"67b2e47f-c2ce-4690-8c6a-0b6415fc3878","session_id":"465401fb-843d-48a3-baea-2e761d25f93c","details":{"from":null,"to":"backlog"}}
+{"v":1,"ts":"2026-04-22T12:05:54Z","event":"status_changed","item_uuid":"67b2e47f-c2ce-4690-8c6a-0b6415fc3878","session_id":"b30d7f18-a806-439e-9390-526baebc424f","details":{"from":"backlog","to":"in_progress"}}
+{"v":1,"ts":"2026-04-22T12:05:54Z","event":"phase_changed","item_uuid":"67b2e47f-c2ce-4690-8c6a-0b6415fc3878","session_id":"b30d7f18-a806-439e-9390-526baebc424f","details":{"from":null,"to":"research"}}
+{"v":1,"ts":"2026-04-22T13:02:24Z","event":"phase_changed","item_uuid":"67b2e47f-c2ce-4690-8c6a-0b6415fc3878","session_id":"b30d7f18-a806-439e-9390-526baebc424f","details":{"from":"research","to":"plan"}}
+{"v":1,"ts":"2026-04-22T16:08:59Z","event":"phase_changed","item_uuid":"67b2e47f-c2ce-4690-8c6a-0b6415fc3878","session_id":"48817c3a-0a73-430d-94fb-c1d34cefc442","details":{"from":"plan","to":"implement"}}
+{"v":1,"ts":"2026-04-22T16:35:03Z","event":"phase_changed","item_uuid":"67b2e47f-c2ce-4690-8c6a-0b6415fc3878","session_id":"48817c3a-0a73-430d-94fb-c1d34cefc442","details":{"from":"implement","to":"review"}}
+{"v":1,"ts":"2026-04-22T16:39:55Z","event":"phase_changed","item_uuid":"67b2e47f-c2ce-4690-8c6a-0b6415fc3878","session_id":"48817c3a-0a73-430d-94fb-c1d34cefc442","details":{"from":"review","to":"complete"}}
+{"v":1,"ts":"2026-04-22T16:40:18Z","event":"status_changed","item_uuid":"67b2e47f-c2ce-4690-8c6a-0b6415fc3878","session_id":"48817c3a-0a73-430d-94fb-c1d34cefc442","details":{"from":"in_progress","to":"complete"}}
