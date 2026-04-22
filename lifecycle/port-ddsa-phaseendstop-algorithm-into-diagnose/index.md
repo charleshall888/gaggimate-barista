@@ -2,10 +2,10 @@
 feature: port-ddsa-phaseendstop-algorithm-into-diagnose
 parent_backlog_uuid: null
 parent_backlog_id: 018
-artifacts: ["research", "spec", "plan"]
+artifacts: ["research", "spec", "plan", "review"]
 tags: [gaggimate-1-8-0-upgrade]
 created: 2026-04-20
-updated: 2026-04-21
+updated: 2026-04-22
 ---
 
 # [[018-port-ddsa-algorithm-to-diagnose|Port DDSA / PhaseEndStop algorithm into /diagnose]]
@@ -15,3 +15,4 @@ Feature lifecycle for [[018-port-ddsa-algorithm-to-diagnose]].
 - Research: [[port-ddsa-phaseendstop-algorithm-into-diagnose/research|research.md]]
 - Spec: [[port-ddsa-phaseendstop-algorithm-into-diagnose/spec|spec.md]]
 - Plan: [[port-ddsa-phaseendstop-algorithm-into-diagnose/plan|plan.md]]
+- Review: [[port-ddsa-phaseendstop-algorithm-into-diagnose/review|review.md]]

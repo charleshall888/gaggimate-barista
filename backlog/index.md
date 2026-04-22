@@ -4,7 +4,6 @@
 |-----|-------|--------|----------|------|------------|--------|------|
 | 5 | Multi-user data isolation | backlog | high | feature | — | — | ✓ |
 | 13 | Gaggimate firmware 1.8.0 upgrade adaptation | backlog | high | epic | — | — | — |
-| 18 | Port DDSA / PhaseEndStop algorithm into /diagnose | in_progress | medium | feature | — | 013 | ✓ |
 | 1 | Add three-level detail parameter to analyze_shot | backlog | low | idea | — | — | — |
 | 22 | Capture weight-flow hygiene-coverage fixtures (retained-negatives + non-null pathology) | backlog | low | chore | — | 015 | — |
 
@@ -20,4 +19,3 @@
 
 ## In-Progress
 
-- **18** Port DDSA / PhaseEndStop algorithm into /diagnose (in_progress)
