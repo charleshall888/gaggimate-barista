@@ -299,3 +299,25 @@
   from: implement
   to: review
   note: "All 16 tasks complete; 3 new sections in verification-notes.md; 2/3 unable-to-test (not 3/3 cascade); refetch-audit 0 MISMATCH; private-repo invariant diff empty."
+
+- ts: 2026-04-22T02:14:47Z
+  event: review_verdict
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  verdict: APPROVED
+  cycle: 1
+  requirements_drift: none
+  issue_count: 1
+  note: "Req 4.5 literal-substring check on composed section (a) is PARTIAL — command uses fully-qualified --git-dir/--work-tree form per CLAUDE.md. Spec intent satisfied via embedded full output; issue is optional follow-up, non-blocking."
+
+- ts: 2026-04-22T02:14:47Z
+  event: phase_transition
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  tier: complex
+  from: review
+  to: complete
+
+- ts: 2026-04-22T02:15:09Z
+  event: feature_complete
+  feature: post-upgrade-drift-investigation-mixed-era-retention-ordering-ble-precision
+  tasks_total: 16
+  rework_cycles: 0
