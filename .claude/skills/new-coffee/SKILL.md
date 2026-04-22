@@ -106,12 +106,23 @@ Options to offer:
 
 ### 6. UPLOAD Profile (if requested)
 
-Use MCP tool to upload:
+Use MCP tool to upload and activate:
+
 ```
-manage_profile(action="create", profile_name="[Coffee Name] [AI]", temperature=X, phases=[...])
+created_profile = manage_profile(action="create", profile_name="[Coffee Name] [AI]", temperature=X, phases=[...])
 ```
 
 Always add `[AI]` suffix to profile names.
+
+If create returns `success: false`, surface the error message to the user and stop — do not proceed to save or select. Do not claim the profile was uploaded.
+
+On success, extract the new profile's id from `created_profile["profile"]["id"]`, then call:
+
+```
+select_response = manage_profile(action="select", profile_id=created_profile["profile"]["id"])
+```
+
+If `select_response["success"]` is false, report the error to the user ("Profile was created but could not be activated on the device: [error]"). Do not claim the profile is active.
 
 ### 7. SAVE to Repository
 
