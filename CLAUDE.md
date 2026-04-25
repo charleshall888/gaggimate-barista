@@ -30,6 +30,7 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 - `automatic-pro/` - Automatic Pro firmware built-in profile: 5-phase vIT3 architecture, dose scaling, and working profile JSONs (16g, 18g, 20g, 22g)
 - `MILK_AND_DRINKS.md` - Steaming technique, temperature thresholds, drink specs, single-boiler workflow
 - `BASKETS.md` - Dose = basket size rule, puck depth effects, precision basket puck prep
+- `PUCK_SCREENS.md` - Puck screen types (mesh, round-hole, thin, thick), flow effects, channeling/headspace impacts, screen-aware adjustments
 
 ## Dynamic Data Files
 
@@ -42,7 +43,9 @@ These files in the project root grow from user interactions:
 
 `coffees/`, `grind-map.md`, and `user-setup.md` are expected to be **symlinks** pointing into a private data repo. Run `bin/setup-data-repo.sh /path/to/private-repo` to wire them up on any machine. `GAGGIMATE_STORAGE_PATH` in `mcp/.env` points to `{private-repo}/mcp-data/` for MCP ratings and profile storage.
 
-**Unconfigured check**: If `user-setup.md` reads like an unconfigured template (generic equipment, "No active coffee" placeholder, no grind history), warn the user and suggest running `bin/setup-data-repo.sh` or copying from `user-setup.example.md`.
+**Unconfigured check**: If `user-setup.md` reads like an unconfigured template (generic equipment, "No active coffee" placeholder, no grind history), warn the user and suggest running `bin/setup-data-repo.sh` or copying from `user-setup.example.md`. Treat a missing Puck Screen row, or one with value `None`/blank/whitespace, as no screen present. Puck Screen field state is orthogonal to template detection — a populated Puck Screen row alone does NOT count as a configured setup, and an absent or `None` Puck Screen row does NOT make an otherwise-configured `user-setup.md` look unconfigured.
+
+**Puck Screen field parsing contract**: Skills that read the Puck Screen field from `user-setup.md` must apply this parsing rule consistently: (a) row missing entirely → `None`; (b) row present with value "None" (case-insensitive) or whitespace-only → `None`; (c) row present with any other non-empty value → "screen present", with classification keyed on case-insensitive substring match against `mesh`, `round-hole`, `thin`, `thick`. Skills should not invent additional Puck Screen categories or normalize values beyond these substring checks.
 
 **Auto-commit policy**: After any data-writing skill step, read `.data-repo-path` at the project root. If present, commit and push to the private repo (separate Bash calls, no chaining, no `git -C`; use `--git-dir={private_repo}/.git --work-tree={private_repo}`). If `.data-repo-path` is absent, skip silently. If present but `git push` fails, inform the user: "Private repo push failed — changes saved locally. Run `git push` manually in `{private_repo_path}` when credentials are available."
 
