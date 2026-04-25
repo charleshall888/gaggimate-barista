@@ -74,6 +74,17 @@ Use the loaded knowledge files (BREWING_BASICS + TASTING_GUIDE) to diagnose and 
 4. **Pressure/Profile** — style change or enhancement
 5. **Puck prep** — channeling, inconsistency
 
+**Puck Screen presence detection (pre-check before applying sour-path or channeling-path recommendations):**
+
+Scan the Equipment table in `user-setup.md` for a `Puck Screen` row. Per the CLAUDE.md parsing contract, treat any of the following as **no screen present** (skip the guardrails below): missing row, blank value, or value `None` (case-insensitive). Any other non-empty value means **screen present** — apply the gated guardrails below.
+
+The skill does NOT carry its own copy of the guardrail wording — it routes to `knowledge/PUCK_SCREENS.md` §Diagnostic Guardrails as the Single Source of Truth. The cold-screen check is a pre-check inserted before the existing sour → grind-finer path, NOT a reordering of the adjustment hierarchy above.
+
+| Taste signal | Screen present? | Action |
+|--------------|-----------------|--------|
+| Sour | Yes | Load `knowledge/PUCK_SCREENS.md` → §Diagnostic Guardrails → **Cold-Screen Sour Guardrail**. ASK about **preheat** discipline (was the screen locked into the portafilter during the flush?) BEFORE recommending grind finer. A cold puck screen pulls heat from the puck surface and produces a sour shot; preheat fixes the cause and grinding finer makes it worse. |
+| Sour + bitter (channeling signature) | Yes | Load `knowledge/PUCK_SCREENS.md` → §Diagnostic Guardrails → **Channeling-Nuance Note**. Apply the prep-driven-vs-shower-screen-driven distinction: because the puck screen already mitigates shower-screen-driven channeling, the remaining channeling is **likely** (NOT "almost certainly") puck-prep-driven. EXCEPT verify the screen itself is not the source first — check screen orientation (upside-down? smooth side vs textured side per manufacturer), wrong size for the basket, or bent/warped from prior over-dosing. The Core Rule recommendation is preserved verbatim: **fix puck prep, NOT grind**. |
+
 **Critical diagnostic rules:**
 
 | Symptom | Diagnosis | Fix |
@@ -119,10 +130,14 @@ Append a row to the Tasting Notes table in the active coffee's `README.md`:
 
 The Rating column records whether the shot worked — low-rated rows are diagnostic data, not noise.
 
-**Update process:**
-1. Read current `grind-map.md`
-2. Append new row: Coffee, Roast, Process, Origin, Days Off Roast, Grind, Profile, Ratio, Temp, Rating, Date
+**Update process (append-only — preserves header, alignment line, and every existing data row):**
+1. Read current `grind-map.md`. Do NOT touch the header line, the alignment line, or any existing data rows.
+2. Append a new row to the **end** of the file with these 12 fields in order: `Coffee, Roast, Process, Origin, Days Off Roast, Grind, Profile, Ratio, Temp, Rating, Date, Puck Screen?`
 3. **Grind notation:** Full Sette 270 format: macro + micro letter (e.g., "9D", "10M", "11A")
+4. **Puck Screen? cell — read from `user-setup.md` Equipment table (stateless read; do NOT write):**
+   - Missing row, blank value, or value `None` (case-insensitive) or whitespace-only → write a **blank cell**
+   - Any other non-empty value → write `Y`
+5. **No back-fill of existing rows.** Old 11-column rows in `grind-map.md` are left untouched; only the newly appended row is 12-column. Under markdown-table semantics the missing 12th cell on old rows parses as blank ("unknown" per the grind-map.example.md contract). Header/schema migration is owned separately and is NOT this skill's concern.
 
 #### 4c. Shot Notes → Device
 
