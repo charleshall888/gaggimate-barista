@@ -4,11 +4,13 @@ A record of grind settings from rated shots. When you rate a shot with a grind s
 
 ## Shot History
 
-| Coffee | Roast | Process | Origin | Days Off Roast | Grind | Profile | Ratio | Temp | Rating | Date |
-|--------|-------|---------|--------|----------------|-------|---------|-------|------|--------|------|
-| Example Roaster Ethiopia Yirgacheffe | Light | Washed | Ethiopia | 21 | 13C | Bloom Slide | 1:2.5 | 94°C | 5 | Jan 15 |
+| Coffee | Roast | Process | Origin | Days Off Roast | Grind | Profile | Ratio | Temp | Rating | Date | Puck Screen? |
+|--------|-------|---------|--------|----------------|-------|---------|-------|------|--------|------|--------------|
+| Example Roaster Ethiopia Yirgacheffe | Light | Washed | Ethiopia | 21 | 13C | Bloom Slide | 1:2.5 | 94°C | 5 | Jan 15 |  |
 
 *Days Off Roast is optional—use "—" when roast date is unknown.*
+
+*Puck Screen? — "Y" if a screen was installed, blank if unknown. Blank is NOT "no screen" — use "N" to record explicit absence; this distinction matters because new rows from /feedback are blank-as-unknown for back-compat.*
 
 ---
 
