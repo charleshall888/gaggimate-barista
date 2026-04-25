@@ -16,6 +16,12 @@ description: >
 
 Systematically research a coffee and propose starting extraction parameters.
 
+## Conditionally Load
+
+| File | When |
+|------|------|
+| `knowledge/PUCK_SCREENS.md` | `user-setup.md` Equipment table has a Puck Screen row with value ≠ `None` (informs discussion only — does NOT alter grind/temp/ratio starting recommendations) |
+
 ## Workflow
 
 ### 1. GATHER Coffee Info
