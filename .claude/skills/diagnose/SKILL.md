@@ -142,6 +142,17 @@ Cross-reference the user's taste feedback with telemetry patterns.
 
 **See:** `references/TELEMETRY_PATTERNS.md` for detailed correlation matrix.
 
+**Puck Screen presence detection (pre-check before applying sour-path or channeling-path recommendations):**
+
+Scan the Equipment table in `user-setup.md` for a `Puck Screen` row. Per the CLAUDE.md parsing contract, treat any of the following as **no screen present** (skip the guardrails below): missing row, blank value, or value `None` (case-insensitive). Any other non-empty value means **screen present** — apply the gated guardrails below.
+
+The skill does NOT carry its own copy of the guardrail wording — it routes to `knowledge/PUCK_SCREENS.md` §Diagnostic Guardrails as the Single Source of Truth. The cold-screen check is a pre-check inserted before the existing sour → grind-finer path, NOT a replacement for the diagnostic hierarchy.
+
+| Taste signal | Screen present? | Action |
+|--------------|-----------------|--------|
+| Sour | Yes | Load `knowledge/PUCK_SCREENS.md` → §Diagnostic Guardrails → **Cold-Screen Sour Guardrail**. ASK about **preheat** discipline (was the screen locked into the portafilter during the flush?) BEFORE recommending grind finer. A cold puck screen pulls heat from the puck surface and produces a sour shot; preheat fixes the cause and grinding finer makes it worse. |
+| Sour + bitter (channeling signature) | Yes | Load `knowledge/PUCK_SCREENS.md` → §Diagnostic Guardrails → **Channeling-Nuance Note**. Apply the prep-driven-vs-shower-screen-driven distinction: because the puck screen already mitigates shower-screen-driven channeling, the remaining channeling is **likely** (NOT "almost certainly") puck-prep-driven. EXCEPT verify the screen itself is not the source first — check screen orientation (upside-down? smooth side vs textured side per manufacturer), wrong size for the basket, or bent/warped from prior over-dosing. The Core Rule recommendation is preserved verbatim: **fix puck prep, NOT grind**. |
+
 ### 3b. AUTO-TRIGGER Feedback (4-5 Star Shots)
 
 If the user provides a rating of 4 or 5 stars (explicitly like "5/5" or "4 stars", or implied like "this is great", "really dialed in", "best shot yet") **and** provides taste descriptors, automatically run the `/feedback` skill after completing the diagnosis. Do NOT ask — just invoke it with the shot ID, rating, and taste notes gathered during diagnosis. The user expects the full feedback loop (grind map update, tasting notes, device sync) to happen seamlessly.
