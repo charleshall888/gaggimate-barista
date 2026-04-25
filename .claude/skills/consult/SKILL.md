@@ -33,6 +33,7 @@ Use the routing table below to identify which file(s) to load. Match on keywords
 | decaf, blend, decaffeinated | `knowledge/SPECIAL_CATEGORIES.md` | — |
 | milk, steam, drink, cortado, cappuccino, latte, flat white | `knowledge/MILK_AND_DRINKS.md` | — |
 | basket, dose rule, headroom, puck depth | `knowledge/BASKETS.md` | — |
+| puck screen, normcore, screen imprint, screen orientation | `knowledge/PUCK_SCREENS.md` | `knowledge/reference/PUCK_SCREENS_REFERENCE.md` |
 | automatic pro, firmware, built-in profile | `knowledge/automatic-pro/AUTOMATIC_PRO_GUIDE.md` | — |
 | adjust, dial in, what to change, improvement | `knowledge/ESPRESSO_BREWING_BASICS.md` | — |
 
