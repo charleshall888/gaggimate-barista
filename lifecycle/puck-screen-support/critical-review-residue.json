@@ -1,0 +1,45 @@
+{
+  "ts": "2026-04-24T22:45:00Z",
+  "feature": "puck-screen-support",
+  "artifact": "lifecycle/puck-screen-support/plan.md",
+  "synthesis_status": "ok",
+  "reviewers": {"completed": 4, "dispatched": 4},
+  "findings": [
+    {
+      "class": "B",
+      "finding": "Task 12's R13c parsing-contract sub-edit has no specified file location; only non-binding prose says 'edit only sections AWAY from the Core Rule block'. grep ≥2 acceptance is satisfiable anywhere in CLAUDE.md including inside the preserved Core Rules block at lines 126-133. No line-range or section-bounded check enforces placement.",
+      "reviewer_angle": "SHA256 capture fragility & Core Rule preservation under CLAUDE.md edits",
+      "evidence_quote": "**R13c (parsing contract)**: document how skills parse the Puck Screen value. Required behaviors: ... Verifiable via `grep -c 'Puck Screen' CLAUDE.md` ≥ 2 (field-reference + parsing-contract)."
+    },
+    {
+      "class": "B",
+      "finding": "A fix-cycle re-run of Task 12 producing two CLAUDE.md commits silently breaks the spec-literal R12 command (`git show HEAD~1:CLAUDE.md`). The commit-cadence constraint is documented in Veto Surface but not propagated as an enforceable task or commit-message marker.",
+      "reviewer_angle": "SHA256 capture fragility & Core Rule preservation under CLAUDE.md edits",
+      "evidence_quote": "R12's literal acceptance command uses `git show HEAD~1:CLAUDE.md`, which only works if CLAUDE.md is touched in exactly one commit and that commit is HEAD~1 at verification time."
+    },
+    {
+      "class": "B",
+      "finding": "R11 channeling-nuance note (likely-prep-driven EXCEPT misaligned screen) is added only to /diagnose (Task 9) and not /feedback (Task 10), but /feedback owns the canonical 'Sour AND bitter | Channeling | Fix puck prep' rule at SKILL.md:86 and is the primary sour-shot entry path per spec.md:9. Users reporting sour+bitter on the busier /feedback path silently miss the misaligned-screen edge case that /diagnose catches.",
+      "reviewer_angle": "Cold-screen guardrail duplication across /diagnose and /feedback",
+      "evidence_quote": "R11 (channeling-nuance note): when diagnosing sour+bitter with a screen present: Remaining channeling is **likely** (NOT 'almost certainly') puck-prep-driven. EXCEPT when the screen itself could be misaligned (upside-down, wrong size, bent)."
+    },
+    {
+      "class": "B",
+      "finding": "The user's private grind-map.md is not migrated by any task and the user is not instructed to migrate it themselves. The plan defers to a future moment when 'user manually adds the header column to private file' but no skill output, post-implementation note, or task tells the user this is required.",
+      "reviewer_angle": "R20 writer back-compat — runtime regression risk",
+      "evidence_quote": "Acceptable transitional ragged state until user manually adds the header column to private file."
+    },
+    {
+      "class": "B",
+      "finding": "Task 10 documents the transitional ragged state as 'Acceptable' but provides no instruction for the feedback skill to emit a one-line user-facing notice when it first writes a 12-col row into an 11-col private grind-map.md. The user finds out by visual inspection or by reading the lifecycle spec.",
+      "reviewer_angle": "First-run transitional ragged state — missing skill messaging",
+      "evidence_quote": "**No back-fill** of existing 11-column rows in private `grind-map.md` — only new rows are written 12-column. Acceptable transitional ragged state until user manually adds the header column to private file."
+    },
+    {
+      "class": "B",
+      "finding": "Task 12 extends CLAUDE.md's 'Unconfigured check' for the Puck Screen field (the established agent-emits-warning-when-state-is-incoherent pattern) but does NOT extend it symmetrically to flag a grind-map.md column-count mismatch against the example template. The precedent for first-run state-mismatch warnings exists and is being edited by this very task; the symmetric case is silently dropped.",
+      "reviewer_angle": "First-run transitional ragged state — missing skill messaging",
+      "evidence_quote": "(b) extend the Unconfigured check (line 45) with Puck-Screen-field handling and a clarifying note that field state is orthogonal to template detection"
+    }
+  ]
+}

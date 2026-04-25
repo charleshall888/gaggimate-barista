@@ -1,0 +1,271 @@
+- ts: 2026-04-24T17:49:14Z
+  event: clarify_critic
+  feature: puck-screen-support
+  findings:
+    - "Intent clarity rated HIGH on 'three goals' but the core action verb 'adjust accordingly' is admittedly undefined — the assessor is double-counting the same ambiguity as both clear intent and unclear scope."
+    - "Product spec identification treated as settled intent input; knowing the SKU tells us nothing about what the agent should do differently — conflates 'we know what hardware' with 'we know the intended behavioral change'."
+    - "Scope LOW with caveats understates severity: the user's parenthetical '(maybe that is the gaggimate-barista-data repo too?)' is an explicit unanswered design question about where config lives, not just another open-ended bullet."
+    - "Criticality rated medium on 'content/knowledge layer' reasoning, but the source explicitly requires a public shared-repo schema change affecting every downstream user of the template — shared-contract severity was not weighed."
+    - "Complexity rated complex on multi-file fan-out only; the behavioral payload (what round-hole 0.8mm screens actually do to extraction) is undefined and requires research/judgment before any skill can branch on the field."
+    - "Requirements alignment marked N/A because no requirements/ directory exists, but the project has a strong implicit architecture in CLAUDE.md/MEMORY.md (single-source-of-truth table, knowledge-file-per-topic, symlink data architecture) that the feature must conform to — alignment check against that was skipped."
+  dispositions:
+    apply: 6
+    dismiss: 0
+    ask: 0
+  applied_fixes:
+    - "Revised intent clarity from HIGH to LOW — 'adjust accordingly' is genuinely undefined; merged into the §4 Q&A."
+    - "Revised criticality from medium to HIGH — change touches public shared template + multiple shared skills that all downstream users depend on."
+    - "Expanded complexity reasoning — behavioral payload requires research on puck screen effects before skill branches can be specified; complex tier holds."
+    - "Revised requirements alignment from N/A to 'aligned against CLAUDE.md architecture' — feature must slot into MEMORY.md source-of-truth table and follow knowledge-file-per-topic convention."
+    - "Added Q&A on data location (equipment row vs accessories section vs private-only) to resolve the explicit unanswered design question."
+    - "Added Q&A on behavior scope to enumerate which skills should branch on puck-screen presence — user selected all four options plus dose/headroom adjustment."
+  dismissals: []
+  status: ok
+- ts: 2026-04-24T17:49:14Z
+  event: lifecycle_start
+  feature: puck-screen-support
+  tier: complex
+  criticality: high
+- ts: 2026-04-24T17:49:14Z
+  event: phase_transition
+  feature: puck-screen-support
+  from: clarify
+  to: research
+- ts: 2026-04-24T18:02:03Z
+  event: orchestrator_review
+  feature: puck-screen-support
+  phase: research
+  verdict: pass
+  cycle: 1
+  issues: []
+- ts: 2026-04-24T18:02:03Z
+  event: phase_transition
+  feature: puck-screen-support
+  from: research
+  to: specify
+- ts: 2026-04-24T19:55:14Z
+  event: orchestrator_review
+  feature: puck-screen-support
+  phase: specify
+  verdict: pass
+  cycle: 1
+  issues: []
+- ts: 2026-04-24T20:17:54Z
+  event: spec_approved
+  feature: puck-screen-support
+  note: "User approved spec but requested pause before Plan phase."
+- ts: 2026-04-24T22:30:00Z
+  event: orchestrator_review
+  feature: puck-screen-support
+  phase: plan
+  verdict: pass
+  cycle: 1
+  issues: []
+- ts: 2026-04-24T22:50:00Z
+  event: critical_review
+  feature: puck-screen-support
+  phase: plan
+  reviewers_completed: 4
+  reviewers_dispatched: 4
+  a_class_findings: 7
+  b_class_findings: 6
+  c_class_findings: 7
+  applied_fixes:
+    - "Removed misleading /tmp/core_rule_capture.txt framing — literal hex in plan.md is the SoT"
+    - "Added pre-flight SHA256 verification before Task 12 begins editing CLAUDE.md"
+    - "Added awk-range structural invariant (grep -c '^- \\*\\*' = 2) to catch mid-block blank-line corruption"
+    - "Pinned R13c parsing-contract location to the Data Architecture section, with section-bounded grep verification"
+    - "Pinned Task 10 R20 mechanism contract: read-then-append shape preserved, header line MUST NOT be edited"
+    - "Added fixture-based runtime verification walkthrough to Task 10 (catches catastrophic-rewrite regression)"
+    - "Added positive + negative grep verifications for Task 10 mechanism preservation"
+- ts: 2026-04-24T22:50:00Z
+  event: plan_deviation
+  feature: puck-screen-support
+  requirement: R12
+  spec_acceptance: "diff <(git show HEAD~1:CLAUDE.md | awk ...) <(awk ... CLAUDE.md) → exit 0"
+  plan_substitution: "awk '/Sour AND bitter = channeling/,/^$/' CLAUDE.md | shasum -a 256 == captured-digest AND grep -c '^- **' on awk-range == 2"
+  rationale: "Spec literal requires CLAUDE.md edited in exactly one commit at HEAD~1; substitution is robust to fix-cycle commit cadence and adds awk-range structural invariant the spec literal lacked."
+- ts: 2026-04-24T23:05:00Z
+  event: user_correction
+  feature: puck-screen-support
+  phase: plan
+  topic: ragged-state-framing
+  user_input: "I feel like this should never happen? And if it is happening, then it is a problem with our process or system or data right?"
+  resolution: |
+    Restructured plan to treat schema migration (header 11→12 cols) as in-scope and
+    distinct from data back-fill. Added new Task 13 (one-time idempotent header
+    migration of private grind-map.md). Renumbered prior Task 13 → Task 14.
+    Updated Task 10 mechanism contract: pure append-only, no runtime header logic.
+    Updated Scope Boundaries to clarify "no DATA back-fill" — schema migration in scope.
+  applied_fixes:
+    - "Added Task 13: schema migration of private grind-map.md header from 11→12 cols (idempotent, one-time, lossless)"
+    - "Renumbered final verification task to Task 14, updated dependency graph"
+    - "Updated Task 10 R20 mechanism contract to remove runtime header concerns (Task 13 owns schema)"
+    - "Updated Scope Boundaries to distinguish schema migration (in-scope) from data back-fill (out-of-scope)"
+    - "Added Verification Strategy item 8 confirming clean 12-col write post-migration"
+- ts: 2026-04-24T23:05:00Z
+  event: critical_review_decisions
+  feature: puck-screen-support
+  phase: plan
+  decisions:
+    - decision: "Apply: lift cold-screen guardrail to knowledge/PUCK_SCREENS.md (Single Source of Truth)"
+      rationale: "Spec R4 already invokes SoT to migrate EXTRACTION_SCIENCE content into PUCK_SCREENS.md; same architectural move applied consistently in same change set. User preference (full port) documented in memory."
+      status: "pending - to apply in next edit"
+    - decision: "Apply: extend R11 channeling-nuance to /feedback"
+      rationale: "Spec line 9 already established '/feedback is primary sour-shot entry path' as rationale for extending R19; same logic applies to R11. Extending closes silent-miss on busier path; not extending is internally inconsistent with spec's own principle."
+      status: "pending - to apply in next edit"
+    - decision: "Apply (per user pushback): schema-migration approach instead of runtime warning"
+      rationale: "User correctly identified that ragged state should never happen. Header migration during implementation is the proper fix; runtime warning was papering over a data-integrity issue."
+      status: "applied"
+- ts: 2026-04-24T23:15:00Z
+  event: plan_deviation
+  feature: puck-screen-support
+  requirement: R10
+  spec_acceptance: "grep -ci 'puck screen' .claude/skills/diagnose/SKILL.md ≥ 2 (assumes inline guardrail wording)"
+  plan_substitution: "grep -c 'PUCK_SCREENS' ≥ 2 + preheat colocated with puck screen|PUCK_SCREENS reference"
+  rationale: "Cold-screen guardrail wording lifted to knowledge/PUCK_SCREENS.md §Diagnostic Guardrails (Task 1) per Single Source of Truth. Skill references the file by name; future guardrail updates touch one file, not two."
+- ts: 2026-04-24T23:15:00Z
+  event: plan_deviation
+  feature: puck-screen-support
+  requirement: R11
+  spec_acceptance: "grep -ci 'puck.?prep.?driven\\|prep-driven\\|shower.?screen.?driven' ≥ 2 in /diagnose only"
+  plan_substitution: "Either inline distinction tokens OR named reference to PUCK_SCREENS.md §Channeling-Nuance (≥1 mention). R11 also extended to /feedback per spec-internal consistency with spec.md:9."
+  rationale: "Single Source of Truth + spec-internal consistency: spec line 9 already extended sour-path coverage to /feedback for R19; same rationale applies to R11 because /feedback is the primary sour-shot entry path."
+- ts: 2026-04-24T23:15:00Z
+  event: plan_deviation
+  feature: puck-screen-support
+  requirement: R19
+  spec_acceptance: "grep -ci 'puck screen' .claude/skills/feedback/SKILL.md ≥ 1"
+  plan_substitution: "grep -c 'PUCK_SCREENS' ≥ 2 (cold-screen + channeling-nuance via reference) + R19's original disjunction satisfied"
+  rationale: "Cold-screen guardrail wording lifted to PUCK_SCREENS.md (same as R10 deviation). R19 original disjunction still satisfied via either alternative."
+- ts: 2026-04-24T23:15:00Z
+  event: spec_extension
+  feature: puck-screen-support
+  requirement: R11-extended
+  scope_change: "R11 channeling-nuance note extended to /feedback (originally /diagnose only)"
+  rationale: "Internal consistency with spec.md:9 — '/feedback is the primary sour-shot entry path' was the spec's stated rationale for extending R19 to /feedback. Applying the same rationale to R11 closes a silent-miss on the busier path. Not a scope expansion of the project; a consistency fix to the spec's own application of its principle."
+- ts: 2026-04-24T23:25:00Z
+  event: plan_approved
+  feature: puck-screen-support
+  note: "User approved plan but requested pause before Implement phase."
+- ts: 2026-04-24T20:50:00Z
+  event: batch_dispatch
+  feature: puck-screen-support
+  batch: 0
+  tasks: [1, 2, 5, 6]
+- ts: 2026-04-24T20:55:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 1
+  batch: 0
+  status: success
+- ts: 2026-04-24T20:58:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 2
+  batch: 0
+  status: success
+- ts: 2026-04-24T21:01:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 5
+  batch: 0
+  status: success
+- ts: 2026-04-24T21:04:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 6
+  batch: 0
+  status: success
+- ts: 2026-04-24T21:04:00Z
+  event: batch_dispatch
+  feature: puck-screen-support
+  batch: 1
+  tasks: [3, 4, 7, 8, 9, 10, 11, 12, 13]
+- ts: 2026-04-24T21:08:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 3
+  batch: 1
+  status: success
+- ts: 2026-04-24T21:08:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 4
+  batch: 1
+  status: success
+- ts: 2026-04-24T21:08:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 7
+  batch: 1
+  status: success
+- ts: 2026-04-24T21:14:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 8
+  batch: 1
+  status: success
+- ts: 2026-04-24T21:14:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 9
+  batch: 1
+  status: success
+- ts: 2026-04-24T21:14:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 11
+  batch: 1
+  status: success
+- ts: 2026-04-24T21:25:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 10
+  batch: 1
+  status: success
+- ts: 2026-04-24T21:25:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 12
+  batch: 1
+  status: success
+- ts: 2026-04-24T21:25:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 13
+  batch: 1
+  status: success
+- ts: 2026-04-24T21:25:00Z
+  event: batch_dispatch
+  feature: puck-screen-support
+  batch: 2
+  tasks: [14]
+- ts: 2026-04-24T21:32:00Z
+  event: task_complete
+  feature: puck-screen-support
+  task: 14
+  batch: 2
+  status: success
+- ts: 2026-04-24T21:32:00Z
+  event: phase_transition
+  feature: puck-screen-support
+  tier: complex
+  from: implement
+  to: review
+- ts: 2026-04-24T21:42:00Z
+  event: review_verdict
+  feature: puck-screen-support
+  verdict: APPROVED
+  cycle: 1
+  requirements_drift: none
+- ts: 2026-04-24T21:42:00Z
+  event: phase_transition
+  feature: puck-screen-support
+  from: review
+  to: complete
+- ts: 2026-04-24T21:45:00Z
+  event: feature_complete
+  feature: puck-screen-support
+  tasks_total: 14
+  rework_cycles: 1
