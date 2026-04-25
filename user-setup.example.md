@@ -8,6 +8,7 @@
 | **Grinder** | Baratza Encore ESP (flat burr, stepped adjust) |
 | **Basket** | IMS Baristapro Nanotech 18g (ridgeless) |
 | **Scale** | Felicita Arc (Bluetooth), auto-stop enabled, 250ms predictive delay |
+| **Puck Screen** | None |
 
 ## Workflow
 
@@ -51,3 +52,4 @@ The Felicita Arc connects to the Gaggimate via Bluetooth Low Energy (BLE) for au
 - Medium roasts work well at 92-94°C — taste and adjust from there
 - Encore ESP's stepped adjustment makes coarse moves easy; use half-steps for fine-tuning
 - Gaggimate Standard enables pressure profiling — great for pre-infusion and gentle ramp profiles
+- **Puck Screen (optional):** Default is "None" — leave as-is if you don't use one. Otherwise, fill in product details. Examples: `Normcore 58.5mm round-hole (0.8mm thin, 316 stainless)` or `Pesado Diffuser 58mm mesh (1.7mm thick)`.
