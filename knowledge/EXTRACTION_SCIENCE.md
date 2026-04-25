@@ -39,9 +39,9 @@ This is why a profile that works perfectly on one setup may underperform on anot
 | **WDT (needle tool)** | Breaks clumps, redistributes grounds, creates even density | Can't fix too-fine grind or bad grinder uniformity |
 | **Distributor/leveler** | Creates flat surface, mild redistribution | Doesn't break internal clumps (use WDT first) |
 | **Paper filter below puck** | Catches migrating fines, prevents compact layer, cleaner cup | Doesn't fix distribution issues |
-| **Puck screen on top** | Protects puck from shower screen imprint, prevents surface erosion | Doesn't improve internal distribution |
+| **Puck screen on top** | See [PUCK_SCREENS.md](PUCK_SCREENS.md) | — |
 
-**Recommended combo:** WDT → light tap to settle → tamp → (optional: puck screen on top)
+**Recommended combo:** WDT → light tap to settle → tamp → (optional: puck screen on top — see [PUCK_SCREENS.md](PUCK_SCREENS.md))
 
 Paper filters below the puck are particularly effective for high-fines grinders (like the Sette 270) — they prevent fines from accumulating at the basket holes and creating uneven flow.
 
