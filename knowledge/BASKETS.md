@@ -13,7 +13,7 @@ The basket size (15g, 18g, 20g, 22g) indicates the **nominal dose capacity** —
 - **Underdosing risks:** Too much headroom between puck and shower screen → water pools above the puck → uneven saturation → channeling.
 - **Overdosing risks:** Puck touches the shower screen → imprint on the puck ("screen kiss") → restricted flow → uneven extraction and potential back-pressure.
 
-**How to check headroom:** After pulling a shot, look at the top of the puck. It should be flat and smooth, with no screen imprint. If you see a mesh pattern pressed into the surface, reduce your dose by 0.5g.
+**How to check headroom:** After pulling a shot, look at the top of the puck. It should be flat and smooth, with no screen imprint. If you see a mesh pattern pressed into the surface, reduce your dose by 0.5g. If you have a puck screen installed, this check is masked — rely on flow behavior and measured headroom instead.
 
 ---
 
