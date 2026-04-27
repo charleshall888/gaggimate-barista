@@ -105,34 +105,43 @@ Starting Parameters table — even when the critic returns CLEAR.
 Before finalizing, ask:
 > "This [process] [origin] typically shines with [approach]. Would you like to start there, or prefer a more conservative/adventurous approach?"
 
-Options to offer:
+Options to offer (each option creates a dedicated per-coffee profile — see Step 6):
 - **Conservative:** Classic profile, standard ratio (pressure matched to processing method — not always 9 bar)
 - **Recommended:** Profile matched to bean characteristics (roast, process, intensity)
 - **Adventurous:** Bloom profile or turbo shot if appropriate
 
-### 6. UPLOAD Profile (if requested)
+User confirmation of any of these three options authorizes Step 6 to create + activate a new per-coffee `[AI]` profile. Do NOT ask a second time "shall I upload?" — it's part of the same authorization.
 
-Use MCP tool to upload and activate:
+**Reuse exception:** If the user explicitly says "reuse [profile name]", "use the [profile] already on the device", or names an existing `[AI]` profile to apply as-is, skip Step 6's create + select. Note the reused profile in the README's Profiles table with `*(reused from coffees/{other-slug}/)*` and link the JSON via relative path.
 
-```
-created_profile = manage_profile(action="create", profile_name="[Coffee Name] [AI]", temperature=X, phases=[...])
-```
+### 6. MATERIALIZE Per-Coffee Profile
 
-Always add `[AI]` suffix to profile names.
+**Default behavior (runs whenever Step 5 confirmed Conservative/Recommended/Adventurous).** Skip only when the Reuse exception in Step 5 applies.
 
-If create returns `success: false`, surface the error message to the user and stop — do not proceed to save or select. Do not claim the profile was uploaded.
+Per CLAUDE.md "Repo first, device second": the JSON file is the source of truth. Always write to repo before calling MCP.
 
-On success, extract the new profile's id from `created_profile["profile"]["id"]`, then call:
+1. **Write JSON to repo first.** Path: `coffees/{coffee-slug}/{profile-slug}.json`. Profile slug is kebab-case from the style (e.g., `bloom-slide.json`, `turbo.json`, `dark-gentle.json`). The JSON's `label` field must equal `[Coffee Name] [Style] [AI]` (e.g., `Aponte Honey Bloom Slide [AI]`).
 
-```
-select_response = manage_profile(action="select", profile_id=created_profile["profile"]["id"])
-```
+2. **Create on device** by passing the same phases array to MCP:
+   ```
+   created_profile = manage_profile(action="create", profile_name="[Coffee Name] [Style] [AI]", temperature=X, phases=[...])
+   ```
+   If `created_profile["success"]` is false, surface the error and stop. Do not claim the profile was uploaded. The repo JSON stays — it's still the source of truth and can be retried.
 
-If `select_response["success"]` is false, report the error to the user ("Profile was created but could not be activated on the device: [error]"). Do not claim the profile is active.
+3. **Activate on device** using the returned id:
+   ```
+   select_response = manage_profile(action="select", profile_id=created_profile["profile"]["id"])
+   ```
+   If `select_response["success"]` is false, report: "Profile was created but could not be activated on the device: [error]". Do not claim the profile is active.
 
-### 7. SAVE to Repository
+**Naming rules:**
+- Always include `[AI]` suffix.
+- Profile name = `{Coffee Short Name} {Style} [AI]` — short enough to be readable in the device list (e.g., `Aponte Honey Bloom Slide [AI]`, not `Onyx Coffee Lab Colombia Aponte Village Honey Bloom Slide [AI]`).
+- Style word(s) describe the profile shape (Bloom Slide, Turbo, Dark Gentle, Lever Decline) — same convention as the existing `[AI]` profiles on the device.
 
-Create a coffee directory and save the research:
+### 7. SAVE README to Repository
+
+Create the coffee directory and save the research README:
 
 1. **Create directory:** `coffees/{roaster}-{coffee-name}/` (kebab-case, e.g., `coffees/perc-ethiopia-chelchele/`)
 2. **Write `README.md`** using this template:
@@ -174,7 +183,7 @@ table. 2-4 bullets is typical.}
 ## Tasting Notes
 ```
 
-3. **If a profile was uploaded**, also save the JSON to the same directory and fill in the Profiles table row
+3. **Fill in the Profiles table row** with the per-coffee profile from Step 6 (or the reused profile per the Reuse exception). The `File` column links to the JSON written in Step 6 (or the relative path of the reused JSON).
 4. **Remove `.gitkeep`** from `coffees/` if it exists (no longer needed once real content is present)
 5. No confirmation needed—this is a standard workflow step
 
@@ -227,7 +236,10 @@ No confirmation needed—standard workflow step.
 | Dose | Xg in → Xg out | [basket size rationale] |
 
 ### Profile
-[Link to PROFILE_LIBRARY.md profile, or custom JSON if creating new]
+Created `[Coffee Name] [Style] [AI]` profile, activated on device.
+JSON: `coffees/{roaster}-{coffee-name}/{profile-slug}.json`
+
+(If Reuse exception applied: state which existing profile is being reused and link its JSON via relative path.)
 
 ### Saved To
 `coffees/{roaster}-{coffee-name}/README.md`
