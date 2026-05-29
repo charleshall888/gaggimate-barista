@@ -16,16 +16,16 @@ The Sette 270 uses a **macro + micro** adjustment system:
 - Each step is approximately 75-100 microns
 
 ### Micro Adjustment (Lever)
-- Letters A-Q (17 steps) between each macro number
+- Letters A-I (9 steps) between each macro number
 - A = finest within that macro setting
-- Q = coarsest within that macro setting
-- Each micro step is approximately 4-6 microns
+- I = coarsest within that macro setting
+- Each micro step is approximately 8-10 microns
 
 ### Reading Your Setting
 
 Settings are written as **[Macro Number][Micro Letter]**:
 - `9D` = Macro 9, Micro D (toward fine end of macro 9)
-- `10M` = Macro 10, Micro M (middle of macro 10)
+- `10E` = Macro 10, Micro E (middle of macro 10)
 - `11A` = Macro 11, Micro A (finest setting within macro 11)
 
 ### Espresso Range
@@ -55,7 +55,7 @@ Starting from a working shot:
 | Shot too fast, sour | Go finer | 1-2 micro steps |
 | Shot too slow, bitter | Go coarser | 1-2 micro steps |
 | Big change needed | Move macro | 1 macro number |
-| Fine-tuning | Use micro | A-Q within macro |
+| Fine-tuning | Use micro | A-I within macro |
 
 **Rule of thumb:** Start with micro adjustments. Only move macro if you're more than 5-6 micro steps from your target.
 
