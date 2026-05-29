@@ -1,4 +1,17 @@
 {
+  "permissions": {
+    "allow": [
+      "mcp__gaggimate__list_recent_shots",
+      "mcp__gaggimate__analyze_shot",
+      "mcp__gaggimate__manage_profile",
+      "mcp__gaggimate__manage_shot_notes",
+      "mcp__gaggimate__diagnose_connection"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "gaggimate"
+  ],
   "hooks": {
     "PreToolUse": [
       {
