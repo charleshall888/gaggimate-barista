@@ -26,3 +26,7 @@ coffees
 grind-map.md
 user-setup.md
 .data-repo-path
+cortex/.cortex-init
+cortex/.cortex-init-backup/
+.claude/worktrees/
+# cortex/

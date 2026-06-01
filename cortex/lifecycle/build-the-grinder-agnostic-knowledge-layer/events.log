@@ -1,0 +1,1 @@
+{"schema_version": 1, "ts": "2026-06-01T13:00:54Z", "event": "lifecycle_start", "feature": "build-the-grinder-agnostic-knowledge-layer", "tier": "simple", "criticality": "medium", "entry_point": "refine"}
