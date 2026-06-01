@@ -26,6 +26,142 @@
     "repo": null
   },
   {
+    "id": 24,
+    "title": "Migrate grinder layer: Sette 270 -> DF64V + SSP Cast Lab Sweet V3",
+    "status": "backlog",
+    "priority": "high",
+    "type": "epic",
+    "tags": [
+      "df64v-ssp-migration"
+    ],
+    "areas": [],
+    "created": "2026-06-01",
+    "updated": "2026-06-01",
+    "blocks": [],
+    "blocked_by": [],
+    "parent": null,
+    "research": null,
+    "spec": null,
+    "discovery_source": "cortex/research/df64v-ssp-migration/research.md",
+    "plan": null,
+    "uuid": "bffcb516-5ec4-4d67-a732-93e0bdd2bf1f",
+    "lifecycle_slug": null,
+    "session_id": null,
+    "lifecycle_phase": null,
+    "schema_version": "1",
+    "repo": null
+  },
+  {
+    "id": 25,
+    "title": "Build the grinder-agnostic knowledge layer (DF64V + notation + de-Sette)",
+    "status": "backlog",
+    "priority": "high",
+    "type": "feature",
+    "tags": [
+      "df64v-ssp-migration"
+    ],
+    "areas": [],
+    "created": "2026-06-01",
+    "updated": "2026-06-01",
+    "blocks": [],
+    "blocked_by": [],
+    "parent": "024",
+    "research": null,
+    "spec": null,
+    "discovery_source": "cortex/research/df64v-ssp-migration/research.md",
+    "plan": null,
+    "uuid": "f23d821e-b175-4769-b1d8-d8919bc4b3bb",
+    "lifecycle_slug": null,
+    "session_id": null,
+    "lifecycle_phase": null,
+    "schema_version": "1",
+    "repo": null
+  },
+  {
+    "id": 26,
+    "title": "Switch the grind map and user-setup to the DF64V",
+    "status": "backlog",
+    "priority": "high",
+    "type": "chore",
+    "tags": [
+      "df64v-ssp-migration"
+    ],
+    "areas": [],
+    "created": "2026-06-01",
+    "updated": "2026-06-01",
+    "blocks": [],
+    "blocked_by": [
+      "025"
+    ],
+    "parent": "024",
+    "research": null,
+    "spec": null,
+    "discovery_source": "cortex/research/df64v-ssp-migration/research.md",
+    "plan": null,
+    "uuid": "c5880269-8375-44a3-9fd0-c64028fecf45",
+    "lifecycle_slug": null,
+    "session_id": null,
+    "lifecycle_phase": null,
+    "schema_version": "1",
+    "repo": null
+  },
+  {
+    "id": 28,
+    "title": "Commission the DF64V and run the phased per-coffee profile re-dial",
+    "status": "backlog",
+    "priority": "high",
+    "type": "feature",
+    "tags": [
+      "df64v-ssp-migration"
+    ],
+    "areas": [],
+    "created": "2026-06-01",
+    "updated": "2026-06-01",
+    "blocks": [],
+    "blocked_by": [
+      "026"
+    ],
+    "parent": "024",
+    "research": null,
+    "spec": null,
+    "discovery_source": "cortex/research/df64v-ssp-migration/research.md",
+    "plan": null,
+    "uuid": "fb432648-8be0-4756-92ac-d90088278c4e",
+    "lifecycle_slug": null,
+    "session_id": null,
+    "lifecycle_phase": null,
+    "schema_version": "1",
+    "repo": null
+  },
+  {
+    "id": 27,
+    "title": "Parameterize feedback/new-coffee/consult to read the active grinder",
+    "status": "backlog",
+    "priority": "medium",
+    "type": "feature",
+    "tags": [
+      "df64v-ssp-migration"
+    ],
+    "areas": [],
+    "created": "2026-06-01",
+    "updated": "2026-06-01",
+    "blocks": [],
+    "blocked_by": [
+      "025"
+    ],
+    "parent": "024",
+    "research": null,
+    "spec": null,
+    "discovery_source": "cortex/research/df64v-ssp-migration/research.md",
+    "plan": null,
+    "uuid": "efc26131-6a10-4bbb-82a0-ca5431457579",
+    "lifecycle_slug": null,
+    "session_id": null,
+    "lifecycle_phase": null,
+    "schema_version": "1",
+    "repo": null
+  },
+  {
     "id": 1,
     "title": "Add three-level detail parameter to analyze_shot",
     "status": "backlog",
