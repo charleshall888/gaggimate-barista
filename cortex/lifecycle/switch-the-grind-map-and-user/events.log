@@ -1,0 +1,5 @@
+{"schema_version": 1, "ts": "2026-06-01T13:02:59Z", "event": "lifecycle_start", "feature": "switch-the-grind-map-and-user", "tier": "simple", "criticality": "medium", "entry_point": "refine"}
+{"schema_version": 3, "ts": "2026-06-01T13:11:49Z", "event": "clarify_critic", "feature": "switch-the-grind-map-and-user", "parent_epic_loaded": true, "findings_count": 7, "dispositions": {"apply": 1, "dismiss": 4, "ask": 2}, "applied_fixes_count": 1, "dismissals_count": 4, "status": "ok"}
+{"ts": "2026-06-01T13:25:54Z", "event": "complexity_override", "feature": "switch-the-grind-map-and-user", "from": "simple", "to": "complex", "gate": "research_open_questions"}
+{"ts":"2026-06-01T14:03:59Z","event":"sentinel_absence","feature":"switch-the-grind-map-and-user","reviewer_angle":"Atomic-commit vs auto-commit mechanics","reason":"absent","model_tier":"sonnet","expected_sha":"ac43f3995c6dbc5234b19690b208f6c6cda402242c05d47458f514145e5f98ab","observed_sha_or_null":null}
+{"ts": "2026-06-01T14:12:42Z", "event": "spec_approved", "feature": "switch-the-grind-map-and-user"}

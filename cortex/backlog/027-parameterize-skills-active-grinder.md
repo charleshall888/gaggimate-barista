@@ -2,7 +2,7 @@
 schema_version: "1"
 uuid: efc26131-6a10-4bbb-82a0-ca5431457579
 title: "Parameterize feedback/new-coffee/consult to read the active grinder"
-status: backlog
+status: refined
 priority: medium
 type: feature
 tags: [df64v-ssp-migration]
@@ -11,6 +11,10 @@ parent: "024"
 blocked-by: ["025"]
 created: 2026-06-01
 updated: 2026-06-01
+complexity: complex
+criticality: high
+spec: cortex/lifecycle/parameterize-feedback-new-coffee-consult-to/spec.md
+areas: ['skills']
 ---
 
 # Parameterize the grinder-aware skills to read the active grinder

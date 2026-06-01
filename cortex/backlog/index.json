@@ -54,20 +54,22 @@
   {
     "id": 25,
     "title": "Build the grinder-agnostic knowledge layer (DF64V + notation + de-Sette)",
-    "status": "backlog",
+    "status": "refined",
     "priority": "high",
     "type": "feature",
     "tags": [
       "df64v-ssp-migration"
     ],
-    "areas": [],
+    "areas": [
+      "docs"
+    ],
     "created": "2026-06-01",
     "updated": "2026-06-01",
     "blocks": [],
     "blocked_by": [],
     "parent": "024",
     "research": null,
-    "spec": null,
+    "spec": "cortex/lifecycle/build-the-grinder-agnostic-knowledge-layer/spec.md",
     "discovery_source": "cortex/research/df64v-ssp-migration/research.md",
     "plan": null,
     "uuid": "f23d821e-b175-4769-b1d8-d8919bc4b3bb",
@@ -80,7 +82,7 @@
   {
     "id": 26,
     "title": "Switch the grind map and user-setup to the DF64V",
-    "status": "backlog",
+    "status": "refined",
     "priority": "high",
     "type": "chore",
     "tags": [
@@ -95,7 +97,7 @@
     ],
     "parent": "024",
     "research": null,
-    "spec": null,
+    "spec": "cortex/lifecycle/switch-the-grind-map-and-user/spec.md",
     "discovery_source": "cortex/research/df64v-ssp-migration/research.md",
     "plan": null,
     "uuid": "c5880269-8375-44a3-9fd0-c64028fecf45",
@@ -136,13 +138,15 @@
   {
     "id": 27,
     "title": "Parameterize feedback/new-coffee/consult to read the active grinder",
-    "status": "backlog",
+    "status": "refined",
     "priority": "medium",
     "type": "feature",
     "tags": [
       "df64v-ssp-migration"
     ],
-    "areas": [],
+    "areas": [
+      "skills"
+    ],
     "created": "2026-06-01",
     "updated": "2026-06-01",
     "blocks": [],
@@ -151,7 +155,7 @@
     ],
     "parent": "024",
     "research": null,
-    "spec": null,
+    "spec": "cortex/lifecycle/parameterize-feedback-new-coffee-consult-to/spec.md",
     "discovery_source": "cortex/research/df64v-ssp-migration/research.md",
     "plan": null,
     "uuid": "efc26131-6a10-4bbb-82a0-ca5431457579",
