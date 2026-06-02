@@ -55,15 +55,15 @@ Read `grind-map.md` and find similar coffees:
 - Match by: roast level > processing method > origin
 - **Consider profile style compatibility**: A grind setting from a bloom profile at 7.5 bar won't translate directly to a turbo at 6 bar. When presenting matches, include the Profile, Ratio, and Temp columns so the user sees the full extraction context.
 - If match found: use as starting point, adjust for freshness and profile style differences
-- If no match: use defaults from `knowledge/grinders/SETTE_270.md`
+- If no match: load the active grinder reference resolved per the Active Grinder field parsing contract (`knowledge/grinders/` file) with the Req 4 attempt-then-fallback — Per the CLAUDE.md Active Grinder field parsing contract, read the `user-setup.md` Grinder field, resolve the active grinder reference by case-insensitive substring against the contract's map (first match wins), attempt to load that `knowledge/grinders/` file, and on any miss or unreadable `user-setup.md` degrade to grinder-relative step advice plus the unconfigured nudge — never error.
 
-**Freshness adjustment:** Fresher beans (fewer days off roast) need **coarser** grind — CO2 adds puck resistance. If historical match was at 14 days and new bag is 7 days, suggest 1-2 micro steps coarser.
+**Freshness adjustment:** Fresher beans (fewer days off roast) need **coarser** grind — CO2 adds puck resistance. If historical match was at 14 days and new bag is 7 days, suggest a small step / 1-2 steps coarser.
 
 ### 4. SYNTHESIZE Recommendations
 
 Build recommendations using:
 - **Temperature:** From `knowledge/ESPRESSO_BREWING_BASICS.md` roast guidelines
-- **Grind:** From grind-map match or SETTE_270.md defaults
+- **Grind:** From grind-map match or the active grinder reference's defaults
 - **Ratio:** From processing method patterns (see below)
 - **Pressure:** From `knowledge/PRESSURE_GUIDE.md` roast × processing matrix (see below)
 - **Profile:** From `knowledge/PROFILE_LIBRARY.md` by roast/process, adjusted for correct pressure
