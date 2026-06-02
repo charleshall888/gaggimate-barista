@@ -14,14 +14,14 @@ Decaf's higher porosity and lower density mean it needs a gentler approach acros
 
 | Variable | Regular Espresso | Decaf Adjustment | Why |
 |----------|-----------------|-----------------|-----|
-| **Grind** | Your baseline | 1–3 macro steps *coarser* | Porous structure offers less flow resistance |
+| **Grind** | Your baseline | A few steps coarser | Porous structure offers less flow resistance |
 | **Temperature** | Per roast level | -2 to -4°C from baseline | Extracts faster; lower temp avoids bitterness |
 | **Pressure** | Per matrix | -1 to -2 bar | Less force needed; reduces harsh extraction |
 | **Ratio** | Per style | Same or slightly longer (1:2.5) | Longer ratio develops sweetness in a less complex cup |
 | **Pre-infusion** | Standard | Shorter (3–5 seconds) | Porous puck saturates faster |
 | **Dose** | = basket size | Same (never underdose) | Porosity means the basket may look fuller — trust the scale |
 
-**Expect:** Decaf shots flow *noticeably* faster at the same grind setting. On the Sette 270, start 2–3 macro steps coarser than your regular setting and adjust from there.
+**Expect:** Decaf shots flow *noticeably* faster at the same grind setting. Start a few steps coarser than your regular setting on your grinder and adjust from there.
 
 ### Profile Recommendations
 
