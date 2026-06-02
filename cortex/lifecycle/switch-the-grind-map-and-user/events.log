@@ -12,3 +12,6 @@
 {"ts": "2026-06-02T16:24:39Z", "event": "batch_dispatch", "feature": "switch-the-grind-map-and-user", "batch": 2, "tasks": [3], "mode": "orchestrator-direct"}
 {"ts": "2026-06-02T16:24:39Z", "event": "task_complete", "feature": "switch-the-grind-map-and-user", "task": 3, "commit": "1e0949a", "note": "user-setup Grinder repointed, pushed"}
 {"ts": "2026-06-02T16:24:39Z", "event": "phase_transition", "feature": "switch-the-grind-map-and-user", "tier": "complex", "from": "implement", "to": "review"}
+{"ts": "2026-06-02T16:28:21Z", "event": "review_verdict", "feature": "switch-the-grind-map-and-user", "verdict": "APPROVED", "cycle": 1, "requirements_drift": "none"}
+{"ts": "2026-06-02T16:28:21Z", "event": "phase_transition", "feature": "switch-the-grind-map-and-user", "from": "review", "to": "complete"}
+{"ts": "2026-06-02T16:29:22Z", "event": "feature_complete", "feature": "switch-the-grind-map-and-user", "tasks_total": 3, "rework_cycles": 1, "merge_anchor": "merge"}

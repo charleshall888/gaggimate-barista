@@ -1,2 +1,3 @@
 {"v":1,"ts":"2026-06-01T12:45:23Z","event":"status_changed","item_uuid":"c5880269-8375-44a3-9fd0-c64028fecf45","session_id":"manual","details":{"from":null,"to":"backlog"}}
 {"v":1,"ts":"2026-06-01T14:12:51Z","event":"status_changed","item_uuid":"c5880269-8375-44a3-9fd0-c64028fecf45","session_id":"manual","details":{"from":"backlog","to":"refined"}}
+{"v":1,"ts":"2026-06-02T16:29:05Z","event":"status_changed","item_uuid":"c5880269-8375-44a3-9fd0-c64028fecf45","session_id":"b91ea758-5125-4f11-8138-588c01ad8120","details":{"from":"refined","to":"complete"}}

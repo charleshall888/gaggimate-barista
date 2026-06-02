@@ -2,7 +2,7 @@
 schema_version: "1"
 uuid: c5880269-8375-44a3-9fd0-c64028fecf45
 title: "Switch the grind map and user-setup to the DF64V"
-status: refined
+status: complete
 priority: high
 type: chore
 tags: [df64v-ssp-migration]
@@ -10,7 +10,7 @@ discovery_source: cortex/research/df64v-ssp-migration/research.md
 parent: "024"
 blocked-by: ["025"]
 created: 2026-06-01
-updated: 2026-06-01
+updated: 2026-06-02
 complexity: complex
 criticality: high
 spec: cortex/lifecycle/switch-the-grind-map-and-user/spec.md

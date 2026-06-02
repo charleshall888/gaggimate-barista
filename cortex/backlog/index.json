@@ -52,34 +52,6 @@
     "repo": null
   },
   {
-    "id": 26,
-    "title": "Switch the grind map and user-setup to the DF64V",
-    "status": "refined",
-    "priority": "high",
-    "type": "chore",
-    "tags": [
-      "df64v-ssp-migration"
-    ],
-    "areas": [],
-    "created": "2026-06-01",
-    "updated": "2026-06-01",
-    "blocks": [],
-    "blocked_by": [
-      "025"
-    ],
-    "parent": "024",
-    "research": null,
-    "spec": "cortex/lifecycle/switch-the-grind-map-and-user/spec.md",
-    "discovery_source": "cortex/research/df64v-ssp-migration/research.md",
-    "plan": null,
-    "uuid": "c5880269-8375-44a3-9fd0-c64028fecf45",
-    "lifecycle_slug": null,
-    "session_id": null,
-    "lifecycle_phase": null,
-    "schema_version": "1",
-    "repo": null
-  },
-  {
     "id": 28,
     "title": "Commission the DF64V and run the phased per-coffee profile re-dial",
     "status": "backlog",
@@ -90,11 +62,9 @@
     ],
     "areas": [],
     "created": "2026-06-01",
-    "updated": "2026-06-01",
+    "updated": "2026-06-02",
     "blocks": [],
-    "blocked_by": [
-      "026"
-    ],
+    "blocked_by": [],
     "parent": "024",
     "research": null,
     "spec": null,
@@ -110,7 +80,7 @@
   {
     "id": 27,
     "title": "Parameterize feedback/new-coffee/consult to read the active grinder",
-    "status": "refined",
+    "status": "in_progress",
     "priority": "medium",
     "type": "feature",
     "tags": [
@@ -120,7 +90,7 @@
       "skills"
     ],
     "created": "2026-06-01",
-    "updated": "2026-06-01",
+    "updated": "2026-06-02",
     "blocks": [],
     "blocked_by": [
       "025"
@@ -133,7 +103,7 @@
     "uuid": "efc26131-6a10-4bbb-82a0-ca5431457579",
     "lifecycle_slug": null,
     "session_id": null,
-    "lifecycle_phase": null,
+    "lifecycle_phase": "plan",
     "schema_version": "1",
     "repo": null
   },

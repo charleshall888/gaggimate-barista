@@ -8,9 +8,9 @@ type: feature
 tags: [df64v-ssp-migration]
 discovery_source: cortex/research/df64v-ssp-migration/research.md
 parent: "024"
-blocked-by: ["026"]
+blocked-by: []
 created: 2026-06-01
-updated: 2026-06-01
+updated: 2026-06-02
 ---
 
 # Commission the DF64V and run the phased per-coffee profile re-dial
