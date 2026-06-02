@@ -25,7 +25,7 @@ Use the routing table below to identify which file(s) to load. Match on keywords
 | temperature, temp, roast level, how hot | `knowledge/ESPRESSO_BREWING_BASICS.md` | — |
 | pressure, bar, processing method | `knowledge/PRESSURE_GUIDE.md` | — |
 | ratio, yield, dose, output, how much | `knowledge/ESPRESSO_BREWING_BASICS.md` | — |
-| grind, Sette, finer, coarser, grind setting | `knowledge/grinders/SETTE_270.md` | `knowledge/ESPRESSO_BREWING_BASICS.md` |
+| grind, grinder, finer, coarser, grind setting | Active grinder reference resolved per the Active Grinder field parsing contract → `knowledge/grinders/` | `knowledge/ESPRESSO_BREWING_BASICS.md` |
 | sour, bitter, taste, flavor, tasting | `knowledge/ESPRESSO_TASTING_GUIDE.md` | `knowledge/ESPRESSO_BREWING_BASICS.md` |
 | channeling, puck prep, WDT, distribution | `knowledge/EXTRACTION_SCIENCE.md` | — |
 | freshness, rest, degas, storage, freeze | `knowledge/BEAN_FRESHNESS_AND_STORAGE.md` | — |
@@ -40,6 +40,14 @@ Use the routing table below to identify which file(s) to load. Match on keywords
 If the question spans two topics (e.g., "what pressure for a natural at light roast?"), load both the primary and secondary files.
 
 If no keywords match, default to `knowledge/ESPRESSO_BREWING_BASICS.md` — it covers the broadest range of topics.
+
+### 1b. RESOLVE Active Grinder Reference (for grind/grinder questions)
+
+When the question matches the grind/grinder routing row, resolve the active grinder reference before loading:
+
+Per the CLAUDE.md Active Grinder field parsing contract, read the `user-setup.md` Grinder field, resolve the active grinder reference by case-insensitive substring against the contract's map (first match wins), attempt to load that `knowledge/grinders/` file, and on any miss or unreadable `user-setup.md` degrade to grinder-relative step advice plus the unconfigured nudge — never error.
+
+This Grinder-field read is a config read that lies outside the cascade cap (the cap covers only knowledge/reference loads — see §5 below).
 
 ### 2. LOAD Primary File
 
@@ -62,7 +70,7 @@ Answer the user's question using the content you just loaded. Cite specific tabl
 
 Only load a deep reference file if the user asks "why?", wants theory, or the quick-reference file explicitly doesn't cover their question.
 
-**Cascade prevention rule:** Load at most **ONE** quick-reference file and **ONE** deep reference file per question. If the quick-reference answers it, stop there. Never chain quick->deep->second-quick->second-deep.
+**Cascade prevention rule:** Load at most **ONE** quick-reference file and **ONE** deep reference file per question. If the quick-reference answers it, stop there. Never chain quick->deep->second-quick->second-deep. (Reading the `user-setup.md` Grinder field to select the active grinder reference is a config read outside the cap — it does not count against the one-quick + one-deep limit.)
 
 | Deep Reference | Load ONLY when user asks about... |
 |---------------|----------------------------------|
@@ -74,7 +82,7 @@ Only load a deep reference file if the user asks "why?", wants theory, or the qu
 | `knowledge/reference/PRESSURE_REFERENCE.md` (95) | Pressure-compound interactions, pressure misconceptions deep-dive |
 | `knowledge/reference/MILK_AND_DRINKS_REFERENCE.md` (118) | Milk chemistry, foam science, latte art technique |
 | `knowledge/reference/SPECIAL_CATEGORIES_REFERENCE.md` (85) | Decaffeination chemistry, blend philosophy analysis |
-| `knowledge/reference/SETTE_270_REFERENCE.md` (156) | Grinder calibration, burr wear, maintenance deep-dive |
+| Active grinder's deep reference, resolved per the contract's explicit deep-tier map under `knowledge/reference/` | Grinder calibration, burr wear, maintenance deep-dive — `consult` proceeds without a deep reference when the active grinder has no deep-map row |
 
 **Gated to other skills only (never load from /consult):**
 - `knowledge/reference/PROFILE_CREATION_REFERENCE.md` — only via `/gaggimate-profiles`
