@@ -130,7 +130,7 @@ Rules:
 - Preserve all correct information from the draft.
 - For grind confidence: rewrite the estimate with language that matches the evidence
   strength. LOW confidence → use "roughly X as a starting point." NONE → use "the
-  the active grinder reference's espresso range starts around X; expect to dial from there."
+  active grinder reference's espresso range starts around X; expect to dial from there."
 - For conditional framing: rewrite conflicting conditionals into a clear IF/ELSE
   structure. Example:
     "Start at your grinder's recommended starting setting. After your first shot:
