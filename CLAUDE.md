@@ -27,6 +27,7 @@ Reference these files in the `knowledge/` directory for detailed guidance:
 - `BEAN_FRESHNESS_AND_STORAGE.md` - Peak flavor windows, ultra-fresh handling, visual freshness cues
 - `SPECIAL_CATEGORIES.md` - Decaf extraction adjustments, blend temperature strategies, archetype quick-reference
 - `grinders/SETTE_270.md` - Sette 270 adjustment system, espresso range table, quick adjustment guide
+- `grinders/DF64V.md` - DF64V Gen-3 adjustment system, espresso RPM range, quick-adjust guide (SSP Cast Lab Sweet V3 Red Speed burrs)
 - `automatic-pro/` - Automatic Pro firmware built-in profile: 5-phase vIT3 architecture, dose scaling, and working profile JSONs (16g, 18g, 20g, 22g)
 - `MILK_AND_DRINKS.md` - Steaming technique, temperature thresholds, drink specs, single-boiler workflow
 - `BASKETS.md` - Dose = basket size rule, puck depth effects, precision basket puck prep
