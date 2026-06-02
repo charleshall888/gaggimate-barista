@@ -2,7 +2,7 @@
 schema_version: "1"
 uuid: efc26131-6a10-4bbb-82a0-ca5431457579
 title: "Parameterize feedback/new-coffee/consult to read the active grinder"
-status: in_progress
+status: complete
 priority: medium
 type: feature
 tags: [df64v-ssp-migration]

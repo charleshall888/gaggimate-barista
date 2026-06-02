@@ -78,36 +78,6 @@
     "repo": null
   },
   {
-    "id": 27,
-    "title": "Parameterize feedback/new-coffee/consult to read the active grinder",
-    "status": "in_progress",
-    "priority": "medium",
-    "type": "feature",
-    "tags": [
-      "df64v-ssp-migration"
-    ],
-    "areas": [
-      "skills"
-    ],
-    "created": "2026-06-01",
-    "updated": "2026-06-02",
-    "blocks": [],
-    "blocked_by": [
-      "025"
-    ],
-    "parent": "024",
-    "research": null,
-    "spec": "cortex/lifecycle/parameterize-feedback-new-coffee-consult-to/spec.md",
-    "discovery_source": "cortex/research/df64v-ssp-migration/research.md",
-    "plan": null,
-    "uuid": "efc26131-6a10-4bbb-82a0-ca5431457579",
-    "lifecycle_slug": null,
-    "session_id": null,
-    "lifecycle_phase": "plan",
-    "schema_version": "1",
-    "repo": null
-  },
-  {
     "id": 1,
     "title": "Add three-level detail parameter to analyze_shot",
     "status": "backlog",

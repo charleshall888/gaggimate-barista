@@ -11,3 +11,4 @@
 {"ts": "2026-06-02T18:17:47Z", "event": "phase_transition", "feature": "parameterize-feedback-new-coffee-consult-to", "tier": "complex", "from": "implement", "to": "review"}
 {"ts": "2026-06-02T18:24:37Z", "event": "review_verdict", "feature": "parameterize-feedback-new-coffee-consult-to", "verdict": "APPROVED", "cycle": 1, "requirements_drift": "none"}
 {"ts": "2026-06-02T18:24:37Z", "event": "phase_transition", "feature": "parameterize-feedback-new-coffee-consult-to", "from": "review", "to": "complete"}
+{"ts": "2026-06-02T18:26:13Z", "event": "feature_complete", "feature": "parameterize-feedback-new-coffee-consult-to", "tasks_total": 8, "rework_cycles": 1, "merge_anchor": "merge"}
