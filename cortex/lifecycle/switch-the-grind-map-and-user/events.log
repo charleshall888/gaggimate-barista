@@ -3,3 +3,5 @@
 {"ts": "2026-06-01T13:25:54Z", "event": "complexity_override", "feature": "switch-the-grind-map-and-user", "from": "simple", "to": "complex", "gate": "research_open_questions"}
 {"ts":"2026-06-01T14:03:59Z","event":"sentinel_absence","feature":"switch-the-grind-map-and-user","reviewer_angle":"Atomic-commit vs auto-commit mechanics","reason":"absent","model_tier":"sonnet","expected_sha":"ac43f3995c6dbc5234b19690b208f6c6cda402242c05d47458f514145e5f98ab","observed_sha_or_null":null}
 {"ts": "2026-06-01T14:12:42Z", "event": "spec_approved", "feature": "switch-the-grind-map-and-user"}
+{"ts": "2026-06-02T16:15:03Z", "event": "plan_approved", "feature": "switch-the-grind-map-and-user"}
+{"ts": "2026-06-02T16:15:03Z", "event": "phase_transition", "feature": "switch-the-grind-map-and-user", "from": "plan", "to": "implement"}
