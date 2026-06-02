@@ -6,7 +6,9 @@ A record of grind settings from rated shots. When you rate a shot with a grind s
 
 | Coffee | Roast | Process | Origin | Days Off Roast | Grind | Profile | Ratio | Temp | Rating | Date | Puck Screen? |
 |--------|-------|---------|--------|----------------|-------|---------|-------|------|--------|------|--------------|
-| Example Roaster Ethiopia Yirgacheffe | Light | Washed | Ethiopia | 21 | 13C | Bloom Slide | 1:2.5 | 94°C | 5 | Jan 15 |  |
+| Example Roaster Ethiopia Yirgacheffe | Light | Washed | Ethiopia | 21 | chirp + 14 mk | Bloom Slide | 1:2.5 | 94°C | 5 | Jan 15 |  |
+
+*Grind is logged in chirp-relative notation (`chirp + N marks`). See `knowledge/grinders/_NOTATION.md` for the full notation contract, epoch-binding convention, and seasoning caveats.*
 
 *Days Off Roast is optional—use "—" when roast date is unknown.*
 
