@@ -350,7 +350,7 @@ Coarse grind, high flow, fast extraction. Emphasizes clarity and brightness over
 
 **Flavor expectations:** Bright, clean, tea-like, clarity of origin flavors, lighter body
 
-**Note:** Requires coarser grind than typical espresso. Expect 2-4 macro steps coarser on most grinders. The longer ratio is essential — with a coarse grind and short contact time, you need more water volume to achieve adequate extraction. A 1:2 turbo will be sour and under-extracted.
+**Note:** Requires a significantly coarser grind than typical espresso — this is a large relative shift from your normal espresso starting point, not a minor adjustment. The longer ratio is essential — with a coarse grind and short contact time, you need more water volume to achieve adequate extraction. A 1:2 turbo will be sour and under-extracted.
 
 **Milk drink note:** Turbo shots have lighter body and higher volume, which can get lost in large milk drinks. If you want turbo clarity in milk, pair with a cortado, piccolo, or flat white rather than a full latte.
 
