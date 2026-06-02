@@ -146,7 +146,7 @@ The danger isn't the cold — it's the transition from cold to warm. When frozen
 
 ### Grind Adjustment for Frozen Beans
 
-Frozen beans grind finer than room-temperature beans at the same grinder setting. Adjust **1–2 macro steps coarser** to compensate, then dial in from there. The increased uniformity may also mean you can extract at slightly lower pressure with better results.
+Frozen beans grind finer than room-temperature beans at the same grinder setting. Adjust **a step or two coarser on your grinder** to compensate, then dial in from there. The increased uniformity may also mean you can extract at slightly lower pressure with better results.
 
 ---
 

@@ -32,7 +32,7 @@ Espresso extraction happens in stages:
 
 ### Turbo Shot
 - **Pressure:** ~6 bar (naturally low from coarse grind)
-- **Grind:** Coarser (medium-fine, 2-4 macro steps coarser than traditional)
+- **Grind:** Coarser (medium-fine; noticeably coarser than your traditional setting — consult your grinder's reference for the expected step count)
 - **Ratio:** 1:2.5 to 1:3 (longer ratio is essential — coarse grind + short time needs more water for adequate extraction)
 - **Time:** 10-20 seconds
 - **Temperature:** 96C (high temp compensates for short contact time)
@@ -166,7 +166,7 @@ If you rotate between different bags:
 
 - **Record everything** in your `grind-map.md` — coffee, grind setting, profile, ratio, temperature, days off roast, rating
 - **When returning to a coffee**, check your grind map and adjust for freshness: fresher beans (fewer days off roast) typically need a slightly coarser grind — CO2 adds puck resistance, so compensate to hit target time
-- **Purge grinder retention** when switching coffees — run 2-3g through to clear the old grounds. The Sette 270 has relatively low retention (~1g), but stale grounds from a previous coffee will affect the first shot
+- **Purge grinder retention** when switching coffees — run 2-3g through to clear the old grounds. Even with low-retention grinders, stale grounds from a previous coffee will affect the first shot
 - **Don't compare across coffees** — a grind setting that works for one bean won't work for another, even at the same roast level. Origin, variety, density, and processing all affect extraction
 
 ### When to Abandon an Approach

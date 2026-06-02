@@ -2,7 +2,7 @@
 schema_version: "1"
 uuid: f23d821e-b175-4769-b1d8-d8919bc4b3bb
 title: "Build the grinder-agnostic knowledge layer (DF64V + notation + de-Sette)"
-status: backlog
+status: refined
 priority: high
 type: feature
 tags: [df64v-ssp-migration]
@@ -11,6 +11,10 @@ parent: "024"
 blocked-by: []
 created: 2026-06-01
 updated: 2026-06-01
+complexity: complex
+criticality: high
+spec: cortex/lifecycle/build-the-grinder-agnostic-knowledge-layer/spec.md
+areas: ['docs']
 ---
 
 # Build the grinder-agnostic knowledge layer

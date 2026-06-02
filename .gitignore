@@ -30,3 +30,8 @@ cortex/.cortex-init
 cortex/.cortex-init-backup/
 .claude/worktrees/
 # cortex/
+
+# Cortex overnight/pipeline runtime artifacts (per-run, not source)
+cortex/lifecycle/sessions/
+cortex/lifecycle/*/exit-reports/
+cortex/lifecycle/*/agent-activity.jsonl
