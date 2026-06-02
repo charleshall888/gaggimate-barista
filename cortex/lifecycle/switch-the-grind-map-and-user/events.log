@@ -5,3 +5,10 @@
 {"ts": "2026-06-01T14:12:42Z", "event": "spec_approved", "feature": "switch-the-grind-map-and-user"}
 {"ts": "2026-06-02T16:15:03Z", "event": "plan_approved", "feature": "switch-the-grind-map-and-user"}
 {"ts": "2026-06-02T16:15:03Z", "event": "phase_transition", "feature": "switch-the-grind-map-and-user", "from": "plan", "to": "implement"}
+{"ts": "2026-06-02T16:19:48Z", "event": "batch_dispatch", "feature": "switch-the-grind-map-and-user", "batch": 0, "tasks": [1], "mode": "orchestrator-direct"}
+{"ts": "2026-06-02T16:19:48Z", "event": "task_complete", "feature": "switch-the-grind-map-and-user", "task": 1, "note": "telemetry skipped (device unreachable); R1 floor verified"}
+{"ts": "2026-06-02T16:24:39Z", "event": "batch_dispatch", "feature": "switch-the-grind-map-and-user", "batch": 1, "tasks": [2], "mode": "orchestrator-direct"}
+{"ts": "2026-06-02T16:24:39Z", "event": "task_complete", "feature": "switch-the-grind-map-and-user", "task": 2, "commit": "4e9b63e", "note": "archive + fresh DF64V map, atomic commit pushed"}
+{"ts": "2026-06-02T16:24:39Z", "event": "batch_dispatch", "feature": "switch-the-grind-map-and-user", "batch": 2, "tasks": [3], "mode": "orchestrator-direct"}
+{"ts": "2026-06-02T16:24:39Z", "event": "task_complete", "feature": "switch-the-grind-map-and-user", "task": 3, "commit": "1e0949a", "note": "user-setup Grinder repointed, pushed"}
+{"ts": "2026-06-02T16:24:39Z", "event": "phase_transition", "feature": "switch-the-grind-map-and-user", "tier": "complex", "from": "implement", "to": "review"}
