@@ -228,18 +228,18 @@ Altitude affects bean density, which directly impacts extraction behavior. Dense
 
 | Days Off Roast | CO2 Level | Grind Adjustment |
 |----------------|-----------|------------------|
-| 3-7 days | High | 1-2 micro steps coarser |
+| 3-7 days | High | 1-2 steps coarser |
 | 8-14 days | Medium | Baseline (grind map reference) |
-| 15-21 days | Low | 1-2 micro steps finer |
+| 15-21 days | Low | 1-2 steps finer |
 | 22+ days | Depleted | Consider fresher beans |
 
 > *For comprehensive freshness science — degassing curves, peak flavor windows by roast level, storage methods, and freezing protocols — see `knowledge/BEAN_FRESHNESS_AND_STORAGE.md`.*
 
 ### Calculation Example
 
-If grind-map.md shows a similar coffee at `9D` at 14 days off roast:
-- New bag at 7 days → suggest `9F` or `9G` (coarser)
-- New bag at 21 days → suggest `9B` or `9C` (finer)
+If grind-map.md shows a similar coffee at its recorded setting at 14 days off roast:
+- New bag at 7 days → suggest 1-2 steps coarser
+- New bag at 21 days → suggest 1-2 steps finer
 
 ---
 
