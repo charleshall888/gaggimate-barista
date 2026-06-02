@@ -133,7 +133,7 @@ The Rating column records whether the shot worked — low-rated rows are diagnos
 **Update process (append-only — preserves header, alignment line, and every existing data row):**
 1. Read current `grind-map.md`. Do NOT touch the header line, the alignment line, or any existing data rows.
 2. Append a new row to the **end** of the file with these 12 fields in order: `Coffee, Roast, Process, Origin, Days Off Roast, Grind, Profile, Ratio, Temp, Rating, Date, Puck Screen?`
-3. **Grind notation:** Defer the recording format to the notation prescribed by the active grinder reference — record exactly the format that reference specifies for the active grinder (e.g., for the DF64V this defers to the notation in `knowledge/grinders/_NOTATION.md` as prescribed by its reference).
+3. **Grind notation:** Defer the recording format to the notation prescribed by the active grinder reference — record exactly the format that reference specifies (a reference may itself defer to the shared `knowledge/grinders/_NOTATION.md`).
 4. **Puck Screen? cell — read from `user-setup.md` Equipment table (stateless read; do NOT write):**
    - Missing row, blank value, or value `None` (case-insensitive) or whitespace-only → write a **blank cell**
    - Any other non-empty value → write `Y`
