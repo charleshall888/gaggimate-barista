@@ -8,17 +8,19 @@ Actionable tables for grinder-profile interaction, channeling prevention, pre-in
 
 ## Why Grinder Choice Affects Profile Design
 
-Different grinders produce fundamentally different particle beds, which respond differently to pressure and flow:
+Different grinders produce fundamentally different particle beds — driven primarily by **fines content**. Burr shape (flat vs. conical) is a loose proxy for fines content, but the specific burr set determines the actual result:
 
-| Grinder Type | Profile Considerations |
-|--------------|----------------------|
-| **High-fines conical** (Sette 270, Niche) | May benefit from 7–8 bar extraction, gentler ramp, or longer pre-infusion to avoid over-compacting fines |
-| **Low-fines flat** (EK43, SSP burrs) | Can handle 9 bar consistently; may need finer grind to compensate for lack of fines; pressure decline is less critical |
+| Fines Level | Profile Considerations |
+|-------------|----------------------|
+| **High-fines** (typical conicals: Sette 270, Niche) | May benefit from 7–8 bar extraction, gentler ramp, or longer pre-infusion to avoid over-compacting fines |
+| **Low-fines flat** (e.g. EK43, some SSP burr sets — *fines output varies by model; not all flats are low-fines*) | Can handle 9 bar consistently; may need finer grind to compensate for lack of fines; pressure decline is less critical |
 | **Unimodal grinders** | Often require flow-based profiles rather than pressure-based; turbo-style shots work particularly well |
+
+> **Cup character (body vs. clarity):** Burr shape alone does not cleanly predict body/clarity outcomes — this is contested and depends on the specific burr set. Refer to the active grinder's burr-character note for the tendency that applies to your setup.
 
 This is why a profile that works perfectly on one setup may underperform on another — the grinder is part of the system.
 
-> *For Sette 270-specific settings and maintenance, see `grinders/SETTE_270.md`*
+> *For settings and maintenance specific to your grinder, see the active grinder's reference (per the Grinder field in `user-setup.md`).*
 
 ---
 
@@ -43,7 +45,7 @@ This is why a profile that works perfectly on one setup may underperform on anot
 
 **Recommended combo:** WDT → light tap to settle → tamp → (optional: puck screen on top — see [PUCK_SCREENS.md](PUCK_SCREENS.md))
 
-Paper filters below the puck are particularly effective for high-fines grinders (like the Sette 270) — they prevent fines from accumulating at the basket holes and creating uneven flow.
+Paper filters below the puck are particularly effective for high-fines grinders — they prevent fines from accumulating at the basket holes and creating uneven flow.
 
 ---
 
