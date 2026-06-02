@@ -49,7 +49,7 @@ Make `feedback`, `consult`, and `new-coffee` resolve the active grinder from the
 
   Preserve all existing Core Rules verbatim.
 - **Verification**: `grep -c "Active Grinder field parsing contract" CLAUDE.md` ≥ 1 AND `grep -c "SETTE_270_REFERENCE.md" CLAUDE.md` ≥ 1 AND `grep -c "DF64V_REFERENCE.md" CLAUDE.md` ≥ 1 (deep map is explicit, not templated) AND `grep -i "knowledge/grinders/" CLAUDE.md` ≥ 1 AND `grep -iE "fallback|unconfigured|do not hardcode" CLAUDE.md` ≥ 1 AND `grep -ciE "first match|never error" CLAUDE.md` ≥ 1 — pass if all match; the quick/deep maps, attempt-then-fallback rule, `_`-prefix exclusion, and canonical sentence are review-confirmable in the clause text.
-- **Status**: [ ] pending
+- **Status**: [x] done
 
 ### Task 3: Parameterize feedback/SKILL.md (grind load + notation deferral)
 - **Files**: `.claude/skills/feedback/SKILL.md`
@@ -85,7 +85,7 @@ Make `feedback`, `consult`, and `new-coffee` resolve the active grinder from the
 - **Complexity**: simple
 - **Context**: Three Sette literals. (1) `SELF_CHECK.md:14` claims-block line `GRIND_ESTIMATE: [setting, e.g., 13E] (source: [grind-map match name | Sette 270 default range])` — change "Sette 270 default range" to "active grinder reference default range" (or "active grinder default range") and make the `13E` example token grinder-neutral (e.g., "your starting setting" or an active-reference-derived placeholder). (2) `SELF_CHECK.md:133` arbiter line `Sette 270 espresso range starts around X; expect to dial from there.` — change "Sette 270 espresso range" to "the active grinder reference's espresso range". (3) `SELF_CHECK.md:136` arbiter example `"Start at 13E. After your first shot:` — make the `13E` token grinder-neutral. Preserve the surrounding critic/arbiter protocol structure and the confidence-calibration table.
 - **Verification**: `grep -ci "sette" .claude/skills/new-coffee/references/SELF_CHECK.md` = 0 AND `grep -rnE "\b[0-9]{1,2}[A-M]\b" .claude/skills/new-coffee/references/SELF_CHECK.md` returns 0 lines (token-family sweep — the `sette`-only grep does NOT catch the two `13E` example tokens at lines 14 and 136; this does) — pass if both hold.
-- **Status**: [ ] pending
+- **Status**: [x] done
 
 ### Task 7: De-Sette new-coffee/references/RESEARCH_CHECKLIST.md
 - **Files**: `.claude/skills/new-coffee/references/RESEARCH_CHECKLIST.md`
@@ -94,7 +94,7 @@ Make `feedback`, `consult`, and `new-coffee` resolve the active grinder from the
 - **Complexity**: simple
 - **Context**: Two spots. (1) Freshness table at `RESEARCH_CHECKLIST.md:231` and `:233` use "1-2 micro steps coarser/finer" — change "micro steps" to "steps" (grinder-relative). (2) Calculation Example at `RESEARCH_CHECKLIST.md:240-242` uses Sette codes (`9D` at 14 days; `9F`/`9G` coarser; `9B`/`9C` finer) — rewrite in grinder-relative step language, e.g. "If grind-map.md shows a similar coffee at its recorded setting at 14 days off roast: New bag at 7 days → suggest 1-2 steps coarser; New bag at 21 days → suggest 1-2 steps finer." No `9[A-I]` token may remain. Preserve the table structure and the BEAN_FRESHNESS cross-link.
 - **Verification**: `grep -niE "sette|micro step" .claude/skills/new-coffee/references/RESEARCH_CHECKLIST.md` returns 0 lines AND `grep -nE "\b[0-9]{1,2}[A-M]\b" .claude/skills/new-coffee/references/RESEARCH_CHECKLIST.md` returns 0 lines (token-family sweep — supersedes the narrower `9[A-I]`; catches `9D`/`9F`/`9G`/`9B`/`9C` and any two-digit code) — pass if both hold.
-- **Status**: [ ] pending
+- **Status**: [x] done
 
 ### Task 8: Whole-feature verification (de-Sette sweep + no-DF64V-hardcode + Sette-path dry-run)
 - **Files**: (read-only verification across) `.claude/skills/feedback/SKILL.md`, `.claude/skills/consult/SKILL.md`, `.claude/skills/new-coffee/SKILL.md`, `.claude/skills/new-coffee/references/SELF_CHECK.md`, `.claude/skills/new-coffee/references/RESEARCH_CHECKLIST.md`
