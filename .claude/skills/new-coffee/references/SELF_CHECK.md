@@ -11,7 +11,7 @@ After completing your synthesis (Step 4) but before confirming with the user, ex
 
 ```
 <claims>
-GRIND_ESTIMATE: [setting, e.g., 13E] (source: [grind-map match name | Sette 270 default range])
+GRIND_ESTIMATE: [setting, e.g., your starting setting] (source: [grind-map match name | active grinder default range])
 GRIND_MATCH_SIMILARITY: [HIGH | MEDIUM | LOW | NONE]
   HIGH = same roast level + same process + similar origin
   MEDIUM = same roast level + same process, different origin
@@ -130,10 +130,10 @@ Rules:
 - Preserve all correct information from the draft.
 - For grind confidence: rewrite the estimate with language that matches the evidence
   strength. LOW confidence → use "roughly X as a starting point." NONE → use "the
-  Sette 270 espresso range starts around X; expect to dial from there."
+  the active grinder reference's espresso range starts around X; expect to dial from there."
 - For conditional framing: rewrite conflicting conditionals into a clear IF/ELSE
   structure. Example:
-    "Start at 13E. After your first shot:
+    "Start at your grinder's recommended starting setting. After your first shot:
     → If it tastes sour or pulls fast: go 1 step finer.
     → If it tastes bitter or pulls slow: go 1 step coarser."
   Never put both branches in the same sentence without the conditional triggers.
