@@ -26,7 +26,7 @@ Read these files before proceeding:
 | File | When |
 |------|------|
 | `knowledge/PRESSURE_GUIDE.md` (152) | Feedback suggests pressure/profile style change |
-| `knowledge/grinders/SETTE_270.md` (64) | User provides or asks about grind settings |
+| Active grinder reference resolved per the Active Grinder field parsing contract → `knowledge/grinders/` file | User provides or asks about grind settings — Per the CLAUDE.md Active Grinder field parsing contract, read the `user-setup.md` Grinder field, resolve the active grinder reference by case-insensitive substring against the contract's map (first match wins), attempt to load that `knowledge/grinders/` file, and on any miss or unreadable `user-setup.md` degrade to grinder-relative step advice plus the unconfigured nudge — never error. |
 | `grind-map.md` | Grind setting provided |
 | `knowledge/MILK_AND_DRINKS.md` (148) | User asks about drink format, or shot is dialed in (4+ balanced) and user has milk drink preferences |
 
@@ -133,7 +133,7 @@ The Rating column records whether the shot worked — low-rated rows are diagnos
 **Update process (append-only — preserves header, alignment line, and every existing data row):**
 1. Read current `grind-map.md`. Do NOT touch the header line, the alignment line, or any existing data rows.
 2. Append a new row to the **end** of the file with these 12 fields in order: `Coffee, Roast, Process, Origin, Days Off Roast, Grind, Profile, Ratio, Temp, Rating, Date, Puck Screen?`
-3. **Grind notation:** Full Sette 270 format: macro + micro letter (e.g., "9D", "10M", "11A")
+3. **Grind notation:** Defer the recording format to the notation prescribed by the active grinder reference — record exactly the format that reference specifies for the active grinder (e.g., for the DF64V this defers to the notation in `knowledge/grinders/_NOTATION.md` as prescribed by its reference).
 4. **Puck Screen? cell — read from `user-setup.md` Equipment table (stateless read; do NOT write):**
    - Missing row, blank value, or value `None` (case-insensitive) or whitespace-only → write a **blank cell**
    - Any other non-empty value → write `Y`
@@ -202,7 +202,7 @@ If user wants full milk science, steaming technique, or drink recipes → load `
 
 ## Quick Reference
 
-**User says:** "3 stars, sour, 14E grind, 22g in"
+**User says:** "3 stars, sour, current grind, 22g in"
 **Action:** Load context → record → diagnose (sour = extract more) → recommend grind/yield change → update tasting notes + grind map + shot notes
 
 **User says:** "5 stars, balanced, amazing sweetness"
