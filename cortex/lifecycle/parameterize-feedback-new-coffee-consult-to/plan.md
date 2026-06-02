@@ -30,7 +30,7 @@ Make `feedback`, `consult`, and `new-coffee` resolve the active grinder from the
 - **Complexity**: trivial
 - **Context**: 027 is `blocked-by: 025` and consumes 025's outputs — the per-grinder references (`knowledge/grinders/DF64V.md`), the grinder-neutral notation (`knowledge/grinders/_NOTATION.md`) that `feedback` defers to, and the template (`knowledge/grinders/_TEMPLATE.md`). This is a hard gate: if the named files are absent, halt and do not proceed to any later task — 027 is not implementable until 025 lands. The halt is enforced structurally by the dependency graph: every other task transitively declares `Depends on: [1]` (Task 2 directly, the rest via Task 2), so a failed gate blocks all descendants under the implement dispatcher — it is not relying on prose alone. (In this interactive session the gate is already satisfied: `DF64V.md`, `_TEMPLATE.md`, `_NOTATION.md`, `DF64V_REFERENCE.md` all exist. It remains a live gate for an overnight run where 025 might not have landed.)
 - **Verification**: `test -f knowledge/grinders/DF64V.md && test -f knowledge/grinders/_TEMPLATE.md` — pass if exit 0; on non-zero, halt the feature (do not dispatch any descendant task).
-- **Status**: [ ] pending
+- **Status**: [x] done
 
 ### Task 2: Add the "Active Grinder field parsing contract" clause to CLAUDE.md
 - **Files**: `CLAUDE.md`
