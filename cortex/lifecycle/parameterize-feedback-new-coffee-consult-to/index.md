@@ -2,7 +2,7 @@
 feature: parameterize-feedback-new-coffee-consult-to
 parent_backlog_uuid: efc26131-6a10-4bbb-82a0-ca5431457579
 parent_backlog_id: 027
-artifacts: ["research", "spec", "plan"]
+artifacts: ["research", "spec", "plan", "review"]
 tags: ["df64v-ssp-migration"]
 created: 2026-06-01
 updated: 2026-06-02
