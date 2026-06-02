@@ -123,20 +123,20 @@ At espresso settings, both flat and conical burrs produce bimodal distributions 
 
 ### Conical vs. Flat Burrs
 
-The Sette 270 uses **conical burrs**, which have distinct characteristics compared to flat burrs.
+Burr shape is commonly used as a proxy for fines content — conical burrs tend to produce more fines; flat burrs tend to produce fewer. This is a tendency, not a deterministic rule: geometry varies significantly within each category.
 
-| Burr Type | Particle Distribution | Cup Character | Forgiveness |
-|-----------|----------------------|---------------|-------------|
-| **Conical** | More bimodal, more fines | Fuller body, texture, sweetness | More forgiving of prep |
-| **Flat** | More unimodal, fewer fines | More clarity, uniformity, brightness | Rewards precise prep |
+| Burr Type | Particle Distribution | Cup Character (tendency — contested; burr set matters) | Forgiveness |
+|-----------|----------------------|-------------------------------------------------------|-------------|
+| **Conical (high-fines)** | More bimodal, more fines | Fuller body, texture, sweetness | More forgiving of prep |
+| **Flat (lower-fines)** | More unimodal, fewer fines | More clarity, uniformity, brightness | Rewards precise prep |
 
 **Why this matters for profiles:**
-- Conical burr grinders (like the Sette 270) produce more fines → may benefit from slightly lower extraction pressure to avoid over-compacting fines
-- Flat burr / unimodal grinders can handle higher pressure more consistently because the particle bed is more uniform
+- High-fines grinders (many conical designs, and some flat designs) produce more fines → may benefit from slightly lower extraction pressure to avoid over-compacting fines
+- Low-fines / unimodal grinders can handle higher pressure more consistently because the particle bed is more uniform
 
 Jonathan Gagné's research found that "more unimodal grinders require a much finer average grind size when pulling a shot of espresso" — the lack of fines means you need more total surface area to achieve adequate extraction.
 
-> *For Sette 270-specific settings and maintenance, see `../grinders/SETTE_270.md`*
+> *For your grinder's specific settings and burr character, see the active grinder's reference (per the Grinder field in `user-setup.md`).*
 
 ### The Role of Fines
 
@@ -162,8 +162,8 @@ Scott Rao notes that "the happy medium amount of fines for a given brewing situa
 
 High retention → high exchange → stale grounds mixing with fresh → inconsistent shots.
 
-**The Sette 270 has ~0.5g retention** — relatively low. Mitigation:
-- Purge 1–2g before your first shot of the day
+**Retention varies significantly by grinder design** — from under 0.5g on low-retention designs to several grams on traditional home grinders. Check the active grinder's reference for the specific figure. Regardless, the mitigations are:
+- Purge a small amount before your first shot of the day (amount depends on your grinder's retention)
 - Brief purge if changing beans
 - Single-dosing helps (weigh beans in, expect slight retention loss)
 
