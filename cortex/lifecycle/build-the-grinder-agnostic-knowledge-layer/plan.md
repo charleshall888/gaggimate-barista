@@ -58,7 +58,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
   - `grep -ci 'zero set\|epoch\|re-zero\|supersede\|pre-rezero' knowledge/grinders/_NOTATION.md` ≥ 2 — pass if ≥ 2 (R1c worked-example anchor + R1d row-superseding convention).
   - No prescribed µm/mark number: `grep -Eci 'micron[s]?[ /-]?(per|/)[ ]?mark|[0-9.]+ ?(µm|um|micron)[s]?[ /-]?(per|/)[ ]?mark' knowledge/grinders/_NOTATION.md` = 0 — pass if 0 (R1: must NOT prescribe a microns-per-mark figure).
   - Prior-grinder dead-coordinate statement present: `grep -ci 'dead.coordinate\|do not translate\|don.t translate\|not carry.forward\|prior grinder' knowledge/grinders/_NOTATION.md` ≥ 1 — pass if ≥ 1 (R1f).
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 2: Create `knowledge/grinders/DF64V.md` (operating quick-ref)
 
@@ -89,7 +89,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
   - Notation link present: `grep -c '_NOTATION.md' knowledge/grinders/DF64V.md` ≥ 1 — pass if ≥ 1 (R2 links to `_NOTATION.md`).
   - No microns-per-mark figure: `grep -Eci 'micron[s]?[ /-]?(per|/)[ ]?mark|[0-9.]+ ?(µm|um|micron)[s]?[ /-]?(per|/)[ ]?mark' knowledge/grinders/DF64V.md` = 0 — pass if 0 (R14 fact #5).
   - R14 content-correctness gate is performed in Task 14, not here (this verification confirms the grep *aids*; correctness is the reviewer's call).
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 3: Create `knowledge/reference/DF64V_REFERENCE.md` (deep-dive companion)
 
@@ -114,7 +114,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
   - Seasoning stated as a span, not a bald figure: `grep -Eci '5[ -]?(to|–|-)[ ]?10 ?kg|5.10 ?kg|settl' knowledge/reference/DF64V_REFERENCE.md` ≥ 1 — pass if ≥ 1 (R14 fact #4 — the ~5–10 kg settle leg is present, not just "2–3 kg").
   - No microns-per-mark figure: `grep -Eci 'micron[s]?[ /-]?(per|/)[ ]?mark|[0-9.]+ ?(µm|um|micron)[s]?[ /-]?(per|/)[ ]?mark' knowledge/reference/DF64V_REFERENCE.md` = 0 — pass if 0 (R14 fact #5).
   - R14 content-correctness gate is performed in Task 14, not here.
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 4: Create `knowledge/grinders/_TEMPLATE.md` (per-grinder scaffold, no DF64V content)
 
@@ -132,7 +132,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
   - No DF64V-specific content: `grep -ciE 'df64v|ssp|cast|red speed' knowledge/grinders/_TEMPLATE.md` = 0 — pass if 0 (R4).
   - Placement-instruction text for the optional reference companion: `grep -i 'reference companion\|deep-dive\|_REFERENCE' knowledge/grinders/_TEMPLATE.md | wc -l` ≥ 1 — pass if ≥ 1 (R4).
   - References `_NOTATION.md`: `grep -c '_NOTATION.md' knowledge/grinders/_TEMPLATE.md` ≥ 1 — pass if ≥ 1 (R4).
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 5: Add `grinders/DF64V.md` bullet to the CLAUDE.md Knowledge Files index (Sette entry retained)
 
@@ -148,7 +148,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
 - **Verification**:
   - `grep -c 'grinders/DF64V.md' CLAUDE.md` ≥ 1 — pass if ≥ 1 (R5 DF64V entry added).
   - `grep -c 'grinders/SETTE_270.md' CLAUDE.md` ≥ 1 — pass if ≥ 1 (R5 Sette entry retained).
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 6: Re-key `knowledge/EXTRACTION_SCIENCE.md` (archetype table, cross-ref, paper-filter parenthetical)
 
@@ -167,7 +167,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
   - Body/clarity claim carries a tendency/contested qualifier: `grep -iE 'tend|contested|burr set' knowledge/EXTRACTION_SCIENCE.md | wc -l` ≥ 1 — pass if ≥ 1 (R6).
   - Fines→grind-size lesson still present (not hedged away): `grep -ci 'finer grind\|finer.*compensate\|fines.*grind' knowledge/EXTRACTION_SCIENCE.md` ≥ 1 — pass if ≥ 1 (R6 — the lesson survives).
   - No hardcoded Sette link: `grep -c 'grinders/SETTE_270.md' knowledge/EXTRACTION_SCIENCE.md` = 0 — pass if 0 (R6 + R13).
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 7: Re-key `knowledge/reference/EXTRACTION_SCIENCE_REFERENCE.md` (conical-vs-flat section, cross-ref, retention figure)
 
@@ -185,7 +185,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
   - Cup-character hedge present: `grep -iE 'tend|contested|burr set' knowledge/reference/EXTRACTION_SCIENCE_REFERENCE.md | wc -l` ≥ 1 — pass if ≥ 1 (R7 hedge scoped to cup-character).
   - No hardcoded Sette link: `grep -c 'grinders/SETTE_270.md' knowledge/reference/EXTRACTION_SCIENCE_REFERENCE.md` = 0 — pass if 0 (R7 + R13).
   - "~0.5g" Sette retention figure removed/genericized: `grep -c '0.5g retention\|~0.5g\|0.5 g retention' knowledge/reference/EXTRACTION_SCIENCE_REFERENCE.md` = 0 — pass if 0 (R7).
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 8: Re-key `knowledge/SPECIAL_CATEGORIES.md` (decaf macro-step + "On the Sette 270" sentence)
 
@@ -202,7 +202,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
   - No "macro step" language: `grep -ci 'macro step' knowledge/SPECIAL_CATEGORIES.md` = 0 — pass if 0 (R8).
   - Decaf coarser-grind guidance retained: `grep -ci 'coarser' knowledge/SPECIAL_CATEGORIES.md` ≥ 1 — pass if ≥ 1 (R8 teaching preserved).
   - No "Sette" mention in the decaf guidance: `grep -ci 'Sette' knowledge/SPECIAL_CATEGORIES.md` = 0 — pass if 0 (grinder-neutral; supports R13's spirit).
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 9: Re-key `knowledge/reference/BEAN_FRESHNESS_REFERENCE.md` (frozen-bean macro-step, L149)
 
@@ -216,7 +216,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
 - **Verification**:
   - No "macro step" language: `grep -ci 'macro step' knowledge/reference/BEAN_FRESHNESS_REFERENCE.md` = 0 — pass if 0 (R9).
   - Frozen-bean coarser guidance retained: `grep -ci 'coarser' knowledge/reference/BEAN_FRESHNESS_REFERENCE.md` ≥ 1 — pass if ≥ 1 (R9 teaching preserved).
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 10: Re-key `knowledge/reference/ESPRESSO_BREWING_REFERENCE.md` (turbo macro-step L35 + Sette retention L169)
 
@@ -232,7 +232,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
   - No "macro step" language: `grep -ci 'macro step' knowledge/reference/ESPRESSO_BREWING_REFERENCE.md` = 0 — pass if 0 (R10).
   - No Sette-specific retention gram figure: `grep -Eci 'Sette 270 has.*retention|retention \(~?[0-9.]+ ?g\)|~1g\b|~0.5g\b' knowledge/reference/ESPRESSO_BREWING_REFERENCE.md` = 0 — pass if 0 (R10: no Sette-specific retention gram figure remains).
   - Turbo coarser teaching retained: `grep -ci 'coarser' knowledge/reference/ESPRESSO_BREWING_REFERENCE.md` ≥ 1 — pass if ≥ 1 (R10 teaching preserved).
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 11: Re-key `knowledge/reference/PROFILE_LIBRARY_REFERENCE.md` (turbo macro-step, L353)
 
@@ -246,7 +246,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
 - **Verification**:
   - No "macro step" language: `grep -ci 'macro step' knowledge/reference/PROFILE_LIBRARY_REFERENCE.md` = 0 — pass if 0 (R11).
   - Turbo coarser guidance retained: `grep -ci 'coarser' knowledge/reference/PROFILE_LIBRARY_REFERENCE.md` ≥ 1 — pass if ≥ 1 (R11 teaching preserved).
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 12: Re-key the example grind map value (`grind-map.example.md`, value-only — no RPM column)
 
@@ -264,7 +264,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
   - Grind cell uses chirp-relative notation: `grep -ci 'chirp' grind-map.example.md` ≥ 1 — pass if ≥ 1 (R12 chirp-relative notation in the cell/legend).
   - References `_NOTATION.md`: `grep -c '_NOTATION.md' grind-map.example.md` ≥ 1 — pass if ≥ 1 (R12 legend references the contract).
   - Column count unchanged (no RPM column added): `awk -F'|' 'NR==7 {print NF}' grind-map.example.md` equals the pre-edit value — capture the pre-edit header NF first (`awk -F'|' 'NR==7 {print NF}' grind-map.example.md` before editing; it is 14 = 12 columns + 2 outer pipes), then confirm it is unchanged after editing. Pass if the post-edit header NF equals the pre-edit header NF (R12: no RPM column added). The example row (NR==9) NF must likewise be unchanged.
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 13: Cross-link indirection sweep — no broken Sette links across all de-Setted files
 
@@ -278,7 +278,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
   - This verification reads artifacts produced by Tasks 6–11 (pre-existing at sweep time) — it is not self-sealing.
 - **Verification**:
   - `grep -rl 'SETTE_270' knowledge/EXTRACTION_SCIENCE.md knowledge/reference/EXTRACTION_SCIENCE_REFERENCE.md knowledge/SPECIAL_CATEGORIES.md knowledge/reference/BEAN_FRESHNESS_REFERENCE.md knowledge/reference/ESPRESSO_BREWING_REFERENCE.md knowledge/reference/PROFILE_LIBRARY_REFERENCE.md` returns nothing (empty output, no files listed) — pass if no files are listed (R13).
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 14: Hardware-correctness content review of the two DF64V files (R14 seven-fact checklist)
 
@@ -301,7 +301,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
 - **Verification**:
   - **Interactive/session-dependent (the R14 gate):** the reviewer reads `knowledge/grinders/DF64V.md` and `knowledge/reference/DF64V_REFERENCE.md` line-by-line and confirms each of the 7 facts is hedged-or-absent (no unqualified wrong-variant present), and that no V2 Silver Knight / fixed-DF64 / Gen-2 spec is carried. Recorded as a pass only when all 7 + the no-wrong-variant check hold. This is a content judgment over artifacts authored by Tasks 2/3, not a grep.
   - **Grep aid (run, then inspect each hit):** `grep -niE 'silver knight|gen 2|DF64 ' knowledge/grinders/DF64V.md knowledge/reference/DF64V_REFERENCE.md` — each hit must be a contrast line. Zero hits also passes (no contrast lines needed).
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ### Task 15: Final integration verification — full R1–R14 acceptance sweep
 
@@ -316,7 +316,7 @@ Plus: **no V2 Silver Knight filter-burr spec** and **no fixed-DF64 / Gen-2 spec*
   - All grep commands from Tasks 1–13 verifications run and pass — pass if every command's count/exit assertion holds.
   - R14 reviewer pass (Task 14) is recorded as passed for both DF64V files — pass if the seven-fact + no-wrong-variant content review confirmed hedged-or-absent.
   - Phase-1-before-Phase-2 ordering held: the four foundation files (`knowledge/grinders/_NOTATION.md`, `knowledge/grinders/DF64V.md`, `knowledge/reference/DF64V_REFERENCE.md`, `knowledge/grinders/_TEMPLATE.md`) all exist (`ls` them) before the Phase-2 cross-links resolve — pass if all four exist and Task 13's no-broken-link sweep returned empty.
-- **Status**: [ ] not started
+- **Status**: [x] not started
 
 ## Verification Strategy
 
