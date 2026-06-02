@@ -4,7 +4,6 @@
 |-----|-------|--------|----------|------|------------|--------|------|
 | 5 | Multi-user data isolation | backlog | high | feature | — | — | ✓ |
 | 24 | Migrate grinder layer: Sette 270 -> DF64V + SSP Cast Lab Sweet V3 | backlog | high | epic | — | — | — |
-| 25 | Build the grinder-agnostic knowledge layer (DF64V + notation + de-Sette) | refined | high | feature | — | 024 | ✓ |
 | 26 | Switch the grind map and user-setup to the DF64V | refined | high | chore | 025 | 024 | ✓ |
 | 28 | Commission the DF64V and run the phased per-coffee profile re-dial | backlog | high | feature | 026 | 024 | — |
 | 27 | Parameterize feedback/new-coffee/consult to read the active grinder | refined | medium | feature | 025 | 024 | ✓ |
@@ -13,7 +12,8 @@
 
 ## Refined
 
-- **25** Build the grinder-agnostic knowledge layer (DF64V + notation + de-Sette)
+- **26** Switch the grind map and user-setup to the DF64V
+- **27** Parameterize feedback/new-coffee/consult to read the active grinder
 
 ## Backlog
 

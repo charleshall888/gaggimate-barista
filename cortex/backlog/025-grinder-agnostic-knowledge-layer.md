@@ -2,7 +2,7 @@
 schema_version: "1"
 uuid: f23d821e-b175-4769-b1d8-d8919bc4b3bb
 title: "Build the grinder-agnostic knowledge layer (DF64V + notation + de-Sette)"
-status: refined
+status: complete
 priority: high
 type: feature
 tags: [df64v-ssp-migration]

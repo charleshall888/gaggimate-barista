@@ -52,34 +52,6 @@
     "repo": null
   },
   {
-    "id": 25,
-    "title": "Build the grinder-agnostic knowledge layer (DF64V + notation + de-Sette)",
-    "status": "refined",
-    "priority": "high",
-    "type": "feature",
-    "tags": [
-      "df64v-ssp-migration"
-    ],
-    "areas": [
-      "docs"
-    ],
-    "created": "2026-06-01",
-    "updated": "2026-06-01",
-    "blocks": [],
-    "blocked_by": [],
-    "parent": "024",
-    "research": null,
-    "spec": "cortex/lifecycle/build-the-grinder-agnostic-knowledge-layer/spec.md",
-    "discovery_source": "cortex/research/df64v-ssp-migration/research.md",
-    "plan": null,
-    "uuid": "f23d821e-b175-4769-b1d8-d8919bc4b3bb",
-    "lifecycle_slug": null,
-    "session_id": null,
-    "lifecycle_phase": null,
-    "schema_version": "1",
-    "repo": null
-  },
-  {
     "id": 26,
     "title": "Switch the grind map and user-setup to the DF64V",
     "status": "refined",
