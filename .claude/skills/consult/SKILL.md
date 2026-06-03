@@ -25,7 +25,7 @@ Use the routing table below to identify which file(s) to load. Match on keywords
 | temperature, temp, roast level, how hot | `knowledge/ESPRESSO_BREWING_BASICS.md` | — |
 | pressure, bar, processing method | `knowledge/PRESSURE_GUIDE.md` | — |
 | ratio, yield, dose, output, how much | `knowledge/ESPRESSO_BREWING_BASICS.md` | — |
-| grind, grinder, finer, coarser, grind setting | Active grinder reference resolved per the Active Grinder field parsing contract → `knowledge/grinders/` | `knowledge/ESPRESSO_BREWING_BASICS.md` |
+| grind, grinder, finer, coarser, grind setting, rpm, motor speed, grind speed | Active grinder reference resolved per the Active Grinder field parsing contract → `knowledge/grinders/` | `knowledge/ESPRESSO_BREWING_BASICS.md` |
 | sour, bitter, taste, flavor, tasting | `knowledge/ESPRESSO_TASTING_GUIDE.md` | `knowledge/ESPRESSO_BREWING_BASICS.md` |
 | channeling, puck prep, WDT, distribution | `knowledge/EXTRACTION_SCIENCE.md` | — |
 | freshness, rest, degas, storage, freeze | `knowledge/BEAN_FRESHNESS_AND_STORAGE.md` | — |
