@@ -34,5 +34,8 @@ cortex/.cortex-init-backup/
 # Cortex overnight/pipeline runtime artifacts (per-run, not source)
 cortex/lifecycle/sessions/
 cortex/lifecycle/overnight-state.json
+cortex/lifecycle/metrics.json
 cortex/lifecycle/*/exit-reports/
 cortex/lifecycle/*/agent-activity.jsonl
+cortex/lifecycle/*/.lock
+cortex/lifecycle/*/.session
