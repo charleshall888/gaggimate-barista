@@ -1,0 +1,7 @@
+{"schema_version": 1, "ts": "2026-06-03T15:38:02Z", "event": "lifecycle_start", "feature": "operationalize-rpm-as-an-extraction-variable", "tier": "simple", "criticality": "medium", "entry_point": "refine"}
+{"schema_version": 3, "ts": "2026-06-03T15:46:22Z", "event": "clarify_critic", "feature": "operationalize-rpm-as-an-extraction-variable", "parent_epic_loaded": true, "findings_count": 5, "dispositions": {"apply": 4, "dismiss": 0, "ask": 1}, "applied_fixes_count": 4, "dismissals_count": 0, "status": "ok"}
+{"ts": "2026-06-03T15:59:21Z", "event": "complexity_override", "feature": "operationalize-rpm-as-an-extraction-variable", "from": "simple", "to": "complex", "gate": "clarify_reconcile"}
+{"ts": "2026-06-03T15:59:21Z", "event": "criticality_override", "feature": "operationalize-rpm-as-an-extraction-variable", "from": "medium", "to": "high", "gate": "clarify_reconcile"}
+{"ts": "2026-06-03T17:04:16Z", "event": "spec_approved", "feature": "operationalize-rpm-as-an-extraction-variable"}
+{"ts": "2026-06-03T17:39:12Z", "event": "plan_approved", "feature": "operationalize-rpm-as-an-extraction-variable"}
+{"ts": "2026-06-03T17:39:12Z", "event": "phase_transition", "feature": "operationalize-rpm-as-an-extraction-variable", "from": "plan", "to": "implement"}
