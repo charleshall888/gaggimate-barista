@@ -59,7 +59,8 @@ A quick reference for grind settings and adjustments. For your personal grind se
   Include: starting window (rough mark range from zero), any speed/RPM-control notes,
   and any grinder-specific caveats (stall risk, minimum grind size floor, etc.).
   Absolute micron/particle-size claims → do NOT include.
-  Burr character tendency → include a short, hedged note (see Burr Character section below). -->
+  Burr character tendency → include a short, hedged note (see Burr Character section below).
+  Variable-speed gating: a grinder is treated as variable-speed (RPM behavior enabled across the skills) when its file includes a `## Motor Speed (RPM)` section; fixed-speed grinders omit it. -->
 
 ### Starting Window
 
