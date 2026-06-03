@@ -39,7 +39,25 @@ The DF64V Gen-3 is variable-speed. For espresso, the recommended operating range
 - **~1400 RPM** is a retailer preference reported to shift toward more body (vendor-framed; see Burr Character note below); it is not a floor or default.
 - **Below ~700–800 RPM** risks a low-RPM stall with dense, light-roast beans fed all at once — this is an edge case, not a motor-torque flaw (see Deep Dive for context).
 
-Start at **~1000–1100 RPM** and adjust if you want to experiment with body. RPM changes shift the grind distribution and may require a grind-setting re-dial; treat RPM as a coarse lever, not a fine-tuning tool.
+Start at **~1000–1100 RPM**. RPM changes shift the grind distribution and may require a grind-setting re-dial; treat RPM as a coarse lever, not a fine-tuning tool. Before reaching for RPM as a tuning move, read the **RPM as a dial-in lever** note below — the link between RPM and cup body is contested, not a settled dial.
+
+---
+
+## RPM as a dial-in lever
+
+**When to reach for it.** RPM is the last lever, not the first. Dial grind, ratio, temperature, and puck prep first — they do far more, far more predictably. Only reach for RPM once those are settled and you want to run a *deliberate, logged* body/clarity experiment. RPM is **never** the opening move, and it is **never** a channeling fix (sour *and* bitter is a puck-prep problem — see the Quick Adjustment Guide).
+
+**The one uncontested fact — anchor on your shot timer.** Changing RPM shifts the grind distribution, so after any RPM change you must **re-dial grind to restore your target shot time**. Let your shot timer tell you which way to move the grind — do not assume a direction. (No printed "raise RPM → go finer" rule lives here on purpose; the timer decides.)
+
+**Why "more RPM → more body" is contested.** The popular framing that higher RPM adds body is **contested**, not established:
+
+- One rigorous independent measurement (McKeon Aloe) found higher RPM shifted the distribution *coarser* with fewer fines — the opposite of the vendor "more body" story.
+- Hoffmann's blind tasting found no clean correlation here at all (null result).
+- The vendor-framed "RPM is a body lever" claim is unproven; treat it as plausible-at-best, not a calibrated dial.
+
+So do not dial against RPM as if "RPM = body" were confirmed. **Your own logged RPM↔outcome data is the real signal** — record RPM with each shot and let your own cup tell you whether a given RPM change did anything for *this* coffee on *your* machine.
+
+> **Deep dive:** the McKeon/Hoffmann evidence and the re-dial mechanics are covered in [`../reference/DF64V_REFERENCE.md`](../reference/DF64V_REFERENCE.md) → "RPM as a Body/Clarity Lever".
 
 ---
 
@@ -82,7 +100,7 @@ Within the SSP flat range, the **Cast** line produces **higher fines than typica
 
 The **Red Speed** TiAlCN coating is vendor-described as adding body relative to the Silver Knight (DLC) variant; the vendor itself notes this is "secondary and grinder-dependent." Treat as plausible, not established.
 
-**Practical implication:** If you want to dial body on the DF64V, the primary levers are **dose, ratio, and RPM** — not burr choice (that's fixed). Manage body via higher dose or slightly higher RPM (with the caveats above); manage clarity via lower dose or lower RPM. The cup-character details defer to your specific extraction and taste rather than the burr specification.
+**Practical implication:** Since the burr is fixed, the levers you actually have for body are **dose and ratio** (predictable) — and, with caveats, **RPM**. RPM is *not* a settled body dial: the "more RPM → more body" link is contested (see the **RPM as a dial-in lever** note above for the McKeon-coarser / Hoffmann-null evidence and the own-data hedge). Reach for dose and ratio first; only run RPM as a deliberate, logged experiment. The cup-character details defer to your specific extraction and taste rather than the burr specification.
 
 ---
 
