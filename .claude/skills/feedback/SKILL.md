@@ -106,7 +106,19 @@ The skill does NOT carry its own copy of the guardrail wording — it routes to 
 
 **The "sour AND bitter" rule (Scott Rao):** When a shot tastes both sour and bitter simultaneously, water is finding paths of least resistance — over-extracting some grounds while under-extracting others. The fix is puck prep, not grind. Grinding finer when channeling is present makes it worse.
 
+**Mid-bag RPM-change re-dial guard (variable-speed only — gated by the Step 3 RPM gate; single `user-setup` read, NO grind-map history parser):**
+
+When the gate is ON and the user states an RPM for this session that **differs** from the current `Operating RPM` read from `user-setup.md` (a single read — do NOT scan prior grind-map rows), do both of the following:
+1. **Warn and re-anchor.** Explain that RPM is a coarse lever that shifts the grind distribution, so the old grind setting no longer maps to the same shot. Recommend **re-dialing grind to restore the target shot time** — let the shot timer tell you which way — rather than carrying the old `chirp + N marks` setting forward. (Do not restate RPM range numbers; for the why, route to `knowledge/grinders/DF64V.md`.)
+2. **Update (or create) the Operating RPM field.** Write the new stated RPM into `user-setup.md`'s `Operating RPM` field — **creating the row if it is absent** (per Task 4's documented contract) — mirroring how the Active Coffee section is updated in `/new-coffee`. This write must reach the Step 4e `.data-repo-path` commit/push **even when no rating is recorded** (a mid-bag RPM report may arrive on an unrated shot), so perform the Step 4e commit path regardless of whether a rating was logged.
+
+When the stated RPM matches the current `Operating RPM` (or no RPM is stated), do nothing here — no warning, no update.
+
 Always explain *why* you're suggesting a change. One primary recommendation, one backup.
+
+**Experiment-triggered RPM guidance (variable-speed only — NOT part of the adjustment hierarchy, never volunteered):**
+
+Do NOT volunteer RPM as a fix during routine sour/bitter/fast/slow diagnosis — it is deliberately absent from the adjustment hierarchy above. Offer RPM guidance **only when the user explicitly frames a deliberate body/clarity experiment** (e.g., "I want to experiment with body via RPM" or "would changing motor speed change clarity?"). In that case, give **hedged** guidance and route the reasoning to `knowledge/grinders/DF64V.md` ("RPM as a dial-in lever" note) rather than restating any RPM numbers or asserting an unqualified "RPM = body" rule — the science is contested and your own logged RPM↔outcome data is the real signal.
 
 ### 4. RECORD (silent, no confirmation needed)
 
