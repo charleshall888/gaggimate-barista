@@ -18,6 +18,18 @@ Do not log absolute printed-dial numbers as the canonical record. `chirp + N mar
 
 ---
 
+## Motor Speed (RPM) — A Separate, Non-Chirp Coordinate
+
+For variable-speed grinders, motor RPM is logged as a **plain integer** (e.g. `850`) — never as `chirp + N marks`. RPM is **additive to** the chirp/epoch contract above, not a redefinition of it: it is a second, independent column, never folded into the `chirp + N marks` value.
+
+- **RPM is a grinder configuration value, NOT a chirp coordinate.** It describes how fast the burrs turn, not how far the dial is opened from zero.
+- **RPM is NOT bound to the zero-set epoch.** A re-zero, burr swap, or burr reinstallation does not invalidate a logged RPM — the integer carries forward across epochs unchanged.
+- **Blank for fixed-speed grinders.** If the grinder has no motor-speed control, leave the RPM column empty. Do not record a value where none exists.
+- **Never infer an unobserved RPM.** Log only the RPM the user actually set or reported. Do not back-calculate, estimate, or guess a motor speed.
+- **Logged as an independent column**, parallel to `chirp + N marks` — never substituted for it or merged into it.
+
+---
+
 ## Epoch Binding: Zero-Set Anchor
 
 A `chirp + N marks` value is only meaningful relative to the zero it was dialed from. **Every grind-log table must open with a zero-set anchor line identifying the epoch:**
@@ -97,3 +109,4 @@ Values logged in a prior grinder's native units — for example, a Baratza Sette
 | Re-zero / burr-swap | Insert `--- pre-rezero (zero set: ...) ---` divider; old rows are dead coordinates, do not carry forward |
 | Seasoning drift | Early values are provisional; the chirp zero drifts coarser through break-in |
 | Prior-grinder codes | Dead-coordinate data — do not translate or carry forward |
+| Motor speed (RPM) | Plain integer in an independent column; a grinder config value, not a chirp coordinate; not epoch-bound (survives re-zero/burr-swap); blank for fixed-speed grinders; never inferred |
