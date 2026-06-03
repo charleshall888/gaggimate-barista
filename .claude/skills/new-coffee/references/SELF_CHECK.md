@@ -22,6 +22,7 @@ TEMP: [°C] (basis: [roast level guideline | grind map | other])
 PRESSURE: [bar] (basis: [roast × process matrix | other])
 PROFILE: [profile name] (basis: [how it was selected])
 RATIO: [e.g., 1:2.3] (basis: [processing method | user preference | other])
+RPM_RECOMMENDATION: [value | N/A — fixed-speed] (source: [user-setup Operating RPM | DF64V.md reference default])
 CONDITIONAL_RECOMMENDATIONS: [list each "if X → Y" adjustment in the draft, one per line]
 ADJUSTMENT_COUNT: [count of distinct variables being adjusted in the first-shot recommendation]
 </claims>

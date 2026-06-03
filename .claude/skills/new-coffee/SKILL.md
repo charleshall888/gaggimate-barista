@@ -69,6 +69,7 @@ Build recommendations using:
 - **Profile:** From `knowledge/PROFILE_LIBRARY.md` by roast/process, adjusted for correct pressure
 - **Dose:** From `user-setup.md` basket size. **Dose = basket size** (e.g., 22g basket → 22g dose). Don't underdose.
 - **Volumetric target:** When using a library profile, confirm its volumetric stop matches dose × ratio. Library profiles are sized for 22g.
+- **RPM (variable-speed grinders only — gated):** After resolving the active grinder per the Active Grinder field parsing contract (already done in Step 3 CONSULT), check whether the resolved **quick-tier** `knowledge/grinders/<NAME>.md` contains a section heading exactly `## Motor Speed (RPM)`. **If it does → RPM behavior ON:** include an RPM starting recommendation in the output table (see the conditional RPM row below). The rendered value is the user's `Operating RPM` from `user-setup.md` (per its integer parse rule) if set, else the reference default from that grinder file's `## Motor Speed (RPM)` section — do not restate the literal numbers here; read them at runtime. **If the heading is absent / no quick-tier file resolved / the Active Grinder contract fell back to fallback / `user-setup.md` is unreadable → RPM behavior OFF:** this is a **fixed-speed** path — omit the RPM row entirely and **never error**.
 
 ### 4b. SELF-CHECK via Multi-Agent Review
 
@@ -231,6 +232,7 @@ No confirmation needed—standard workflow step.
 |-----------|-------|-----------|
 | Temperature | X°C | [roast level rationale] |
 | Grind | XY | [from history or default, freshness adjusted] |
+| RPM | [placeholder] | [variable-speed only] |
 | Ratio | 1:X | [process rationale] |
 | Profile | [name] | [why this profile] |
 | Dose | Xg in → Xg out | [basket size rationale] |
@@ -254,6 +256,8 @@ Set as active coffee in `user-setup.md`
 **Note:** "What to Watch For" above is conversational guidance for the user's first shot.
 Research synthesis (origin, variety, processing insights) is separately saved to the README's
 "What to Expect" section in Step 7.
+
+**Note (conditional RPM row):** The `| RPM | [placeholder] | [variable-speed only] |` row is emitted **only when the Step 4 SYNTHESIZE gate is ON** (the resolved quick-tier grinder file has a `## Motor Speed (RPM)` section). When the gate is OFF — a **fixed-speed** grinder, no resolved file, contract fallback, or unreadable `user-setup.md` — omit the row entirely and **never error**. When emitted, the `[placeholder]` renders the user's `Operating RPM` from `user-setup.md` if set, else the reference default from the grinder file's `## Motor Speed (RPM)` section (read at runtime — the numbers are never written into this skill).
 
 ---
 
