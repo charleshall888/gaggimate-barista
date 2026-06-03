@@ -142,6 +142,8 @@ Cross-reference the user's taste feedback with telemetry patterns.
 
 **See:** `references/TELEMETRY_PATTERNS.md` for detailed correlation matrix.
 
+**RPM as diagnostic context (advisory, when known):** If the RPM used for the shot is known — from the shot's `grind-map.md` row or a value the user states — fold it into the correlation narrative as contextual input. A logged RPM is self-identifying (RPM exists only for variable-speed grinders), so no grinder-resolution or out-of-range gating is needed. For example: a fast/gushing shot at a high logged RPM is consistent with a coarser distribution, and a choked/stalling shot at a low logged RPM points toward the low-RPM-stall edge. Defer all interpretation to `knowledge/grinders/DF64V.md` and `knowledge/reference/DF64V_REFERENCE.md` rather than asserting RPM facts here. **If no RPM is known for the shot, behave exactly as today — skip this context and run the correlation unchanged.**
+
 **Puck Screen presence detection (pre-check before applying sour-path or channeling-path recommendations):**
 
 Scan the Equipment table in `user-setup.md` for a `Puck Screen` row. Per the CLAUDE.md parsing contract, treat any of the following as **no screen present** (skip the guardrails below): missing row, blank value, or value `None` (case-insensitive). Any other non-empty value means **screen present** — apply the gated guardrails below.
