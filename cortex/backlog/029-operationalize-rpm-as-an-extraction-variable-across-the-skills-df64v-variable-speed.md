@@ -2,12 +2,16 @@
 schema_version: "1"
 uuid: 3d6d9f57-c538-4626-a8e8-24c9f075a363
 title: "Operationalize RPM as an extraction variable across the skills (DF64V variable-speed)"
-status: backlog
+status: complete
 priority: medium
 type: feature
 created: 2026-06-03
 updated: 2026-06-03
 parent: "024"
+complexity: complex
+criticality: high
+spec: cortex/lifecycle/operationalize-rpm-as-an-extraction-variable/spec.md
+areas: ['skills']
 ---
 ## Why
 

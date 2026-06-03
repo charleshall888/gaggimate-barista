@@ -1,0 +1,3 @@
+{"v":1,"ts":"2026-06-03T15:20:11Z","event":"status_changed","item_uuid":"3d6d9f57-c538-4626-a8e8-24c9f075a363","session_id":"f802d995-22ec-433a-b53a-c43d56b71512","details":{"from":null,"to":"backlog"}}
+{"v":1,"ts":"2026-06-03T17:05:13Z","event":"status_changed","item_uuid":"3d6d9f57-c538-4626-a8e8-24c9f075a363","session_id":"4d2ce4f0-362e-4ad7-81a1-4d885766e691","details":{"from":"backlog","to":"refined"}}
+{"v":1,"ts":"2026-06-03T18:31:39Z","event":"status_changed","item_uuid":"3d6d9f57-c538-4626-a8e8-24c9f075a363","session_id":"664b0114-5362-4701-9e8f-13695720a3bb","details":{"from":"refined","to":"complete"}}
