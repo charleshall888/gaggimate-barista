@@ -63,7 +63,13 @@ Gather from the user (ask for what's missing):
 
 A +/-2g estimate is fine for diagnosis and recording.
 
+**Operating RPM (variable-speed grinders only — gated by the Step 3 RPM gate):** When the gate is ON, read the current `Operating RPM` from `user-setup.md` (parse: an integer = the current RPM; missing/blank/`None`/non-integer = unknown) and carry it forward as the RPM value for the grind-map row in Step 4b. If the user states a different RPM this session, that stated value overrides the `user-setup.md` value for this row (and triggers the mid-bag re-dial guard). If the gate is ON but Operating RPM is unknown, prompt for it once (light) and, if still unknown, leave it blank — never infer. When the gate is OFF (fixed-speed grinder), do not read or prompt for RPM.
+
 ### 3. ANALYZE & RECOMMEND
+
+**Variable-speed RPM gate (pre-check before the adjustment hierarchy):**
+
+Per the CLAUDE.md Active Grinder field parsing contract, read the `user-setup.md` Grinder field, resolve the active grinder reference by case-insensitive substring against the contract's map (first match wins), attempt to load that `knowledge/grinders/` file, and on any miss or unreadable `user-setup.md` degrade to grinder-relative step advice plus the unconfigured nudge — never error. RPM behavior is **ON** iff the resolved **quick-tier** `knowledge/grinders/<NAME>.md` contains a section whose heading is exactly `## Motor Speed (RPM)`. Gating reads the quick-tier file only (not the deep-tier reference, not the Grinder prose). No match, no resolved file, or contract fallback → the grinder is **fixed-speed**: RPM behavior is **OFF** (no RPM prompts, blank RPM column), **never error**. This gate governs the RPM read in Step 2 and the RPM cell of the grind-map writer in Step 4b.
 
 Use the loaded knowledge files (BREWING_BASICS + TASTING_GUIDE) to diagnose and recommend.
 
@@ -132,12 +138,16 @@ The Rating column records whether the shot worked — low-rated rows are diagnos
 
 **Update process (append-only — preserves header, alignment line, and every existing data row):**
 1. Read current `grind-map.md`. Do NOT touch the header line, the alignment line, or any existing data rows.
-2. Append a new row to the **end** of the file with these 12 fields in order: `Coffee, Roast, Process, Origin, Days Off Roast, Grind, Profile, Ratio, Temp, Rating, Date, Puck Screen?`
-3. **Grind notation:** Defer the recording format to the notation prescribed by the active grinder reference — record exactly the format that reference specifies (a reference may itself defer to the shared `knowledge/grinders/_NOTATION.md`).
-4. **Puck Screen? cell — read from `user-setup.md` Equipment table (stateless read; do NOT write):**
+2. **Misaligned-row guard (run before appending, every invocation):** Scan the live `grind-map.md` for any data row whose column count ≠ 13. If one is found, flag it to the user (e.g., "Heads up — row N in `grind-map.md` has a column count that doesn't match the 13-column header; you may want to fix it by hand."). Do NOT auto-backfill or rewrite the row — flag only. (At plan time the live file has the 13-column header and zero data rows, but a user may have hand-edited or restored old rows, so this check is a runtime responsibility on every invocation.)
+3. Append a new row to the **end** of the file with these 13 fields in order: `Coffee, Roast, Process, Origin, Days Off Roast, Grind, RPM, Profile, Ratio, Temp, Rating, Date, Puck Screen?`
+4. **Grind notation:** Defer the recording format to the notation prescribed by the active grinder reference — record exactly the format that reference specifies (a reference may itself defer to the shared `knowledge/grinders/_NOTATION.md`).
+5. **RPM cell — value comes from the Step 2 / Step 3 RPM gate (never infer):**
+   - Variable-speed (gate ON): write the Operating RPM resolved in Step 2 as a plain **integer** (the `user-setup.md` value, or the session-stated value if the user overrode it). If the gate is ON but RPM is still unknown after the one light prompt, write a **blank** cell.
+   - Fixed-speed (gate OFF), unresolved grinder, or contract fallback: write a **blank** cell.
+6. **Puck Screen? cell — read from `user-setup.md` Equipment table (stateless read; do NOT write):**
    - Missing row, blank value, or value `None` (case-insensitive) or whitespace-only → write a **blank cell**
    - Any other non-empty value → write `Y`
-5. **No back-fill of existing rows.** Old 11-column rows in `grind-map.md` are left untouched; only the newly appended row is 12-column. Under markdown-table semantics the missing 12th cell on old rows parses as blank ("unknown" per the grind-map.example.md contract). Header/schema migration is owned separately and is NOT this skill's concern.
+7. **No back-fill of existing rows.** Old 12-column (or shorter) rows in `grind-map.md` are left untouched; only the newly appended row is 13-column. Under markdown-table semantics the missing cells on old rows parse as blank ("unknown" per the grind-map.example.md contract). Header/schema migration is owned separately and is NOT this skill's concern.
 
 #### 4c. Shot Notes → Device
 
