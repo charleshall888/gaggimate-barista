@@ -76,6 +76,16 @@ Quick-reference card for Gaggimate profile JSON structure. For full profile crea
 - **Flow** (`"flow"`) — Maintain specific flow rate. `pressure` acts as ceiling. Use `flow: -1` for adaptive flow (auto-adjusts to puck resistance).
 - **Power** (`"power"`) — Fixed pump percentage (Standard only). Use `pressure: 0, flow: 0` for **bloom (pump off)**.
 
+> **Flow limit vs ease-in for a gentle build (channeling prevention).** In `pressure` mode the
+> `flow` value is an *optional limit*, but on a **permeable puck** a low limit (e.g. `flow: 4`)
+> can become the *binding constraint* and pin pressure **below target** — the pump sits pegged
+> at the limit while pressure stalls, giving a thin, sour, under-extracted shot. If you want a
+> gentle build that **still reaches full pressure**, lengthen the **ease-in transition** (slows
+> the pressure *ramp*) rather than capping flow (caps the pressure *ceiling*). Set `flow: 0`
+> (no limit) on the ramp/hold and let a longer ease-in do the gentling. Reserve a low flow
+> limit for when you deliberately want a flow-ceilinged shot. (See the matching telemetry
+> signature "Capped below target" in `diagnose/references/TELEMETRY_PATTERNS.md`.)
+
 ---
 
 ## Transition Configuration
