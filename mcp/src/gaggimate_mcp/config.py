@@ -19,7 +19,12 @@ class GaggimateConfig(BaseSettings):
     # Connection settings
     gaggimate_host: str = "gaggimate.local"
     gaggimate_protocol: str = "ws"
-    request_timeout: float = 5.0
+    # Per-attempt HTTP request timeout (seconds). Sized for the full .slog
+    # shot-log download over a weak link, not just a quick API call.
+    request_timeout: float = 12.0
+    # Retries (after the first attempt) for idempotent HTTP reads on timeout /
+    # transient connection errors. Total attempts = request_retries + 1.
+    request_retries: int = 2
 
     # Safety limits
     max_temperature: float = 100.0

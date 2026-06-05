@@ -12,7 +12,8 @@ class TestGaggimateConfig:
         config = GaggimateConfig()
         assert config.gaggimate_host == "gaggimate.local"
         assert config.gaggimate_protocol == "ws"
-        assert config.request_timeout == 5.0
+        assert config.request_timeout == 12.0
+        assert config.request_retries == 2
         assert config.max_temperature == 100.0
         assert config.min_temperature == 25.0
         assert config.max_pressure == 12.0
