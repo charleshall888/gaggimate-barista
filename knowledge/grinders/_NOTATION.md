@@ -16,6 +16,19 @@ Log grind settings **relative to your grinder's current zero (chirp) point**, no
 
 Do not log absolute printed-dial numbers as the canonical record. `chirp + N marks` is the record; the dial number at that chirp is incidental and meaningless after any re-zero or burr reinstallation.
 
+### Chirp-zeroed shorthand: the bare integer
+
+On a **chirp-zeroed / stepless grinder** (e.g. the DF64V), record the grind as a **bare integer** equal to the number of marks the collar is opened from the chirp zero — for example, `11`. This is shorthand only: it is meaningful **only** because the grind-log table carries a **mandatory** one-time header (or footnote) declaration:
+
+```
+Grind = marks open from chirp zero (<GRINDER>)
+```
+
+That header supplies the "from chirp" anchor once, so the repetitive `chirp + … marks` wording can be factored out of every row. The bare integer is canonical **only** because of this declaration; a bare number without the header is meaningless.
+
+- **The bare integer is STILL the chirp-relative operator coordinate.** The header supplies the "from chirp" anchor — we are only factoring the repeated `chirp + …` wording out of each row, not changing what the number *means*. It is **NOT** the absolute printed dial position. The existing prohibition above still holds: do **not** bless the absolute printed-dial number as the canonical record. (A user who has zeroed their grinder *at* the chirp point will read the same number off the dial, but the record's meaning is "marks from chirp", not "dial position".)
+- The same operator-coordinate caveat applies unchanged: `11` is an operator coordinate, not a micron gap or particle-size claim.
+
 ---
 
 ## Motor Speed (RPM) — A Separate, Non-Chirp Coordinate
@@ -39,6 +52,8 @@ zero set: YYYY-MM-DD
 ```
 
 This anchor is the epoch for every row beneath it. If you re-zero or swap burrs and establish a new zero, rows logged under the old epoch do not carry forward to the new one — see the superseding convention below.
+
+On a chirp-zeroed grinder using the bare-integer shorthand, the marks-from-chirp header declaration (`Grind = marks open from chirp zero (<GRINDER>)`) sits **alongside** this zero-set anchor — the zero-set anchor establishes *which* chirp epoch the integers count from, and the header declares that the bare integers *are* marks-from-chirp counts. Both are required.
 
 ### Worked example
 
@@ -97,6 +112,7 @@ Values logged in a prior grinder's native units — for example, a Baratza Sette
 - A Sette macro+micro code encodes a position on that grinder's stepped dial; it has no physical equivalent on any other grinder (or on the same grinder after a re-zero).
 - Do not attempt to convert a prior-grinder value to `chirp + N marks`. Re-dial from scratch on the new grinder.
 - Prior-grinder log rows should be archived or clearly labelled as grinder-specific historical data to avoid confusion during a migration.
+- **The bare-integer shorthand applies ONLY to chirp-zeroed / stepless grinders.** An absolute-scale grinder (e.g. the Baratza Sette 270, with macro+micro codes like `9D`) keeps its own native code as the record — the bare-marks-from-chirp rule does **not** apply to it.
 
 ---
 
@@ -104,7 +120,7 @@ Values logged in a prior grinder's native units — for example, a Baratza Sette
 
 | Concept | Rule |
 |---------|------|
-| Log format | `chirp + N marks` — an operator coordinate, not a micron or particle-size claim |
+| Log format | Chirp-zeroed / stepless grinder → bare integer (marks open from chirp zero), valid only under a header declaring `Grind = marks open from chirp zero (<GRINDER>)`; absolute-scale grinder → its own native code (e.g. Sette `9D`). Either way it is an operator coordinate, not a micron or particle-size claim |
 | Epoch anchor | Every table begins with `zero set: YYYY-MM-DD` |
 | Re-zero / burr-swap | Insert `--- pre-rezero (zero set: ...) ---` divider; old rows are dead coordinates, do not carry forward |
 | Seasoning drift | Early values are provisional; the chirp zero drifts coarser through break-in |

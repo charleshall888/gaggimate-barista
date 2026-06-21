@@ -54,7 +54,7 @@ New SSP Cast Lab Sweet burrs (factory-installed or user-swapped) require a meani
 
 - Break in with **coffee only** — not rice, not cleaning tablets. Rice does not correctly bed in espresso burrs and can skew the surface finish; cleaning tablets are a maintenance tool, not a seasoning medium.
 - The ~5–10 kg settling range is drawn from DF64V + SSP Cast user experience (Home-Barista thread reports of ~7–9 kg). Earlier generic-SSP guidance (~2–3 kg) reflects lower-fines SSP lines and understates this burr's break-in requirement.
-- **During break-in, treat all grind settings as provisional.** A "chirp + N marks" value logged at 1 kg throughput does not reproduce the same cup at 7 kg — the zero itself has drifted coarser. See [`../grinders/_NOTATION.md`](../grinders/_NOTATION.md) for the epoch-binding and row-superseding conventions.
+- **During break-in, treat all grind settings as provisional.** A grind logged at N marks from chirp at 1 kg throughput does not reproduce the same cup at 7 kg — the zero itself has drifted coarser. See [`../grinders/_NOTATION.md`](../grinders/_NOTATION.md) for the epoch-binding and row-superseding conventions.
 - If your shot time is drifting coarser week-over-week without any intentional change, you are still in break-in. Do not keep chasing the drift by going finer without acknowledging the epoch drift in your log.
 
 ---

@@ -23,11 +23,11 @@ Re-zero after any burr removal, reinstallation, or alignment adjustment. Prior-e
 
 ### Logging Your Setting
 
-Record your grind as **`chirp + N marks`** from your current zero — this is an operator coordinate, not a micron or particle-size claim. No microns-per-mark figure exists for the DF64V's stepless collar; do not treat mark counts as absolute gap measurements.
+Record your grind as a **bare integer** equal to the number of marks the collar is open from your current chirp zero (e.g. `11`). The grind-log table declares **"Grind = marks open from chirp zero (DF64V)"** once in its header/footnote, so the bare number is unambiguous; without that header declaration a bare number is meaningless. The recorded number is still the chirp-relative operator coordinate — the header supplies the "from chirp" anchor; it is **not** the absolute printed-dial position. This is an operator coordinate, not a micron or particle-size claim. No microns-per-mark figure exists for the DF64V's stepless collar; do not treat mark counts as absolute gap measurements. See [`_NOTATION.md`](_NOTATION.md).
 
 ### Espresso Start Window
 
-For espresso, begin dialing around **chirp + 10–20 marks** from zero. This is a starting window only — your actual setting will depend on bean, dose, roast, and freshness. Dial from this range; do not assume it is a working shot.
+For espresso, begin dialing around **10–20 (marks from chirp)** from zero. This is a starting window only — your actual setting will depend on bean, dose, roast, and freshness. Dial from this range; do not assume it is a working shot.
 
 ---
 
@@ -65,11 +65,13 @@ So do not dial against RPM as if "RPM = body" were confirmed. **Your own logged 
 
 For espresso with the SSP Cast V3 Red Speed, typical starting windows by roast level:
 
-| Roast Level | Typical Start Window | Notes |
+Values in the **Typical Start Window** column are marks open from chirp zero.
+
+| Roast Level | Typical Start Window (marks from chirp) | Notes |
 |-------------|----------------------|-------|
-| Light       | chirp + 10–15 marks  | Fine end; slow target time likely needed |
-| Medium      | chirp + 13–18 marks  | Standard espresso range |
-| Dark        | chirp + 16–22 marks  | Coarser to avoid over-extraction |
+| Light       | 10–15  | Fine end; slow target time likely needed |
+| Medium      | 13–18  | Standard espresso range |
+| Dark        | 16–22  | Coarser to avoid over-extraction |
 
 **These are starting points only.** Actual settings depend on bean freshness (fresher = slightly coarser), dose, target ratio/time, and your current zero epoch. The DF64V with SSP Cast burrs has a reputation for a narrower-than-average dial-in window — expect to work the range methodically.
 

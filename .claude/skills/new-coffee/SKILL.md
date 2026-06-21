@@ -190,6 +190,8 @@ table. 2-4 bullets is typical.}
 
 ### 8. Set Active Coffee
 
+`user-setup.md` is a symlink FILE into the private data repo, and the Edit/Write tool refuses to write through a symlink. Before reading-for-edit OR writing it, resolve the symlink and operate on the REAL target: run `readlink user-setup.md`; if it resolves, Read AND Edit the resolved absolute target (e.g. `/Users/charlie.hall/Workspaces/gaggimate-barista-data/user-setup.md`); if `readlink` returns nothing (regular file — no private repo configured), operate on the literal path. The Read-before-edit and the Edit must target the SAME resolved path.
+
 Update the Active Coffee section in `user-setup.md` with:
 - **Coffee**: Full coffee name (e.g., "PERC Ethiopia Chelchele")
 - **Directory**: Path to the coffee directory (e.g., `coffees/perc-ethiopia-chelchele`)

@@ -50,7 +50,7 @@ Gather from the user (ask for what's missing):
 | **Rating** (1-5 stars) | Yes | Overall satisfaction |
 | **Balance** (sour/balanced/bitter) | Yes | Primary extraction indicator |
 | **Observations** | Yes (1+ specific note) | Body, sweetness, finish, flavor, mouthfeel |
-| **Grind setting** | Ask if not offered | Important for tracking |
+| **Grind setting** | Ask if not offered | Important for tracking. On a chirp-zeroed/stepless grinder (per the active-grinder reference, e.g. DF64V), interpret a bare number like "11" (or "11 grind") as marks-open-from-the-chirp-zero — the chirp-relative operator coordinate, NOT the absolute printed dial position. Accept it as a bare integer and say it back as "grind 11" (or "11 from chirp" when the anchor needs emphasis). Absolute-scale grinders (e.g. Sette 270 macro+micro codes like 9D) keep their own code — the bare-marks rule does not apply to them. |
 | **Dose in** | Ask if not offered | Should match basket size |
 | **Shot ID** | Optional | From `list_recent_shots` if user doesn't provide |
 
@@ -109,8 +109,8 @@ The skill does NOT carry its own copy of the guardrail wording — it routes to 
 **Mid-bag RPM-change re-dial guard (variable-speed only — gated by the Step 3 RPM gate; single `user-setup` read, NO grind-map history parser):**
 
 When the gate is ON and the user states an RPM for this session that **differs** from the current `Operating RPM` read from `user-setup.md` (a single read — do NOT scan prior grind-map rows), do both of the following:
-1. **Warn and re-anchor.** Explain that RPM is a coarse lever that shifts the grind distribution, so the old grind setting no longer maps to the same shot. Recommend **re-dialing grind to restore the target shot time** — let the shot timer tell you which way — rather than carrying the old `chirp + N marks` setting forward. (Do not restate RPM range numbers; for the why, route to `knowledge/grinders/DF64V.md`.)
-2. **Update (or create) the Operating RPM field.** Write the new stated RPM into `user-setup.md`'s `Operating RPM` field — **creating the row if it is absent** (per Task 4's documented contract) — mirroring how the Active Coffee section is updated in `/new-coffee`. This write must reach the Step 4e `.data-repo-path` commit/push **even when no rating is recorded** (a mid-bag RPM report may arrive on an unrated shot), so perform the Step 4e commit path regardless of whether a rating was logged.
+1. **Warn and re-anchor.** Explain that RPM is a coarse lever that shifts the grind distribution, so the old grind setting no longer maps to the same shot. Recommend **re-dialing grind to restore the target shot time** — let the shot timer tell you which way — rather than carrying the old grind number forward. (Do not restate RPM range numbers; for the why, route to `knowledge/grinders/DF64V.md`.)
+2. **Update (or create) the Operating RPM field.** Write the new stated RPM into `user-setup.md`'s `Operating RPM` field — **creating the row if it is absent** (per Task 4's documented contract) — mirroring how the Active Coffee section is updated in `/new-coffee`. **Symlink-resolve before writing:** `user-setup.md` is a symlink file into the private data repo and the Edit/Write tool refuses to write through it. Run `readlink user-setup.md`; if it resolves, Read AND Edit the resolved absolute target (e.g. `/Users/charlie.hall/Workspaces/gaggimate-barista-data/user-setup.md`); if `readlink` returns nothing (regular file — no private repo configured), operate on the literal path. The Read-before-edit and the Edit must target the SAME resolved path. This write must reach the Step 4e `.data-repo-path` commit/push **even when no rating is recorded** (a mid-bag RPM report may arrive on an unrated shot), so perform the Step 4e commit path regardless of whether a rating was logged.
 
 When the stated RPM matches the current `Operating RPM` (or no RPM is stated), do nothing here — no warning, no update.
 
@@ -134,6 +134,7 @@ Append a row to the Tasting Notes table in the active coffee's `README.md`:
 - **#**: Sequential shot number for this coffee
 - **Date**: Compact format (e.g., Feb 12)
 - **Shot**: Gaggimate shot ID (6-digit, for `/diagnose` cross-reference)
+- **Grind**: Record in the active grinder reference's notation (same rule as step 4b.4) — for chirp-zeroed grinders (e.g. DF64V) a **bare integer** = marks from chirp; for absolute-scale grinders (e.g. Sette) the grinder's own code. Ensure the Tasting Notes table carries the one-time footnote `Grind = marks open from chirp zero (<grinder>)` for chirp-zeroed grinders — add it if absent.
 - **In/Out**: Dose in/out as "22/48g"
 - **Ratio**: Actual ratio as 1:X.X
 - **Profile**: Short profile style name (matches Profiles table)
@@ -149,10 +150,14 @@ Append a row to the Tasting Notes table in the active coffee's `README.md`:
 The Rating column records whether the shot worked — low-rated rows are diagnostic data, not noise.
 
 **Update process (append-only — preserves header, alignment line, and every existing data row):**
-1. Read current `grind-map.md`. Do NOT touch the header line, the alignment line, or any existing data rows.
+0. **Symlink-resolve before reading-for-edit or writing.** `grind-map.md` is a symlink file into the private data repo and the Edit/Write tool refuses to write through it. Run `readlink grind-map.md`; if it resolves, Read AND Edit the resolved absolute target (e.g. `/Users/charlie.hall/Workspaces/gaggimate-barista-data/grind-map.md`); if `readlink` returns nothing (regular file — no private repo configured), operate on the literal path. The Read-before-edit and the Edit must target the SAME resolved path. Use this resolved path for steps 1–7 below.
+1. Read current `grind-map.md` (at the resolved path from step 0). Do NOT touch the header line, the alignment line, or any existing data rows.
 2. **Misaligned-row guard (run before appending, every invocation):** Scan the live `grind-map.md` for any data row whose column count ≠ 13. If one is found, flag it to the user (e.g., "Heads up — row N in `grind-map.md` has a column count that doesn't match the 13-column header; you may want to fix it by hand."). Do NOT auto-backfill or rewrite the row — flag only. (At plan time the live file has the 13-column header and zero data rows, but a user may have hand-edited or restored old rows, so this check is a runtime responsibility on every invocation.)
 3. Append a new row to the **end** of the file with these 13 fields in order: `Coffee, Roast, Process, Origin, Days Off Roast, Grind, RPM, Profile, Ratio, Temp, Rating, Date, Puck Screen?`
 4. **Grind notation:** Defer the recording format to the notation prescribed by the active grinder reference — record exactly the format that reference specifies (a reference may itself defer to the shared `knowledge/grinders/_NOTATION.md`).
+   - **Chirp-zeroed/stepless grinders (e.g. DF64V):** the canonical recorded grind value is a **bare integer** equal to the number of marks the collar is opened from the chirp zero (e.g. `11`). A bare number like "11" from the user is recorded as that bare integer. This bare integer is still the **chirp-RELATIVE** operator coordinate — the table header supplies the "from chirp" anchor so the repetitive "chirp + N marks" wording is factored out of every row; it is NOT a blessing of the absolute printed-dial number as the canonical record. Caveats remain in force: it is an operator coordinate, NOT a micron/particle-size claim; the chirp point drifts coarser as burrs season, so the same number drifts finer over time; the zero-set epoch anchor + superseding-divider conventions remain.
+   - **Mandatory header declaration:** the bare integer is meaningful only because the grind-map table carries a one-time header/footnote declaration: "Grind = marks open from chirp zero (<grinder>)" (e.g. "(DF64V)"). For chirp-zeroed grinders this declaration is **mandatory** — a bare number without it is meaningless. Ensure the table carries it; **add it if absent**.
+   - **Absolute-scale grinders (e.g. Sette 270):** UNCHANGED — record the grinder's own absolute code (macro+micro like `9D`). The bare-marks-from-chirp rule does NOT apply to them.
 5. **RPM cell — value comes from the Step 2 / Step 3 RPM gate (never infer):**
    - Variable-speed (gate ON): write the Operating RPM resolved in Step 2 as a plain **integer** (the `user-setup.md` value, or the session-stated value if the user overrode it). If the gate is ON but RPM is still unknown after the one light prompt, write a **blank** cell.
    - Fixed-speed (gate OFF), unresolved grinder, or contract fallback: write a **blank** cell.

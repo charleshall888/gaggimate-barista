@@ -6,9 +6,9 @@ A record of grind settings from rated shots. When you rate a shot with a grind s
 
 | Coffee | Roast | Process | Origin | Days Off Roast | Grind | RPM | Profile | Ratio | Temp | Rating | Date | Puck Screen? |
 |--------|-------|---------|--------|----------------|-------|-----|---------|-------|------|--------|------|--------------|
-| Example Roaster Ethiopia Yirgacheffe | Light | Washed | Ethiopia | 21 | chirp + 14 mk | 1100 | Bloom Slide | 1:2.5 | 94°C | 5 | Jan 15 |  |
+| Example Roaster Ethiopia Yirgacheffe | Light | Washed | Ethiopia | 21 | 14 | 1100 | Bloom Slide | 1:2.5 | 94°C | 5 | Jan 15 |  |
 
-*Grind is logged in chirp-relative notation (`chirp + N marks`). See `knowledge/grinders/_NOTATION.md` for the full notation contract, epoch-binding convention, and seasoning caveats.*
+*Grind = marks open from chirp zero (DF64V); recorded as a bare integer. See `knowledge/grinders/_NOTATION.md` for the full notation contract, epoch-binding convention, and seasoning caveats.*
 
 *RPM — variable-speed grinder RPM as an integer (e.g. `1100`); leave blank for fixed-speed grinders.*
 

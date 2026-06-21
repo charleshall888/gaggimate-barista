@@ -37,11 +37,14 @@ A quick reference for grind settings and adjustments. For your personal grind se
 
 <!-- PLACEMENT: Describe the mechanical adjustment system of this specific grinder.
   Stepless collar → describe chirp/zero dialing procedure and what "a mark" means on this unit.
+                    A chirp-zeroed grinder records a BARE INTEGER = marks opened from chirp zero;
+                    the "from chirp" anchor is declared once in the grind-log header per _NOTATION.md,
+                    so individual settings drop the repetitive "chirp + ... marks" wording.
   Stepped collar  → describe step count and any macro/micro split.
   Speed control   → document RPM range and the operating point for espresso (if applicable).
 
   Do NOT prescribe a microns-per-mark figure.
-  For the logging format (chirp-relative notation, epoch anchors, superseding rows),
+  For the logging format (bare marks-from-chirp notation, epoch anchors, superseding rows),
   link to _NOTATION.md — do not duplicate the contract here. -->
 
 ### [Adjustment Type — e.g. "Stepless Collar" or "Macro + Micro Dial"]
@@ -64,7 +67,7 @@ A quick reference for grind settings and adjustments. For your personal grind se
 
 ### Starting Window
 
-[Describe the typical starting window for espresso, e.g. "~N–M marks from zero."]
+[Describe the typical starting window for espresso. On a chirp-zeroed/stepless grinder this is a bare range, e.g. "~[N–M]" (marks from chirp, per the grind-log header); on an absolute-scale grinder use that grinder's own dial codes.]
 
 ### Burr Character (tendency only)
 
@@ -77,13 +80,16 @@ A quick reference for grind settings and adjustments. For your personal grind se
 
 ### Espresso Range
 
-<!-- Roast-level starting points as chirp-relative ranges. Label clearly as starting points only. -->
+<!-- Roast-level starting points. For a chirp-zeroed/stepless grinder, write bare ranges
+  (e.g. "[N–M]") — the "marks from chirp" anchor is declared once in the grind-log header per
+  _NOTATION.md, not repeated per row. For an absolute-scale grinder, use that grinder's own dial
+  codes. Label clearly as starting points only. -->
 
 | Roast Level | Typical Starting Point | Notes |
 |-------------|------------------------|-------|
-| Light       | chirp + [N–M marks]    |       |
-| Medium      | chirp + [N–M marks]    |       |
-| Dark        | chirp + [N–M marks]    |       |
+| Light       | [N–M]                  |       |
+| Medium      | [N–M]                  |       |
+| Dark        | [N–M]                  |       |
 
 **Important:** These are starting points. Actual settings depend on bean freshness, humidity, dose size, target ratio and time. All values are operator coordinates — see [`_NOTATION.md`](_NOTATION.md).
 
