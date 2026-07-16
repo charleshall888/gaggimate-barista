@@ -9,8 +9,8 @@
 #     command: "uv run fastapi run src/main.py"
 # default-tier:           # simple | complex (override auto-assessment)
 # default-criticality:    # low | medium | high | critical
-skip-specify: false
-skip-review: false
+# skip-specify:           # true | false
+# skip-review:            # true | false
 commit-artifacts: true
 # Gate for the overnight critical-tier dual-plan synthesizer dispatch path.
 # Default false (fail-closed) until the operator validates the path and flips to true.
