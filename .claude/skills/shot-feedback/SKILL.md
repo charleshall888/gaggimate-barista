@@ -1,13 +1,13 @@
 ---
-name: feedback
+name: shot-feedback
 description: >
   Gather shot feedback, analyze extraction, recommend adjustments, and record results.
-  Use when user says: "/feedback", "I just pulled a shot", "how was that", "it tasted [sour/bitter/flat/good]",
+  Use when user says: "/shot-feedback", "I just pulled a shot", "how was that", "it tasted [sour/bitter/flat/good]",
   provides a star rating, shares taste observations, or asks "what should I adjust" after a shot.
   Owns the full shot feedback loop: gathering, analysis, grind map updates, tasting notes, and drink format.
 ---
 
-<command-name>feedback</command-name>
+<command-name>shot-feedback</command-name>
 
 # Shot Feedback & Dialing Skill
 

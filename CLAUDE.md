@@ -80,7 +80,7 @@ Invoke these with `/skill-name` for specialized workflows:
 - `/new-coffee` - Research a new coffee and propose starting parameters (grind, temp, ratio, profile)
 - `/gaggimate-profiles` - Create custom extraction profiles with detailed pump, transition, and stop condition guidance
 - `/diagnose` - Analyze shot telemetry to diagnose extraction issues (correlates pressure/flow/temp with taste)
-- `/feedback` - Gather shot feedback, analyze extraction, recommend adjustments, record to grind map + tasting notes
+- `/shot-feedback` - Gather shot feedback, analyze extraction, recommend adjustments, record to grind map + tasting notes
 - `/consult` - Answer espresso knowledge questions from authoritative files (temperature, pressure, ratios, freshness, etc.)
 
 ## Core Workflow
@@ -121,7 +121,7 @@ Use `/gaggimate-profiles` — it owns the full workflow: gathering info, selecti
 
 ### 4. Shot Feedback & Dialing Loop
 
-Use `/feedback` — it owns the full workflow: gathering taste feedback, recording ratings, analyzing extraction, recommending adjustments, updating grind map (any rated shot with a grind setting), logging tasting notes (all shots), syncing to device, and recommending drink formats. See the skill for details.
+Use `/shot-feedback` — it owns the full workflow: gathering taste feedback, recording ratings, analyzing extraction, recommending adjustments, updating grind map (any rated shot with a grind setting), logging tasting notes (all shots), syncing to device, and recommending drink formats. See the skill for details.
 
 ### 5. Espresso Knowledge Questions
 

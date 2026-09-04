@@ -157,7 +157,7 @@ The skill does NOT carry its own copy of the guardrail wording — it routes to 
 
 ### 3b. AUTO-TRIGGER Feedback (4-5 Star Shots)
 
-If the user provides a rating of 4 or 5 stars (explicitly like "5/5" or "4 stars", or implied like "this is great", "really dialed in", "best shot yet") **and** provides taste descriptors, automatically run the `/feedback` skill after completing the diagnosis. Do NOT ask — just invoke it with the shot ID, rating, and taste notes gathered during diagnosis. The user expects the full feedback loop (grind map update, tasting notes, device sync) to happen seamlessly.
+If the user provides a rating of 4 or 5 stars (explicitly like "5/5" or "4 stars", or implied like "this is great", "really dialed in", "best shot yet") **and** provides taste descriptors, automatically run the `/shot-feedback` skill after completing the diagnosis. Do NOT ask — just invoke it with the shot ID, rating, and taste notes gathered during diagnosis. The user expects the full feedback loop (grind map update, tasting notes, device sync) to happen seamlessly.
 
 For shots rated 1-3 or with no clear rating, do NOT auto-trigger — focus on diagnostic recommendations and let the user decide.
 

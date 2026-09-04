@@ -14,7 +14,7 @@ A record of grind settings from rated shots. When you rate a shot with a grind s
 
 *Days Off Roast is optional—use "—" when roast date is unknown.*
 
-*Puck Screen? — "Y" if a screen was installed, blank if unknown. Blank is NOT "no screen" — use "N" to record explicit absence; this distinction matters because new rows from /feedback are blank-as-unknown for back-compat.*
+*Puck Screen? — "Y" if a screen was installed, blank if unknown. Blank is NOT "no screen" — use "N" to record explicit absence; this distinction matters because new rows from /shot-feedback are blank-as-unknown for back-compat.*
 
 ---
 

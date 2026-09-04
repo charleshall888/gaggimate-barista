@@ -801,7 +801,7 @@ async def manage_shot_notes(
         })
 
     # Defense-in-depth: truncate bean_type to 200 chars before passing to either sink.
-    # /feedback skill is supposed to truncate too, but this server-side belt prevents
+    # /shot-feedback skill is supposed to truncate too, but this server-side belt prevents
     # oversized strings from reaching the device sidecar or local ratings.json if the
     # skill misbehaves. Applied here so device sync and local backup get the same value.
     if bean_type is not None:

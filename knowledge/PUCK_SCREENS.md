@@ -93,7 +93,7 @@ Modest. The screen redistributes flow rather than restricting it. No grind shift
 
 ## Diagnostic Guardrails
 
-This section is the **Single Source of Truth** for skill-side puck-screen guardrails. Skills (`/diagnose`, `/feedback`) reference this section by name; they do NOT carry their own copy of the wording.
+This section is the **Single Source of Truth** for skill-side puck-screen guardrails. Skills (`/diagnose`, `/shot-feedback`) reference this section by name; they do NOT carry their own copy of the wording.
 
 ### Cold-Screen Sour Guardrail
 
