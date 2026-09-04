@@ -58,7 +58,7 @@ Pre-infusion prevents channeling by achieving **full saturation before extractio
 2. Full pressure on a dry puck → water flows through any weak spot → instant channeling
 3. Low-pressure pre-infusion (1–3 bar) gives water time to wet all the coffee evenly
 4. Once the puck is saturated, there are no "weak spots" for water to exploit
-5. The pressure threshold (~4 bar) marks when the puck compresses — stay below this during pre-infusion
+5. Keep pre-infusion below ~4 bar. **Caveat on this number:** 4 bar is a widely-used *phase-transition setpoint* in DE1-lineage profiles (where flow control hands off to pressure control), not a measured physical threshold at which puck compression begins. No physics source has been located that establishes a compression-onset pressure. Treat ~4 bar as established convention, and do not cite it as a measured constant.
 
 **Bloom phase (extended pre-infusion):**
 - Fill at low pressure/flow until puck is wet

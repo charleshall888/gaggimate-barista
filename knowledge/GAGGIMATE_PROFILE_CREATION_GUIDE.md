@@ -114,18 +114,26 @@ Quick-reference card for Gaggimate profile JSON structure. For full profile crea
 
 | Field | Type | Required | Description | Valid Values |
 |-------|------|----------|-------------|--------------|
-| `type` | string | Yes | Measurement type | `"volumetric"`, `"water_pumped"`, `"pressure"`, `"flow"` |
+| `type` | string | Yes | Measurement type | `"volumetric"`, `"pumped"`, `"pressure"`, `"flow"` |
 | `operator` | string | Yes | Comparison operator | `"gte"` (>=), `"lte"` (<=), `"gt"` (>), `"lt"` (<) |
 | `value` | number | Yes | Threshold value | Depends on type |
 
 ### Target Types
 
 - **Volumetric** — Exit at scale weight (requires BT scale). Most common for final shot weight.
-- **Water Pumped** — Exit after X ml pumped. Scale-independent.
+- **Pumped** — Exit after X ml pumped. Scale-independent. (The token is `"pumped"` — firmware profiles and `phase_exits` telemetry both use it; an earlier revision of this guide said `"water_pumped"`, which is wrong.)
 - **Pressure** — Exit when pressure crosses threshold (above or below).
 - **Flow** — Exit when flow crosses threshold.
 
 Multiple targets per phase use **OR logic** — phase exits when ANY condition is met.
+
+> **Always pair long volumetric phases with a `pumped` backstop.** If the BT scale drops mid-shot (a documented Bookoo/Gaggimate failure mode), a volumetric target can never fire and the phase runs to its full duration timeout — potentially 3× the intended beverage. Add `{"type": "pumped", "operator": "gte", "value": N}` where N clears a normal shot's total pumped volume with ~15–20% margin (observed normal totals for a 22g/55g shot: ~90–115 ml → backstop 130). Confirmed live on-device Jul 2026.
+
+### Firmware behaviors observed on-device (Jul 2026, fw 1.8.0)
+
+- **`phase: "decline"` is normalized to `"brew"` on upload** — the device rewrites it. The enum is display-only anyway; author repo JSONs with `"brew"` for decline phases so repo and device stay byte-identical.
+- **`transition.duration` above the documented 10s max executes correctly** — 38–40s linear declines run as authored (telemetry-verified). The 0–10s range in the transition table is stale documentation for ramp-style transitions, not a firmware limit.
+- **A pump-off phase encodes as `{"target": "flow", "pressure": 0, "flow": 0}`** — this is how the working on-device bloom/soak phases are written; `"power"`/0/0 also appears in older examples but flow/0/0 is the pattern the current firmware profiles use.
 
 ---
 

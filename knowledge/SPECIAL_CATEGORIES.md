@@ -14,23 +14,26 @@ Decaf's higher porosity and lower density mean it needs a gentler approach acros
 
 | Variable | Regular Espresso | Decaf Adjustment | Why |
 |----------|-----------------|-----------------|-----|
-| **Grind** | Your baseline | A few steps coarser | Porous structure offers less flow resistance |
-| **Temperature** | Per roast level | -2 to -4°C from baseline | Extracts faster; lower temp avoids bitterness |
+| **Grind** | Your baseline | Substantially FINER (often several steps) | Porous, brittle structure offers less flow resistance — at your regular setting the puck gushes; grind finer to rebuild resistance |
+| **Temperature** | Per roast level | Start AT baseline; raise 1–2°C if sour | Published guidance is split — Swiss Water says 93±3°C; the specialty-espresso camp runs decaf hot (94–96°C, especially lighter roasts). In practice SWP decaf under-extracts to sour far more readily than it over-extracts to bitter: treat heat as an extraction lever, not a hazard. (On-machine: a 75% SWP blend improved monotonically from 89.7→93.3°C effective, shots 527–537, Jul 2026) |
 | **Pressure** | Per matrix | -1 to -2 bar | Less force needed; reduces harsh extraction |
 | **Ratio** | Per style | Same or slightly longer (1:2.5) | Longer ratio develops sweetness in a less complex cup |
 | **Pre-infusion** | Standard | Shorter (3–5 seconds) | Porous puck saturates faster |
 | **Dose** | = basket size | Same (never underdose) | Porosity means the basket may look fuller — trust the scale |
 
-**Expect:** Decaf shots flow *noticeably* faster at the same grind setting. Start a few steps coarser than your regular setting on your grinder and adjust from there.
+**Expect:** Decaf shots flow *noticeably* faster at the same grind setting — the decaffeination soak weakens the cellulose matrix, so the puck offers far less flow resistance. Start a few steps **finer** than your regular setting and let the shot timer set the magnitude; large corrections (3+ steps) are common. Don't confuse the two decaf adjustments: lower temp/pressure manages decaf's *fast flavor extraction*; finer grind manages its *low flow resistance*. (Directionally confirmed on-machine: a ~75% Swiss Water blend at a regular coffee's setting ran 42g in 15s at ≤7 bar — shot 523, Jul 2026.)
 
 ### Profile Recommendations
 
 | Profile | Suitability | Notes |
 |---------|------------|-------|
+| **Soak-start + moderate peak + long decline** | Excellent (field-proven) | Gentle fill → 5–6s pump-off **saturation rest** → ease-in to 7–7.5 bar → linear decline, 1:2.5. The rest phase does nothing for degassing (decaf has no CO2) but structurally wets and consolidates a fines-heavy puck before pressure arrives — it measurably stabilized pucks ground near the fines threshold (Jul 2026, 75% SWP blend, shots 534 vs 536/537) |
 | **Dark Roast Gentle** | Excellent | Low pressure (6–7 bar) + decline matches decaf's needs |
 | **Classic 9-Bar** (modified) | Good | Reduce to 7–8 bar; shorten pre-infusion |
-| **Bloom Profile** | Use with caution | Decaf has less CO2 — the bloom pause offers less benefit; shorten to 3–5 seconds |
+| **Bloom Profile** | Reframe, don't skip | The pause has no CO2 to release — but keep it 5–6s as a *saturation rest* (see top row); don't slam pressure into a decaf puck |
 | **Turbo** | Avoid | Decaf's porosity + coarse grind + low pressure = nearly zero resistance; shot will gush |
+
+**When the puck can't supply classic resistance (decaf-heavy blends):** expect the resistance-vs-grind curve to peak *well before* the collar's fine limit and then invert — past the fines threshold, extra fines fracture the puck instead of packing it (grind-response mapping, Jul 2026: resistance doubled from the regular-coffee setting to ~5 marks finer, peaked, then *fell* at the extreme). Once grind peaks, stop grinding: get contact time from pump-side flow limits or declining profiles, get extraction from temperature (see row above) and ratio (1:2.5), and never chase gauge pressure — a decaf shot's quality lives in contact time × heat, not bar.
 
 ### Why Decaf Tastes "Flat" (And How to Fix It)
 
