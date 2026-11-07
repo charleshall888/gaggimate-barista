@@ -41,6 +41,7 @@ FIELD_BITS = {
     'EV': 10,  # estimated weight
     'PR': 11,  # puck resistance
     'SI': 12,  # system info (v2+)
+    'WP': 13,  # water pumped (v6+)
 }
 
 
@@ -83,6 +84,7 @@ FIELD_DEFS = {
             'extended_recording': bool(val & 0x0010),
         }
     ),
+    FIELD_BITS['WP']: FieldDef(name='wp', field_type='uint16', scale=WEIGHT_SCALE),
 }
 
 
@@ -195,7 +197,9 @@ def parse_binary_shot(data: bytes, shot_id: str) -> ShotData:
     fields_per_sample = count_set_bits(fields_mask)
     if fields_per_sample == 0:
         raise ValueError(f"Invalid shot file: fields_mask is 0 (no fields recorded)")
-    sample_data_size = fields_per_sample * 2  # Each field is 2 bytes
+    # v6+ stores the tick (T) as uint32 milliseconds; every other field is 2 bytes.
+    wide_tick = version >= 6 and bool(fields_mask & (1 << FIELD_BITS['T']))
+    sample_data_size = fields_per_sample * 2 + (2 if wide_tick else 0)
 
     # Determine actual samples (handle truncated files)
     available_data = len(data) - header_size
@@ -204,7 +208,7 @@ def parse_binary_shot(data: bytes, shot_id: str) -> ShotData:
 
     # Build field order based on mask
     field_order = []
-    for bit in range(13):
+    for bit in range(32):
         if fields_mask & (1 << bit):
             field_order.append(bit)
 
@@ -221,12 +225,19 @@ def parse_binary_shot(data: bytes, shot_id: str) -> ShotData:
                 break
 
         # Parse each field in this sample
-        for field_index, field_bit in enumerate(field_order):
+        field_offset = sample_offset
+        for field_bit in field_order:
             field_def = FIELD_DEFS.get(field_bit)
             if not field_def:
+                # Unknown field: skip its 2 bytes so later fields stay aligned
+                field_offset += 2
                 continue
 
-            field_offset = sample_offset + field_index * 2
+            if wide_tick and field_bit == FIELD_BITS['T']:
+                # v6+: tick is already milliseconds, no interval transform
+                sample[field_def.name] = struct.unpack_from('<I', data, field_offset)[0]
+                field_offset += 4
+                continue
 
             # Read value based on type
             if field_def.field_type == 'int16':
@@ -241,6 +252,8 @@ def parse_binary_shot(data: bytes, shot_id: str) -> ShotData:
                 sample[field_def.name] = value / field_def.scale
             else:
                 sample[field_def.name] = value
+
+            field_offset += 2
 
         samples.append(sample)
 

@@ -194,3 +194,42 @@ class TestBinaryShotParser:
         assert shot.sample_count == 2
         assert shot.incomplete == True
         assert len(shot.samples) == 2
+
+    def test_parse_shot_v7_wide_tick_and_water_pumped(self):
+        """v6+ files store T as uint32 ms and add the WP (water pumped) field.
+
+        Firmware writes 30-byte samples for a 14-field mask: 13 x 2 bytes + a 4-byte tick.
+        Reading the tick as 2 bytes shifts every later field and garbles the shot.
+        """
+        fields_mask = 0x3FFF  # bits 0-13: T ... SI, WP
+        header = struct.pack(
+            '<IB B H H H I I I I 32s 48s H',
+            0x544F4853, 7, 30, 512, 250, 0,
+            fields_mask, 2, 24235, 1794062989,
+            b'SlBzzWpssh\x00'.ljust(32, b'\x00'), b'Danche Turbo [AI]\x00'.ljust(48, b'\x00'), 0,
+        )
+        header = header.ljust(512, b'\x00')
+
+        def sample(t_ms, ct, cp, fl, v, wp):
+            # T(uint32), TT, CT, TP, CP, FL, TF, PF, VF, V, EV, PR, SI, WP
+            return struct.pack('<I12hH', t_ms, 950, ct, 70, cp, fl, 500, 400, 430, v, 0, 100, 15, wp)
+
+        data = header + sample(10235, 952, 58, 413, 96, 510) + sample(20235, 953, 18, 500, 515, 1001)
+        assert len(data) == 512 + 2 * 30
+
+        shot = parse_binary_shot(data, "000986")
+
+        assert shot.sample_count == 2
+        assert shot.incomplete is False
+        first, second = shot.samples
+        assert first['t'] == 10235  # raw ms, no interval multiply
+        assert first['tt'] == 95.0
+        assert first['ct'] == 95.2
+        assert first['cp'] == 5.8
+        assert first['fl'] == 4.13
+        assert first['v'] == 9.6
+        assert first['systemInfo']['raw'] == 15
+        assert first['wp'] == 51.0
+        assert second['t'] == 20235
+        assert second['v'] == 51.5
+        assert second['wp'] == 100.1
